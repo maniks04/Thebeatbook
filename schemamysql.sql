@@ -55,9 +55,10 @@ CREATE TABLE bookings
   booking_id INT NOT NULL AUTO_INCREMENT,
   artist_id INT NOT NULL,
   venue_id INT NOT NULL,
-  booking_date DATETIME,
+  start_time DATETIME,
+  end_time DATETIME,
   booking_description VARCHAR(8000),
-
+  confirmed boolean DEFAULT FALSE,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   PRIMARY KEY (booking_id),
   FOREIGN KEY (artist_id) REFERENCES artists (artist_id),
