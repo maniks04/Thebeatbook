@@ -42,10 +42,10 @@ const Calendar = () => {
                     description: description,
                     allDay: false
                 },
-                true // make the event "stick"
+                true
             );
 
-            axios.post('calendar', {
+            axios.post('/calendar', {
               title: title,
               description: description,
               start: start,
@@ -64,7 +64,7 @@ const Calendar = () => {
         let eventId = event.id
         let timeChange = delta._data
 
-        axios.post('dragAndDrop', {
+        axios.post('/dragAndDrop', {
           eventId: eventId,
           timeChange: timeChange
         })
@@ -77,7 +77,7 @@ const Calendar = () => {
 
       // grabs all events from db to display on calendar
       events: function(start, end, timezone, callback) {
-        axios.get('calendar')
+        axios.get('/calendar')
         .then((res) => {
           var events = []
           res.data.forEach((event) => {
@@ -101,11 +101,12 @@ const Calendar = () => {
       // maxTime: '22:00:00', // when the calender ends the day.
 
 
-
+      // adds a tooltip to calendar events (can also add img etc... to show more about the band/venue)
       eventMouseover: function(calEvent, jsEvent) {
         var tooltip = '<div class="tooltipevent" style="width:200px;height:auto;background:white;border-style:inset;position:absolute;z-index:10001;">' + calEvent.description + '</div>';
         var $tooltip = $(tooltip).appendTo('body');
 
+        // this alows TT to follow mouse when moooosing over.
         $(this).mouseover(function(e) {
             $(this).css('z-index', 10000);
             $tooltip.fadeIn('500');

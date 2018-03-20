@@ -32,7 +32,7 @@ const isLoggedIn = (req, res, next) => {
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', function(req, res) {
 
-  
+
 });
 
 app.post('/login', passport.authenticate('local-login'), (req, res) => {
@@ -54,20 +54,26 @@ app.post('/logout', isLoggedIn, (req, res) => {
 /******************************** Calendar ***********************************/
 
 app.post('/calendar', (req, res) => {
+  let userId = 1
   let title = req.body.title;
   let description = req.body.description;
   let start = req.body.start;
   let end = req.body.end;
+  db.addEvent(userId, title, description, start, end);
+
   res.status(200).end()
 })
 
 app.post('/dragAndDrop', (req, res) => {
-  let id = req.body.eventId;
+  let id = 1;
+  let eventId = req.body.eventId;
   let timeChange = req.body.timeChange;
+  db.eventChange()
   res.status(200).end()
 })
 
 app.get('/calendar', (req, res) => {
+  db.getEvents(1)
   testData = [
     {
       title: 'Tumble22',
@@ -97,4 +103,3 @@ app.get('/*', (req, res) => {
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port 3000!');
 });
-
