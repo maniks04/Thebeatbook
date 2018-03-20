@@ -1,0 +1,19 @@
+#calendar {
+    /* float: right;
+    width: 50%; */
+
+}
+
+body {
+    background-color: #fafafa;
+}
+
+ .login-form {
+    max-width: 300px;
+  }
+   .login-form-forgot {
+    float: right;
+  }
+   .login-form-button {
+    width: 100%;
+  }
