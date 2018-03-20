@@ -28,6 +28,7 @@ const Calendar = () => {
       selectHelper: true,
       unselectAuto: false,
       nowIndicator: true,
+      height: window.innerHeight*.87,
 
       // alows drag and release creation of events
       select: function(start, end, allDay) {

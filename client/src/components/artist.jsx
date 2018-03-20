@@ -16,25 +16,27 @@ class Artist extends React.Component {
         super(props)
         this.state = {
             open:false,
+            key:1,
         }
-    }
-
-    onCollapse(collapsed) {
-      console.log(collapsed);
-      this.setState({ collapsed });
     }
 
     logout() {
         this.props.history.replace('/')
     }
 
+    onSelect(info) {
+      console.log('key', info)
+      this.setState({
+        key: info.key
+      })
+    }
 
     render() {
         return (
           <Layout style={{ minHeight: '100vh' }}>
             <Sider>
               <div className="logo" />
-              <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+              <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onSelect={(info)=>this.onSelect(info)} >
                 <Menu.Item key="1">
                   <Icon type="calendar" />
                   <span>Calendar</span>
@@ -69,51 +71,3 @@ class Artist extends React.Component {
 }
 
 export default Artist
-
-// var a = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.png'
-// const styles = {
-//     topBar: {
-//         height: 80,
-//         backgroundColor: 'white',
-//         borderBottom: 'solid',
-//         borderWidth: .5,
-//         borderColor: '#e6e6e6',
-//     },
-//
-//     logo: {
-//         //float: 'right',
-//         height: 30,
-//         width: 30,
-//         display: 'inline',
-//
-//     },
-//
-//     beatbook: {
-//         fontSize: 20,
-//         fontFamily: 'system-ui',
-//         display: 'inline'
-//     },
-//
-//     innerbox: {
-//       maxWidth: 1200,
-//       margin: 'auto',
-//       width: '80%'
-//     },
-//
-//     loginbox: {
-//         backgroundColor: 'white',
-//         position: 'absolute',
-//         borderStyle: 'solid',
-//         borderWidth: .5,
-//         borderColor: '#e6e6e6',
-//         width: window.innerWidth/4,
-//         height: window.innerHeight*.75,
-//         left: window.innerWidth*3/8,
-//         top: window.innerHeight*1/8,
-//         textAlign: 'center'
-//     },
-//
-//     logout: {
-//       float: 'right'
-//     }
-// }
