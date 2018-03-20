@@ -28,6 +28,18 @@ goHome() {
     this.props.history.replace('/')
 }
 
+registerArtist(username, password, email) {
+    axios.post('/register/artist', {
+        username: username,
+        password: password, 
+        email: email
+    }).then(res => {
+        console.log(res.data)
+    }).catch(err => {
+        console.log('error', err)
+    })
+}
+
 
     render() {
         const styles = {
@@ -85,7 +97,7 @@ goHome() {
                       <div style={styles.beatbook}>beatbook</div>
                       <div style={styles.divider}></div>
                       <div style={styles.registerform}>
-                        <ArtistRegisterFormContainer submitLogin={this.props.submitLogin}/> 
+                        <ArtistRegisterFormContainer registerArtist={this.registerArtist}/> 
                       </div>
                       <Icon style={styles.left} type="left" onClick={() => this.goHome()}/>
                     </div >

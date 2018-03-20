@@ -1,6 +1,7 @@
+
 const config = require('./config.js');
 
-let knex;
+
 
 knex = require('knex')({
   client: 'mysql',
@@ -12,7 +13,7 @@ const checkCredentials = (username) => {
     .where(knex.raw(`LOWER(username) = LOWER('${username}')`));
 };
 
-const addNewUser = async (username, password, email) => {
+const registerArtist = async (username, password, email) => {
   const userQuery = await knex.select().from('users')
     .where(knex.raw(`LOWER(username) = LOWER('${username}')`));
   const emailQuery = await knex.select().from('users')
@@ -26,6 +27,10 @@ const addNewUser = async (username, password, email) => {
   }
 };
 
+
+
+
+
 const getUsername = async (id) => {
   let user = await knex.select('username').from('users').where('user_id', id);
   return user[0].username;
@@ -37,7 +42,7 @@ const getUser = async (id) => {
 }
 
 module.exports = {
-  addNewUser,
+  registerArtist,
   getUsername,
   getUser,
   checkCredentials,

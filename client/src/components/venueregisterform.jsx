@@ -21,7 +21,7 @@ class VenueRegisterForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        this.props.registerVenue(values.userName, values.password, values.confirmPassword, values.email)
+        this.props.registerVenue(values.username, values.password, values.email)
       }
     });
    
@@ -42,7 +42,7 @@ class VenueRegisterForm extends React.Component {
        
       <Form onSubmit={(e) => this.registerVenue(e)} className="login-form">
         <FormItem>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input id="shit" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
