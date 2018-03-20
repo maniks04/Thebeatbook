@@ -22,7 +22,17 @@ componentDidMount() {
     console.log('artistregister', this.props.history)
 }
 
-
+registerVenue(username, passwordemail) {
+    axios.post('/register/venue', {
+        username: username,
+        password: password, 
+        email: email
+    }).then(res => {
+        console.log(res.data)
+    }).catch(err => {
+        console.log('error', err)
+    })
+}
 
 
     render() {
@@ -77,7 +87,7 @@ componentDidMount() {
                       <div style={styles.beatbook}>beatbook</div>
                       <div style={styles.divider}></div>
                       <div style={styles.registerform}>
-                        <VenueRegisterFormContainer submitLogin={this.props.submitLogin}/> 
+                        <VenueRegisterFormContainer registerVenue={this.registerVenue}/> 
                       </div>
                     </div >
         )

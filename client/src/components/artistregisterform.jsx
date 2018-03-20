@@ -16,12 +16,12 @@ class ArtistRegisterForm extends React.Component {
     }
 
     
-  handleSubmit  (e)   {
+  registerArtist  (e)   {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        this.props.submitLogin(values.userName, values.password)
+        this.props.registerArtist(values.username, values.password, values.email)
       }
     });
    
@@ -37,9 +37,9 @@ class ArtistRegisterForm extends React.Component {
     return (
       <div>
        
-      <Form onSubmit={this.handleSubmit} className="login-form">
+      <Form onSubmit={(e) => this.registerArtist(e)} className="login-form">
         <FormItem>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input id="shit" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
@@ -53,7 +53,7 @@ class ArtistRegisterForm extends React.Component {
           )}
         </FormItem>
         <FormItem>
-          {getFieldDecorator('confirmpassword', {
+          {getFieldDecorator('confirmPassword', {
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
             <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Confirm Password" />
