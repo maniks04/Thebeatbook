@@ -1,3 +1,5 @@
+drop database if exists beatbook;
+
 create database beatbook;
 use beatbook;
 
@@ -15,7 +17,7 @@ CREATE TABLE users
   password VARCHAR(60) NOT NULL,
   email VARCHAR(255) DEFAULT NULL,
   facebook_id VARCHAR(255) DEFAULT NULL,
-  is_venue boolean DEFAULT TRUE,
+  user_type VARCHAR(10) NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   PRIMARY KEY (user_id)
 );

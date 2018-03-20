@@ -21,13 +21,11 @@ class VenueRegisterForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        this.props.registerVenue(values.username, values.password, values.email)
+        this.props.registerVenue(values.username, values.password, values.email, values.venueName, values.address, values.city, values.state, values.capacity)
       }
     });
    
   }
-
-
 
 
 
@@ -67,6 +65,41 @@ class VenueRegisterForm extends React.Component {
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
             <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('venueName', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="venueName" placeholder="Venue Name" />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('address', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="address" placeholder="Adress" />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('city', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="city" placeholder="City" />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('state', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="state" placeholder="State" />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('capacity', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="capacity" placeholder="Venue Capacity" />
           )}
         </FormItem>
         <FormItem>
