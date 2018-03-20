@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
-import calendar from '../actions/calendar.js'
+import calendar from './calendar.js'
 import TextField from 'material-ui/TextField';
 import { Modal, Button } from 'antd';
 import { Avatar } from 'antd';
@@ -66,7 +66,7 @@ class Artist extends React.Component {
             }
         }
 
-        
+
         return(<div>
                     <nav style={styles.manik}>
                         {/* <div style={styles.manik} ></div> */}

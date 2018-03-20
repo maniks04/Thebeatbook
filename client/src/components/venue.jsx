@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
-import calendar from '../actions/calendar.js'
+import calendar from './calendar.js'
 
 
 class Venue extends React.Component {
