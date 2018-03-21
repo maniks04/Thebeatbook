@@ -27,7 +27,7 @@ const reducer = function(state = initialState, action) {
       return Object.assign({},  state, {artist: false, venue: false})
     case 'TOGGLE_LOADING' :
     return Object.assign({}, state, {loading: !state.loading});
-    case 'SET_ARTIST_BOOKINGS' :
+    case 'SET_BOOKINGS' :
     return Object.assign({}, state, {bookings: action.payload});
     case 'ERROR' :
     return Object.assign({}, state, {currentError: action.payload});
