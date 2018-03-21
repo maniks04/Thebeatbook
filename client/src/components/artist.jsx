@@ -28,9 +28,12 @@ class Artist extends React.Component {
 
 
 
-  logout() {
-    this.props.history.replace('/')
-  }
+
+    logout() {
+        this.props.actions.logout()
+        //this.props.history.replace('/')
+    }
+
 
 
     render() {
@@ -111,4 +114,6 @@ const mapStateToProps = state => (
     { actions: bindActionCreators(actions, dispatch) }
   );
 
+
 export default connect(mapStateToProps, mapDispatchToProps)(Artist);
+

@@ -5,7 +5,11 @@ import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
+
+import { withRouter } from 'react-router';
+
 import calendar from './calendar.jsx'
+
 
 
 class Venue extends React.Component {
@@ -21,8 +25,8 @@ componentDidMount() {
 
 
 logout() {
-    this.props.history.replace('/')
-    
+    //this.props.history.replace('/')
+    this.props.actions.logout()
 }
 
 
@@ -41,4 +45,12 @@ logout() {
     }
 }
 
-export default Venue
+const mapStateToProps = state => (
+    { store: state } // eslint-disable-line
+  );
+  
+  const mapDispatchToProps = dispatch => (
+    { actions: bindActionCreators(actions, dispatch) }
+  );
+  
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Venue));
