@@ -33,7 +33,8 @@ app.post('/', function(req, res) {
 });
 
 app.post('/register/artist', async (req, res) => {
-  const registration = await db.registerArtist(req.body.username, req.body.password, req.body.email, req.body.city, req.body.state);
+  var hash = bcrypt.hashSync(req.body.password, 10);
+  const registration = await db.registerArtist(req.body.username, hash, req.body.email, req.body.city, req.body.state);
   if (registration === 'username already exists') {
      return res.send('username already exists') 
   } if (registration === 'email already exists') {
@@ -44,7 +45,8 @@ app.post('/register/artist', async (req, res) => {
 })
 
 app.post('/register/venue', async (req, res) => {
-  const registration = await db.registerVenue(req.body.username, req.body.password, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);
+  var hash = bcrypt.hashSync(req.body.password, 10);
+  const registration = await db.registerVenue(req.body.username, hash, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);
   if (registration === 'username already exists') {
     return res.send('username already exists')
   } if (registration === 'username already exists') {
@@ -55,15 +57,32 @@ app.post('/register/venue', async (req, res) => {
 })
 
 
-app.post('/login', passport.authenticate('local-login'), (req, res) => {
-  console.log(req.body)
-  res.status(200).json({
-    user_id: req.user.user_id,
-    username: req.user.username,
-    session_id: req.sessionID
-  });
-});
+// app.post('/login', passport.authenticate('local-login'), (req, res) => {
+//   console.log(req.body)
+//   res.status(200).json({
+//     user_id: req.user.user_id,
+//     username: req.user.username,
+//     session_id: req.sessionID
+//   });
+// });
 
+
+app.post('/login', async (req, res) => {
+  const userInfo = await db.checkCredentials(req.body.username);
+  if (userInfo.length) {
+    const user = userInfo[0]
+    if(bcrypt.compareSync(req.body.password, user.password)) {
+      // Passwords match
+      const user = await db.getUser(req.body.username)
+      console.log(user)
+      res.json(user).end();
+     } else {
+      // Passwords don't match
+     res.send('your passwords dont match')
+     }
+  } 
+  res.send('Username does not exist')
+})
 
 
 app.post('/logout', isLoggedIn, (req, res) => {
@@ -114,8 +133,16 @@ app.get('/calendar', (req, res) => {
 //BOOKINGS
 
 app.get('/bookings', async (req, res) => {
-  const Id = req.query.artistId;
-  let events = await db.getArtistBookings(Id);
+  const Id = req.query.userId;
+  const type = req.query.user;
+  let events = await db.getBookings(Id, type);
+  res.status(200).send({events : events})
+});
+
+app.get('/user', async (req, res) => {
+  const Id = req.query.userId;
+  const type = req.query.user;
+  let user = await db.getBookings(Id, type);
   res.status(200).send({events : events})
 });
 

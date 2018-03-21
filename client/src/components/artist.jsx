@@ -23,20 +23,21 @@ class Artist extends React.Component {
     console.log('mounted Artist')
     console.log(this.props.store.artistBookings);
         //fetch bookings test
-let actions = this.props.actions;
-let artistId = 1; //this will eaqual this.props.store.artist_id
-actions.fetchArtistBookings(artistId)
+  let actions = this.props.actions;
+  let artistId = 1; //this will eaqual this.props.store.artist_id
+  actions.fetchArtistBookings(artistId)
 //***************************************************        
-
-
   }
 
 
 
-  logout() {
-    // this.props.history.replace('/')
-    console.log(this.props.store.artistBookings)
-  }
+
+
+    logout() {
+        this.props.actions.logout()
+        //this.props.history.replace('/')
+    }
+
 
 
     render() {
@@ -116,4 +117,6 @@ const mapStateToProps = state => (
     { actions: bindActionCreators(actions, dispatch) }
   );
 
+
 export default connect(mapStateToProps, mapDispatchToProps)(Artist);
+

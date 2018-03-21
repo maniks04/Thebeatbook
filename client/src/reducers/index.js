@@ -1,10 +1,11 @@
 export const initialState = {
   loginModalStatus: false,
   registerModalStatus: false,
-  artistBookings: [],
+  artist: false,
+  venue: false,
+  bookings: [],
   loading: false,
   currentError: ''
-
 }
 
 
@@ -17,13 +18,20 @@ const reducer = function(state = initialState, action) {
     case 'OPENREGISTERMODAL' :
       return Object.assign({},  state, {registerModalStatus:true});
     case 'CLOSEREGISTERMODAL' :
-      return Object.assign({},  state, {registerModalStatus:false});
+      return Object.assign({},  state, {registerModalStatus:false})
+    case 'LOADARTISTPAGE' :
+      return Object.assign({},  state, {artist:true})
+    case 'LOADVENUEPAGE' :
+      return Object.assign({},  state, {venue:true})
+    case 'LOGOUT' :
+      return Object.assign({},  state, {artist: false, venue: false})
     case 'TOGGLE_LOADING' :
     return Object.assign({}, state, {loading: !state.loading});
     case 'SET_ARTIST_BOOKINGS' :
-    return Object.assign({}, state, {artistBookings: action.payload});
+    return Object.assign({}, state, {bookings: action.payload});
     case 'ERROR' :
     return Object.assign({}, state, {currentError: action.payload});
+
     default :
       return state
   }

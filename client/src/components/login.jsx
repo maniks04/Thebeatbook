@@ -18,58 +18,9 @@ class Login extends React.Component {
     }
 
 
-componentDidMount() {
-    console.log('login', this.props.history)
-}
-
-
 
 
     render() {
-        const styles = {
-            logo: {
-                height: 20,
-                width: 20,
-                display: 'inline-block'
-
-            },
-            beatbook: {
-                fontSize: 20,
-                fontFamily: 'system-ui',
-                marginTop: '5%',
-                display: 'inline-block'
-            },
-            loginbutton: {
-                textAlign: 'center'
-            },
-            loginbox: {
-                backgroundColor: 'white',
-                position: 'absolute',
-                borderStyle: 'solid',
-                borderWidth: .5,
-                borderColor: '#e6e6e6',
-                width: window.innerWidth/4,
-                height: window.innerHeight*.75,
-                left: window.innerWidth*3/8,
-                top: window.innerHeight*1/8,
-                textAlign: 'center'
-            },
-            loginform: {
-                marginLeft: 50,
-                marginRight: 50
-
-            },
-            divider: {
-                borderStyle: 'solid',
-                borderWidth: .5,
-                borderColor: '#e6e6e6', 
-                marginLeft: 25,
-                marginRight: 25,
-                marginTop: 50,
-                marginBottom: 50
-            }
-        }
-
        
         return(
             <div style={styles.loginbox}>
@@ -95,3 +46,48 @@ const mapStateToProps = state => (
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+
+const styles = {
+    logo: {
+        height: 20,
+        width: 20,
+        display: 'inline-block'
+
+    },
+    beatbook: {
+        fontSize: 20,
+        fontFamily: 'system-ui',
+        marginTop: '5%',
+        display: 'inline-block'
+    },
+    loginbutton: {
+        textAlign: 'center'
+    },
+    loginbox: {
+        backgroundColor: 'white',
+        position: 'absolute',
+        borderStyle: 'solid',
+        borderWidth: .5,
+        borderColor: '#e6e6e6',
+        width: window.innerWidth/4,
+        height: window.innerHeight*.75,
+        left: window.innerWidth*3/8,
+        top: window.innerHeight*1/8,
+        textAlign: 'center'
+    },
+    loginform: {
+        marginLeft: 50,
+        marginRight: 50
+
+    },
+    divider: {
+        borderStyle: 'solid',
+        borderWidth: .5,
+        borderColor: '#e6e6e6', 
+        marginLeft: 25,
+        marginRight: 25,
+        marginTop: 50,
+        marginBottom: 50
+    }
+}

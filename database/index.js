@@ -47,33 +47,37 @@ const registerVenue = async (username, password, email, venueName, address, city
   } 
 }
 
-
 const getUserID = async (username) => {
   let id = await knex.select('user_id').from('users').where('username', username);
   return id[0].user_id
 }
-
-// const getUsername = async (id) => {
-//   let user = await knex.select('username').from('users').where('user_id', id);
-//   return user[0].username;
-// };
 
 const getUserByName = async (username) => {
   let user = await knex.select('*').from('users').where('username', username);
   return user[0];
 }
 
-const getUser = async (id) => {
-  let user = await knex.select('*').from('users').where('user_id', id);
-  return user[0];
+
+//REFACTOR TO OPTIMIZE DB QUERY
+const getUser = async (username) => {
+  let user = await knex.select('*').from('users').where('username', username);
+  if (user[0].user_type === 'artist') {
+    let artist = await getArtist(user[0].user_id);
+    let bookings = await getArtistBookings(artist.artist_id);
+    return [user[0], artist, bookings[0]]
+  } else {
+    let venue = await getVenue(user[0].user_id)
+    let bookings = await getVenueBookings(venue[0].venue_id);
+    return [user[0], venue, bookings[0]]
+  }
 };
 
 
 
-const getArtist = async (userId) => {
-  let artist = await knex.select('*').from('artists').where('artists.user_id', id);
-  return artist[0];
 
+const getArtist = async (userId) => {
+  let artist = await knex.select('*').from('artists').where('artists.user_id', userId);
+  return artist[0];
 }
 
 //BOOKINGS
@@ -85,12 +89,12 @@ const getArtistBookings = (artistId) => {
     .orderBy('bookings.start_time', 'booking_description');
 };
 
-const getVenueBookings = (venueId) => {
-  return knex.select('*')
-    .from('bookings')
-    .where('bookings.venue_id', venueId)
-    .orderBy('bookings.start_time', 'booking_description');
-};
+// const getVenueBookings = (venueId) => {
+//   return knex.select('*')
+//     .from('bookings')
+//     .where('bookings.venue_id', venueId)
+//     .orderBy('bookings.start_time', 'booking_description');
+// };
 
 module.exports = {
   registerArtist,
