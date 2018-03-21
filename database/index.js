@@ -59,8 +59,14 @@ const getUsername = async (id) => {
   return user[0].username;
 }
 
-const getUser = async (id) => {
-  let user = await knex.select('*').from('users').where('user_id', id);
+// const getUser = async (id) => {
+//   let user = await knex.select('*').from('users').where('user_id', id);
+//   return user[0];
+// }
+
+const getUser = async (username) => {
+  let user = await knex.select('*').from('users').where('username', username);
+  console.log(user)
   return user[0];
 }
 

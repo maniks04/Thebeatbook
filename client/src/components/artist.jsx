@@ -25,7 +25,8 @@ class Artist extends React.Component {
 
 
     logout() {
-        this.props.history.replace('/')
+        this.props.actions.logout()
+        //this.props.history.replace('/')
     }
 
 
@@ -99,4 +100,12 @@ class Artist extends React.Component {
     }
 }
 
-export default Artist
+const mapStateToProps = state => (
+    { store: state } // eslint-disable-line
+  );
+  
+  const mapDispatchToProps = dispatch => (
+    { actions: bindActionCreators(actions, dispatch) }
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Artist);

@@ -11,12 +11,13 @@ import * as reducers from '../reducers/index.js'
 import Calendar from '../actions/calendar.js'
 import TextField from 'material-ui/TextField';
 import Login from './login.jsx'
+import Artist from './artist.jsx'
+import Venue from './venue.jsx'
 
 
 class Home extends React.Component {
     constructor(props) {
         super(props)
-        this.submitLogin = this.submitLogin.bind(this)
     }
 
     
@@ -25,16 +26,7 @@ class Home extends React.Component {
     }
 
 
-    submitLogin(username, password) {
-        axios.post('/login', {
-            username: username,
-            password: password
-        }).then(res => {
-            console.log(res.data)
-        }).catch(err => {
-            console.log(err)
-        })   
-    }
+
 
     
 
@@ -43,7 +35,16 @@ class Home extends React.Component {
      
         
         return( <div>
-                    <Login history={this.props.history} submitLogin={this.submitLogin}/>  
+                    {!this.props.store.artist && !this.props.store.venue &&
+                        <Login history={this.props.history} submitLogin={this.submitLogin}/> 
+                    } 
+
+                    {this.props.store.artist &&
+                       <Artist />
+                    }
+                    {this.props.store.venue  &&
+                        <Venue />
+                    }
                 </div>)
     }
 }
