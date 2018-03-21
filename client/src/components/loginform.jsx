@@ -17,7 +17,6 @@ class LoginForm extends React.Component {
 
   submitLogin (e)   {
     e.preventDefault();
-    console.log('hiii')
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
