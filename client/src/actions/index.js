@@ -30,8 +30,8 @@ export const submitLogin = (username, password) => {
             if (res.data === 'your passwords dont match' || res.data === 'Username does not exist') {
                 console.log(res.data)
             } else {
-                console.log(res)
-                if (res.data.user_type === 'artist') {
+                console.log(res.data)
+                if (res.data[0].user_type === 'artist') {
                     dispatch(loadArtistPage(res.data))
                 } if (res.data.user_type === 'venue') {
                     dispatch(loadVenuePage(res.data))
@@ -55,32 +55,32 @@ export const submitLogin = (username, password) => {
 
 
 
-
-export const login = (username, password) => {
-    return (dispatch) => {
-      return axios({
-        method: 'get',
-        url: '/login',
-        params: {
-          username: username,
-          password: password,
-        },
-      }).then(
-        results => {
-          if (results.data.error) {
-            alert(results.data.message);
-          } else {
-            dispatch(authenticate());
-            dispatch(fetchTrips(username));
-          }
-        },
-        error => {
-          console.log('error', error);
-          dispatch(badStuff(error));
-        }
-      )
-    }
-}
+//not using
+// export const login = (username, password) => {
+//     return (dispatch) => {
+//       return axios({
+//         method: 'get',
+//         url: '/login',
+//         params: {
+//           username: username,
+//           password: password,
+//         },
+//       }).then(
+//         results => {
+//           if (results.data.error) {
+//             alert(results.data.message);
+//           } else {
+//             dispatch(authenticate());
+//             dispatch(fetchTrips(username));
+//           }
+//         },
+//         error => {
+//           console.log('error', error);
+//           dispatch(badStuff(error));
+//         }
+//       )
+//     }
+// }
 
  export const fetchArtistBookings = (artistId) => {
   return (dispatch) => {

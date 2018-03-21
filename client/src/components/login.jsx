@@ -28,7 +28,7 @@ class Login extends React.Component {
                       <div style={styles.beatbook}>beatbook</div>
                       <div style={styles.divider}></div>
                       <div style={styles.loginform}>
-                        <LoginFormContainer submitLogin={this.props.submitLogin}/> 
+                        <LoginFormContainer /> 
                       </div>
                       <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">login</div>
                     </div >

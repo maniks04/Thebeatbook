@@ -36,7 +36,7 @@ class Home extends React.Component {
         
         return( <div>
                     {!this.props.store.artist && !this.props.store.venue &&
-                        <Login history={this.props.history} submitLogin={this.submitLogin}/> 
+                        <Login history={this.props.history}/> 
                     } 
 
                     {this.props.store.artist &&
