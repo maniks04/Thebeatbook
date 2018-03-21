@@ -14,14 +14,16 @@ class LoginForm extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+      console.log(this.props)
+    }
 
   submitLogin (e)   {
     e.preventDefault();
-    console.log('hiii')
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        this.props.submitLogin(values.userName, values.password)
+        this.props.actions.submitLogin(values.userName, values.password)
       }
     });
   }

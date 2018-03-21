@@ -19,8 +19,6 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
-// app.use(express.static(__dirname + '/../app'));
-// app.use(express.static(__dirname + '/../node_modules'));
 
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -32,17 +30,59 @@ const isLoggedIn = (req, res, next) => {
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', function(req, res) {
 
-
 });
 
-app.post('/login', passport.authenticate('local-login'), (req, res) => {
-  console.log(req.body)
-  res.status(200).json({
-    user_id: req.user.user_id,
-    username: req.user.username,
-    session_id: req.sessionID
-  });
-});
+app.post('/register/artist', async (req, res) => {
+  var hash = bcrypt.hashSync(req.body.password, 10);
+  const registration = await db.registerArtist(req.body.username, hash, req.body.email, req.body.city, req.body.state);
+  if (registration === 'username already exists') {
+     return res.send('username already exists')
+  } if (registration === 'email already exists') {
+     return res.send('email already exists')
+  } else {
+    res.send('added')
+  }
+})
+
+app.post('/register/venue', async (req, res) => {
+  var hash = bcrypt.hashSync(req.body.password, 10);
+  const registration = await db.registerVenue(req.body.username, hash, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);
+  if (registration === 'username already exists') {
+    return res.send('username already exists')
+  } if (registration === 'username already exists') {
+    return res.send('email already exists')
+  } else {
+    res.send('added')
+  }
+})
+
+
+// app.post('/login', passport.authenticate('local-login'), (req, res) => {
+//   console.log(req.body)
+//   res.status(200).json({
+//     user_id: req.user.user_id,
+//     username: req.user.username,
+//     session_id: req.sessionID
+//   });
+// });
+
+
+app.post('/login', async (req, res) => {
+  const userInfo = await db.checkCredentials(req.body.username);
+  if (userInfo.length) {
+    const user = userInfo[0]
+    if(bcrypt.compareSync(req.body.password, user.password)) {
+      // Passwords match
+      const user = await db.getUser(req.body.username)
+      return res.json(user)
+     } else {
+      // Passwords don't match
+      return res.send('your passwords dont match')
+     }
+  }
+  res.send('Username does not exist')
+})
+
 
 app.post('/logout', isLoggedIn, (req, res) => {
   req.logout();
@@ -94,6 +134,14 @@ app.get('/calendar', (req, res) => {
 })
 
 /*****************************************************************************/
+
+//BOOKINGS
+
+app.get('/bookings', async (req, res) => {
+  const Id = req.query.artistId;
+  let events = await db.getArtistBookings(Id);
+  res.status(200).send({events : events})
+});
 
 
 app.get('/*', (req, res) => {

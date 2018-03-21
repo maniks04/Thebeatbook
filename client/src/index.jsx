@@ -16,8 +16,8 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import $ from 'jquery'
 // import AnyComponent from './components/filename.jsx'
 
-let store = createStore(reducer)
-//let store = createStore(reducer, applyMiddleware(thunk));
+
+let store = createStore(reducer, applyMiddleware(thunk));
 
 const Base = ({ store }) => (
   <Provider store={store}>
@@ -25,8 +25,8 @@ const Base = ({ store }) => (
       <MuiThemeProvider theme={getMuiTheme(lightBaseTheme)}>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/artist" component={Artist} />
-          <Route exact path="/venue" component={Venue} />
+          {/* <Route exact path="/artist" component={Artist} />
+          <Route exact path="/venue" component={Venue} /> */}
           <Route exact path="/artistregister" component={ArtistRegister} />
           <Route exact path="/venueregister" component={VenueRegister} />
         </Switch>

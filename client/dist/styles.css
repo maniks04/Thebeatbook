@@ -4,9 +4,52 @@
 
 }
 
-body {
+/* body {
     background-color: #fafafa;
+}  */
+
+/* body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(50deg, rgba(88, 128, 217, 0.92), rgba(124, 35, 171, 0.92)), url(/media/bg.jpg);
+  background-size: cover;
+} */
+
+/* favorite */
+body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(50deg, rgba(217, 161, 88, 0.92), rgba(171, 35, 53, 0.92)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
+  background-size: cover;
 }
+
+/* body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(50deg, rgba(217, 161, 88, 0.92), rgba(171, 55, 35, 0.92)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
+  background-size: cover;
+} */
+
+ /* body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(50deg, rgba(217, 172, 88, 0.92), rgba(171, 35, 53, 0.92)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
+  background-size: cover;
+}  */
+
+/* body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(50deg, rgba(133, 88, 217, 0.92), rgba(35, 133, 171, 0.92)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
+  background-size: cover;
+} */
+
+/* body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(50deg, rgba(204, 217, 88, 0.92), rgba(171, 67, 35, 0.92)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
+  background-size: cover;
+} */
 
  .login-form {
     max-width: 300px;

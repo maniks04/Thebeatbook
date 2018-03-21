@@ -5,13 +5,14 @@ import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
-import calendar from './calendar.js'
+import calendar from './calendar.jsx'
 import TextField from 'material-ui/TextField';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
 class Artist extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -20,8 +21,18 @@ class Artist extends React.Component {
         }
     }
 
+  componentDidMount() {
+    console.log('mounted Artist')
+    let actions = this.props.actions;
+    let artistId = 1; //this will eaqual this.props.store.artist_id
+    console.log(actions.fetchArtistBookings(artistId))
+    console.log(this.props.store.artistBookings);
+  }
+
+
     logout() {
-        this.props.history.replace('/')
+        this.props.actions.logout()
+        //this.props.history.replace('/')
     }
 
     onSelect(info) {
@@ -30,6 +41,7 @@ class Artist extends React.Component {
         key: info.key
       })
     }
+
 
     render() {
         return (
@@ -70,4 +82,13 @@ class Artist extends React.Component {
   }
 }
 
-export default Artist
+const mapStateToProps = state => (
+    { store: state } // eslint-disable-line
+  );
+
+  const mapDispatchToProps = dispatch => (
+    { actions: bindActionCreators(actions, dispatch) }
+  );
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Artist);
