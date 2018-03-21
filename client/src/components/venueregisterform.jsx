@@ -11,8 +11,7 @@ import { withRouter } from 'react-router';
 
 class VenueRegisterForm extends React.Component {
     constructor(props) {
-        super(props)
-        
+        super(props)    
     }
 
     
@@ -24,7 +23,6 @@ class VenueRegisterForm extends React.Component {
         this.props.registerVenue(values.userName, values.password, values.confirmPassword, values.email)
       }
     });
-   
   }
 
 

@@ -1,3 +1,7 @@
+-- CREATE DATABASE beatbook;
+
+USE beatbook;
+
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS venues;
 DROP TABLE IF EXISTS artists;
@@ -68,28 +72,22 @@ CREATE TABLE bookings
 -- ---
 
 -- insert into users
---   (username, password)
+--   (user_id, username, password)
 -- VALUES
---   ('yaboi', '$2a$10$MCRlmB8bUswMTqKG.kURCu2pu8ipopli2LLaO5OODNokt44cpLZ56'),
---   ('Gepeto', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou'),
---   ('Zanbato', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou'),
---   ('Colonel', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou'),
---   ('Hipster', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou');
+--   (1, 'yaboi', '$2a$10$MCRlmB8bUswMTqKG.kURCu2pu8ipopli2LLaO5OODNokt44cpLZ56'),
+--   (2, 'Gepeto', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou');
 
--- insert into posts
---   (user_id, title, code, summary, solution_id)
+-- insert into artists
+--   (artist_id, user_id, artist_name, artist_description)
 -- VALUES
---   (1, 'Get to the Choppa', 'aslkdjfleaf', 'Get to the choppa or die', 123456),
---   (2, 'He is a real boy', 'hello world', 'Turn puppet into real boy', null),
---   (3, 'A really big sword', 'chop chop its all in the mind', 'the ultimate onion chopper', null),
---   (4, 'How do you pronounce my name?', 'some military guy', 'Did not know how to say this till I was 25', null),
---   (5, 'I hate everything', 'Your music sucks', 'Going to drink some IPAs', 234567);
+--   (1, 1, 'Trouble', 'turbofunk');
 
--- insert into comments
---   (user_id, post_id, message, votes)
+-- insert into bookings
+--   (booking_id, artist_id, venue_id, start_time, end_time, booking_description)
 -- VALUES
---   (1, 1, 'Guns Blazing', 5),
---   (2, 1, 'Think of the children!', 2),
---   (3, 1, 'sword = shield', 525),
---   (4, 1, 'Pulls out rocket launcher', 15),
---   (5, 1, 'I used those before they were cool', 0);
+--   (1, 1, 1, '2018-03-22T14:30:00', '2018-03-22T16:30:00', 'SXSW Free show!');
+
+-- insert into venues
+--   (venue_id, user_id, venue_name, venue_description, capacity)
+-- VALUES
+--   (1, 2, 'Vulcan', 'sixth street venue', 700);

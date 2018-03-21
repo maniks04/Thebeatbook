@@ -19,8 +19,6 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
-// app.use(express.static(__dirname + '/../app'));
-// app.use(express.static(__dirname + '/../node_modules'));
 
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -88,6 +86,14 @@ app.get('/calendar', (req, res) => {
 })
 
 /*****************************************************************************/
+
+//BOOKINGS
+
+app.get('/bookings', async (req, res) => {
+  const Id = req.query.artistId;
+  let events = await db.getArtistBookings(Id);
+  res.status(200).send({events : events})
+});
 
 
 app.get('/*', (req, res) => {
