@@ -5,7 +5,7 @@ const config = require('./config.js');
 
 knex = require('knex')({
   client: 'mysql',
-  connection: config,
+  connection: config.mySql,
 });
 
 

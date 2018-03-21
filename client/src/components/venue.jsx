@@ -7,13 +7,16 @@ import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
 import { withRouter } from 'react-router';
 import calendar from './calendar.jsx'
-
+import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
+const { Header, Content, Footer, Sider } = Layout;
+const SubMenu = Menu.SubMenu;
 
 class Venue extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          open: false
+          open: false,
+          key:"1"
         }
     }
 
@@ -28,74 +31,72 @@ logout() {
     //this.props.history.replace('/')
     this.props.actions.logout()
 }
+onSelect(info) {
+  console.log('key', info)
+  this.setState({
+    key: info.key
+  })
+}
 
+
+view() {
+  let key = this.state.key
+  if (key === '1') {
+    return calendar()
+  }
+  if (key === '2') {
+    return (<div>Find Artist</div>)
+  }
+  if (key === '3') {
+    return (<div>Incoming Event requests</div>)
+  }
+  if (key === '4') {
+    this.props.actions.logout()
+  }
+}
 
     render() {
-      var a = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.png'
-      const styles = {
-        topbar: {
-            height: 80,
-            backgroundColor: 'white',
-            borderBottom: 'solid',
-            borderWidth: .5,
-            borderColor: '#e6e6e6',
-        },
 
-        logo: {
-          //float: 'left',
-          height: 30,
-          width: 30,
-          display: 'inline'
-        },
 
-        beatbook: {
-            fontSize: 20,
-            fontFamily: 'system-ui',
-            display: 'inline'
-        },
+      return(
+        <Layout style={{ minHeight: '100vh' }}>
+          <Sider>
+            <div className="logo" />
+            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onSelect={(info)=>this.onSelect(info)} >
+              <Menu.Item key="1">
+                <Icon type="calendar" />
+                <span>Calendar</span>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Icon type="plus" />
+                <span>Find Artist</span>
+              </Menu.Item>
+              <Menu.Item key="3">
+                <Icon type="book"/>
+                <span>Booking Requests</span>
+              </Menu.Item>
+              <Menu.Item key="4">
+                <Icon type="logout"/>
+                <span>Logout</span>
+              </Menu.Item>
+            </Menu>
+          </Sider>
+          <Layout>
 
-        loginbox: {
-            backgroundColor: 'white',
-            position: 'absolute',
-            borderStyle: 'solid',
-            borderWidth: .5,
-            borderColor: '#e6e6e6',
-            width: window.innerWidth/2  ,
-            height: window.innerHeight*.75,
-            left: window.innerWidth*1/4,
-            top: window.innerHeight*1/8,
-            textAlign: 'center'
-        },
-
-        logout: {
-          float: 'right'
-        }
-      }
-
-      return(<div>
-                <nav style ={styles.topbar}>
-                  <img src={a} style={styles.logo}></img>
-                  <div style={styles.beatbook}>beatbook</div>
-                  <RaisedButton onClick={() => this.logout()} label='logout' style={styles.logout}/>
-                </nav>
-
-                <div style={styles.loginbox}>
-                  Venue Page
-                  <br />
-                  <Avatar size="large" icon="user" />
-                </div>
-
-                <div>
-                    <Button type="primary" onClick={() => this.setState({open: true})}>Open</Button>
-                    <Modal
-                    title="Events"
-                    visible={this.state.open}
-                    //   onOk={this.handleOk}
-                    onCancel={() => this.setState({open:false})}>
-                    {calendar()}
-                    </Modal>
-                </div>
-              </div>)
+            <Content style={{ margin: '0 16px' }}>
+              <Breadcrumb style={{ margin: '16px 0' }}>
+                <Breadcrumb.Item></Breadcrumb.Item>
+              </Breadcrumb>
+              <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                {this.view()}
+              </div>
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>
+            Woooo Ant design!!!!!
+            </Footer>
+          </Layout>
+        </Layout>
+      )
     }
 }
 

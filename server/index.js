@@ -99,7 +99,7 @@ app.post('/calendar', (req, res) => {
   let description = req.body.description;
   let start = req.body.start;
   let end = req.body.end;
-  db.addEvent(userId, title, description, start, end);
+  //db.addEvent(userId, title, description, start, end);
 
   res.status(200).end()
 })
@@ -108,12 +108,12 @@ app.post('/dragAndDrop', (req, res) => {
   let id = 1;
   let eventId = req.body.eventId;
   let timeChange = req.body.timeChange;
-  db.eventChange()
+  //db.eventChange()
   res.status(200).end()
 })
 
 app.get('/calendar', (req, res) => {
-  db.getEvents(1)
+  //db.getEvents(1)
   testData = [
     {
       title: 'Tumble22',

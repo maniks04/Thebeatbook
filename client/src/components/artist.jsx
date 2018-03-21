@@ -17,23 +17,20 @@ class Artist extends React.Component {
         super(props)
         this.state = {
             open:false,
-            key:1,
+            key:"1",
         }
     }
 
   componentDidMount() {
-    console.log('mounted Artist')
     let actions = this.props.actions;
     let artistId = 1; //this will eaqual this.props.store.artist_id
-    console.log(actions.fetchArtistBookings(artistId))
-    console.log(this.props.store.artistBookings);
   }
 
 
-    logout() {
-        this.props.actions.logout()
-        //this.props.history.replace('/')
-    }
+    // logout() {
+    //     this.props.actions.logout()
+    //     //this.props.history.replace('/')
+    // }
 
     onSelect(info) {
       console.log('key', info)
@@ -42,8 +39,28 @@ class Artist extends React.Component {
       })
     }
 
+    view() {
+      let key = this.state.key
+      if (key === '1') {
+        return calendar()
+      }
+      if (key === '2') {
+        return (<div> Find Venue </div>)
+      }
+      if (key === '3') {
+        return (<div>The fancy view of your epk.</div>)
+      }
+      if (key === '4') {
+        return <div> Edit EPK </div>
+      }
+      if (key === '5') {
+        this.props.actions.logout()
+      }
+    }
 
     render() {
+
+
         return (
           <Layout style={{ minHeight: '100vh' }}>
             <Sider>
@@ -57,9 +74,13 @@ class Artist extends React.Component {
                   <Icon type="plus" />
                   <span>Find Venue</span>
                 </Menu.Item>
-                <Menu.Item key="3">
-                  <Icon type="user"/>
-                  <span>EPK</span>
+                <SubMenu key="sub1" title={<span><Icon type="team" /><span>EPK</span></span>}>
+                  <Menu.Item key="3">View</Menu.Item>
+                  <Menu.Item key="4">Edit</Menu.Item>
+                </SubMenu>
+                <Menu.Item key="5">
+                  <Icon type="logout"/>
+                  <span>Logout</span>
                 </Menu.Item>
               </Menu>
             </Sider>
@@ -70,7 +91,7 @@ class Artist extends React.Component {
                   <Breadcrumb.Item></Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                  {calendar()}
+                  {this.view()}
                 </div>
               </Content>
               <Footer style={{ textAlign: 'center' }}>
