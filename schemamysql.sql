@@ -74,25 +74,34 @@ CREATE TABLE bookings
 --
 -- ---
 
--- insert into venues
---   (venue_id, user_id, venue_name, venue_description, capacity)
--- VALUES
---   (1, 2, 'Vulcan', 'sixth street venue', 700);
 
 
--- insert into users
---   (user_id, username, password, user_type)
--- VALUES
---   (2, 'Gepeto', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou', 'venue');
 
--- insert into artists
---   (artist_id, user_id, artist_name, artist_description, user_type)
--- VALUES
---   (1, 1, 'Trouble', 'turbofunk', 'artist');
+insert into users
+  (user_id, username, password, user_type)
+VALUES
+  (1, 'Gepeto', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou', 'venue');
 
--- insert into bookings
---   (booking_id, artist_id, venue_id, start_time, end_time, booking_description)
--- VALUES
---   (1, 1, 1, '2018-03-22T14:30:00', '2018-03-22T16:30:00', 'SXSW Free show!');
+insert into users
+  (user_id, username, password, user_type)
+VALUES
+  (2, 'Gepeto', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou', 'artist');
+
+
+insert into venues
+  (venue_id, user_id, venue_name, venue_description, capacity)
+VALUES
+  (1, 2, 'Vulcan', 'sixth street venue', 700);
+
+
+insert into artists
+  (artist_id, user_id, artist_name, artist_description)
+VALUES
+  (1, 1, 'Trouble', 'turbofunk');
+
+insert into bookings
+  (booking_id, artist_id, venue_id, start_time, end_time, booking_description)
+VALUES
+  (1, 1, 1, '2018-03-22T14:30:00', '2018-03-22T16:30:00', 'SXSW Free show!');
 
 
