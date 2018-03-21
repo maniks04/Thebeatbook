@@ -6,11 +6,13 @@ knex = require('knex')({
 });
 
 
-//LOGIN / AUTHENTICATION
+
 const checkCredentials = (username) => {
   return knex.select().from('users')
     .where(knex.raw(`LOWER(username) = LOWER('${username}')`));
 };
+
+
 
 const addUsers = async (username, password, email, userType) => {
   const userQuery = await knex.select().from('users')
@@ -22,7 +24,7 @@ const addUsers = async (username, password, email, userType) => {
   } else if (emailQuery.length) {
     return 'email already exists';
   } else {
-     return await knex('users').insert({ username: username, password: password, email: email, user_type: userType});  //took out return 
+     return await knex('users').insert({ username: username, password: password, email: email, user_type: userType});  //took out return
   }
 };
 
@@ -34,7 +36,7 @@ const registerArtist = async (username, password, email, city, state) => {
   } else {
       const id = await getUserID(username)
       return await knex('artists').insert({artist_name: username, artist_city: city, artist_state: state, user_id: id})
-  } 
+  }
 }
 
 const registerVenue = async (username, password, email, venueName, address, city, state, capacity) => {
@@ -44,7 +46,7 @@ const registerVenue = async (username, password, email, venueName, address, city
   } else {
       const id = await getUserID(username)
       return await knex('venues').insert({venue_name: venueName, venue_address: address, venue_city: city, venue_state: state, capacity: capacity, user_id: id})//id, name, capacity, city, state, address
-  } 
+  }
 }
 
 const getUserID = async (username) => {
@@ -80,6 +82,26 @@ const getArtist = async (userId) => {
   return artist[0];
 }
 
+
+
+/****************************** Event Stuffs **********************************/
+
+const addEvent = async (userId, title, description, start, end) => {
+  console.log('hit addEvent');
+}
+
+const getEvents = async (userId) => {
+  console.log('hit getEvents');
+}
+
+const eventChange = async (userId, timeChange /* eventId */) => {
+  console.log('hit eventChang');
+
+}
+
+
+/******************************************************************************/
+
 //BOOKINGS
 
 const getArtistBookings = (artistId) => {
@@ -96,10 +118,12 @@ const getArtistBookings = (artistId) => {
 //     .orderBy('bookings.start_time', 'booking_description');
 // };
 
+
 module.exports = {
   registerArtist,
   registerVenue,
   getUser,
   checkCredentials,
   getArtistBookings
+
 };
