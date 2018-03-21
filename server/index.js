@@ -70,15 +70,15 @@ app.post('/register/venue', async (req, res) => {
 app.post('/login', async (req, res) => {
   const userInfo = await db.checkCredentials(req.body.username);
   if (userInfo.length) {
-    const user = userInfo[0]
+    let user = userInfo[0]
     if(bcrypt.compareSync(req.body.password, user.password)) {
       // Passwords match
-      const user = await db.getUser(req.body.username)
+      let user = await db.getUser(req.body.username)
       console.log(user)
-      res.json(user).end();
+      return res.send(user)
      } else {
       // Passwords don't match
-     res.send('your passwords dont match')
+     return res.send('your passwords dont match')
      }
   } 
   res.send('Username does not exist')
