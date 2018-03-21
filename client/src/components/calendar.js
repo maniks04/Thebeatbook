@@ -2,12 +2,12 @@ import React from 'react';
 import $ from 'jquery';
 const moment = require('moment');
 import 'fullcalendar';
-import axios from 'axios';
+import axios from 'axios'
 
 
 // all you need to do is import Calender in a file and then call the calendar()
 //    within to have it be displayed.
-const Calendar = (props) => {
+const Calendar = () => {
   $(function() {
     $('#calendar').fullCalendar({
       // adds buttons for swaping the view and gives a title to the calendar (typically the date range of the view being showed.)
@@ -28,6 +28,7 @@ const Calendar = (props) => {
       selectHelper: true,
       unselectAuto: false,
       nowIndicator: true,
+      height: window.innerHeight*.87,
 
       // alows drag and release creation of events
       select: function(start, end, allDay) {

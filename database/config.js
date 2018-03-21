@@ -4,4 +4,3 @@ module.exports = {
     password: '',
     database: 'beatbook'
 };
-  
