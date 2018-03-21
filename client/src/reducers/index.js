@@ -31,7 +31,6 @@ const reducer = function(state = initialState, action) {
     return Object.assign({}, state, {bookings: action.payload});
     case 'ERROR' :
     return Object.assign({}, state, {currentError: action.payload});
-
     default :
       return state
   }
