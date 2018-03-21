@@ -86,9 +86,9 @@ CREATE TABLE bookings
 --   (2, 'Gepeto', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou', 'venue');
 
 -- insert into artists
---   (artist_id, user_id, artist_name, artist_description)
+--   (artist_id, user_id, artist_name, artist_description, user_type)
 -- VALUES
---   (1, 1, 'Trouble', 'turbofunk');
+--   (1, 1, 'Trouble', 'turbofunk', 'artist');
 
 -- insert into bookings
 --   (booking_id, artist_id, venue_id, start_time, end_time, booking_description)

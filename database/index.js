@@ -1,11 +1,8 @@
-
 const config = require('./config.js');
-
-
 
 knex = require('knex')({
   client: 'mysql',
-  connection: config.mySql,
+  connection: config,
 });
 
 
@@ -50,44 +47,41 @@ const registerVenue = async (username, password, email, venueName, address, city
   } 
 }
 
-
 const getUserID = async (username) => {
   let id = await knex.select('user_id').from('users').where('username', username);
   return id[0].user_id
 }
-
-const getUsername = async (id) => {
-  let user = await knex.select('username').from('users').where('user_id', id);
-  return user[0].username;
-};
 
 const getUserByName = async (username) => {
   let user = await knex.select('*').from('users').where('username', username);
   return user[0];
 }
 
-// const getUser = async (id) => {
-//   let user = await knex.select('*').from('users').where('user_id', id);
-//   return user[0];
-// }
 
+//REFACTOR TO OPTIMIZE DB QUERY
 const getUser = async (username) => {
   let user = await knex.select('*').from('users').where('username', username);
-  //console.log(user)
   if (user[0].user_type === 'artist') {
-    let artist = await getArtist(user[0].user_id)
-    let bookings = await getArtistBookings(user[0].user_id)
-    return [user[0], artist[0], bookings[0]]
+    let artist = await getArtist(user[0].user_id);
+    let bookings = await getArtistBookings(artist[0].artist_id);
+    return [user[0], artist[0], bookings]
+   } else {
+    let venue = await getVenue(user[0].user_id)
+    let bookings = await getVenueBookings(venue[0].venue_id);
+    return [user[0], venue[0], bookings]
   }
-  //return user[0];
 };
 
+const getVenue = async (userId) => {
+  let venue = await knex.select('*').from('venues').where('user_id', userId);
+  return venue;
+}
 
 
 const getArtist = async (userId) => {
   let artist = await knex.select('*').from('artists').where('user_id', userId);
   return artist;
-   
+
 }
 
 //BOOKINGS
@@ -100,18 +94,17 @@ const getArtistBookings = async (artistId) => {
     return bookings;
 };
 
-const getVenueBookings = (venueId) => {
-  return knex.select('*')
+const getVenueBookings = async (venueId) => {
+  let bookings = await knex.select('*')
     .from('bookings')
-    .where('bookings.venue_id', venueId)
+    .where('venue_id', venueId)
     .orderBy('start_time', 'booking_description');
+    return bookings;
 };
 
 module.exports = {
   registerArtist,
   registerVenue,
-  getUsername,
   getUser,
   checkCredentials,
-  getArtistBookings
 };
