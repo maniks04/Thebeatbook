@@ -15,7 +15,6 @@ class Venue extends React.Component {
 
 componentDidMount() {
     console.log('mounted Venue')
-    console.log(this.props.history)
 }
 
 

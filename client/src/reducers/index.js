@@ -20,7 +20,7 @@ const reducer = function(state = initialState, action) {
       return Object.assign({},  state, {registerModalStatus:false});
     case 'TOGGLE_LOADING' :
     return Object.assign({}, state, {loading: !state.loading});
-    case 'SHOW_ARTIST_BOOKINGS' :
+    case 'SET_ARTIST_BOOKINGS' :
     return Object.assign({}, state, {artistBookings: action.payload});
     case 'ERROR' :
     return Object.assign({}, state, {currentError: action.payload});
@@ -29,4 +29,4 @@ const reducer = function(state = initialState, action) {
   }
 }
 
-export default reducer
+export default reducer;

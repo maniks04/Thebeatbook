@@ -16,35 +16,40 @@ class Artist extends React.Component {
     this.state = {
       open: false
     }
+
   }
 
   componentDidMount() {
     console.log('mounted Artist')
-    let actions = this.props.actions;
-    let artistId = 1; //this will eaqual this.props.store.artist_id
-    console.log(actions.fetchArtistBookings(artistId))
     console.log(this.props.store.artistBookings);
+        //fetch bookings test
+let actions = this.props.actions;
+let artistId = 1; //this will eaqual this.props.store.artist_id
+actions.fetchArtistBookings(artistId)
+//***************************************************        
+
+
   }
 
 
 
   logout() {
-    this.props.history.replace('/')
+    // this.props.history.replace('/')
+    console.log(this.props.store.artistBookings)
   }
 
 
     render() {
-        var a = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.png'
-
-        const styles = {
-            manik: {
-                height: 80,
-                backgroundColor: 'white',
-                borderBottom: 'solid',
-                borderWidth: .5,
-                borderColor: '#e6e6e6',
-            },
-            logo: {
+      var a = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.png'
+      const styles = {
+        manik: {
+          height: 80,
+          backgroundColor: 'white',
+          borderBottom: 'solid',
+          borderWidth: .5,
+          borderColor: '#e6e6e6',
+        },
+        logo: {
                 //float: 'right',
                 height: 20,
                 width: 20,

@@ -29,9 +29,31 @@ const isLoggedIn = (req, res, next) => {
 
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', function(req, res) {
-
   
 });
+
+app.post('/register/artist', async (req, res) => {
+  const registration = await db.registerArtist(req.body.username, req.body.password, req.body.email, req.body.city, req.body.state);
+  if (registration === 'username already exists') {
+     return res.send('username already exists') 
+  } if (registration === 'email already exists') {
+     return res.send('email already exists')
+  } else {
+    res.send('added')
+  } 
+})
+
+app.post('/register/venue', async (req, res) => {
+  const registration = await db.registerVenue(req.body.username, req.body.password, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);
+  if (registration === 'username already exists') {
+    return res.send('username already exists')
+  } if (registration === 'username already exists') {
+    return res.send('email already exists')
+  } else {
+    res.send('added')
+  } 
+})
+
 
 app.post('/login', passport.authenticate('local-login'), (req, res) => {
   console.log(req.body)
@@ -41,6 +63,8 @@ app.post('/login', passport.authenticate('local-login'), (req, res) => {
     session_id: req.sessionID
   });
 });
+
+
 
 app.post('/logout', isLoggedIn, (req, res) => {
   req.logout();

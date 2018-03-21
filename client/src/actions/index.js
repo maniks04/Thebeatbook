@@ -8,7 +8,7 @@ import axios from 'axios';
 
 //*************************************************
 //FETCH BOOKINGS
-const setArtistBookings = (bookings) => ({ type: 'SHOW_ARTIST_BOOKINGS', payload: bookings });
+const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload: bookings });
 
  export const fetchArtistBookings = (artistId) => {
   return (dispatch) => {
@@ -20,6 +20,7 @@ const setArtistBookings = (bookings) => ({ type: 'SHOW_ARTIST_BOOKINGS', payload
       },
     }).then(
       ({ data }) => {
+        console.log('actions data', data)
         dispatch(setArtistBookings(data.events));
       },
       error => dispatch(badStuff(error))
