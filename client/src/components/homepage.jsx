@@ -8,7 +8,7 @@ import axios from 'axios'
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import * as reducers from '../reducers/index.js'
-import Calendar from '../actions/calendar.js'
+import Calendar from './calendar.jsx'
 import TextField from 'material-ui/TextField';
 import Login from './login.jsx'
 import Artist from './artist.jsx'

@@ -16,7 +16,7 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import $ from 'jquery'
 // import AnyComponent from './components/filename.jsx'
 
-//let store = createStore(reducer)
+
 let store = createStore(reducer, applyMiddleware(thunk));
 
 const Base = ({ store }) => (
