@@ -21,7 +21,6 @@ class Venue extends React.Component {
     }
 
     componentDidMount() {
-        console.log('mounted Venue')
     }
 
     logout() {
@@ -30,7 +29,6 @@ class Venue extends React.Component {
     }
 
     onSelect(info) {
-      console.log('key', info)
       this.setState({
         key: info.key
       })

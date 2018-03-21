@@ -74,7 +74,6 @@ app.post('/login', async (req, res) => {
     if(bcrypt.compareSync(req.body.password, user.password)) {
       // Passwords match
       let user = await db.getUser(req.body.username)
-      console.log(user)
       return res.send(user)
      } else {
       // Passwords don't match
@@ -141,7 +140,8 @@ app.get('/calendar', (req, res) => {
 app.get('/bookings', async (req, res) => {
   const Id = req.query.userId;
   const type = req.query.user;
-  let events = await db.getBookings(Id, type);
+  let events = await db.getArtistBookings(Id);
+  console.log('events: ', events)
   res.status(200).send({events : events})
 });
 

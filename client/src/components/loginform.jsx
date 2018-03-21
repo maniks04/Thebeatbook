@@ -15,14 +15,12 @@ class LoginForm extends React.Component {
     }
 
     componentDidMount() {
-      console.log(this.props)
     }
 
   submitLogin (e)   {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         this.props.actions.submitLogin(values.userName, values.password)
       }
     });
@@ -49,7 +47,7 @@ class LoginForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-  
+
 
 
     return (
@@ -86,11 +84,11 @@ class LoginForm extends React.Component {
             <Checkbox>Remember me</Checkbox>
           )}
           <a className="login-form-forgot" href="">Forgot password</a>
-          
+
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
-          
+
           Or <a onClick={() => this.openRegisterModal()}>register now!</a>
         </FormItem>
       </Form>
@@ -109,4 +107,3 @@ const mapDispatchToProps = dispatch => (
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));
 //export default NormalLoginForm
-
