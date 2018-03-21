@@ -20,43 +20,40 @@ class Venue extends React.Component {
         }
     }
 
-componentDidMount() {
-    console.log('mounted Venue')
-    console.log(this.props.history)
-}
+    componentDidMount() {
+        console.log('mounted Venue')
+    }
+
+    logout() {
+        //this.props.history.replace('/')
+        this.props.actions.logout()
+    }
+
+    onSelect(info) {
+      console.log('key', info)
+      this.setState({
+        key: info.key
+      })
+    }
 
 
-
-logout() {
-    //this.props.history.replace('/')
-    this.props.actions.logout()
-}
-onSelect(info) {
-  console.log('key', info)
-  this.setState({
-    key: info.key
-  })
-}
-
-
-view() {
-  let key = this.state.key
-  if (key === '1') {
-    return calendar()
-  }
-  if (key === '2') {
-    return (<div>Find Artist</div>)
-  }
-  if (key === '3') {
-    return (<div>Incoming Event requests</div>)
-  }
-  if (key === '4') {
-    this.props.actions.logout()
-  }
-}
+    view() {
+      let key = this.state.key
+      if (key === '1') {
+        return calendar()
+      }
+      if (key === '2') {
+        return (<div>Find Artist</div>)
+      }
+      if (key === '3') {
+        return (<div>Incoming Event requests</div>)
+      }
+      if (key === '4') {
+        this.props.actions.logout()
+      }
+    }
 
     render() {
-
 
       return(
         <Layout style={{ minHeight: '100vh' }}>

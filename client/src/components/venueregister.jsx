@@ -13,30 +13,30 @@ const logo = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.pn
 const VenueRegisterFormContainer = Form.create()(VenueRegisterForm); //component for antd loginform
 
 class VenueRegister extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+    super(props)
+  }
 
 
 componentDidMount() {
-    console.log('artistregister', this.props.history)
+  console.log('artistregister', this.props.history)
 }
 
 registerVenue(username, password, email, venueName, address, city, state, capacity) {
-    axios.post('/register/venue', {
-        username: username,
-        password: password, 
-        email: email,
-        venueName: venueName, 
-        address: address, 
-        city: city, 
-        state: state,
-        capacity: capacity
-    }).then(res => {
-        console.log(res.data)
-    }).catch(err => {
-        console.log('error', err)
-    })
+  axios.post('/register/venue', {
+    username: username,
+    password: password, 
+    email: email,
+    venueName: venueName, 
+    address: address, 
+    city: city, 
+    state: state,
+    capacity: capacity
+  }).then(res => {
+    console.log(res.data)
+  }).catch(err => {
+    console.log('error', err)
+  })
 }
 
 

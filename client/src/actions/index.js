@@ -6,12 +6,8 @@ import axios from 'axios';
  export const openRegisterModal = () => ({type: 'OPENREGISTERMODAL'});
  export const closeRegisterModal = () => ({type: 'CLOSEREGISTERMODAL'});
 
-//*************************************************
-//FETCH BOOKINGS
-const setArtistBookings = (bookings) => ({ type: 'SHOW_ARTIST_BOOKINGS', payload: bookings });
 
-
- export const logout = () => ({type: 'LOGOUT'})
+export const logout = () => ({type: 'LOGOUT'})
 
 const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE'})
  
@@ -31,9 +27,11 @@ export const submitLogin = (username, password) => {
                 console.log(res.data)
             } else {
                 console.log(res)
-                if (res.data.user_type === 'artist') {
+                let type = res.data.user_type;
+                // dispatch(fetchArtistBookings(res.data.user_id, type))
+                if (type === 'artist') {
                     dispatch(loadArtistPage(res.data))
-                } if (res.data.user_type === 'venue') {
+                } if (type === 'venue') {
                     dispatch(loadVenuePage(res.data))
                 }
             } 
@@ -42,6 +40,7 @@ export const submitLogin = (username, password) => {
         })
     }
 }
+// ************************************************* TOGGLE LOADING BEORE ANY ACTIONS ; STILL NEED TO WRITE IT***
 
 //     axios.post('/login', {
 //         username: username,
@@ -53,45 +52,47 @@ export const submitLogin = (username, password) => {
 //     })   
 // }
 
+// export const login = (username, password) => {
+//     return (dispatch) => {
+//       return axios({
+//         method: 'get',
+//         url: '/login',
+//         params: {
+//           username: username,
+//           password: password,
+//         },
+//       }).then(
+//         results => {
+//           if (results.data.error) {
+//             alert(results.data.message);
+//           } else {
+//             dispatch(authenticate());
+//             dispatch(fetchTrips(username));
+//           }
+//         },
+//         error => {
+//           console.log('error', error);
+//           dispatch(badStuff(error));
+//         }
+//       )
+//     }
+// }
 
+//*************************************************
+//FETCH BOOKINGS
+const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload: bookings });
 
-
-export const login = (username, password) => {
-    return (dispatch) => {
-      return axios({
-        method: 'get',
-        url: '/login',
-        params: {
-          username: username,
-          password: password,
-        },
-      }).then(
-        results => {
-          if (results.data.error) {
-            alert(results.data.message);
-          } else {
-            dispatch(authenticate());
-            dispatch(fetchTrips(username));
-          }
-        },
-        error => {
-          console.log('error', error);
-          dispatch(badStuff(error));
-        }
-      )
-    }
-}
-
- export const fetchArtistBookings = (artistId) => {
+ export const fetchArtistBookings = (userId) => {
   return (dispatch) => {
     return axios({
       method: 'get',
       url: '/bookings',
       params: {
-        artistId: artistId,
+        userId: userId,
       },
     }).then(
       ({ data }) => {
+        console.log('actions data', data)
         dispatch(setArtistBookings(data.events));
       },
       error => dispatch(badStuff(error))

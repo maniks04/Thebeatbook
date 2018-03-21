@@ -68,16 +68,17 @@ app.post('/register/venue', async (req, res) => {
 
 
 app.post('/login', async (req, res) => {
-  const userInfo = await db.checkCredentials(req.body.username);
+  let userInfo = await db.checkCredentials(req.body.username);
   if (userInfo.length) {
-    const user = userInfo[0]
+    let user = userInfo[0]
     if(bcrypt.compareSync(req.body.password, user.password)) {
       // Passwords match
-      const user = await db.getUser(req.body.username)
-      return res.json(user)
+      let user = await db.getUser(req.body.username)
+      console.log(user)
+      return res.send(user)
      } else {
       // Passwords don't match
-      return res.send('your passwords dont match')
+     return res.send('your passwords dont match')
      }
   }
   res.send('Username does not exist')
@@ -138,8 +139,16 @@ app.get('/calendar', (req, res) => {
 //BOOKINGS
 
 app.get('/bookings', async (req, res) => {
-  const Id = req.query.artistId;
-  let events = await db.getArtistBookings(Id);
+  const Id = req.query.userId;
+  const type = req.query.user;
+  let events = await db.getBookings(Id, type);
+  res.status(200).send({events : events})
+});
+
+app.get('/user', async (req, res) => {
+  const Id = req.query.userId;
+  const type = req.query.user;
+  let user = await db.getBookings(Id, type);
   res.status(200).send({events : events})
 });
 

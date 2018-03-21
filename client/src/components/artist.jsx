@@ -13,24 +13,24 @@ const SubMenu = Menu.SubMenu;
 
 class Artist extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            open:false,
-            key:"1",
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      open:false,
+      key:"1",
     }
-
-  componentDidMount() {
-    let actions = this.props.actions;
-    let artistId = 1; //this will eaqual this.props.store.artist_id
   }
 
 
-    // logout() {
-    //     this.props.actions.logout()
-    //     //this.props.history.replace('/')
-    // }
+  componentDidMount() {
+    console.log('mounted Artist')
+    console.log(this.props.store.artistBookings);
+        //fetch bookings test
+    let actions = this.props.actions;
+    let artistId = 1; //this will eaqual this.props.store.artist_id
+    actions.fetchArtistBookings(artistId)
+  }
+
 
     onSelect(info) {
       console.log('key', info)
@@ -38,6 +38,7 @@ class Artist extends React.Component {
         key: info.key
       })
     }
+
 
     view() {
       let key = this.state.key
@@ -56,10 +57,9 @@ class Artist extends React.Component {
       if (key === '5') {
         this.props.actions.logout()
       }
-    }
+  }
 
     render() {
-
 
         return (
           <Layout style={{ minHeight: '100vh' }}>
