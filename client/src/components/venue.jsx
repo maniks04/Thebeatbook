@@ -19,19 +19,14 @@ class Venue extends React.Component {
 
 componentDidMount() {
     console.log('mounted Venue')
-    console.log(this.props.history)
 }
-
-
 
 logout() {
     //this.props.history.replace('/')
     this.props.actions.logout()
 }
-
-
-    render() {
-        let testEvent = {
+render() {
+  let testEvent = {
             title: 'props test event',
             start: '2018-03-16T14:30:00',
             end: '2018-03-16T16:30:00'
