@@ -28,7 +28,7 @@ export const submitLogin = (username, password) => {
             } else {
                 console.log(res)
                 let type = res.data[0].user_type;
-                // dispatch(setBookings(res.data.user_id, type))
+                dispatch(setBookings(res.data[2]))
                 if (type === 'artist') {
                     dispatch(loadArtistPage(res.data))
                 } if (type === 'venue') {
@@ -41,7 +41,7 @@ export const submitLogin = (username, password) => {
     }
 }
 
-// const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
+const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
 // ************************************************* TOGGLE LOADING BEORE ANY ACTIONS ; STILL NEED TO WRITE IT***
 
 //     axios.post('/login', {

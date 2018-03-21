@@ -125,5 +125,4 @@ module.exports = {
   getUser,
   checkCredentials,
   getArtistBookings
-
 };
