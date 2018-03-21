@@ -19,14 +19,7 @@ class Artist extends React.Component {
 
   }
 
-  componentDidMount() {
-    console.log('mounted Artist')
-    console.log(this.props.store.artistBookings);
-        //fetch bookings test
-  let actions = this.props.actions;
-  let artistId = 1; //this will eaqual this.props.store.artist_id
-  actions.fetchArtistBookings(artistId)
-//***************************************************        
+  componentDidMount() {   
   }
 
 

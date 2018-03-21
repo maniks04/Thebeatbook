@@ -64,11 +64,11 @@ const getUser = async (username) => {
   if (user[0].user_type === 'artist') {
     let artist = await getArtist(user[0].user_id);
     let bookings = await getArtistBookings(artist.artist_id);
-    return [user[0], artist, bookings[0]]
+    return [user[0], artist, bookings]
   } else {
     let venue = await getVenue(user[0].user_id)
     let bookings = await getVenueBookings(venue[0].venue_id);
-    return [user[0], venue, bookings[0]]
+    return [user[0], venue[0], bookings]
   }
 };
 
