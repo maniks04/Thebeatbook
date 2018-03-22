@@ -5,24 +5,17 @@ import 'fullcalendar';
 import axios from 'axios';
 import { Modal, Button, Form, Input } from 'antd';
 
-
-// all you need to do is import Calender in a file and then call the calendar()
-//    within to have it be displayed.
 const Calendar = (data) => {
   $(function() {
     $('#calendar').fullCalendar({
-      // adds buttons for swaping the view and gives a title to the calendar (typically the date range of the view being showed.)
       header: {
         left: 'prev,next today',
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
 
-      footer: {
-        // same layout as header if you want to add anything to bottom of calendar.
-      },
+      footer: { /* can add if wanted */},
 
-      // these allow calender elements to be moveable droppable not sticky and shows exactly what time it is on the calender
       droppable: true,
       editable: true,
       selectable: true,
@@ -31,7 +24,6 @@ const Calendar = (data) => {
       nowIndicator: true,
       height: window.innerHeight*.87,
 
-      // alows drag and release creation of events
       select: function(start, end, allDay) {
         let title;
         let description;
@@ -87,7 +79,6 @@ const Calendar = (data) => {
         $('#calendar').fullCalendar('unselect');
       },
 
-      // allows users to drag and drop events to reschedule them.
       eventDrop: function(event, delta, revertFunc) {
         let eventId = event.id
         let timeChange = delta._data
@@ -103,7 +94,6 @@ const Calendar = (data) => {
         })
       },
 
-      // grabs all events from db to display on calendar
       events: function(start, end, timezone, callback) {
           var events = []
           data.forEach((event) => {
@@ -123,7 +113,6 @@ const Calendar = (data) => {
 
 
       eventClick: function ( event, jsEvent, view ) {
-        //will likely use to select events not necesarily change color
          Modal.info({
            title: 'Event Description',
            content: (
@@ -132,7 +121,6 @@ const Calendar = (data) => {
            onOk(){},
            onCancel(){}
          })
-
       }
     });
   });
