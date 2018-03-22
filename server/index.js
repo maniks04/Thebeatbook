@@ -137,13 +137,12 @@ app.get('/calendar', (req, res) => {
 
 //BOOKINGS
 
-app.get('/bookings', async (req, res) => {
-  const Id = req.query.userId;
-  const type = req.query.user;
-  let events = await db.getArtistBookings(Id);
-  console.log('events: ', events)
-  res.status(200).send({events : events})
-});
+// app.get('/bookings', async (req, res) => {
+//   const Id = req.query.userId;
+//   const type = req.query.user;
+//   let events = await db.getBookings(Id, type);
+//   res.status(200).send({events : events})
+// });
 
 app.get('/user', async (req, res) => {
   const Id = req.query.userId;
