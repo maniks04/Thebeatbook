@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
-import calendar from './calendar.jsx'
-import TextField from 'material-ui/TextField';
+import calendar from './calendar.jsx';
+import Requests from './artistRequests.jsx';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -43,7 +43,7 @@ class Artist extends React.Component {
         return (<div> Find Venue </div>)
       }
       if (key === '3') {
-        return (<div>MY REQUESTS</div>)
+        return (<Requests />)
       }
       if (key === '4') {
         return (<div>The fancy view of your epk.</div>)
@@ -72,7 +72,7 @@ class Artist extends React.Component {
                   <span>Find Venue</span>
                 </Menu.Item>
                 <Menu.Item key="3">
-                  <Icon type="plus" />
+                  <Icon type="folder" />
                   <span>My Requests</span>
                 </Menu.Item>
                 <SubMenu key="sub1" title={<span><Icon type="team" /><span>EPK</span></span>}>
