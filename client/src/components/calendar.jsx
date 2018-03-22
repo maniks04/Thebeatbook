@@ -15,7 +15,6 @@ const Calendar = (data) => {
       },
 
       footer: { /* can add if wanted */},
-
       droppable: true,
       editable: true,
       selectable: true,
@@ -25,12 +24,6 @@ const Calendar = (data) => {
       height: window.innerHeight*.87,
 
       select: function(start, end, allDay) {
-        let title;
-        let description;
-        let submit = () => {
-            title = ($('.title').val())
-            description = ($('.description').val())
-        }
 
         Modal.confirm({
           title: 'Event Info',
@@ -47,7 +40,8 @@ const Calendar = (data) => {
             </div>
           ),
           onOk(){
-            submit()
+            let title = $('.title').val();
+            let description = $('.description').val();
             if (title) {
               $('#calendar').fullCalendar('renderEvent',
                   {
@@ -80,8 +74,11 @@ const Calendar = (data) => {
       },
 
       eventDrop: function(event, delta, revertFunc) {
+        console.log(event)
         let eventId = event.id
+        console.log(eventId)
         let timeChange = delta._data
+        console.log(timeChange)
 
         axios.post('/dragAndDrop', {
           eventId: eventId,
