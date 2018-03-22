@@ -21,10 +21,7 @@ class Artist extends React.Component {
     }
   }
 
-
-
   componentDidMount() {
-    console.log('mounted Artist')
     console.log('logging the store!:::', this.props.store.bookings);
   }
 
@@ -46,15 +43,18 @@ class Artist extends React.Component {
         return (<div> Find Venue </div>)
       }
       if (key === '3') {
-        return (<div>The fancy view of your epk.</div>)
+        return (<div>MY REQUESTS</div>)
       }
       if (key === '4') {
-        return <div> Edit EPK </div>
+        return (<div>The fancy view of your epk.</div>)
       }
       if (key === '5') {
+        return <div> Edit EPK </div>
+      }
+      if (key === '6') {
         this.props.actions.logout()
       }
-  }
+    }
 
     render() {
 
@@ -71,11 +71,15 @@ class Artist extends React.Component {
                   <Icon type="plus" />
                   <span>Find Venue</span>
                 </Menu.Item>
+                <Menu.Item key="3">
+                  <Icon type="plus" />
+                  <span>My Requests</span>
+                </Menu.Item>
                 <SubMenu key="sub1" title={<span><Icon type="team" /><span>EPK</span></span>}>
-                  <Menu.Item key="3">View</Menu.Item>
-                  <Menu.Item key="4">Edit</Menu.Item>
+                  <Menu.Item key="4">View</Menu.Item>
+                  <Menu.Item key="5">Edit</Menu.Item>
                 </SubMenu>
-                <Menu.Item key="5">
+                <Menu.Item key="6">
                   <Icon type="logout"/>
                   <span>Logout</span>
                 </Menu.Item>
