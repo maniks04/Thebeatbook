@@ -53,10 +53,7 @@ class Artist extends React.Component {
       if (key === '4') {
         return <ArtistEpkEdit />
       }
-    //   if (key === '5') {
-    //     this.props.actions.logout()  
-    //   }
-  }
+    }
 
     render() {
 

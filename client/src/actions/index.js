@@ -8,6 +8,20 @@ import axios from 'axios';
 
 
 export const logout = () => ({type: 'LOGOUT'})
+// export const deauthenticate = () => ({type: 'LOGOUT'})
+// export const logout = () => {
+//   return (dispatch) => {
+//     return axios({
+//       method: 'get',
+//       url: 'logout',
+//     }).then(
+//       () => {
+//         dispatch(deauthenticate());
+//       }
+//     );
+//   };
+// };
+
 
 const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE', payload: data.username})
 const loadVenuePage = (data) => ({type: 'LOADVENUEPAGE'})

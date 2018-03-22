@@ -32,6 +32,16 @@ app.post('/', function(req, res) {
   
 });
 
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      // throw err;
+      res.status(500).send(err);
+    }
+  });
+  res.end();
+});
+
 app.post('/register/artist', async (req, res) => {
   var hash = bcrypt.hashSync(req.body.password, 10);
   const registration = await db.registerArtist(req.body.username, hash, req.body.email, req.body.city, req.body.state);

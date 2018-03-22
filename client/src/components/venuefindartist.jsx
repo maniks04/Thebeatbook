@@ -13,7 +13,6 @@ const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
 class VenueFindArtist extends React.Component {
-
   constructor(props) {
     super(props)
     
