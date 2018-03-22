@@ -88,7 +88,7 @@ class Artist extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-          Woooo Ant design!!!!!
+          Rubber Ducky Dynasty!
           </Footer>
         </Layout>
       </Layout>
