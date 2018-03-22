@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
- export const openLoginModal = () => ({type: 'OPENLOGINMODAL'});  
+ export const openLoginModal = () => ({type: 'OPENLOGINMODAL'});
  export const closeLoginModal = () => ({type: 'CLOSELOGINMODAL'});
  export const openRegisterModal = () => ({type: 'OPENREGISTERMODAL'});
  export const closeRegisterModal = () => ({type: 'CLOSEREGISTERMODAL'});
@@ -10,7 +10,7 @@ import axios from 'axios';
 export const logout = () => ({type: 'LOGOUT'})
 
 const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE'})
- 
+
 const loadVenuePage = (data) => ({type: 'LOADVENUEPAGE'})
 
 export const submitLogin = (username, password) => {
@@ -26,7 +26,6 @@ export const submitLogin = (username, password) => {
             if (res.data === 'your passwords dont match' || res.data === 'Username does not exist') {
                 console.log(res.data)
             } else {
-                console.log(res)
                 let type = res.data[0].user_type;
                 dispatch(setBookings(res.data[2]))
                 if (type === 'artist') {
@@ -34,7 +33,7 @@ export const submitLogin = (username, password) => {
                 } if (type === 'venue') {
                     dispatch(loadVenuePage(res.data))
                 }
-            } 
+            }
         }).catch(err => {
             console.log(err)
         })
@@ -51,7 +50,7 @@ const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
 //         console.log(res.data)
 //     }).catch(err => {
 //         console.log(err)
-//     })   
+//     })
 // }
 
 // export const login = (username, password) => {
@@ -105,4 +104,3 @@ const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload:
 export const badStuff = (error) => ({type: 'ERROR', payload: error});
 const loading = () => ({type: 'TOGGLE_LOADING'});
 //*************************************************
-

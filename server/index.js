@@ -74,7 +74,6 @@ app.post('/login', async (req, res) => {
     if(bcrypt.compareSync(req.body.password, user.password)) {
       // Passwords match
       let user = await db.getUser(req.body.username)
-      console.log(user)
       return res.send(user)
      } else {
       // Passwords don't match
