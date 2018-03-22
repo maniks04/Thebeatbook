@@ -13,34 +13,29 @@ const logo = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.pn
 const LoginFormContainer = Form.create()(LoginForm); //component for antd loginform
 
 class Login extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+      super(props)
+  }
 
-
-
-
-    render() {
-       
-        return(
-            <div style={styles.loginbox}>
-                      <img src={logo} style={styles.logo}></img>
-                      <div style={styles.beatbook}>beatbook</div>
-                      <div style={styles.divider}></div>
-                      <div style={styles.loginform}>
-                        <LoginFormContainer submitLogin={this.props.submitLogin}/> 
-                      </div>
-                      <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">login</div>
-                    </div >
-        )
-    }
+  render() {
+    return(
+        <div style={styles.loginbox}>
+                  <img src={logo} style={styles.logo}></img>
+                  <div style={styles.beatbook}>beatbook</div>
+                  <div style={styles.divider}></div>
+                  <div style={styles.loginform}>
+                    <LoginFormContainer submitLogin={this.props.submitLogin}/>
+                  </div>
+                  <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">login</div>
+                </div >
+    )
+  }
 }
-
 
 const mapStateToProps = state => (
     { store: state }
   );
-  
+
   const mapDispatchToProps = dispatch => (
     { actions: bindActionCreators(actions, dispatch) }
   );
@@ -84,7 +79,7 @@ const styles = {
     divider: {
         borderStyle: 'solid',
         borderWidth: .5,
-        borderColor: '#e6e6e6', 
+        borderColor: '#e6e6e6',
         marginLeft: 25,
         marginRight: 25,
         marginTop: 50,
