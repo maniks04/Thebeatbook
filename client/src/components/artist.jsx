@@ -27,17 +27,16 @@ class Artist extends React.Component {
 
 
     onSelect(info) {
-      console.log('key', info)
       this.setState({
         key: info.key
       })
     }
 
 
-    view() {
+    view(data) {
       let key = this.state.key
       if (key === '1') {
-        return calendar()
+        return calendar(data)
       }
       if (key === '2') {
         return (<div> Find Venue </div>)
@@ -57,6 +56,7 @@ class Artist extends React.Component {
     }
 
     render() {
+      let data = this.props.store.bookings
 
         return (
           <Layout style={{ minHeight: '100vh' }}>
@@ -92,7 +92,7 @@ class Artist extends React.Component {
                   <Breadcrumb.Item></Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                  {this.view()}
+                  {this.view(data)}
                 </div>
               </Content>
               <Footer style={{ textAlign: 'center' }}>
