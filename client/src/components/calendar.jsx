@@ -106,7 +106,6 @@ const Calendar = (data) => {
       minTime: '04:00:00', // when the calendar starts the day.
       // maxTime: '22:00:00', // when the calender ends the day.
 
-
       eventClick: function ( event, jsEvent, view ) {
          Modal.info({
            title: 'Event Description',
