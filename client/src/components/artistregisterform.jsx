@@ -10,12 +10,10 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 
 class ArtistRegisterForm extends React.Component {
-    constructor(props) {
-        super(props)
-        
-    }
+  constructor(props) {
+      super(props)
+  }
 
-    
   registerArtist  (e)   {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -24,18 +22,14 @@ class ArtistRegisterForm extends React.Component {
         this.props.registerArtist(values.username, values.password, values.email, values.city, values.state)
       }
     });
-   
   }
-
-
-
 
   render() {
     const { getFieldDecorator } = this.props.form;
 
     return (
       <div>
-       
+
       <Form onSubmit={(e) => this.registerArtist(e)} className="login-form">
         <FormItem >
           {getFieldDecorator('username', {
@@ -80,11 +74,11 @@ class ArtistRegisterForm extends React.Component {
           )}
         </FormItem>
         <FormItem>
-        
+
           <Button type="primary" htmlType="submit" className="login-form-button">
             Register
           </Button>
-          
+
         </FormItem>
       </Form>
       </div>
