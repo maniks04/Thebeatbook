@@ -74,21 +74,19 @@ const Calendar = (data) => {
       },
 
       eventDrop: function(event, delta, revertFunc) {
-        console.log(event)
         let eventId = event.id
-        console.log(eventId)
         let timeChange = delta._data
-        console.log(timeChange)
 
         axios.post('/dragAndDrop', {
           eventId: eventId,
           timeChange: timeChange
         })
-        .then(res => {
-        })
-        .catch(err => {
-          console.log(err)
-        })
+          .then(res => {
+
+          })
+          .catch(err => {
+            console.log(err)
+          })
       },
 
       events: function(start, end, timezone, callback) {
@@ -129,8 +127,5 @@ return (
     </div>
   )
 }
-
-
-
 
 export default Calendar
