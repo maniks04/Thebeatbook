@@ -125,12 +125,24 @@ app.post('/dragAndDrop', (req, res) => {
 //   res.status(200).send({events : events})
 // });
 
-app.get('/user', async (req, res) => {
-  const Id = req.query.userId;
-  const type = req.query.user;
-  let user = await db.getBookings(Id, type);
-  res.status(200).send({events : events})
+// app.get('/user', async (req, res) => {
+//   const Id = req.query.userId;
+//   const type = req.query.user;
+//   let user = await db.getBookings(Id, type);
+//   res.status(200).send({events : events})
+// });
+
+
+/*****************************************************************************/
+
+//VENUES
+
+app.get('/venues', async (req, res) => {
+  const city = req.query.city;
+  let venues = await db.getVenues(city);
+  res.status(200).send({venues : venues})
 });
+
 
 
 app.get('/*', (req, res) => {
@@ -140,3 +152,4 @@ app.get('/*', (req, res) => {
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port 3000!');
 });
+

@@ -7,6 +7,7 @@ import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
 import calendar from './calendar.jsx';
 import Requests from './artistRequests.jsx';
+import SearchVenues from './searchVenues.jsx';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -39,7 +40,7 @@ class Artist extends React.Component {
         return calendar(data)
       }
       if (key === '2') {
-        return (<div> Find Venue </div>)
+        return (<SearchVenues />)
       }
       if (key === '3') {
         return (<Requests />)

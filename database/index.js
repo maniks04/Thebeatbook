@@ -82,7 +82,9 @@ const getArtist = async (userId) => {
   return artist[0];
 }
 
-
+const getVenues = async (city) => {
+  return await knex.select('*').from('venues').where('venues.venue_city', city);
+}
 
 //BOOKINGS
 
@@ -117,5 +119,6 @@ module.exports = {
   getUser,
   checkCredentials,
   getArtistBookings,
-  addBooking
+  addBooking,
+  getVenues
 };

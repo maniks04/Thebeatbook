@@ -1,8 +1,14 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions/index.js';
+import { bindActionCreators } from 'redux';
+import ReactDOM from 'react-dom';
+import $ from 'jquery';
 import { Input } from 'antd';
 const Search = Input.Search;
 import axios from 'axios';
 
-class Requests extends React.Component {
+class SearchVenues extends React.Component {
 
   constructor(props) {
     super(props)
@@ -19,7 +25,9 @@ class Requests extends React.Component {
 
   onSearch(info) {
     axios.get('/venues', {
-      city: info
+      params: {
+        city: info
+      }
     }).then(res => {
       console.log(res.data)
       this.setState({
@@ -37,6 +45,7 @@ class Requests extends React.Component {
       <Search
       placeholder="Enter A City Here"
       onSearch={value => this.onSearch(value)}
+      style={{ width: 300 }}
       enterButton
       />
     )
