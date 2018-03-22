@@ -24,7 +24,7 @@ const addUsers = async (username, password, email, userType) => {
   } else if (emailQuery.length) {
     return 'email already exists';
   } else {
-     return await knex('users').insert({ username: username, password: password, email: email, user_type: userType});  //took out return
+     return await knex('users').insert({ username: username, password: password, email: email, user_type: userType});
   }
 };
 
@@ -84,24 +84,6 @@ const getArtist = async (userId) => {
 
 
 
-/****************************** Event Stuffs **********************************/
-
-const addEvent = async (userId, title, description, start, end) => {
-  console.log('hit addEvent');
-}
-
-const getEvents = async (userId) => {
-  console.log('hit getEvents');
-}
-
-const eventChange = async (userId, timeChange /* eventId */) => {
-  console.log('hit eventChang');
-
-}
-
-
-/******************************************************************************/
-
 //BOOKINGS
 
 const getArtistBookings = (artistId) => {
@@ -119,10 +101,21 @@ const getArtistBookings = (artistId) => {
 // };
 
 
+const addBooking = async (info) => {
+  await knex('bookings').insert({ 
+    artist_id: info.artistId, 
+    venue_id: info.venueId, 
+    start_time: info.startTime, 
+    end_time: info.endTime, 
+    booking_description: info.description
+  });
+}
+
 module.exports = {
   registerArtist,
   registerVenue,
   getUser,
   checkCredentials,
-  getArtistBookings
+  getArtistBookings,
+  addBooking
 };
