@@ -119,7 +119,6 @@ const Calendar = (data) => {
     });
   });
 
-
 return (
     <div>
       <div id='calendar'></div>

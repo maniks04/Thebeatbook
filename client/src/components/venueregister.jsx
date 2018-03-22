@@ -17,54 +17,50 @@ class VenueRegister extends React.Component {
     super(props)
   }
 
+  componentDidMount() {
+    console.log('artistregister', this.props.history)
+  }
 
-componentDidMount() {
-  console.log('artistregister', this.props.history)
+  registerVenue(username, password, email, venueName, address, city, state, capacity) {
+    axios.post('/register/venue', {
+      username: username,
+      password: password,
+      email: email,
+      venueName: venueName,
+      address: address,
+      city: city,
+      state: state,
+      capacity: capacity
+    }).then(res => {
+      console.log(res.data)
+    }).catch(err => {
+      console.log('error', err)
+    })
+  }
+
+  render() {
+    return(
+        <div style={styles.registerbox}>
+                  <img src={logo} style={styles.logo}></img>
+                  <div style={styles.beatbook}>beatbook</div>
+                  <div style={styles.divider}></div>
+                  <div style={styles.registerform}>
+                    <VenueRegisterFormContainer registerVenue={this.registerVenue}/>
+                  </div>
+                </div >
+    )
+  }
 }
-
-registerVenue(username, password, email, venueName, address, city, state, capacity) {
-  axios.post('/register/venue', {
-    username: username,
-    password: password, 
-    email: email,
-    venueName: venueName, 
-    address: address, 
-    city: city, 
-    state: state,
-    capacity: capacity
-  }).then(res => {
-    console.log(res.data)
-  }).catch(err => {
-    console.log('error', err)
-  })
-}
-
-
-    render() {
-        return(
-            <div style={styles.registerbox}>
-                      <img src={logo} style={styles.logo}></img>
-                      <div style={styles.beatbook}>beatbook</div>
-                      <div style={styles.divider}></div>
-                      <div style={styles.registerform}>
-                        <VenueRegisterFormContainer registerVenue={this.registerVenue}/> 
-                      </div>
-                    </div >
-        )
-    }
-}
-
 
 const mapStateToProps = state => (
     { store: state } // eslint-disable-line
   );
-  
+
   const mapDispatchToProps = dispatch => (
     { actions: bindActionCreators(actions, dispatch) }
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(VenueRegister);
-
 
 const styles = {
     logo: {
@@ -102,7 +98,7 @@ const styles = {
     divider: {
         borderStyle: 'solid',
         borderWidth: .5,
-        borderColor: '#e6e6e6', 
+        borderColor: '#e6e6e6',
         marginLeft: 25,
         marginRight: 25,
         marginTop: 50,

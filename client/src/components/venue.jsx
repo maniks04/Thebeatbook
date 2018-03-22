@@ -34,7 +34,6 @@ class Venue extends React.Component {
       })
     }
 
-
     view() {
       let key = this.state.key
       if (key === '1') {
