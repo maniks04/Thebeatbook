@@ -21,8 +21,6 @@ class Artist extends React.Component {
     }
   }
 
-
-
   componentDidMount() {
     console.log('logging the store!:::', this.props.store.bookings);
   }

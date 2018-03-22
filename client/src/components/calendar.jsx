@@ -75,7 +75,7 @@ const Calendar = (data) => {
 
       eventDrop: function(event, delta, revertFunc) {
         let eventId = event.id
-        let timeChange = delta._data
+        let timeChange = delta._data // delta contains the time change info + other jquery elements.
 
         axios.post('/dragAndDrop', {
           eventId: eventId,
