@@ -8,6 +8,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import calendar from './calendar.jsx'
 import TextField from 'material-ui/TextField';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
+import ArtistEpk from './artistepk.jsx'
+import ArtistEpkEdit from './artistepkedit.jsx'
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
@@ -24,16 +26,15 @@ class Artist extends React.Component {
 
 
   componentDidMount() {
-    console.log('mounted Artist')
-    console.log('logging the store!:::', this.props.store.bookings);
+    console.log(this.props.store)
   }
 
 
     onSelect(info) {
-      console.log('key', info)
-      this.setState({
-        key: info.key
-      })
+      //console.log('key', info)
+      info.key === '5' ? 
+        this.props.actions.logout() :
+          this.setState({key: info.key})  
     }
 
 
@@ -43,17 +44,18 @@ class Artist extends React.Component {
         return calendar()
       }
       if (key === '2') {
-        return (<div> Find Venue </div>)
+        return <div> Find Venue </div>
       }
       if (key === '3') {
-        return (<div>The fancy view of your epk.</div>)
+        this.props.actions.getArtistEpk(this.props.store.username)
+        return <ArtistEpk />
       }
       if (key === '4') {
-        return <div> Edit EPK </div>
+        return <ArtistEpkEdit />
       }
-      if (key === '5') {
-        this.props.actions.logout()
-      }
+    //   if (key === '5') {
+    //     this.props.actions.logout()  
+    //   }
   }
 
     render() {

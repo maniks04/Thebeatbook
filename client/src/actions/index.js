@@ -9,8 +9,7 @@ import axios from 'axios';
 
 export const logout = () => ({type: 'LOGOUT'})
 
-const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE'})
- 
+const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE', payload: data.username})
 const loadVenuePage = (data) => ({type: 'LOADVENUEPAGE'})
 
 export const submitLogin = (username, password) => {
@@ -26,11 +25,11 @@ export const submitLogin = (username, password) => {
             if (res.data === 'your passwords dont match' || res.data === 'Username does not exist') {
                 console.log(res.data)
             } else {
-                console.log(res)
+                console.log('dataaaaa',res.data)
                 let type = res.data[0].user_type;
                 dispatch(setBookings(res.data[2]))
                 if (type === 'artist') {
-                    dispatch(loadArtistPage(res.data))
+                    dispatch(loadArtistPage(res.data[0]))
                 } if (type === 'venue') {
                     dispatch(loadVenuePage(res.data))
                 }
@@ -106,3 +105,40 @@ export const badStuff = (error) => ({type: 'ERROR', payload: error});
 const loading = () => ({type: 'TOGGLE_LOADING'});
 //*************************************************
 
+const renderArtistEpk = (data) => ({type: 'RENDEREPK', payload: data})
+
+export const getArtistEpk = (username) => {
+  return (dispatch) => {
+    return axios({
+      method: 'get',
+      url: '/artist/epk',
+      params: {
+        username: username
+      }
+    }).then(res => {
+      dispatch(renderArtistEpk(res.data[0]))
+    }).catch(err => {
+      console.log('err', err)
+    })
+  }
+}
+
+
+export const getArtistsByCity = (city) => {
+  return (dispatch) => {
+    return axios({
+      method: 'get',
+      url: 'artist/city',
+      params: {
+        city: city
+      }
+    }).then(res => {
+      console.log(res.data)
+      dispatch(renderArtistCityList(res.data))
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
+
+const renderArtistCityList = (list) => ({type: 'RENDERARTISTCITYLIST', payload: list})

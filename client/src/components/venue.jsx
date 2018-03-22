@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { withRouter } from 'react-router';
 import calendar from './calendar.jsx'
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
+import VenueFindArtist from './venuefindartist.jsx'
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
@@ -21,19 +22,19 @@ class Venue extends React.Component {
     }
 
     componentDidMount() {
-        console.log('mounted Venue')
+        console.log(this.props.store)
     }
 
-    logout() {
-        //this.props.history.replace('/')
-        this.props.actions.logout()
-    }
 
     onSelect(info) {
-      console.log('key', info)
-      this.setState({
-        key: info.key
-      })
+      //console.log('key', info)
+      info.key === '4' ?
+        this.props.actions.logout() :
+          this.setState({key: info.key})
+    }
+
+    searchArtist() {
+
     }
 
 
@@ -43,14 +44,12 @@ class Venue extends React.Component {
         return calendar()
       }
       if (key === '2') {
-        return (<div>Find Artist</div>)
+        return <VenueFindArtist />
       }
       if (key === '3') {
-        return (<div>Incoming Event requests</div>)
+        return <div>Incoming Event requests</div>
       }
-      if (key === '4') {
-        this.props.actions.logout()
-      }
+      
     }
 
     render() {

@@ -65,16 +65,16 @@ const getUser = async (username) => {
   let user = await knex.select('*').from('users').where('username', username);
   if (user[0].user_type === 'artist') {
     let artist = await getArtist(user[0].user_id);
-
     let bookings = await getArtistBookings(artist[0].artist_id);
     return [user[0], artist, bookings]
   } else {
-
     let venue = await getVenue(user[0].user_id)
     let bookings = await getVenueBookings(venue[0].venue_id);
-    return [user[0], venue[0], bookings]
+    return [user[0], venue, bookings]
   }
 };
+
+
 
 const getVenue = async (userId) => {
   let venue = await knex.select('*').from('venues').where('user_id', userId);
@@ -85,11 +85,29 @@ const getVenue = async (userId) => {
 const getArtist = async (userId) => {
   let artist = await knex.select('*').from('artists').where('user_id', userId);
   return artist;
-
 }
 
 
+const getEpkData = async (username) => {
+  let artistEpkData = await knex.select ('artist_name', 'artist_description', 'artist_city', 'artist_state').from('artists').where('artist_name', username)
+  return artistEpkData
+}
 
+const getArtistsByCity = async (city) => {
+  let artistList = await knex.select('artist_name').from('artists').where('artist_city', city)
+  return artistList
+}
+
+
+// artist_id INT NOT NULL AUTO_INCREMENT,
+//   user_id INT NOT NULL,
+//   artist_name VARCHAR(50) NOT NULL,
+//   artist_description VARCHAR(8000) DEFAULT NULL,
+//   artist_city VARCHAR(25),
+//   artist_state VARCHAR(25),
+//   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+//   PRIMARY KEY (artist_id),
+//   FOREIGN KEY (user_id) REFERENCES users (user_id)
 /****************************** Event Stuffs **********************************/
 
 const addEvent = async (userId, title, description, start, end) => {
@@ -117,13 +135,12 @@ const getArtistBookings = (artistId) => {
     .orderBy('bookings.start_time', 'booking_description');
 };
 
-// const getVenueBookings = async (venueId) => {
-//   let bookings = await knex.select('*')
-//     .from('bookings')
-//     .where('bookings.venue_id', venueId)
-//     .orderBy('bookings.start_time', 'booking_description');
-//     return bookings;
-// };
+const getVenueBookings =  (venueId) => {
+  return knex.select('*')
+    .from('bookings')
+    .where('bookings.venue_id', venueId)
+    .orderBy('bookings.start_time', 'booking_description');
+};
 
 
 module.exports = {
@@ -131,5 +148,7 @@ module.exports = {
   registerVenue,
   getUser,
   checkCredentials,
-  getArtistBookings
+  getArtistBookings,
+  getEpkData,
+  getArtistsByCity
 };

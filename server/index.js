@@ -29,19 +29,19 @@ const isLoggedIn = (req, res, next) => {
 
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', function(req, res) {
-
+  
 });
 
 app.post('/register/artist', async (req, res) => {
   var hash = bcrypt.hashSync(req.body.password, 10);
   const registration = await db.registerArtist(req.body.username, hash, req.body.email, req.body.city, req.body.state);
   if (registration === 'username already exists') {
-     return res.send('username already exists')
+     return res.send('username already exists') 
   } if (registration === 'email already exists') {
      return res.send('email already exists')
   } else {
     res.send('added')
-  }
+  } 
 })
 
 app.post('/register/venue', async (req, res) => {
@@ -53,7 +53,7 @@ app.post('/register/venue', async (req, res) => {
     return res.send('email already exists')
   } else {
     res.send('added')
-  }
+  } 
 })
 
 
@@ -78,10 +78,10 @@ app.post('/login', async (req, res) => {
       return res.send(user)
      } else {
       // Passwords don't match
-     return res.send('your passwords dont match')
-     }
-  }
-  res.send('Username does not exist')
+      return res.send('your passwords dont match')
+    }
+  } 
+   res.send('Username does not exist')
 })
 
 
@@ -95,26 +95,20 @@ app.post('/logout', isLoggedIn, (req, res) => {
 /******************************** Calendar ***********************************/
 
 app.post('/calendar', (req, res) => {
-  let userId = 1
   let title = req.body.title;
   let description = req.body.description;
   let start = req.body.start;
   let end = req.body.end;
-  //db.addEvent(userId, title, description, start, end);
-
   res.status(200).end()
 })
 
 app.post('/dragAndDrop', (req, res) => {
-  let id = 1;
-  let eventId = req.body.eventId;
+  let id = req.body.eventId;
   let timeChange = req.body.timeChange;
-  //db.eventChange()
   res.status(200).end()
 })
 
 app.get('/calendar', (req, res) => {
-  //db.getEvents(1)
   testData = [
     {
       title: 'Tumble22',
@@ -134,23 +128,26 @@ app.get('/calendar', (req, res) => {
   res.status(200).send(testData).end()
 })
 
+app.get('/artist/epk', async (req, res) => {
+  console.log(req.query.username)
+  let epkInfo = await db.getEpkData(req.query.username)
+  res.json(epkInfo)
+})
+
+
+app.get('/artist/city', async (req, res) => {
+  let artistList = await db.getArtistsByCity(req.query.city)
+  res.json(artistList)
+})
 /*****************************************************************************/
 
 //BOOKINGS
 
 // app.get('/bookings', async (req, res) => {
-//   const Id = req.query.userId;
-//   const type = req.query.user;
-//   let events = await db.getBookings(Id, type);
+//   const Id = req.query.artistId;
+//   let events = await db.getArtistBookings(Id);
 //   res.status(200).send({events : events})
 // });
-
-app.get('/user', async (req, res) => {
-  const Id = req.query.userId;
-  const type = req.query.user;
-  let user = await db.getBookings(Id, type);
-  res.status(200).send({events : events})
-});
 
 
 app.get('/*', (req, res) => {
@@ -160,3 +157,4 @@ app.get('/*', (req, res) => {
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port 3000!');
 });
+

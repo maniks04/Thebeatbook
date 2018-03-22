@@ -22,7 +22,7 @@ class Home extends React.Component {
 
     
     componentDidMount() {
-        console.log('mounted homepage')
+    console.log(this.props.store)
     }
 
 
