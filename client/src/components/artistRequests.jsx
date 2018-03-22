@@ -47,9 +47,9 @@ class Requests extends React.Component {
 	          <List.Item actions={[<a>edit</a>, <a>more</a>]}>
 	            <List.Item.Meta
 	              title={<a href="https://ant.design">{item.start_time}</a>}
-	              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+	              description="THIS IS A HARDCODED DESCRIPTION OF THE EVENT"
 	            />
-	            <div>content</div>
+	            <div></div>
 	          </List.Item>
           )}
       />
