@@ -30,8 +30,8 @@ class Login extends React.Component {
                       <div style={styles.loginform}>
                         <LoginFormContainer submitLogin={this.props.submitLogin}/> 
                       </div>
-                      <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">login</div>
-                    </div >
+                      <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">facebook login</div>
+            </div>
         )
     }
 }

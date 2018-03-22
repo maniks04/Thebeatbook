@@ -45,16 +45,7 @@ const Calendar = (props) => {
                 true
             );
 
-            axios.post('/calendar', {
-              title: title,
-              description: description,
-              start: start,
-              end: end
-            }).then(res => {
-            }).catch(err => {
-              console.log(err)
-            })
-
+               
         }
         $('#calendar').fullCalendar('unselect');
       },
@@ -77,22 +68,7 @@ const Calendar = (props) => {
 
       // grabs all events from db to display on calendar
       events: function(start, end, timezone, callback) {
-        axios.get('/calendar')
-        .then((res) => {
-          var events = []
-          res.data.forEach((event) => {
-            events.push({
-              title: event.title,
-              description: event.description,
-              start: event.start,
-              end: event.end,
-              id: event.id
-            })
-          })
-          callback(events)
-        }).catch((err) => {
-          console.log(err)
-        })
+// ******************** PULL EVENTS FROM STORE***************
       },
 
       // attatches a description to event (possibly going to attatch this to a tooltip)
