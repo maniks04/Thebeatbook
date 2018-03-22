@@ -7,7 +7,7 @@ import axios from 'axios';
 
 // all you need to do is import Calender in a file and then call the calendar()
 //    within to have it be displayed.
-const Calendar = (props) => {
+const Calendar = (data) => {
   $(function() {
     $('#calendar').fullCalendar({
       // adds buttons for swaping the view and gives a title to the calendar (typically the date range of the view being showed.)
@@ -28,7 +28,7 @@ const Calendar = (props) => {
       selectHelper: true,
       unselectAuto: false,
       nowIndicator: true,
-      height: window.innerHeight*.85,
+      height: window.innerHeight*.87,
 
       // alows drag and release creation of events
       select: function(start, end, allDay) {
@@ -78,22 +78,22 @@ const Calendar = (props) => {
 
       // grabs all events from db to display on calendar
       events: function(start, end, timezone, callback) {
-        axios.get('/calendar')
-        .then((res) => {
+        //axios.get('/calendar')
+        //.then((res) => {
           var events = []
-          res.data.forEach((event) => {
+          data.forEach((event) => {
             events.push({
-              title: event.title,
+              //title: event.booking_title,
               description: event.description,
-              start: event.start,
-              end: event.end,
-              id: event.id
+              start: event.start_time,
+              end: event.end_time,
+              id: event.booking_id
             })
           })
           callback(events)
-        }).catch((err) => {
-          console.log(err)
-        })
+        //}).catch((err) => {
+          //console.log(err)
+        //})
       },
 
       // attatches a description to event (possibly going to attatch this to a tooltip)

@@ -57,6 +57,7 @@ CREATE TABLE bookings
   booking_id INT NOT NULL AUTO_INCREMENT,
   artist_id INT NOT NULL,
   venue_id INT NOT NULL,
+  booking_title VARCHAR(8000),
   start_time DATETIME,
   end_time DATETIME,
   booking_description VARCHAR(8000),
