@@ -76,7 +76,7 @@ const Calendar = (data) => {
 
       eventDrop: function(event, delta, revertFunc) {
         let eventId = event.id
-        let timeChange = delta._data
+        let timeChange = delta._data // delta contains the time change info + other jquery elements.
 
         axios.post('/dragAndDrop', {
           eventId: eventId,
@@ -92,7 +92,7 @@ const Calendar = (data) => {
           var events = []
           data.forEach((event) => {
             events.push({
-              //title: event.booking_title,
+              title: event.booking_title,
               description: event.booking_description,
               start: event.start_time,
               end: event.end_time,
@@ -117,7 +117,6 @@ const Calendar = (data) => {
       }
     });
   });
-
 
 return (
     <div>

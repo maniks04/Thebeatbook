@@ -143,6 +143,12 @@ app.get('/venues', async (req, res) => {
   res.status(200).send({venues : venues})
 });
 
+app.get('/venueCalendar', async (req, res) => {
+  let venue_id = req.query.venue_id
+  let venueCalendar = await db.getVenueBookings(venue_id);
+  res.status(200).send(venueCalendar);
+})
+
 
 
 app.get('/*', (req, res) => {
@@ -152,4 +158,3 @@ app.get('/*', (req, res) => {
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port 3000!');
 });
-
