@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
 import calendar from './calendar.jsx';
-import Requests from './artistRequests.jsx';
+import Requests from './requests.jsx';
 import SearchVenues from './searchVenues.jsx';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;

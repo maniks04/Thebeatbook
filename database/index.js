@@ -70,8 +70,8 @@ const getUser = async (username) => {
   } else {
     //refactor to getVenueBookings2*******************************
     let venue = await getVenue(user[0].user_id)
-    let bookings = await getVenueBookings(venue[0].venue_id);
-    return [user[0], venue[0], bookings]
+    let bookings = await getVenueBookings2(venue.venue_id);
+    return [user[0], venue, bookings]
   }
 };
 
@@ -84,7 +84,8 @@ const getArtist = async (userId) => {
 }
 
 const getVenue = async (userId) => {
-  return await knex.select('*').from('venues').where('venues.user_id', userId);
+  let venue = await knex.select('*').from('venues').where('venues.user_id', userId);
+  return venue[0];
 }
 
 const getVenues = async (city) => {
@@ -106,13 +107,6 @@ const getVenueBookings = (venueId) => {
     .where('bookings.venue_id', venueId)
     .orderBy('bookings.start_time', 'booking_description');
 };
-// const getVenueBookings = (venueId) => {
-//   return knex.select('*')
-//     .from('bookings')
-//     .where('bookings.venue_id', venueId)
-//     .orderBy('bookings.start_time', 'booking_description');
-// };
-
 
 const addBooking = async (info) => {
   await knex('bookings').insert({ 
@@ -124,13 +118,13 @@ const addBooking = async (info) => {
   });
 }
 
-// const getVenueBookings2 = (venueId) => {
-//   return knex.column(knex.raw('bookings.*, venues.venue_name')).select()
-//     .from('bookings')
-//     .innerJoin('venues', 'bookings.venue_id', 'venue.venue_id')
-//     .where('venues.venue_id', venueId)
-//     .orderBy('bookings.start_time', 'desc');
-// }
+const getVenueBookings2 = async (venueId) => {
+  return await knex.column(knex.raw('b.*, a.artist_name')).select()
+    .from(knex.raw('bookings b'))
+    .innerJoin(knex.raw('artists a using (artist_id)'))    
+    .where(knex.raw(`b.venue_id = ${venueId}`))
+    .orderBy('b.start_time', 'desc');
+};
 //SELECT b.*, v.venue_name
 //FROM bookings b INNER JOIN venues v using (venue_id)
 //WHERE v.venue_id = <your venue id>
