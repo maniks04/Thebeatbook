@@ -14,9 +14,8 @@ const Calendar = (data) => {
         right: 'month,agendaWeek,agendaDay'
       },
 
-      footer: { /* can add if wanted */},
       droppable: true,
-      editable: true,
+      //editable: true,
       selectable: true,
       selectHelper: true,
       unselectAuto: false,
@@ -74,21 +73,21 @@ const Calendar = (data) => {
         $('#calendar').fullCalendar('unselect');
       },
 
-      eventDrop: function(event, delta, revertFunc) {
-        let eventId = event.id
-        let timeChange = delta._data // delta contains the time change info + other jquery elements.
-
-        axios.post('/dragAndDrop', {
-          eventId: eventId,
-          timeChange: timeChange
-        }).then(res => {})
-          .catch(err => {
-            console.log(err)
-          })
-      },
+      // eventDrop: function(event, delta, revertFunc) {
+      //   let eventId = event.id
+      //   let timeChange = delta._data
+      //
+      //   axios.post('/dragAndDrop', {
+      //     eventId: eventId,
+      //     timeChange: timeChange
+      //   }).then(res => {})
+      //     .catch(err => {
+      //       console.log(err)
+      //     })
+      // },
 
       events: function(start, end, timezone, callback) {
-
+          // ideas on how to show only
           var events = []
           data.forEach((event) => {
             events.push({
@@ -102,8 +101,8 @@ const Calendar = (data) => {
           callback(events)
       },
 
-      minTime: '04:00:00', // when the calendar starts the day.
-      // maxTime: '22:00:00', // when the calender ends the day.
+      minTime: '04:00:00',
+      // maxTime: '22:00:00',
 
       eventClick: function ( event, jsEvent, view ) {
          Modal.info({
