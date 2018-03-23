@@ -4,7 +4,7 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import { Input, Table } from 'antd';
+import { Input, Table, Divider } from 'antd';
 const Search = Input.Search;
 import axios from 'axios';
 
@@ -112,6 +112,7 @@ class SearchVenues extends React.Component {
         style={{ width: 300 }}
         enterButton
         />
+        <Divider />
         <Table 
         columns={columns}
         rowKey={(record) => record.registered}

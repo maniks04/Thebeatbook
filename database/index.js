@@ -99,6 +99,12 @@ const getArtistBookings = (artistId) => {
     .orderBy('bookings.start_time', 'booking_description');
 };
 
+const getVenueBookings = (venueId) => {
+  return knex.select('*')
+    .from('bookings')
+    .where('bookings.venue_id', venueId)
+    .orderBy('bookings.start_time', 'booking_description');
+};
 // const getVenueBookings = (venueId) => {
 //   return knex.select('*')
 //     .from('bookings')
@@ -123,6 +129,7 @@ module.exports = {
   getUser,
   checkCredentials,
   getArtistBookings,
+  getVenueBookings,
   addBooking,
   getVenue,
   getVenues
