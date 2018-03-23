@@ -92,7 +92,7 @@ const Calendar = (data) => {
           var events = []
           data.forEach((event) => {
             events.push({
-              //title: event.booking_title,
+              title: event.booking_title,
               description: event.booking_description,
               start: event.start_time,
               end: event.end_time,

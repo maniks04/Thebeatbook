@@ -35,9 +35,10 @@ class Venue extends React.Component {
   }
 
   view() {
+    let data = this.props.store.bookings
     let key = this.state.key
     if (key === '1') {
-      return calendar()
+      return calendar(data)
     }
     if (key === '2') {
       return (<div>Find Artist</div>)

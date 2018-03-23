@@ -100,7 +100,6 @@ class Artist extends React.Component {
           </Footer>
         </Layout>
       </Layout>
-    </Layout>
     );
   }
 }

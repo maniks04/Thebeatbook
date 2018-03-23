@@ -11,17 +11,28 @@ import axios from 'axios';
 
 const columns = [{
   title: 'Name',
+  key: 'name',
   dataIndex: 'venue_name',
   sorter: true,
   width: '40%',
 }, {
   title: 'Capacity',
+  key: 'capacity',
   dataIndex: 'capacity',
   sorter: true,
   width: '20%',
 }, {
   title: 'Address',
+  key: 'address',
   dataIndex: 'venue_address',
+}, {
+  title: 'Calendar',
+  key: 'calendar',
+  render: (blah) => (
+    <span>
+      <a href="#">View Venue Calendar</a>
+    </span>
+  )
 }];
 
 class SearchVenues extends React.Component {
@@ -52,6 +63,16 @@ class SearchVenues extends React.Component {
       })
     }).catch(err => {
       console.log('error', err)
+    })
+  }
+
+  viewCalendar(id) {
+    axios.get('/venueCalendar', {
+
+    }).then((res) => {
+
+    }).catch((err) => {
+      console.error('error', err)
     })
   }
 
@@ -113,7 +134,7 @@ class SearchVenues extends React.Component {
         enterButton
         />
         <Divider />
-        <Table 
+        <Table
         columns={columns}
         rowKey={(record) => record.registered}
         dataSource={this.state.venues}
@@ -122,7 +143,7 @@ class SearchVenues extends React.Component {
         onChange={this.handleTableChange}
       />
       </div>
-      ); 
+      );
     }
   }
 }
