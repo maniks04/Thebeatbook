@@ -4,11 +4,11 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import { Input, Table, Divider } from 'antd';
+import { Input, Table, Divider, Modal } from 'antd';
 const Search = Input.Search;
 import axios from 'axios';
-
-
+import calendar from './calendar.jsx';
+let data = {}
 const columns = [{
   title: 'Name',
   key: 'name',
@@ -30,19 +30,26 @@ const columns = [{
   key: 'calendar',
   render: (text, record) => (
     <span>
-      <a href="#" onClick={() => {viewCalendar(record.venue_id)}}>View Venue Calendar</a>
+      <a href="#" onClick={() => {
+        viewCalendar(record.venue_id)
+
+      }}>View Venue Calendar</a>
     </span>
   )
 }];
 
 const viewCalendar = (id) => {
-  console.log('click worked', id)
-  axios.get('/venueCalendar', {
+  let calendarStuff = axios.get('/venueCalendar', {
     params: {
       venue_id: id
     }
   }).then((res) => {
-
+    data = res.data;
+    console.log(data)
+    Modal.success({
+      title: 'Venue Calendar',
+      content: calendar(data)
+    })
   }).catch((err) => {
     console.error('error', err)
   })
@@ -79,18 +86,6 @@ class SearchVenues extends React.Component {
     })
   }
 
-  viewCalendar(id) {
-    console.log('click worked', id)
-    axios.get('/venueCalendar', {
-      params: {
-        venue_id: id
-      }
-    }).then((res) => {
-
-    }).catch((err) => {
-      console.error('error', err)
-    })
-  }
 
   handleTableChange (pagination, filters, sorter) {
     // const pager = { ...this.state.pagination };
