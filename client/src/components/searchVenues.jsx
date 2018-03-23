@@ -73,7 +73,6 @@ class SearchVenues extends React.Component {
         city: info
       }
     }).then(res => {
-      console.log(res.data)
       this.setState({
         fetched: true,
         venues: res.data.venues
