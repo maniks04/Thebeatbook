@@ -13,8 +13,10 @@ class Requests extends React.Component {
 
   constructor(props) {
     super(props)
+    let bookings = this.props.store.bookings;
     this.state = {
-      data: this.props.store.bookings,
+      pending: bookings.filter((booking)=> booking.confirmed === 0),
+      confirmed: bookings.filter((booking)=> booking.confirmed === 1),
       loadingMore: false,
       showLoadingMore: true,
     }
@@ -33,7 +35,7 @@ class Requests extends React.Component {
 
 
     render() {
-    	const { data } = this.state;
+    	const { confirmed, pending } = this.state;
     	// const loadMore = showLoadingMore ? (
      //  <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
      //    {loadingMore && <Spin />}
@@ -45,22 +47,34 @@ class Requests extends React.Component {
             <Tabs defaultActiveKey="1" onChange={this.callback}>
               <TabPane tab="Confirmed" key="1">
                 <List
-      	        className="demo-loadmore-list"
-      	        itemLayout="horizontal"
-      	        
-      	        dataSource={data}
-      	        renderItem={item => (
-      	          <List.Item actions={[<a>edit</a>, <a>more</a>]}>
-      	            <List.Item.Meta
-      	              title={<a href="https://ant.design">{item.start_time}</a>}
-      	              description="THIS IS A HARDCODED DESCRIPTION OF THE EVENT"
-      	            />
-      	            <div></div>
-      	          </List.Item>
+        	        className="demo-loadmore-list"
+        	        itemLayout="horizontal"
+        	        dataSource={confirmed}
+        	        renderItem={item => (
+        	          <List.Item actions={[<a>edit</a>, <a>more</a>]}>
+        	            <List.Item.Meta
+        	              title={<a href="https://ant.design">{item.start_time}</a>}
+        	              description="THIS IS A HARDCODED DESCRIPTION OF THE EVENT"
+        	            />
+        	          </List.Item>
                 )}
                 />
               </TabPane>
-              <TabPane tab="Pending" key="2">Content of Tab Pane 2</TabPane>
+              <TabPane tab="Pending" key="2">
+                <List
+                  className="demo-loadmore-list"
+                  itemLayout="horizontal"
+                  dataSource={pending}
+                  renderItem={item => (
+                    <List.Item actions={[<a>edit</a>, <a>more</a>]}>
+                      <List.Item.Meta
+                        title={<a href="https://ant.design">{item.start_time}</a>}
+                        description="THIS IS A HARDCODED DESCRIPTION OF THE EVENT"
+                      />
+                    </List.Item>
+                  )}
+                />
+              </TabPane>
             </Tabs>
           </div>
         );
