@@ -7,12 +7,8 @@ export const initialState = {
   loading: false,
   currentError: '',
   username: '',
-  epkName: '',
-  epkDescription: '',
-  epkCity: '',
-  epkState: '',
-  searchedArtistCityList: [],
-  venueSearchedArtist: false
+  chosenArtist: '',
+  searchedArtistCityList: []
 }
 
 
@@ -32,22 +28,18 @@ const reducer = function(state = initialState, action) {
       return Object.assign({},  state, {venue:true})
     case 'LOGOUT' :
       return Object.assign({},  state, {
-        artist: false, venue: false, venueSearchedArtist: false, epkName: '',
-        epkDescription: '', epkCity: '', epkState: '', username: '', searchedArtistCityList: []
-      })
+        artist: false, venue: false, username: '', searchedArtistCityList: [], chosenArtist: ''})
     case 'TOGGLE_LOADING' :
-    return Object.assign({}, state, {loading: !state.loading});
+      return Object.assign({}, state, {loading: !state.loading});
     case 'SET_BOOKINGS' :
-    return Object.assign({}, state, {bookings: action.payload});
+      return Object.assign({}, state, {bookings: action.payload});
     case 'ERROR' :
-    return Object.assign({}, state, {currentError: action.payload});
-    case 'RENDEREPK' :
-    return Object.assign({}, state, {
-      epkName: action.payload.artist_name, epkDescription: action.payload.artist_description,
-        epkCity: action.payload.artist_city, epkState: action.payload.artist_state,
-        venueSearchedArtist: true
-      });
-      case 'RENDERARTISTCITYLIST' :
+      return Object.assign({}, state, {currentError: action.payload});
+      case 'ClEARARTIST' :
+      return Object.assign({}, state, {chosenArtist: '', searchedArtistCityList: ''});
+    case 'CHOSENARTIST' :
+      return Object.assign({}, state, {chosenArtist: action.payload});
+    case 'RENDERARTISTCITYLIST' :
     return Object.assign({}, state, {searchedArtistCityList: action.payload});
     default :
       return state

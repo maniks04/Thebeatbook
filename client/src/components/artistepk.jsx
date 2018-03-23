@@ -4,6 +4,7 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import axios from 'axios'
 import RaisedButton from 'material-ui/RaisedButton';
 import calendar from './calendar.jsx'
 import TextField from 'material-ui/TextField';
@@ -15,35 +16,47 @@ class ArtistEpk extends React.Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      epk: []
+    }
   }
 
 
 
   componentDidMount() {
-    //console.log('mounted ArtistProfile')
-    //console.log(this.props.store)
+    this.props.store.username ? 
+    this.getArtistEpk(this.props.store.username) :    //gets the epk info of the logged in user
+    this.getArtistEpk(this.props.store.chosenArtist)  //gets epk info of a user that the venue is searching for
+  }
+
+  getArtistEpk(username) {
+    axios.get('/artist/epk', {
+      params: {
+        username: username
+      }
+    })
+    .then(res => {
+      this.setState({epk: res.data[0]})
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
 
 
     render() {
-        //the artist himself clicks to see his profile, it runs the function to 
-        //set all epk values based on his username
-        //this page displays the current epk values
-        //if a venue clicks on an artist, it will set epkstates to 
-        //that artist and load that artist's epk values
-        //based on their username
         return (
           <div>
-          {this.props.store.epkName}
+          {this.state.epk.artist_name}
           <br/>
-          {this.props.store.epkDescription}
+          {this.state.epk.artist_description}
           <br/>
-          {this.props.store.epkCity}
+          {this.state.epk.artist_city}
           <br/>
-          {this.props.store.epkState}
+          {this.state.epk.artist_state}
           <br/>
           </div>
+          
         )
     }
 }

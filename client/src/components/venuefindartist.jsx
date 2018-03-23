@@ -9,55 +9,101 @@ import calendar from './calendar.jsx'
 import TextField from 'material-ui/TextField';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 import ArtistEpk from './artistepk.jsx'
+import { Table, Divider } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
 class VenueFindArtist extends React.Component {
   constructor(props) {
     super(props)
-    
+    this.state = {
+        chosenArtist: '',
+        city: ''
+    }
   }
 
 
-  componentDidMount() {
-      console.log(this.props.store)
+  
+
+  clear() {
+      this.setState({chosenArtist: '', city: ''})
+      this.props.actions.clearArtist()
   }
 
-  view() {
-      if (this.props.store.venueSearchedArtist === true) {
-          return <ArtistEpk />
-      } 
-        if (this.props.store.searchedArtistCityList.length > 0) {
-          return this.props.store.searchedArtistCityList.map((artist, i) => 
-            <div key={i} onClick={() => this.searchArtist(artist.artist_name)}>{artist.artist_name}</div>
-        )}
-        else {
-          return <div>search for a user!</div>
-        }
-       
+  searchArtist(artistName) {
+    this.setState({chosenArtist: artistName, city: ''})
+    this.props.actions.chosenArtist(artistName)
   }
 
+  searchArtistCity(city) {
+    this.setState({city: city})
+    this.props.actions.getArtistsByCity(city)
 
-    searchArtist(artistName) {
-        this.props.actions.getArtistEpk(artistName)
-}
-
-searchArtistCity() {
-    this.props.actions.getArtistsByCity($('.artistcitysearch').val())
-}
+  }
 
 
     render() {
-        return (
-            <div>
+        // const dataSource = [{
+        //     key: '1',
+        //     name: 'Mike',
+        //     age: 32,
+        //     address: '10 Downing Street'
+        //   }, {
+        //     key: '2',
+        //     name: 'John',
+        //     age: 42,
+        //     address: '10 Downing Street'
+        //   }];
+
+          const dataSource = this.props.store.searchedArtistCityList
+          
+          const columns = [{
+            title: 'Artist Name',
+            dataIndex: 'Artist name',
+            key: 'Artist name',
+          }, {
+            title: 'Age',
+            dataIndex: 'age',
+            key: 'age',
+          }, {
+            title: 'Address',
+            dataIndex: 'address',
+            key: 'address',
+          }];
+
+            if (this.state.city.length) {
+                return (
+                    <div>
+                    <button onClick={() => this.clear()}>go back</button>
+                    <div>{this.props.store.searchedArtistCityList.map((artist, i) => 
+                        <div key={i} onClick={() => this.searchArtist(artist.artist_name)}>{artist.artist_name}</div>
+                    )}</div>
+                    <Table dataSource={dataSource} columns={columns} />
+                    </div>
+                )
+            }
+
+            if (!this.state.chosenArtist.length) {
+                return (
+                    <div> 
                 Find Artist
             <input className="artistsearch" placeholder="search by name"></input>
             <button onClick={() => this.searchArtist($('.artistsearch').val())}>search name</button>
             <input className="artistcitysearch" placeholder="search by city"></input>
-            <button onClick={() => this.searchArtistCity()}>search city</button>
-            <div>{this.view()}</div>
-              </div>
-        )
+            <button onClick={() => this.searchArtistCity($('.artistcitysearch').val())}>search city</button>
+             </div>
+                )
+            }
+
+            if (this.state.chosenArtist.length) {
+                return(
+                    <div>
+                <button onClick={() => this.clear()}>go back</button>
+                <ArtistEpk />
+                </div>
+                )
+            }
+
     }
 }
 

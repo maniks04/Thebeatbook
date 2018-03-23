@@ -17,7 +17,7 @@ class Venue extends React.Component {
         super(props)
         this.state = {
           open: false,
-          key:"1"
+          key:"1",
         }
     }
 
