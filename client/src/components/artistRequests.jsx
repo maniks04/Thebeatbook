@@ -43,7 +43,7 @@ class Requests extends React.Component {
      //    {loadingMore && <Spin />}
      //    {!loadingMore && <Button onClick={}>loading more</Button>}
 
-     ///////PULLLLLLL VENUE NAME, MAYBE USE OUTER JOIN TABLES IN
+     ///////PUT VENUE LINK IN THE 'A' ATTRIBUTES
      //  </div>
     // ) : null;
         return (
@@ -57,7 +57,7 @@ class Requests extends React.Component {
         	        renderItem={item => (
         	          <List.Item actions={[<a>edit</a>, <a>more</a>]}>
         	            <List.Item.Meta
-        	              title={<a href="https://ant.design">Use DB Join to Get Title here</a>}
+        	              title={<a href="https://ant.design">{item.venue_name}</a>}
         	              description={item.booking_description}
         	            />
                       <div>Gig on: {moment(item.start_time.slice(0, 10)).format("MMM Do YY")}</div>
@@ -73,7 +73,7 @@ class Requests extends React.Component {
                   renderItem={item => (
                     <List.Item actions={[<a>See Event</a>, <a>more</a>]}>
                       <List.Item.Meta
-                        title={<a href="https://ant.design">Use DB Join to Get Title here</a>}
+                        title={<a href="https://ant.design">{item.venue_name}</a>}
                         description={item.booking_description}
                       />
                       <div>Trying to gig: {moment(item.start_time.slice(0, 10)).format("MMM Do YY")}</div>
