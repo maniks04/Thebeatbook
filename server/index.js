@@ -153,11 +153,10 @@ app.get('/artist/city', async (req, res) => {
 
 //BOOKINGS
 
-// app.get('/bookings', async (req, res) => {
-//   const Id = req.query.artistId;
-//   let events = await db.getArtistBookings(Id);
-//   res.status(200).send({events : events})
-// });
+app.get('/epk', async (req, res) => {
+  let epk = await db.getEpk(req.query.artistId);
+  res.status(200).send({epk : epk})
+});
 
 
 app.get('/*', (req, res) => {

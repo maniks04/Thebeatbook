@@ -143,12 +143,18 @@ const getVenueBookings =  (venueId) => {
 };
 
 
+const getEpk = async (artistId) => {
+  let artist = await knex.select('*').from('artists').where('artists.artist_id', artistId);
+  return artist[0];
+}
+
 module.exports = {
   registerArtist,
   registerVenue,
   getUser,
   checkCredentials,
-  getArtistBookings,
-  getEpkData,
-  getArtistsByCity
+  addBooking,
+  getVenue,
+  getVenues,
+  getEpk
 };

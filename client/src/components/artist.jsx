@@ -30,29 +30,26 @@ class Artist extends React.Component {
   }
 
 
-    onSelect(info) {
-      //console.log('key', info)
-      info.key === '5' ? 
-        this.props.actions.logout() :
-          this.setState({key: info.key})  
+  view(data) {
+    let key = this.state.key
+    let artist = this.props.store.artistId;
+    if (key === '1') {
+      return calendar(data)
     }
-
-
-    view() {
-      let key = this.state.key
-      if (key === '1') {
-        return calendar()
-      }
-      if (key === '2') {
-        return <div> Find Venue </div>
-      }
-      if (key === '3') {
-        this.props.actions.getArtistEpk(this.props.store.username)
-        return <ArtistEpk />
-      }
-      if (key === '4') {
-        return <ArtistEpkEdit />
-      }
+    if (key === '2') {
+      return (<SearchVenues />)
+    }
+    if (key === '3') {
+      return (<Requests />)
+    }
+    if (key === '4') {
+      return (<EPKView artist={artist}/>)
+    }
+    if (key === '5') {
+      return (<WrappedNormalLoginForm />)
+    }
+    if (key === '6') {
+      this.props.actions.logout()
     }
 
     render() {

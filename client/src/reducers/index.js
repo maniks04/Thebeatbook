@@ -3,6 +3,8 @@ export const initialState = {
   registerModalStatus: false,
   artist: false,
   venue: false,
+  artistId: '',
+  venueId: '',
   bookings: [],
   loading: false,
   currentError: '',
@@ -33,14 +35,12 @@ const reducer = function(state = initialState, action) {
       return Object.assign({}, state, {loading: !state.loading});
     case 'SET_BOOKINGS' :
       return Object.assign({}, state, {bookings: action.payload});
+    case 'SET_ARTISTID' :
+      return Object.assign({}, state, {artistId: action.payload});
+    case 'SET_VENUEID' :
+      return Object.assign({}, state, {venueId: action.payload});
     case 'ERROR' :
       return Object.assign({}, state, {currentError: action.payload});
-      case 'ClEARARTIST' :
-      return Object.assign({}, state, {chosenArtist: '', searchedArtistCityList: ''});
-    case 'CHOSENARTIST' :
-      return Object.assign({}, state, {chosenArtist: action.payload});
-    case 'RENDERARTISTCITYLIST' :
-    return Object.assign({}, state, {searchedArtistCityList: action.payload});
     default :
       return state
   }

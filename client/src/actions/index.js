@@ -7,24 +7,9 @@ import axios from 'axios';
  export const closeRegisterModal = () => ({type: 'CLOSEREGISTERMODAL'});
 
 
-export const logout = () => ({type: 'LOGOUT'})
-// export const deauthenticate = () => ({type: 'LOGOUT'})
-// export const logout = () => {
-//   return (dispatch) => {
-//     return axios({
-//       method: 'get',
-//       url: 'logout',
-//     }).then(
-//       () => {
-//         dispatch(deauthenticate());
-//       }
-//     );
-//   };
-// };
-
-
-const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE', payload: data.username})
-const loadVenuePage = (data) => ({type: 'LOADVENUEPAGE'})
+export const logout = () => ({type: 'LOGOUT'});
+const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE'});
+const loadVenuePage = (data) => ({type: 'LOADVENUEPAGE'});
 
 export const submitLogin = (username, password) => {
     return(dispatch) => {
@@ -43,9 +28,11 @@ export const submitLogin = (username, password) => {
                 let type = res.data[0].user_type;
                 dispatch(setBookings(res.data[2]))
                 if (type === 'artist') {
-                    dispatch(loadArtistPage(res.data[0]))
+                    dispatch(loadArtistPage(res.data))
+                    dispatch(setArtist(res.data[1].artist_id))
                 } if (type === 'venue') {
-                    dispatch(loadVenuePage(res.data))
+                    dispatch(loadVenuePage(res.data));
+                    dispatch(setVenue(res.data[1].artist_id))
                 }
             } 
         }).catch(err => {
@@ -54,6 +41,8 @@ export const submitLogin = (username, password) => {
     }
 }
 
+const setArtist = (artistId) => ({ type: 'SET_ARTISTID', payload: artistId });
+const setVenue = (venueId) => ({ type: 'SET_VENUEID', payload: venueId });
 const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
 // ************************************************* TOGGLE LOADING BEORE ANY ACTIONS ; STILL NEED TO WRITE IT***
 
@@ -95,47 +84,27 @@ const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
 
 //*************************************************
 //FETCH BOOKINGS
-const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload: bookings });
+// const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload: bookings });
 
- export const fetchArtistBookings = (userId) => {
-  return (dispatch) => {
-    return axios({
-      method: 'get',
-      url: '/bookings',
-      params: {
-        userId: userId,
-      },
-    }).then(
-      ({ data }) => {
-        console.log('actions data', data)
-        dispatch(setArtistBookings(data.events));
-      },
-      error => dispatch(badStuff(error))
-    );
-  };
-};
-
-export const badStuff = (error) => ({type: 'ERROR', payload: error});
-const loading = () => ({type: 'TOGGLE_LOADING'});
+// export const fetchArtistBookings = (userId) => {
+//   return (dispatch) => {
+//     return axios({
+//       method: 'get',
+//       url: '/bookings',
+//       params: {
+//         userId: userId,
+//       },
+//     }).then(
+//       ({ data }) => {
+//         console.log('actions data', data)
+//         dispatch(setArtistBookings(data.events));
+//       },
+//       error => dispatch(badStuff(error))
+//     );
+//   };
+// };
 //*************************************************
 
-const renderArtistEpk = (data) => ({type: 'RENDEREPK', payload: data})
-
-export const getArtistEpk = (username) => {
-  return (dispatch) => {
-    return axios({
-      method: 'get',
-      url: '/artist/epk',
-      params: {
-        username: username
-      }
-    }).then(res => {
-      dispatch(renderArtistEpk(res.data[0]))
-    }).catch(err => {
-      console.log('err', err)
-    })
-  }
-}
 
 
 export const getArtistsByCity = (city) => {
