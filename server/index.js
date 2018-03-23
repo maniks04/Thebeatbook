@@ -99,7 +99,8 @@ app.post('/calendar', (req, res) => {
   let description = req.body.description;
   let start = req.body.start;
   let end = req.body.end;
-  //db.addEvent(userId, title, description, start, end);
+  console.log(req.body)
+  db.addBooking(req.body);
 
   res.status(200).end()
 })
@@ -112,26 +113,6 @@ app.post('/dragAndDrop', (req, res) => {
   res.status(200).end()
 })
 
-app.get('/calendar', (req, res) => {
-  //db.getEvents(1)
-  testData = [
-    {
-      title: 'Tumble22',
-      start: '2018-03-22T12:30:00',
-      end: '2018-03-22T13:30:00',
-      description: 'OG Southern Chicken Sandwhich, Dang hot, with a side of chips, for here please.',
-      id: 1
-    },
-    {
-      title: 'Happy Chick',
-      start: '2018-03-23T11:30:00',
-      end: '2018-03-23T12:30:00',
-      description: 'Classic Chic, spicy, with honey siracha and ranch, to go please.',
-      id: 2
-    },
-  ]
-  res.status(200).send(testData).end()
-})
 
 /*****************************************************************************/
 
@@ -144,12 +125,24 @@ app.get('/calendar', (req, res) => {
 //   res.status(200).send({events : events})
 // });
 
-app.get('/user', async (req, res) => {
-  const Id = req.query.userId;
-  const type = req.query.user;
-  let user = await db.getBookings(Id, type);
-  res.status(200).send({events : events})
+// app.get('/user', async (req, res) => {
+//   const Id = req.query.userId;
+//   const type = req.query.user;
+//   let user = await db.getBookings(Id, type);
+//   res.status(200).send({events : events})
+// });
+
+
+/*****************************************************************************/
+
+//VENUES
+
+app.get('/venues', async (req, res) => {
+  const city = req.query.city;
+  let venues = await db.getVenues(city);
+  res.status(200).send({venues : venues})
 });
+
 
 
 app.get('/*', (req, res) => {
@@ -159,3 +152,4 @@ app.get('/*', (req, res) => {
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port 3000!');
 });
+

@@ -4,7 +4,7 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import axios from 'axios'
+import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import * as reducers from '../reducers/index.js'

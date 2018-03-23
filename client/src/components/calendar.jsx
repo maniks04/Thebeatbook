@@ -70,6 +70,7 @@ const Calendar = (data) => {
 
           }
         })
+
         $('#calendar').fullCalendar('unselect');
       },
 
@@ -90,6 +91,7 @@ const Calendar = (data) => {
       },
 
       events: function(start, end, timezone, callback) {
+
           var events = []
           data.forEach((event) => {
             events.push({
