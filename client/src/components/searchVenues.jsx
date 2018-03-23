@@ -8,6 +8,7 @@ import { Input, Table, Divider, Modal } from 'antd';
 const Search = Input.Search;
 import axios from 'axios';
 import calendar from './calendar.jsx';
+
 let data = {}
 const columns = [{
   title: 'Name',
@@ -32,28 +33,27 @@ const columns = [{
     <span>
       <a href="#" onClick={() => {
         viewCalendar(record.venue_id)
-
       }}>View Venue Calendar</a>
     </span>
   )
 }];
 
 const viewCalendar = (id) => {
-  let calendarStuff = axios.get('/venueCalendar', {
+  axios.get('/venueCalendar', {
     params: {
       venue_id: id
     }
   }).then((res) => {
     data = res.data;
-    console.log(data)
     Modal.success({
       title: 'Venue Calendar',
+      width: window.innerWidth*.65,
       content: calendar(data)
-    })
+    });
   }).catch((err) => {
-    console.error('error', err)
+    console.error('error', err);
   })
-}
+};
 
 class SearchVenues extends React.Component {
 
@@ -65,9 +65,6 @@ class SearchVenues extends React.Component {
       loading: false,
       fetched: false
     }
-  }
-
-  componentDidMount() {
   }
 
   onSearch(info) {
@@ -84,45 +81,6 @@ class SearchVenues extends React.Component {
     }).catch(err => {
       console.log('error', err)
     })
-  }
-
-
-  handleTableChange (pagination, filters, sorter) {
-    // const pager = { ...this.state.pagination };
-    // pager.current = pagination.current;
-    // this.setState({
-    //   pagination: pager,
-    // });
-    // this.fetch({
-    //   results: pagination.pageSize,
-    //   page: pagination.current,
-    //   sortField: sorter.field,
-    //   sortOrder: sorter.order,
-    //   ...filters,
-    // });
-  }
-  fetch (params = {}) {
-    // console.log('params:', params);
-    // this.setState({ loading: true });
-    // axios({
-    //   url: '/venues',
-    //   method: 'get',
-    //   data: {
-    //     results: 10,
-    //     ...params,
-    //   },
-
-    // }).then((data) => {
-    //   const pagination = { ...this.state.pagination };
-    //   // Read total count from server
-    //   // pagination.total = data.totalCount;
-    //   pagination.total = 200;
-    //   this.setState({
-    //     loading: false,
-    //     venues: data.results,
-    //     pagination,
-    //   });
-    // });
   }
 
   render() {
