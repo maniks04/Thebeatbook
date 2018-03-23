@@ -5,9 +5,9 @@ import {open} from '../actions'
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import axios from 'axios'
+import axios from 'axios';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import LoginForm from './loginform.jsx'
+import LoginForm from './loginform.jsx';
 
 const logo = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.png'
 const LoginFormContainer = Form.create()(LoginForm); //component for antd loginform

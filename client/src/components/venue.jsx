@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
 import { withRouter } from 'react-router';
-import calendar from './calendar.jsx'
+import calendar from './calendar.jsx';
+import Requests from './requests.jsx';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -34,9 +35,10 @@ class Venue extends React.Component {
     })
   }
 
+
   view() {
-    let data = this.props.store.bookings
-    let key = this.state.key
+    let data = this.props.store.bookings;
+    let key = this.state.key;
     if (key === '1') {
       return calendar(data)
     }
@@ -44,7 +46,7 @@ class Venue extends React.Component {
       return (<div>Find Artist</div>)
     }
     if (key === '3') {
-      return (<div>Incoming Event requests</div>)
+      return (<Requests />)
     }
     if (key === '4') {
       this.props.actions.logout()

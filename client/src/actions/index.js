@@ -43,47 +43,12 @@ export const submitLogin = (username, password) => {
 const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
 // ************************************************* TOGGLE LOADING BEORE ANY ACTIONS ; STILL NEED TO WRITE IT***
 
-//     axios.post('/login', {
-//         username: username,
-//         password: password
-//     }).then(res => {
-//         console.log(res.data)
-//     }).catch(err => {
-//         console.log(err)
-//     })
-// }
-
-// export const login = (username, password) => {
-//     return (dispatch) => {
-//       return axios({
-//         method: 'get',
-//         url: '/login',
-//         params: {
-//           username: username,
-//           password: password,
-//         },
-//       }).then(
-//         results => {
-//           if (results.data.error) {
-//             alert(results.data.message);
-//           } else {
-//             dispatch(authenticate());
-//             dispatch(fetchTrips(username));
-//           }
-//         },
-//         error => {
-//           console.log('error', error);
-//           dispatch(badStuff(error));
-//         }
-//       )
-//     }
-// }
 
 //*************************************************
 //FETCH BOOKINGS
 const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload: bookings });
 
- export const fetchArtistBookings = (userId) => {
+export const fetchArtistBookings = (userId) => {
   return (dispatch) => {
     return axios({
       method: 'get',
@@ -100,7 +65,29 @@ const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload:
     );
   };
 };
+//*************************************************
+//FETCH EPK ---- Probably need to use a 'loading' transition here
+// const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload: bookings });
 
+ export const fetchEpk = (artistId) => {
+  return (dispatch) => {
+    return axios({
+      method: 'get',
+      url: '/epk',
+      params: {
+        artistId: artistId,
+      },
+    }).then(
+      ({ data }) => {
+        console.log('EPK data', data)
+        // dispatch(setArtistBookings(data.events));
+      },
+      error => dispatch(badStuff(error))
+    );
+  };
+};
+
+//may be able to remove badstuff()
 export const badStuff = (error) => ({type: 'ERROR', payload: error});
 const loading = () => ({type: 'TOGGLE_LOADING'});
 //*************************************************
