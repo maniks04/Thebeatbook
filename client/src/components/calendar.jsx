@@ -15,7 +15,6 @@ const Calendar = (data) => {
       },
 
       droppable: true,
-      //editable: true,
       selectable: true,
       selectHelper: true,
       unselectAuto: false,
@@ -65,26 +64,10 @@ const Calendar = (data) => {
               alert('You need a title')
             }
           },
-          onCancel(){
-
-          }
+          onCancel(){}
         })
-
         $('#calendar').fullCalendar('unselect');
       },
-
-      // eventDrop: function(event, delta, revertFunc) {
-      //   let eventId = event.id
-      //   let timeChange = delta._data
-      //
-      //   axios.post('/dragAndDrop', {
-      //     eventId: eventId,
-      //     timeChange: timeChange
-      //   }).then(res => {})
-      //     .catch(err => {
-      //       console.log(err)
-      //     })
-      // },
 
       events: function(start, end, timezone, callback) {
           // ideas on how to show only
