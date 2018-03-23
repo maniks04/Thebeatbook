@@ -12,6 +12,7 @@ import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 import WrappedNormalLoginForm from './epkEdit.jsx';
+import EPKView from './epkView.jsx';
 
 class Artist extends React.Component {
 
@@ -47,7 +48,7 @@ class Artist extends React.Component {
       return (<Requests />)
     }
     if (key === '4') {
-      return (<div>The fancy view of your epk.</div>)
+      return (<EPKView />)
     }
     if (key === '5') {
       return (<WrappedNormalLoginForm />)
