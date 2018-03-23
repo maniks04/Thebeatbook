@@ -11,6 +11,7 @@ import SearchVenues from './searchVenues.jsx';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
+import WrappedNormalLoginForm from './epkEdit.jsx';
 
 class Artist extends React.Component {
 
@@ -49,7 +50,7 @@ class Artist extends React.Component {
       return (<div>The fancy view of your epk.</div>)
     }
     if (key === '5') {
-      return <div> Edit EPK </div>
+      return (<WrappedNormalLoginForm />)
     }
     if (key === '6') {
       this.props.actions.logout()
