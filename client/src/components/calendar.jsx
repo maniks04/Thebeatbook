@@ -81,10 +81,7 @@ const Calendar = (data) => {
         axios.post('/dragAndDrop', {
           eventId: eventId,
           timeChange: timeChange
-        })
-          .then(res => {
-
-          })
+        }).then(res => {})
           .catch(err => {
             console.log(err)
           })

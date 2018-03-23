@@ -82,6 +82,10 @@ const getArtist = async (userId) => {
   return artist[0];
 }
 
+const getVenue = async (userId) => {
+  return await knex.select('*').from('venues').where('venues.user_id', userId);
+}
+
 const getVenues = async (city) => {
   return await knex.select('*').from('venues').where('venues.venue_city', city);
 }
@@ -95,6 +99,12 @@ const getArtistBookings = (artistId) => {
     .orderBy('bookings.start_time', 'booking_description');
 };
 
+const getVenueBookings = (venueId) => {
+  return knex.select('*')
+    .from('bookings')
+    .where('bookings.venue_id', venueId)
+    .orderBy('bookings.start_time', 'booking_description');
+};
 // const getVenueBookings = (venueId) => {
 //   return knex.select('*')
 //     .from('bookings')
@@ -113,12 +123,23 @@ const addBooking = async (info) => {
   });
 }
 
+// const getVenueBookings2 = (venueId) => {
+//   return knex.column(knex.raw('bookings.*, venues.venue_name')).select()
+//     .from('bookings')
+//     .innerJoin('venues', 'bookings.venue_id', 'venue.venue_id')
+//     .where('venues.venue_id', venueId)
+//     .orderBy('bookings.start_time', 'desc');
+// }
+
 module.exports = {
   registerArtist,
   registerVenue,
   getUser,
   checkCredentials,
   getArtistBookings,
+  getVenueBookings,
   addBooking,
-  getVenues
+  getVenue,
+  getVenues,
+  // getVenueBookings2
 };

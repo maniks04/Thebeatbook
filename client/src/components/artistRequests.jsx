@@ -5,54 +5,84 @@ import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import calendar from './calendar.jsx'
-import { Modal, List, Button, Avatar, Layout, Menu, Breadcrumb, Icon, Spin } from 'antd';
+import { Modal, Tabs, List, Button, Layout, Menu, Breadcrumb, Icon, Spin } from 'antd';
 const SubMenu = Menu.SubMenu;
+const TabPane = Tabs.TabPane;
+const moment = require('moment');
 
 class Requests extends React.Component {
 
   constructor(props) {
     super(props)
+    let bookings = this.props.store.bookings;
     this.state = {
-      data: this.props.store.bookings,
+      pending: bookings.filter((booking)=> booking.confirmed === 0),
+      confirmed: bookings.filter((booking)=> booking.confirmed === 1),
       loadingMore: false,
       showLoadingMore: true,
     }
   }
 
-  componentDidMount() {
-    console.log('logging the store!:::', this.props.store.bookings);
-  }
+  // componentDidMount() {
+  // }
 
 
     onSelect(info) {
     }
 
+    callback(key) {
+      console.log(key);
+    }
 
 
     render() {
-    	const { data } = this.state;
+    	const { confirmed, pending } = this.state;
+      console.log(moment(this.props.store.bookings[0].start_time.slice(0, 10)).format("MMM Do YY"))
     	// const loadMore = showLoadingMore ? (
      //  <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
      //    {loadingMore && <Spin />}
      //    {!loadingMore && <Button onClick={}>loading more</Button>}
+
+     ///////PULLLLLLL VENUE NAME, MAYBE USE OUTER JOIN TABLES IN
      //  </div>
     // ) : null;
         return (
-          <List
-	        className="demo-loadmore-list"
-	        itemLayout="horizontal"
-	        
-	        dataSource={data}
-	        renderItem={item => (
-	          <List.Item actions={[<a>edit</a>, <a>more</a>]}>
-	            <List.Item.Meta
-	              title={<a href="https://ant.design">{item.start_time}</a>}
-	              description="THIS IS A HARDCODED DESCRIPTION OF THE EVENT"
-	            />
-	            <div></div>
-	          </List.Item>
-          )}
-      />
+          <div>
+            <Tabs defaultActiveKey="1" onChange={this.callback}>
+              <TabPane tab="Confirmed" key="1">
+                <List
+        	        className="demo-loadmore-list"
+        	        itemLayout="horizontal"
+        	        dataSource={confirmed}
+        	        renderItem={item => (
+        	          <List.Item actions={[<a>edit</a>, <a>more</a>]}>
+        	            <List.Item.Meta
+        	              title={<a href="https://ant.design">Use DB Join to Get Title here</a>}
+        	              description={item.booking_description}
+        	            />
+                      <div>Gig on: {moment(item.start_time.slice(0, 10)).format("MMM Do YY")}</div>
+        	          </List.Item>
+                )}
+                />
+              </TabPane>
+              <TabPane tab="Pending" key="2">
+                <List
+                  className="demo-loadmore-list"
+                  itemLayout="horizontal"
+                  dataSource={pending}
+                  renderItem={item => (
+                    <List.Item actions={[<a>See Event</a>, <a>more</a>]}>
+                      <List.Item.Meta
+                        title={<a href="https://ant.design">Use DB Join to Get Title here</a>}
+                        description={item.booking_description}
+                      />
+                      <div>Trying to gig: {moment(item.start_time.slice(0, 10)).format("MMM Do YY")}</div>
+                    </List.Item>
+                  )}
+                />
+              </TabPane>
+            </Tabs>
+          </div>
         );
   }
 }

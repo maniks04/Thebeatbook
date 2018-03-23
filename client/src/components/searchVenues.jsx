@@ -4,7 +4,7 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import { Input, Table } from 'antd';
+import { Input, Table, Divider } from 'antd';
 const Search = Input.Search;
 import axios from 'axios';
 
@@ -29,7 +29,7 @@ class SearchVenues extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      venues: [/*{venue_id: 2, user_id: 3, venue_name: "Empire Control Room", venue_description: null, capacity: 800, venue_address: "700 Red River Dr."}*/],
+      venues: [],
       pagination: {},
       loading: false,
       fetched: false
@@ -37,10 +37,7 @@ class SearchVenues extends React.Component {
   }
 
   componentDidMount() {
-    console.log('logging the store!:::', this.props.store.bookings);
-    //cities
   }
-
 
   onSearch(info) {
     axios.get('/venues', {
@@ -115,6 +112,7 @@ class SearchVenues extends React.Component {
         style={{ width: 300 }}
         enterButton
         />
+        <Divider />
         <Table 
         columns={columns}
         rowKey={(record) => record.registered}
