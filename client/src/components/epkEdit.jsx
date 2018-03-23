@@ -29,7 +29,10 @@ class NormalLoginForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button 
+            type="primary" 
+            htmlType="submit" 
+            className="login-form-button">
             Save Changes
           </Button>
         </FormItem>
@@ -37,31 +40,23 @@ class NormalLoginForm extends React.Component {
           {getFieldDecorator('artistName', {
             rules: [{ required: true, message: 'Please input your band name!' }],
           })(
-            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="BAND NAME" />
+            <Input 
+              prefix={<Icon type="user" 
+              style={{ color: 'rgba(0,0,0,.25)' }} />} 
+              placeholder="BAND NAME" />
           )}
         </FormItem>
-
-
-
-
         <FormItem>
           {getFieldDecorator('artistBio', {
             rules: [{ required: false}],
           })(
-            <TextArea placeholder="Please Insert Your Band Bio Here!" autosize={{ minRows: 2, maxRows: 6 }} />
+            <TextArea 
+              placeholder="Please Insert Your Band Bio Here!" 
+              autosize={{ minRows: 2, maxRows: 6 }} />
           )}
         </FormItem>
         <FormItem>
-           {//getFieldDecorator('remember', {
-          //   valuePropName: 'checked',
-          //   initialValue: true,
-          // })(
-          //   <Checkbox>Remember me</Checkbox>
-          // )}
-          // <a className="login-form-forgot" href="">Forgot password</a>
-          
-          // Or <a href="">register now!</a>
-        }
+
         </FormItem>
       </Form>
     );

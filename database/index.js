@@ -60,14 +60,15 @@ const getUserByName = async (username) => {
 }
 
 
-//REFACTOR TO OPTIMIZE DB QUERY
+//REFACTOR TO OPTIMIZE DB QUERY: done for artists, not venues yet
 const getUser = async (username) => {
   let user = await knex.select('*').from('users').where('username', username);
   if (user[0].user_type === 'artist') {
     let artist = await getArtist(user[0].user_id);
-    let bookings = await getArtistBookings(artist.artist_id);
+    let bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings]
   } else {
+    //refactor to getVenueBookings2*******************************
     let venue = await getVenue(user[0].user_id)
     let bookings = await getVenueBookings(venue[0].venue_id);
     return [user[0], venue[0], bookings]
@@ -130,6 +131,18 @@ const addBooking = async (info) => {
 //     .where('venues.venue_id', venueId)
 //     .orderBy('bookings.start_time', 'desc');
 // }
+//SELECT b.*, v.venue_name
+//FROM bookings b INNER JOIN venues v using (venue_id)
+//WHERE v.venue_id = <your venue id>
+//ORDER BY b.start_time DESC
+
+const getArtistBookings2 = async (artistId) => {
+  return await knex.column(knex.raw('b.*, v.venue_name')).select()
+    .from(knex.raw('bookings b'))
+    .innerJoin(knex.raw('venues v using (venue_id)'))    
+    .where(knex.raw(`b.artist_id = ${artistId}`))
+    .orderBy('b.start_time', 'desc');
+};
 
 module.exports = {
   registerArtist,
@@ -141,5 +154,5 @@ module.exports = {
   addBooking,
   getVenue,
   getVenues,
-  // getVenueBookings2
+  getArtistBookings2
 };
