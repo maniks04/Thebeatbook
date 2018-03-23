@@ -29,7 +29,7 @@ class SearchVenues extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      venues: [/*{venue_id: 2, user_id: 3, venue_name: "Empire Control Room", venue_description: null, capacity: 800, venue_address: "700 Red River Dr."}*/],
+      venues: [],
       pagination: {},
       loading: false,
       fetched: false
@@ -37,8 +37,6 @@ class SearchVenues extends React.Component {
   }
 
   componentDidMount() {
-    console.log('logging the store!:::', this.props.store.bookings);
-    //cities
   }
 
 
