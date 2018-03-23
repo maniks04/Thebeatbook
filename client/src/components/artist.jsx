@@ -47,7 +47,7 @@ class Artist extends React.Component {
         return <div> Find Venue </div>
       }
       if (key === '3') {
-        //this.props.actions.getArtistEpk(this.props.store.username)
+        this.props.actions.getArtistEpk(this.props.store.username)
         return <ArtistEpk />
       }
       if (key === '4') {

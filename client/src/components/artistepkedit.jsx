@@ -15,22 +15,14 @@ class ArtistEpkEdit extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI8q3t3Oa-Hi2DAdu8729f4RkWQ6rACYRAozbJjG7WUTKZDgaDtQ"
-  }
   }
 
 
 
   componentDidMount() {
-    console.log('mounted ArtistProfileEdit')
-  
   }
 
-  image() {
-    console.log($('.image').val())
-    this.setState({image: $('.image').val()})
-}
+
 
     render() {
 
@@ -41,9 +33,6 @@ class ArtistEpkEdit extends React.Component {
             <input></input>
             <input></input>
             <input></input>
-            <input className="image" placeholder="image"></input>
-            <button onClick={() => this.image()}></button>
-            <img src={this.state.image} />
           </div>
         )
     }

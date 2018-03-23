@@ -1,93 +1,111 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions/index.js';
-import {open} from '../actions'
-import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import axios from 'axios'
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import LoginForm from './loginform.jsx'
+import { Modal } from 'antd';
+const FormItem = Form.Item;
+import { connect } from 'react-redux';
+import * as actions from '../actions/index.js';
+import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router';
 
-const logo = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.png'
-const LoginFormContainer = Form.create()(LoginForm); //component for antd loginform
-
-class Login extends React.Component {
+class LoginForm extends React.Component {
     constructor(props) {
         super(props)
     }
 
-
-
-
-    render() {
-       
-        return(
-            <div style={styles.loginbox}>
-                      <img src={logo} style={styles.logo}></img>
-                      <div style={styles.beatbook}>beatbook</div>
-                      <div style={styles.divider}></div>
-                      <div style={styles.loginform}>
-                        <LoginFormContainer /> 
-                      </div>
-                      <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">login</div>
-                    </div >
-        )
+    componentDidMount() {
+     
     }
+
+  submitLogin (e)   {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        //console.log('Received values of form: ', values);
+        this.props.actions.submitLogin(values.userName, values.password)
+      }
+    });
+  }
+
+  openRegisterModal() {
+    this.props.actions.openRegisterModal()  //sets register modal state to true
+  }
+
+ closeRegisterModal() {
+     this.props.actions.closeRegisterModal() //sets register modal state to false
+ }
+
+ loadArtistRegisterPage() {
+   this.closeRegisterModal()
+   this.props.history.replace('/artistregister') //closes modal and loads artist registration form
+ }
+
+ loadVenueRegisterPage() {
+  this.closeRegisterModal()
+  this.props.history.replace('/venueregister') //closes modal and loads venue registration form
 }
 
+
+  render() {
+    const { getFieldDecorator } = this.props.form;
+  
+
+
+    return (
+      <div>
+        <Modal
+          visible={this.props.store.registerModalStatus}
+          footer={[
+            <Button key={'venue'} onClick={() => this.loadVenueRegisterPage()}>Venue</Button>,
+            <Button key={'artist'} onClick={() => this.loadArtistRegisterPage()}>Artist</Button>
+          ]}
+          onCancel={() => this.closeRegisterModal()}
+        >
+      </Modal>
+      <Form onSubmit={(e) => this.submitLogin(e)} className="login-form">
+        <FormItem>
+          {getFieldDecorator('userName', {
+            rules: [{ required: true, message: 'Please input your username!' }],
+          })(
+            <Input id="shit" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('remember', {
+            valuePropName: 'checked',
+            initialValue: true,
+          })(
+            <Checkbox>Remember me</Checkbox>
+          )}
+          <a className="login-form-forgot" href="">Forgot password</a>
+          
+          <Button type="primary" htmlType="submit" className="login-form-button">
+            Log in
+          </Button>
+          
+          Or <a onClick={() => this.openRegisterModal()}>register now!</a>
+        </FormItem>
+      </Form>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => (
-    { store: state }
-  );
-  
-  const mapDispatchToProps = dispatch => (
-    { actions: bindActionCreators(actions, dispatch) }
-  );
+  { store: state } // eslint-disable-line
+);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+const mapDispatchToProps = dispatch => (
+  { actions: bindActionCreators(actions, dispatch) }
+);
 
-
-const styles = {
-    logo: {
-        height: 20,
-        width: 20,
-        display: 'inline-block'
-
-    },
-    beatbook: {
-        fontSize: 20,
-        fontFamily: 'system-ui',
-        marginTop: '5%',
-        display: 'inline-block'
-    },
-    loginbutton: {
-        textAlign: 'center'
-    },
-    loginbox: {
-        backgroundColor: 'white',
-        position: 'absolute',
-        borderStyle: 'solid',
-        borderWidth: .5,
-        borderColor: '#e6e6e6',
-        width: window.innerWidth/4,
-        height: window.innerHeight*.75,
-        left: window.innerWidth*3/8,
-        top: window.innerHeight*1/8,
-        textAlign: 'center'
-    },
-    loginform: {
-        marginLeft: 50,
-        marginRight: 50
-
-    },
-    divider: {
-        borderStyle: 'solid',
-        borderWidth: .5,
-        borderColor: '#e6e6e6', 
-        marginLeft: 25,
-        marginRight: 25,
-        marginTop: 50,
-        marginBottom: 50
-    }
-}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));
+//export default NormalLoginForm

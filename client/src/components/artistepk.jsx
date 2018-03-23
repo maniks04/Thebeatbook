@@ -22,7 +22,7 @@ class ArtistEpk extends React.Component {
   }
 
 
-
+  
   componentDidMount() {
     this.props.store.username ? 
     this.getArtistEpk(this.props.store.username) :    //gets the epk info of the logged in user

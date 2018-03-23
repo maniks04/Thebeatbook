@@ -103,5 +103,3 @@ insert into bookings
   (booking_id, artist_id, venue_id, start_time, end_time, booking_description)
 VALUES
   (1, 1, 1, '2018-03-22T14:30:00', '2018-03-22T16:30:00', 'SXSW Free show!');
-
-

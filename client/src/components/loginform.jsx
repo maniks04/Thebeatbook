@@ -10,19 +10,18 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 
 class LoginForm extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+      super(props)
+  }
 
-    componentDidMount() {
-     
-    }
+  componentDidMount() {
+
+  }
 
   submitLogin (e)   {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        //console.log('Received values of form: ', values);
         this.props.actions.submitLogin(values.userName, values.password)
       }
     });
@@ -32,26 +31,22 @@ class LoginForm extends React.Component {
     this.props.actions.openRegisterModal()  //sets register modal state to true
   }
 
- closeRegisterModal() {
-     this.props.actions.closeRegisterModal() //sets register modal state to false
- }
+  closeRegisterModal() {
+    this.props.actions.closeRegisterModal() //sets register modal state to false
+  }
 
- loadArtistRegisterPage() {
-   this.closeRegisterModal()
-   this.props.history.replace('/artistregister') //closes modal and loads artist registration form
- }
+  loadArtistRegisterPage() {
+    this.closeRegisterModal()
+    this.props.history.replace('/artistregister') //closes modal and loads artist registration form
+  }
 
- loadVenueRegisterPage() {
-  this.closeRegisterModal()
-  this.props.history.replace('/venueregister') //closes modal and loads venue registration form
-}
-
+  loadVenueRegisterPage() {
+    this.closeRegisterModal()
+    this.props.history.replace('/venueregister') //closes modal and loads venue registration form
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
-  
-
-
     return (
       <div>
         <Modal
@@ -86,11 +81,11 @@ class LoginForm extends React.Component {
             <Checkbox>Remember me</Checkbox>
           )}
           <a className="login-form-forgot" href="">Forgot password</a>
-          
+
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
-          
+
           Or <a onClick={() => this.openRegisterModal()}>register now!</a>
         </FormItem>
       </Form>
@@ -109,4 +104,3 @@ const mapDispatchToProps = dispatch => (
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));
 //export default NormalLoginForm
-
