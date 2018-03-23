@@ -8,6 +8,7 @@ import calendar from './calendar.jsx'
 import { Modal, Tabs, List, Button, Layout, Menu, Breadcrumb, Icon, Spin } from 'antd';
 const SubMenu = Menu.SubMenu;
 const TabPane = Tabs.TabPane;
+const moment = require('moment');
 
 class Requests extends React.Component {
 
@@ -22,8 +23,8 @@ class Requests extends React.Component {
     }
   }
 
-  componentDidMount() {
-  }
+  // componentDidMount() {
+  // }
 
 
     onSelect(info) {
@@ -36,10 +37,13 @@ class Requests extends React.Component {
 
     render() {
     	const { confirmed, pending } = this.state;
+      console.log(moment(this.props.store.bookings[0].start_time.slice(0, 10)).format("MMM Do YY"))
     	// const loadMore = showLoadingMore ? (
      //  <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
      //    {loadingMore && <Spin />}
      //    {!loadingMore && <Button onClick={}>loading more</Button>}
+
+     ///////PULLLLLLL VENUE NAME, MAYBE USE OUTER JOIN TABLES IN
      //  </div>
     // ) : null;
         return (
@@ -53,9 +57,10 @@ class Requests extends React.Component {
         	        renderItem={item => (
         	          <List.Item actions={[<a>edit</a>, <a>more</a>]}>
         	            <List.Item.Meta
-        	              title={<a href="https://ant.design">{item.start_time}</a>}
-        	              description="THIS IS A HARDCODED DESCRIPTION OF THE EVENT"
+        	              title={<a href="https://ant.design">Use DB Join to Get Title here</a>}
+        	              description={item.booking_description}
         	            />
+                      <div>Gig on: {moment(item.start_time.slice(0, 10)).format("MMM Do YY")}</div>
         	          </List.Item>
                 )}
                 />
@@ -66,11 +71,12 @@ class Requests extends React.Component {
                   itemLayout="horizontal"
                   dataSource={pending}
                   renderItem={item => (
-                    <List.Item actions={[<a>edit</a>, <a>more</a>]}>
+                    <List.Item actions={[<a>See Event</a>, <a>more</a>]}>
                       <List.Item.Meta
-                        title={<a href="https://ant.design">{item.start_time}</a>}
-                        description="THIS IS A HARDCODED DESCRIPTION OF THE EVENT"
+                        title={<a href="https://ant.design">Use DB Join to Get Title here</a>}
+                        description={item.booking_description}
                       />
+                      <div>Trying to gig: {moment(item.start_time.slice(0, 10)).format("MMM Do YY")}</div>
                     </List.Item>
                   )}
                 />

@@ -123,6 +123,14 @@ const addBooking = async (info) => {
   });
 }
 
+// const getVenueBookings2 = (venueId) => {
+//   return knex.column(knex.raw('bookings.*, venues.venue_name')).select()
+//     .from('bookings')
+//     .innerJoin('venues', 'bookings.venue_id', 'venue.venue_id')
+//     .where('venues.venue_id', venueId)
+//     .orderBy('bookings.start_time', 'desc');
+// }
+
 module.exports = {
   registerArtist,
   registerVenue,
@@ -132,5 +140,6 @@ module.exports = {
   getVenueBookings,
   addBooking,
   getVenue,
-  getVenues
+  getVenues,
+  // getVenueBookings2
 };
