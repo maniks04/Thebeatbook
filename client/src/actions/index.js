@@ -7,11 +7,9 @@ import axios from 'axios';
  export const closeRegisterModal = () => ({type: 'CLOSEREGISTERMODAL'});
 
 
-export const logout = () => ({type: 'LOGOUT'})
-
-const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE'})
-
-const loadVenuePage = (data) => ({type: 'LOADVENUEPAGE'})
+export const logout = () => ({type: 'LOGOUT'});
+const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE'});
+const loadVenuePage = (data) => ({type: 'LOADVENUEPAGE'});
 
 export const submitLogin = (username, password) => {
     return(dispatch) => {
@@ -30,8 +28,10 @@ export const submitLogin = (username, password) => {
                 dispatch(setBookings(res.data[2]))
                 if (type === 'artist') {
                     dispatch(loadArtistPage(res.data))
+                    dispatch(setArtist(res.data[1].artist_id))
                 } if (type === 'venue') {
-                    dispatch(loadVenuePage(res.data))
+                    dispatch(loadVenuePage(res.data));
+                    dispatch(setVenue(res.data[1].artist_id))
                 }
             }
         }).catch(err => {
@@ -40,52 +40,38 @@ export const submitLogin = (username, password) => {
     }
 }
 
+const setArtist = (artistId) => ({ type: 'SET_ARTISTID', payload: artistId });
+const setVenue = (venueId) => ({ type: 'SET_VENUEID', payload: venueId });
 const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
 // ************************************************* TOGGLE LOADING BEORE ANY ACTIONS ; STILL NEED TO WRITE IT***
 
 
 //*************************************************
 //FETCH BOOKINGS
-const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload: bookings });
+// const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload: bookings });
 
-export const fetchArtistBookings = (userId) => {
-  return (dispatch) => {
-    return axios({
-      method: 'get',
-      url: '/bookings',
-      params: {
-        userId: userId,
-      },
-    }).then(
-      ({ data }) => {
-        console.log('actions data', data)
-        dispatch(setArtistBookings(data.events));
-      },
-      error => dispatch(badStuff(error))
-    );
-  };
-};
+// export const fetchArtistBookings = (userId) => {
+//   return (dispatch) => {
+//     return axios({
+//       method: 'get',
+//       url: '/bookings',
+//       params: {
+//         userId: userId,
+//       },
+//     }).then(
+//       ({ data }) => {
+//         console.log('actions data', data)
+//         dispatch(setArtistBookings(data.events));
+//       },
+//       error => dispatch(badStuff(error))
+//     );
+//   };
+// };
 //*************************************************
 //FETCH EPK ---- Probably need to use a 'loading' transition here
 // const setArtistBookings = (bookings) => ({ type: 'SET_ARTIST_BOOKINGS', payload: bookings });
 
- export const fetchEpk = (artistId) => {
-  return (dispatch) => {
-    return axios({
-      method: 'get',
-      url: '/epk',
-      params: {
-        artistId: artistId,
-      },
-    }).then(
-      ({ data }) => {
-        console.log('EPK data', data)
-        // dispatch(setArtistBookings(data.events));
-      },
-      error => dispatch(badStuff(error))
-    );
-  };
-};
+
 
 //may be able to remove badstuff()
 export const badStuff = (error) => ({type: 'ERROR', payload: error});
