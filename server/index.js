@@ -118,12 +118,10 @@ app.post('/dragAndDrop', (req, res) => {
 
 //BOOKINGS
 
-// app.get('/bookings', async (req, res) => {
-//   const Id = req.query.userId;
-//   const type = req.query.user;
-//   let events = await db.getBookings(Id, type);
-//   res.status(200).send({events : events})
-// });
+app.get('/epk', async (req, res) => {
+  let epk = await db.getEpk(req.query.artistId);
+  res.status(200).send({epk : epk})
+});
 
 // app.get('/user', async (req, res) => {
 //   const Id = req.query.userId;

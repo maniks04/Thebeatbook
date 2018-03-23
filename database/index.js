@@ -138,15 +138,18 @@ const getArtistBookings2 = async (artistId) => {
     .orderBy('b.start_time', 'desc');
 };
 
+const getEpk = async (artistId) => {
+  let artist = await knex.select('*').from('artists').where('artists.artist_id', artistId);
+  return artist[0];
+}
+
 module.exports = {
   registerArtist,
   registerVenue,
   getUser,
   checkCredentials,
-  getArtistBookings,
-  getVenueBookings,
   addBooking,
   getVenue,
   getVenues,
-  getArtistBookings2
+  getEpk
 };

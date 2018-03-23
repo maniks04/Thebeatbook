@@ -38,6 +38,7 @@ class Artist extends React.Component {
 
   view(data) {
     let key = this.state.key
+    let artist = this.props.store.artistId;
     if (key === '1') {
       return calendar(data)
     }
@@ -48,7 +49,7 @@ class Artist extends React.Component {
       return (<Requests />)
     }
     if (key === '4') {
-      return (<EPKView />)
+      return (<EPKView artist={artist}/>)
     }
     if (key === '5') {
       return (<WrappedNormalLoginForm />)
