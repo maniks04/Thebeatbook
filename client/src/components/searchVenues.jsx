@@ -39,7 +39,6 @@ class SearchVenues extends React.Component {
   componentDidMount() {
   }
 
-
   onSearch(info) {
     axios.get('/venues', {
       params: {

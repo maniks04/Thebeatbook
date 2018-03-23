@@ -43,7 +43,7 @@ class Requests extends React.Component {
         return (
           <div>
             <Tabs defaultActiveKey="1" onChange={this.callback}>
-              <TabPane tab="Tab 1" key="1">
+              <TabPane tab="Confirmed" key="1">
                 <List
       	        className="demo-loadmore-list"
       	        itemLayout="horizontal"
@@ -60,8 +60,7 @@ class Requests extends React.Component {
                 )}
                 />
               </TabPane>
-              <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
-              <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane>
+              <TabPane tab="Pending" key="2">Content of Tab Pane 2</TabPane>
             </Tabs>
           </div>
         );
