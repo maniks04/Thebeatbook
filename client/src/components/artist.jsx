@@ -5,8 +5,9 @@ import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
-import calendar from './calendar.jsx'
-import TextField from 'material-ui/TextField';
+import calendar from './calendar.jsx';
+import Requests from './artistRequests.jsx';
+import SearchVenues from './searchVenues.jsx';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -39,15 +40,18 @@ class Artist extends React.Component {
       return calendar(data)
     }
     if (key === '2') {
-      return (<div> Find Venue </div>)
+      return (<SearchVenues />)
     }
     if (key === '3') {
-      return (<div>The fancy view of your epk.</div>)
+      return (<Requests />)
     }
     if (key === '4') {
-      return <div> Edit EPK </div>
+      return (<div>The fancy view of your epk.</div>)
     }
     if (key === '5') {
+      return <div> Edit EPK </div>
+    }
+    if (key === '6') {
       this.props.actions.logout()
     }
   }
@@ -65,14 +69,18 @@ class Artist extends React.Component {
               <span>Calendar</span>
             </Menu.Item>
             <Menu.Item key="2">
-              <Icon type="plus" />
+              <Icon type="search" />
               <span>Find Venue</span>
             </Menu.Item>
+            <Menu.Item key="3">
+              <Icon type="folder" />
+              <span>My Requests</span>
+            </Menu.Item>
             <SubMenu key="sub1" title={<span><Icon type="team" /><span>EPK</span></span>}>
-              <Menu.Item key="3">View</Menu.Item>
-              <Menu.Item key="4">Edit</Menu.Item>
+              <Menu.Item key="4">View</Menu.Item>
+              <Menu.Item key="5">Edit</Menu.Item>
             </SubMenu>
-            <Menu.Item key="5">
+            <Menu.Item key="6">
               <Icon type="logout"/>
               <span>Logout</span>
             </Menu.Item>
@@ -92,12 +100,13 @@ class Artist extends React.Component {
           </Footer>
         </Layout>
       </Layout>
+    </Layout>
     );
   }
 }
 
 const mapStateToProps = state => (
-    { store: state } // eslint-disable-line
+    { store: state }
   );
 
   const mapDispatchToProps = dispatch => (

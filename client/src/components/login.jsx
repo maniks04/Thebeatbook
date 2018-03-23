@@ -17,28 +17,29 @@ class Login extends React.Component {
       super(props)
   }
 
+
   render() {
     return(
-        <div style={styles.loginbox}>
-                  <img src={logo} style={styles.logo}></img>
-                  <div style={styles.beatbook}>beatbook</div>
-                  <div style={styles.divider}></div>
-                  <div style={styles.loginform}>
-                    <LoginFormContainer submitLogin={this.props.submitLogin}/>
-                  </div>
-                  <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">login</div>
-                </div >
+      <div style={styles.loginbox}>
+        <img src={logo} style={styles.logo}></img>
+        <div style={styles.beatbook}>beatbook</div>
+        <div style={styles.divider}></div>
+        <div style={styles.loginform}>
+          <LoginFormContainer submitLogin={this.props.submitLogin}/>
+        </div>
+        <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">facebook login</div>
+      </div>
     )
   }
 }
 
 const mapStateToProps = state => (
-    { store: state }
-  );
+  { store: state }
+);
 
-  const mapDispatchToProps = dispatch => (
-    { actions: bindActionCreators(actions, dispatch) }
-  );
+const mapDispatchToProps = dispatch => (
+  { actions: bindActionCreators(actions, dispatch) }
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

@@ -70,6 +70,7 @@ const Calendar = (data) => {
 
           }
         })
+
         $('#calendar').fullCalendar('unselect');
       },
 
@@ -80,16 +81,14 @@ const Calendar = (data) => {
         axios.post('/dragAndDrop', {
           eventId: eventId,
           timeChange: timeChange
-        })
-          .then(res => {
-
-          })
+        }).then(res => {})
           .catch(err => {
             console.log(err)
           })
       },
 
       events: function(start, end, timezone, callback) {
+
           var events = []
           data.forEach((event) => {
             events.push({

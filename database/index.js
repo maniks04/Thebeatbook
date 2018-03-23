@@ -24,7 +24,7 @@ const addUsers = async (username, password, email, userType) => {
   } else if (emailQuery.length) {
     return 'email already exists';
   } else {
-     return await knex('users').insert({ username: username, password: password, email: email, user_type: userType});  //took out return
+     return await knex('users').insert({ username: username, password: password, email: email, user_type: userType});
   }
 };
 
@@ -82,25 +82,13 @@ const getArtist = async (userId) => {
   return artist[0];
 }
 
-
-
-/****************************** Event Stuffs **********************************/
-
-const addEvent = async (userId, title, description, start, end) => {
-  console.log('hit addEvent');
+const getVenue = async (userId) => {
+  return await knex.select('*').from('venues').where('venues.user_id', userId);
 }
 
-const getEvents = async (userId) => {
-  console.log('hit getEvents');
+const getVenues = async (city) => {
+  return await knex.select('*').from('venues').where('venues.venue_city', city);
 }
-
-const eventChange = async (userId, timeChange /* eventId */) => {
-  console.log('hit eventChang');
-
-}
-
-
-/******************************************************************************/
 
 //BOOKINGS
 
@@ -111,6 +99,12 @@ const getArtistBookings = (artistId) => {
     .orderBy('bookings.start_time', 'booking_description');
 };
 
+const getVenueBookings = (venueId) => {
+  return knex.select('*')
+    .from('bookings')
+    .where('bookings.venue_id', venueId)
+    .orderBy('bookings.start_time', 'booking_description');
+};
 // const getVenueBookings = (venueId) => {
 //   return knex.select('*')
 //     .from('bookings')
@@ -119,10 +113,33 @@ const getArtistBookings = (artistId) => {
 // };
 
 
+const addBooking = async (info) => {
+  await knex('bookings').insert({ 
+    artist_id: info.artistId, 
+    venue_id: info.venueId, 
+    start_time: info.startTime, 
+    end_time: info.endTime, 
+    booking_description: info.description
+  });
+}
+
+// const getVenueBookings2 = (venueId) => {
+//   return knex.column(knex.raw('bookings.*, venues.venue_name')).select()
+//     .from('bookings')
+//     .innerJoin('venues', 'bookings.venue_id', 'venue.venue_id')
+//     .where('venues.venue_id', venueId)
+//     .orderBy('bookings.start_time', 'desc');
+// }
+
 module.exports = {
   registerArtist,
   registerVenue,
   getUser,
   checkCredentials,
-  getArtistBookings
+  getArtistBookings,
+  getVenueBookings,
+  addBooking,
+  getVenue,
+  getVenues,
+  // getVenueBookings2
 };

@@ -87,9 +87,11 @@ CREATE TABLE bookings
 --   (1, 1, 'Trouble', 'turbofunk', 'artist');
 
 -- insert into bookings
---   (booking_id, artist_id, venue_id, start_time, end_time, booking_description)
+--   (artist_id, venue_id, start_time, end_time, booking_description, confirmed)
 -- VALUES
---   (1, 1, 1, '2018-03-22T14:30:00', '2018-03-22T16:30:00', 'SXSW Free show!');
+--   (1, 1, '2018-03-27T14:30:00', '2018-03-27T16:30:00', 'Sahara Lounge Booty Dance', 1),
+--       (1, 1, '2018-03-26T14:30:00', '2018-03-26T16:30:00', 'ACL Live Taping'),
+--       (1, 1, '2018-03-24T14:30:00', '2018-03-24T16:30:00', 'One2One Show');
 
 -- insert into venues
 --   (venue_id, user_id, venue_name, venue_description, capacity)
