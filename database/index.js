@@ -24,7 +24,7 @@ const addUsers = async (username, password, email, userType) => {
   } else if (emailQuery.length) {
     return 'email already exists';
   } else {
-     return await knex('users').insert({ username: username, password: password, email: email, user_type: userType});  //took out return
+     return await knex('users').insert({ username: username, password: password, email: email, user_type: userType});
   }
 };
 
@@ -60,71 +60,37 @@ const getUserByName = async (username) => {
 }
 
 
-//REFACTOR TO OPTIMIZE DB QUERY
+//REFACTOR TO OPTIMIZE DB QUERY: done for artists, not venues yet
 const getUser = async (username) => {
   let user = await knex.select('*').from('users').where('username', username);
   if (user[0].user_type === 'artist') {
     let artist = await getArtist(user[0].user_id);
-    let bookings = await getArtistBookings(artist[0].artist_id);
+    let bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings]
   } else {
+    //refactor to getVenueBookings2*******************************
     let venue = await getVenue(user[0].user_id)
-    let bookings = await getVenueBookings(venue[0].venue_id);
+    let bookings = await getVenueBookings2(venue.venue_id);
     return [user[0], venue, bookings]
   }
 };
 
 
 
-const getVenue = async (userId) => {
-  let venue = await knex.select('*').from('venues').where('user_id', userId);
-  return venue;
-}
-
 
 const getArtist = async (userId) => {
-  let artist = await knex.select('*').from('artists').where('user_id', userId);
-  return artist;
+  let artist = await knex.select('*').from('artists').where('artists.user_id', userId);
+  return artist[0];
 }
 
-
-const getEpkData = async (username) => {
-  let artistEpkData = await knex.select ('artist_name', 'artist_description', 'artist_city', 'artist_state').from('artists').where('artist_name', username)
-  return artistEpkData
+const getVenue = async (userId) => {
+  let venue = await knex.select('*').from('venues').where('venues.user_id', userId);
+  return venue[0];
 }
 
-const getArtistsByCity = async (city) => {
-  let artistList = await knex.select('artist_name').from('artists').where('artist_city', city)
-  return artistList
+const getVenues = async (city) => {
+  return await knex.select('*').from('venues').where('venues.venue_city', city);
 }
-
-
-// artist_id INT NOT NULL AUTO_INCREMENT,
-//   user_id INT NOT NULL,
-//   artist_name VARCHAR(50) NOT NULL,
-//   artist_description VARCHAR(8000) DEFAULT NULL,
-//   artist_city VARCHAR(25),
-//   artist_state VARCHAR(25),
-//   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-//   PRIMARY KEY (artist_id),
-//   FOREIGN KEY (user_id) REFERENCES users (user_id)
-/****************************** Event Stuffs **********************************/
-
-const addEvent = async (userId, title, description, start, end) => {
-  console.log('hit addEvent');
-}
-
-const getEvents = async (userId) => {
-  console.log('hit getEvents');
-}
-
-const eventChange = async (userId, timeChange /* eventId */) => {
-  console.log('hit eventChang');
-
-}
-
-
-/******************************************************************************/
 
 //BOOKINGS
 
@@ -135,13 +101,42 @@ const getArtistBookings = (artistId) => {
     .orderBy('bookings.start_time', 'booking_description');
 };
 
-const getVenueBookings =  (venueId) => {
+const getVenueBookings = (venueId) => {
   return knex.select('*')
     .from('bookings')
     .where('bookings.venue_id', venueId)
     .orderBy('bookings.start_time', 'booking_description');
 };
 
+const addBooking = async (info) => {
+  await knex('bookings').insert({ 
+    artist_id: info.artistId, 
+    venue_id: info.venueId, 
+    start_time: info.startTime, 
+    end_time: info.endTime, 
+    booking_description: info.description
+  });
+}
+
+const getVenueBookings2 = async (venueId) => {
+  return await knex.column(knex.raw('b.*, a.artist_name')).select()
+    .from(knex.raw('bookings b'))
+    .innerJoin(knex.raw('artists a using (artist_id)'))    
+    .where(knex.raw(`b.venue_id = ${venueId}`))
+    .orderBy('b.start_time', 'desc');
+};
+//SELECT b.*, v.venue_name
+//FROM bookings b INNER JOIN venues v using (venue_id)
+//WHERE v.venue_id = <your venue id>
+//ORDER BY b.start_time DESC
+
+const getArtistBookings2 = async (artistId) => {
+  return await knex.column(knex.raw('b.*, v.venue_name')).select()
+    .from(knex.raw('bookings b'))
+    .innerJoin(knex.raw('venues v using (venue_id)'))    
+    .where(knex.raw(`b.artist_id = ${artistId}`))
+    .orderBy('b.start_time', 'desc');
+};
 
 const getEpk = async (artistId) => {
   let artist = await knex.select('*').from('artists').where('artists.artist_id', artistId);

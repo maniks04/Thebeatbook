@@ -19,7 +19,7 @@ class Artist extends React.Component {
     super(props)
     this.state = {
       open:false,
-      key:"1",
+      key:"1"
     }
   }
 
@@ -50,6 +50,7 @@ class Artist extends React.Component {
     }
     if (key === '6') {
       this.props.actions.logout()
+    }
     }
 
     render() {
