@@ -28,12 +28,25 @@ const columns = [{
 }, {
   title: 'Calendar',
   key: 'calendar',
-  render: (blah) => (
+  render: (text, record) => (
     <span>
-      <a href="#">View Venue Calendar</a>
+      <a href="#" onClick={() => {viewCalendar(record.venue_id)}}>View Venue Calendar</a>
     </span>
   )
 }];
+
+const viewCalendar = (id) => {
+  console.log('click worked', id)
+  axios.get('/venueCalendar', {
+    params: {
+      venue_id: id
+    }
+  }).then((res) => {
+
+  }).catch((err) => {
+    console.error('error', err)
+  })
+}
 
 class SearchVenues extends React.Component {
 
@@ -67,8 +80,11 @@ class SearchVenues extends React.Component {
   }
 
   viewCalendar(id) {
+    console.log('click worked', id)
     axios.get('/venueCalendar', {
-
+      params: {
+        venue_id: id
+      }
     }).then((res) => {
 
     }).catch((err) => {
@@ -137,6 +153,7 @@ class SearchVenues extends React.Component {
         <Table
         columns={columns}
         rowKey={(record) => record.registered}
+        onClick={this.viewCalendar}
         dataSource={this.state.venues}
         pagination={this.state.pagination}
         loading={this.state.loading}
