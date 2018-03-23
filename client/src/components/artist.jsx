@@ -27,86 +27,85 @@ class Artist extends React.Component {
   }
 
 
-    onSelect(info) {
-      this.setState({
-        key: info.key
-      })
+  onSelect(info) {
+    this.setState({
+      key: info.key
+    })
+  }
+
+
+  view(data) {
+    let key = this.state.key
+    if (key === '1') {
+      return calendar(data)
     }
-
-
-    view(data) {
-      let key = this.state.key
-      if (key === '1') {
-        return calendar(data)
-      }
-      if (key === '2') {
-        return (<SearchVenues />)
-      }
-      if (key === '3') {
-        return (<Requests />)
-      }
-      if (key === '4') {
-        return (<div>The fancy view of your epk.</div>)
-      }
-      if (key === '5') {
-        return <div> Edit EPK </div>
-      }
-      if (key === '6') {
-        this.props.actions.logout()
-      }
+    if (key === '2') {
+      return (<SearchVenues />)
     }
+    if (key === '3') {
+      return (<Requests />)
+    }
+    if (key === '4') {
+      return (<div>The fancy view of your epk.</div>)
+    }
+    if (key === '5') {
+      return <div> Edit EPK </div>
+    }
+    if (key === '6') {
+      this.props.actions.logout()
+    }
+  }
 
-    render() {
-      let data = this.props.store.bookings
+  render() {
+    let data = this.props.store.bookings
 
-        return (
-          <Layout style={{ minHeight: '100vh' }}>
-            <Sider>
-              <div className="logo" />
-              <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onSelect={(info)=>this.onSelect(info)} >
-                <Menu.Item key="1">
-                  <Icon type="calendar" />
-                  <span>Calendar</span>
-                </Menu.Item>
-                <Menu.Item key="2">
-                  <Icon type="search" />
-                  <span>Find Venue</span>
-                </Menu.Item>
-                <Menu.Item key="3">
-                  <Icon type="folder" />
-                  <span>My Requests</span>
-                </Menu.Item>
-                <SubMenu key="sub1" title={<span><Icon type="team" /><span>EPK</span></span>}>
-                  <Menu.Item key="4">View</Menu.Item>
-                  <Menu.Item key="5">Edit</Menu.Item>
-                </SubMenu>
-                <Menu.Item key="6">
-                  <Icon type="logout"/>
-                  <span>Logout</span>
-                </Menu.Item>
-              </Menu>
-            </Sider>
-            <Layout>
-
-              <Content style={{ margin: '0 16px' }}>
-                <Breadcrumb style={{ margin: '16px 0' }}>
-                  <Breadcrumb.Item></Breadcrumb.Item>
-                </Breadcrumb>
-                <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                  {this.view(data)}
-                </div>
-              </Content>
-              <Footer style={{ textAlign: 'center' }}>
-              Woooo Ant design!!!!!
-              </Footer>
-            </Layout>
-          </Layout>
-        );
+    return (
+      <Layout style={{ minHeight: '100vh' }}>
+        <Sider>
+          <div className="logo" />
+          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onSelect={(info)=>this.onSelect(info)} >
+            <Menu.Item key="1">
+              <Icon type="calendar" />
+              <span>Calendar</span>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Icon type="search" />
+              <span>Find Venue</span>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Icon type="folder" />
+              <span>My Requests</span>
+            </Menu.Item>
+            <SubMenu key="sub1" title={<span><Icon type="team" /><span>EPK</span></span>}>
+              <Menu.Item key="4">View</Menu.Item>
+              <Menu.Item key="5">Edit</Menu.Item>
+            </SubMenu>
+            <Menu.Item key="6">
+              <Icon type="logout"/>
+              <span>Logout</span>
+            </Menu.Item>
+          </Menu>
+        </Sider>
+      <Layout>
+        <Content style={{ margin: '0 16px' }}>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item></Breadcrumb.Item>
+          </Breadcrumb>
+          <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+            {this.view(data)}
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+        Woooo Ant design!!!!!
+        </Footer>
+      </Layout>
+    </Layout>
+    );
   }
 }
 
 const mapStateToProps = state => (
-    { store: state } // eslint-disable-line
+    { store: state } 
   );
 
   const mapDispatchToProps = dispatch => (
