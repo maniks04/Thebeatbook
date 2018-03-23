@@ -88,26 +88,26 @@ class Artist extends React.Component {
             </Menu.Item>
           </Menu>
         </Sider>
-      <Layout>
-        <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item></Breadcrumb.Item>
-          </Breadcrumb>
-          <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-            {this.view(data)}
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>
-        Woooo Ant design!!!!!
-        </Footer>
+        <Layout>
+          <Content style={{ margin: '0 16px' }}>
+            <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb.Item></Breadcrumb.Item>
+            </Breadcrumb>
+            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+              {this.view(data)}
+            </div>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+          Rubber Ducky Dynasty!
+          </Footer>
+        </Layout>
       </Layout>
-    </Layout>
     );
   }
 }
 
 const mapStateToProps = state => (
-    { store: state } 
+    { store: state }
   );
 
   const mapDispatchToProps = dispatch => (

@@ -10,12 +10,13 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 
 class LoginForm extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+      super(props)
+  }
 
-    componentDidMount() {
-    }
+  componentDidMount() {
+
+  }
 
   submitLogin (e)   {
     e.preventDefault();
@@ -30,26 +31,22 @@ class LoginForm extends React.Component {
     this.props.actions.openRegisterModal()  //sets register modal state to true
   }
 
- closeRegisterModal() {
-     this.props.actions.closeRegisterModal() //sets register modal state to false
- }
+  closeRegisterModal() {
+    this.props.actions.closeRegisterModal() //sets register modal state to false
+  }
 
- loadArtistRegisterPage() {
-   this.closeRegisterModal()
-   this.props.history.replace('/artistregister') //closes modal and loads artist registration form
- }
+  loadArtistRegisterPage() {
+    this.closeRegisterModal()
+    this.props.history.replace('/artistregister') //closes modal and loads artist registration form
+  }
 
- loadVenueRegisterPage() {
-  this.closeRegisterModal()
-  this.props.history.replace('/venueregister') //closes modal and loads venue registration form
-}
-
+  loadVenueRegisterPage() {
+    this.closeRegisterModal()
+    this.props.history.replace('/venueregister') //closes modal and loads venue registration form
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
-
-
-
     return (
       <div>
         <Modal

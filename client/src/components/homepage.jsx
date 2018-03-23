@@ -16,36 +16,29 @@ import Venue from './venue.jsx'
 
 
 class Home extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+      super(props)
+  }
+
+  componentDidMount() {
+  }
+  
+  render() {
 
 
-    componentDidMount() {
-    }
+      return( <div>
+                  {!this.props.store.artist && !this.props.store.venue &&
+                      <Login history={this.props.history} submitLogin={this.submitLogin}/>
+                  }
 
-
-
-
-
-
-
-    render() {
-
-
-        return( <div>
-                    {!this.props.store.artist && !this.props.store.venue &&
-                        <Login history={this.props.history} submitLogin={this.submitLogin}/>
-                    }
-
-                    {this.props.store.artist &&
-                       <Artist />
-                    }
-                    {this.props.store.venue  &&
-                        <Venue />
-                    }
-                </div>)
-    }
+                  {this.props.store.artist &&
+                     <Artist />
+                  }
+                  {this.props.store.venue  &&
+                      <Venue />
+                  }
+              </div>)
+  }
 }
 
 

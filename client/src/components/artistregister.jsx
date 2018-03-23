@@ -14,55 +14,52 @@ const logo = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.pn
 const ArtistRegisterFormContainer = Form.create()(ArtistRegisterForm); //component for antd loginform
 
 class ArtistRegister extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+      super(props)
+  };
 
+  componentDidMount() {
+      console.log('artistregister', this.props.history)
+  };
 
-componentDidMount() {
-    console.log('artistregister', this.props.history)
-}
+  goHome() {
+      console.log('clicked')
+      this.props.history.replace('/')
+  };
 
-goHome() {
-    console.log('clicked')
-    this.props.history.replace('/')
-}
-
-registerArtist(username, password, email, city, state) {
+  registerArtist(username, password, email, city, state) {
     axios.post('/register/artist', {
         username: username,
-        password: password, 
+        password: password,
         email: email,
-        city: city, 
+        city: city,
         state: state
     }).then(res => {
         console.log(res.data)
     }).catch(err => {
         console.log('error', err)
     })
-}
+  };
 
-
-    render() {
-        return(
-            <div style={styles.registerbox}>
-                      <img src={logo} style={styles.logo}></img>
-                      <div style={styles.beatbook}>beatbook</div>
-                      <div style={styles.divider}></div>
-                      <div style={styles.registerform}>
-                        <ArtistRegisterFormContainer registerArtist={this.registerArtist}/> 
-                      </div>
-                      <Icon style={styles.left} type="left" onClick={() => this.goHome()}/>
-                    </div >
-        )
-    }
-}
-
+  render() {
+      return(
+          <div style={styles.registerbox}>
+                    <img src={logo} style={styles.logo}></img>
+                    <div style={styles.beatbook}>beatbook</div>
+                    <div style={styles.divider}></div>
+                    <div style={styles.registerform}>
+                      <ArtistRegisterFormContainer registerArtist={this.registerArtist}/>
+                    </div>
+                    <Icon style={styles.left} type="left" onClick={() => this.goHome()}/>
+                  </div >
+      )
+  };
+};
 
 const mapStateToProps = state => (
     { store: state } // eslint-disable-line
   );
-  
+
   const mapDispatchToProps = dispatch => (
     { actions: bindActionCreators(actions, dispatch) }
   );
@@ -108,7 +105,7 @@ const styles = {
     divider: {
         borderStyle: 'solid',
         borderWidth: .5,
-        borderColor: '#e6e6e6', 
+        borderColor: '#e6e6e6',
         marginLeft: 25,
         marginRight: 25,
         marginTop: 50,
