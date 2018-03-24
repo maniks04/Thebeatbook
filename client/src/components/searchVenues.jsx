@@ -47,7 +47,7 @@ const viewCalendar = (id) => {
     data = res.data;
     Modal.success({
       title: 'Venue Calendar',
-      width: window.innerWidth*.65,
+      width: window.innerWidth*.6,
       content: calendar(data)
     });
   }).catch((err) => {

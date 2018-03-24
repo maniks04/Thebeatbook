@@ -89,7 +89,7 @@ CREATE TABLE bookings
 
 -- insert into bookings(artist_id, venue_id, booking_title, start_time, end_time, booking_description, confirmed) values (1,1,'Rubber Duckython', '2018-03-23T9:00:00','2018-03-23T17:00:00','The bestest conference for all your Rubber Ducky needs', 0);
 -- insert into bookings(artist_id, venue_id, booking_title, start_time, end_time, booking_description, confirmed) values (1,1,'Rubber Ducky Dynasty', '2018-03-24T9:00:00','2018-03-24T17:00:00','Not sure if a rubber ducky will come to a duck whistle?', 0);
--- insert into bookings(artist_id, venue_id, booking_title, start_time, end_time, booking_description, confirmed) values (1,1,'The Fellowship of the Rubber Ducky', '2018-03-25T9:00:00','2018-03-25T17:00:00','You must through the Rubber Ducky into the bath Frodo', 0);
+-- insert into bookings(artist_id, venue_id, booking_title, start_time, end_time, booking_description, confirmed) values (1,2,'The Fellowship of the Rubber Ducky', '2018-03-25T9:00:00','2018-03-25T17:00:00','You must through the Rubber Ducky into the bath Frodo', 0);
 -- insert into venues
 --   (venue_id, user_id, venue_name, venue_description, capacity)
 -- VALUES

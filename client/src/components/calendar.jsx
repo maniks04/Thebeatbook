@@ -22,7 +22,6 @@ const Calendar = (data) => {
       height: window.innerHeight*.87,
 
       select: function(start, end, allDay) {
-
         Modal.confirm({
           title: 'Event Info',
           content: (
@@ -70,7 +69,6 @@ const Calendar = (data) => {
       },
 
       events: function(start, end, timezone, callback) {
-          // ideas on how to show only
           var events = []
           data.forEach((event) => {
             events.push({
