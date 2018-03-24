@@ -49,7 +49,7 @@ const viewCalendar = (id) => {
     Modal.success({
       title: 'Venue Calendar',
       width: window.innerWidth*.6,
-      content: calendar(data)
+      content: calendar(bookings)
     });
   }).catch((err) => {
     console.error('error', err);
