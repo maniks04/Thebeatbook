@@ -4,7 +4,7 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import axios from 'axios';
+import axios from 'axios'
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import * as reducers from '../reducers/index.js'
@@ -16,36 +16,44 @@ import Venue from './venue.jsx'
 
 
 class Home extends React.Component {
-  constructor(props) {
-      super(props)
-  }
+    constructor(props) {
+        super(props)
+    }
 
-  componentDidMount() {
-  }
-  
-  render() {
+    
+    componentDidMount() {
+    console.log(this.props.store)
+    }
 
 
-      return( <div>
-                  {!this.props.store.artist && !this.props.store.venue &&
-                      <Login history={this.props.history} submitLogin={this.submitLogin}/>
-                  }
 
-                  {this.props.store.artist &&
-                     <Artist />
-                  }
-                  {this.props.store.venue  &&
-                      <Venue />
-                  }
-              </div>)
-  }
+
+    
+
+
+    render() {
+     
+        
+        return( <div>
+                    {!this.props.store.artist && !this.props.store.venue &&
+                        <Login history={this.props.history}/> 
+                    } 
+
+                    {this.props.store.artist &&
+                       <Artist />
+                    }
+                    {this.props.store.venue  &&
+                        <Venue />
+                    }
+                </div>)
+    }
 }
 
 
 const mapStateToProps = state => (
     { store: state } // eslint-disable-line
   );
-
+  
   const mapDispatchToProps = dispatch => (
     { actions: bindActionCreators(actions, dispatch) }
   );

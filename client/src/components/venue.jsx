@@ -13,25 +13,23 @@ const SubMenu = Menu.SubMenu;
 
 class Venue extends React.Component {
   constructor(props) {
-      super(props)
-      this.state = {
-        open: false,
-        key:"1"
-      }
-  }
-
-  componentDidMount() {
+    super(props)
+    this.state = {
+      open: false,
+      key:"1"
+    }
   }
 
   logout() {
-      //this.props.history.replace('/')
-      this.props.actions.logout()
+    this.props.actions.logout()
   }
 
   onSelect(info) {
-    this.setState({
-      key: info.key
-    })
+    if (info.key === '4') {
+      this.props.actions.logout()
+    } else {
+      this.setState({key: info.key})
+    }
   }
 
 
@@ -47,13 +45,9 @@ class Venue extends React.Component {
     if (key === '3') {
       return (<Requests />)
     }
-    if (key === '4') {
-      this.props.actions.logout()
-    }
   }
 
   render() {
-
     return(
       <Layout style={{ minHeight: '100vh' }}>
         <Sider>
@@ -78,7 +72,6 @@ class Venue extends React.Component {
           </Menu>
         </Sider>
         <Layout>
-
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item></Breadcrumb.Item>

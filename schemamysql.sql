@@ -2,7 +2,6 @@ drop database if exists beatbook;
 
 create database beatbook;
 use beatbook;
-SET time_zone = '-05:00';
 
 
 
@@ -58,7 +57,6 @@ CREATE TABLE bookings
   booking_id INT NOT NULL AUTO_INCREMENT,
   artist_id INT NOT NULL,
   venue_id INT NOT NULL,
-  booking_title VARCHAR(8000),
   start_time DATETIME,
   end_time DATETIME,
   booking_description VARCHAR(8000),
@@ -76,21 +74,32 @@ CREATE TABLE bookings
 --
 -- ---
 
--- insert into users
---   (user_id, username, password)
--- VALUES
---   (1, 'yaboi', '$2a$10$MCRlmB8bUswMTqKG.kURCu2pu8ipopli2LLaO5OODNokt44cpLZ56'),
---   (2, 'Gepeto', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou');
 
--- insert into artists
---   (artist_id, user_id, artist_name, artist_description, user_type)
--- VALUES
---   (1, 1, 'Trouble', 'turbofunk', 'artist');
 
--- insert into bookings(artist_id, venue_id, booking_title, start_time, end_time, booking_description, confirmed) values (1,1,'Rubber Duckython', '2018-03-23T9:00:00','2018-03-23T17:00:00','The bestest conference for all your Rubber Ducky needs', 0);
--- insert into bookings(artist_id, venue_id, booking_title, start_time, end_time, booking_description, confirmed) values (1,1,'Rubber Ducky Dynasty', '2018-03-24T9:00:00','2018-03-24T17:00:00','Not sure if a rubber ducky will come to a duck whistle?', 0);
--- insert into bookings(artist_id, venue_id, booking_title, start_time, end_time, booking_description, confirmed) values (1,1,'The Fellowship of the Rubber Ducky', '2018-03-25T9:00:00','2018-03-25T17:00:00','You must through the Rubber Ducky into the bath Frodo', 0);
--- insert into venues
---   (venue_id, user_id, venue_name, venue_description, capacity)
--- VALUES
---   (1, 2, 'Vulcan', 'sixth street venue', 700);
+
+insert into users
+  (user_id, username, password, user_type)
+VALUES
+  (1, 'Gepeto', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou', 'venue');
+
+insert into users
+  (user_id, username, password, user_type)
+VALUES
+  (2, 'Gepeto', '$2a$10$pKgnmkFU5W7D70ekyEurruql72IonF7c5MiPlfnHrc9ywjrAF89Ou', 'artist');
+
+
+insert into venues
+  (venue_id, user_id, venue_name, venue_description, capacity)
+VALUES
+  (1, 2, 'Vulcan', 'sixth street venue', 700);
+
+
+insert into artists
+  (artist_id, user_id, artist_name, artist_description)
+VALUES
+  (1, 1, 'Trouble', 'turbofunk');
+
+insert into bookings
+  (booking_id, artist_id, venue_id, start_time, end_time, booking_description)
+VALUES
+  (1, 1, 1, '2018-03-22T14:30:00', '2018-03-22T16:30:00', 'SXSW Free show!');
