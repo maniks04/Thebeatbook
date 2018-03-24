@@ -112,9 +112,10 @@ const addBooking = async (info) => {
   await knex('bookings').insert({ 
     artist_id: info.artistId, 
     venue_id: info.venueId, 
-    start_time: info.startTime, 
-    end_time: info.endTime, 
-    booking_description: info.description
+    start_time: info.start_time, 
+    end_time: info.end_time, 
+    booking_description: info.booking_description,
+    // booking_title: info.booking_title
   });
 }
 

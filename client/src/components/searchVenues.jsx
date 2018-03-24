@@ -9,62 +9,45 @@ const Search = Input.Search;
 import axios from 'axios';
 import calendar from './calendar.jsx';
 
-let bookings = [];
-
-const columns = [{
-  title: 'Name',
-  key: 'name',
-  dataIndex: 'venue_name',
-  sorter: true,
-  width: '40%',
-}, {
-  title: 'Capacity',
-  key: 'capacity',
-  dataIndex: 'capacity',
-  sorter: true,
-  width: '20%',
-}, {
-  title: 'Address',
-  key: 'address',
-  dataIndex: 'venue_address',
-}, {
-  title: 'Calendar',
-  key: 'calendar',
-  render: (text, record) => (
-    <span>
-      <a href="#" onClick={() => {
-        viewCalendar(record.venue_id)
-      }}>View Venue Calendar</a>
-    </span>
-  )
-}];
-
-const viewCalendar = (id) => {
-  axios.get('/venueCalendar', {
-    params: {
-      venue_id: id
-    }
-  }).then((res) => {
-    bookings = res.data;
-    Modal.success({
-      title: 'Venue Calendar',
-      width: window.innerWidth*.6,
-      content: calendar(bookings, false)
-    });
-  }).catch((err) => {
-    console.error('error', err);
-  })
-};
 
 class SearchVenues extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
+      saveToStore: this.props.actions.addBooking.bind(this),
       venues: [],
       pagination: {},
       loading: false,
-      fetched: false
+      fetched: false,
+      venueBookings: [],
+      columns: [{
+        title: 'Name',
+        key: 'name',
+        dataIndex: 'venue_name',
+        sorter: true,
+        width: '40%',
+      }, {
+        title: 'Capacity',
+        key: 'capacity',
+        dataIndex: 'capacity',
+        sorter: true,
+        width: '20%',
+      }, {
+        title: 'Address',
+        key: 'address',
+        dataIndex: 'venue_address',
+      }, {
+        title: 'Calendar',
+        key: 'calendar',
+        render: (text, record) => (
+          <span>
+            <a href="#" onClick={() => {
+              this.viewCalendar(record.venue_id)
+            }}>View Venue Calendar</a>
+          </span>
+        )
+      }]
     }
   }
 
@@ -82,6 +65,25 @@ class SearchVenues extends React.Component {
       console.error('error', err)
     })
   }
+
+  viewCalendar (id) {
+  let artistId = this.props.store.artistId;
+  axios.get('/venueCalendar', {
+    params: {
+      venue_id: id
+    }
+  }).then((res) => {
+    this.setState({
+      venueBookings: res.data
+    })
+    Modal.success({
+      title: 'Venue Calendar',
+      content: calendar(this.state.venueBookings, false, artistId, id, this.state.saveToStore)
+    })
+  }).catch((err) => {
+    console.error('error', err);
+  })
+};
 
   render() {
     if (this.state.fetched === false) {
@@ -104,7 +106,7 @@ class SearchVenues extends React.Component {
         />
         <Divider />
         <Table
-        columns={columns}
+        columns={this.state.columns}
         rowKey={(record) => record.registered}
         onClick={this.viewCalendar}
         dataSource={this.state.venues}

@@ -4,8 +4,13 @@ const moment = require('moment');
 import 'fullcalendar';
 import axios from 'axios';
 import { Modal, Button, Form, Input } from 'antd';
+//REDUX STUFF
+import { connect } from 'react-redux';
+import * as actions from '../actions/index.js';
+import { bindActionCreators } from 'redux';
+import ReactDOM from 'react-dom';
 
-const Calendar = (data, bool, artistId, venueId) => {
+const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
   $(function() {
     $('#calendar').fullCalendar({
       header: {
@@ -22,7 +27,7 @@ const Calendar = (data, bool, artistId, venueId) => {
       height: window.innerHeight*.87,
 
       select: function(start, end, allDay) {
-        if(bool) {
+        if(editable) {
         Modal.confirm({
           title: 'Event Info',
           content: (
@@ -51,12 +56,18 @@ const Calendar = (data, bool, artistId, venueId) => {
                   },
                   true
               );
-              axios.post('/calendar', {
-                title: title,
-                description: description,
-                start: start,
-                end: end
-              }).then(res => {
+              //sendArtistId & VenueId****************
+              let newBooking = {
+                booking_title: title,
+                booking_description: description,
+                start_time: start.format('YYYY-MM-DD h:mm:ss'),
+                end_time: end.format('YYYY-MM-DD h:mm:ss'),
+                artistId: artistId,
+                venueId: venueId
+              };
+              saveToStore(newBooking);
+              console.log(start.format('YYYY-MM-DD h:mm:ss'))
+              axios.post('/calendar', newBooking).then(res => {
               }).catch(err => {
                 console.error(err)
               })
@@ -72,7 +83,7 @@ const Calendar = (data, bool, artistId, venueId) => {
 
       events: function(start, end, timezone, callback) {
           var events = []
-          data.forEach((event) => {
+          bookings.forEach((event) => {
             events.push({
               title: event.booking_title,
               description: event.booking_description,
@@ -107,4 +118,4 @@ return (
   )
 }
 
-export default Calendar
+export default Calendar;
