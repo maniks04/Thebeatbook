@@ -4,7 +4,6 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import RaisedButton from 'material-ui/RaisedButton';
 import { withRouter } from 'react-router';
 import calendar from './calendar.jsx';
 import Requests from './requests.jsx';

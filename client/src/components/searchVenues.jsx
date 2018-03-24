@@ -9,7 +9,8 @@ const Search = Input.Search;
 import axios from 'axios';
 import calendar from './calendar.jsx';
 
-let data = {}
+let bookings = [];
+
 const columns = [{
   title: 'Name',
   key: 'name',
@@ -44,12 +45,11 @@ const viewCalendar = (id) => {
       venue_id: id
     }
   }).then((res) => {
-    data = res.data;
+    bookings = res.data;
     Modal.success({
       title: 'Venue Calendar',
-      width: window.innerWidth*.65,
-      content: calendar(data)
-    });
+      content: calendar(bookings)
+    })
   }).catch((err) => {
     console.error('error', err);
   })
