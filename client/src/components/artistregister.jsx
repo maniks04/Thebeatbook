@@ -19,7 +19,7 @@ class ArtistRegister extends React.Component {
   };
 
   componentDidMount() {
-      console.log('artistregister', this.props.history)
+      console.log('artistregister', this)
   };
 
   goHome() {
@@ -35,7 +35,9 @@ class ArtistRegister extends React.Component {
         city: city,
         state: state
     }).then(res => {
-        console.log(res.data)
+        this.actions.loadArtistPage(res.data)
+        this.actions.setArtist(res.data[1].artist_id)
+        this.history.replace('/')
     }).catch(err => {
         console.log('error', err)
     })

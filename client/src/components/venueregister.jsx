@@ -33,6 +33,9 @@ class VenueRegister extends React.Component {
       capacity: capacity
     }).then(res => {
       console.log(res.data)
+      this.actions.loadVenuePage(res.data);
+      this.actions.setVenue(res.data[1].artist_id)
+      this.history.replace('/')
     }).catch(err => {
       console.log('error', err)
     })

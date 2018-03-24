@@ -7,6 +7,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const db = require('../database/index.js');
 const passport = require('passport')
+const helpers = require('./helpers.js')
 require('../server/config/passport')(passport);
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(require('cookie-parser')());
@@ -50,7 +51,9 @@ app.post('/register/artist', async (req, res) => {
   } if (registration === 'email already exists') {
      return res.send('email already exists')
   } else {
-    res.send('added')
+    helpers.sendEmail(req.body.username, req.body.email)
+    let user = await db.getUser(req.body.username)
+    res.send(user)
   } 
 })
 
@@ -62,7 +65,9 @@ app.post('/register/venue', async (req, res) => {
   } if (registration === 'username already exists') {
     return res.send('email already exists')
   } else {
-    res.send('added')
+    helpers.sendEmail(req.body.username, req.body.email)
+    let user = await db.getUser(req.body.username)
+    res.send(user)
   } 
 })
 
@@ -99,6 +104,7 @@ app.post('/logout', isLoggedIn, (req, res) => {
   req.logout();
   res.clearCookie('connect.sid').status(200);
 });
+
 
 
 

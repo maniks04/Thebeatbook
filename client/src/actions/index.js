@@ -8,8 +8,8 @@ import axios from 'axios';
 
 
 export const logout = () => ({type: 'LOGOUT'});
-const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE'});
-const loadVenuePage = (data) => ({type: 'LOADVENUEPAGE'});
+export const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE'});
+export const loadVenuePage = (data) => ({type: 'LOADVENUEPAGE'});
 
 export const submitLogin = (username, password) => {
     return(dispatch) => {
@@ -41,8 +41,8 @@ export const submitLogin = (username, password) => {
     }
 }
 
-const setArtist = (artistId) => ({ type: 'SET_ARTISTID', payload: artistId });
-const setVenue = (venueId) => ({ type: 'SET_VENUEID', payload: venueId });
+export const setArtist = (artistId) => ({ type: 'SET_ARTISTID', payload: artistId });
+export const setVenue = (venueId) => ({ type: 'SET_VENUEID', payload: venueId });
 const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
 // ************************************************* TOGGLE LOADING BEORE ANY ACTIONS ; STILL NEED TO WRITE IT***
 
