@@ -40,7 +40,7 @@ class Artist extends React.Component {
     let key = this.state.key
     let artist = this.props.store.artistId;
     if (key === '1') {
-      return calendar(data)
+      return calendar(data, true)
     }
     if (key === '2') {
       return (<SearchVenues />)
@@ -54,7 +54,7 @@ class Artist extends React.Component {
     if (key === '5') {
       return (<WrappedNormalLoginForm />)
     }
-    
+
   }
 
   render() {

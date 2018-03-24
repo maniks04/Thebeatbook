@@ -20,9 +20,7 @@ export const submitLogin = (username, password) => {
             }
         }).then(res => {
             if (res.data === 'your passwords dont match' || res.data === 'Username does not exist') {
-                console.log(res.data)
             } else {
-                console.log('dataaaaa',res.data)
                 let type = res.data[0].user_type;
                 dispatch(setBookings(res.data[2]))
                 if (type === 'artist') {
@@ -32,7 +30,7 @@ export const submitLogin = (username, password) => {
                     dispatch(loadVenuePage(res.data));
                     dispatch(setVenue(res.data[1].artist_id))
                 }
-            } 
+            }
         }).catch(err => {
             console.log(err)
         })
@@ -51,7 +49,7 @@ const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
 //         console.log(res.data)
 //     }).catch(err => {
 //         console.log(err)
-//     })   
+//     })
 // }
 
 // export const login = (username, password) => {
@@ -114,10 +112,9 @@ export const getArtistsByCity = (city) => {
         city: city
       }
     }).then(res => {
-      console.log(res.data)
       dispatch(renderArtistCityList(res.data))
     }).catch(err => {
-      console.log(err)
+      console.error(err)
     })
   }
 }
