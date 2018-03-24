@@ -16,17 +16,17 @@ class NormalLoginForm extends React.Component {
   }
 
   onClick() {
-    console.log('clicked')
+    let id = this.props.artistID
     let band = $('.band').val();
     let description = $('.description').val();
     let city = $('.city').val();
     let state = $('.state').val();
-    console.log('blah', band)
     axios.post('/updateEPK', {
       band: band,
       description: description,
       city: city,
-      state: state
+      state: state,
+      id: id
     }).then(res => {
     }).catch(err => {
       console.error(err)
@@ -65,7 +65,7 @@ class NormalLoginForm extends React.Component {
           <Button
             type="primary"
             htmlType="submit"
-            onClick={this.onClick}
+            onClick={() => this.onClick()}
             className="login-form-button">
             Save Changes
           </Button>

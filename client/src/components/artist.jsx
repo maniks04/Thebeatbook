@@ -52,7 +52,7 @@ class Artist extends React.Component {
       return (<EPKView artist={artist}/>)
     }
     if (key === '5') {
-      return (<WrappedNormalLoginForm />)
+      return (<WrappedNormalLoginForm artistID={artist}/>)
     }
 
   }

@@ -140,6 +140,8 @@ app.get('/epk', async (req, res) => {
 
 app.post('/updateEPK', async (req, res) => {
   console.log('hit server updateEPK', req.body)
+  db.editEPK(req.body)
+  res.status(200)
 })
 
 
