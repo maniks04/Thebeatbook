@@ -28,10 +28,12 @@ class Artist extends React.Component {
 
 
   onSelect(info) {
-    this.setState({
-      key: info.key
-    })
-  }
+    if (info.key === '6') {
+        this.props.actions.logout()
+    } else {
+        this.setState({key: info.key})
+    }
+}
 
 
   view(data) {
@@ -52,9 +54,7 @@ class Artist extends React.Component {
     if (key === '5') {
       return (<WrappedNormalLoginForm />)
     }
-    if (key === '6') {
-      this.props.actions.logout()
-    }
+    
   }
 
   render() {

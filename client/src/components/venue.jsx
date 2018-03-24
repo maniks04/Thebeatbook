@@ -26,9 +26,11 @@ class Venue extends React.Component {
   }
 
   onSelect(info) {
-    this.setState({
-      key: info.key
-    })
+    if (info.key === '4') {
+      this.props.actions.logout()
+    } else {
+      this.setState({key: info.key})
+    }
   }
 
 
@@ -43,9 +45,6 @@ class Venue extends React.Component {
     }
     if (key === '3') {
       return (<Requests />)
-    }
-    if (key === '4') {
-      this.props.actions.logout()
     }
   }
 
