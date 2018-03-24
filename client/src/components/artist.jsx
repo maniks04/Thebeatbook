@@ -13,6 +13,7 @@ const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 import WrappedNormalLoginForm from './epkEdit.jsx';
 import EPKView from './epkView.jsx';
+const moment = require('moment');
 
 class Artist extends React.Component {
 
@@ -33,14 +34,14 @@ class Artist extends React.Component {
     } else {
         this.setState({key: info.key})
     }
-}
+  }
 
 
-  view(data) {
+  view() {
     let key = this.state.key
-    let artist = this.props.store.artistId;
+    console.log(this.props.store.bookings);
     if (key === '1') {
-      return calendar(data)
+      return calendar(this.props.store.bookings, true)
     }
     if (key === '2') {
       return (<SearchVenues />)
@@ -49,7 +50,7 @@ class Artist extends React.Component {
       return (<Requests />)
     }
     if (key === '4') {
-      return (<EPKView artist={artist}/>)
+      return (<EPKView artist={artistId}/>)
     }
     if (key === '5') {
       return (<WrappedNormalLoginForm />)
@@ -58,7 +59,6 @@ class Artist extends React.Component {
   }
 
   render() {
-    let data = this.props.store.bookings
 
     return (
       <Layout style={{ minHeight: '100vh' }}>
@@ -93,7 +93,7 @@ class Artist extends React.Component {
               <Breadcrumb.Item></Breadcrumb.Item>
             </Breadcrumb>
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-              {this.view(data)}
+              {this.view()}
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
