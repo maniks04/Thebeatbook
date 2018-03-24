@@ -20,24 +20,23 @@ class Home extends React.Component {
         super(props)
     }
 
-    
+
     componentDidMount() {
-    console.log(this.props.store)
     }
 
 
 
 
-    
+
 
 
     render() {
-     
-        
+
+
         return( <div>
                     {!this.props.store.artist && !this.props.store.venue &&
-                        <Login history={this.props.history}/> 
-                    } 
+                        <Login history={this.props.history}/>
+                    }
 
                     {this.props.store.artist &&
                        <Artist />
@@ -53,7 +52,7 @@ class Home extends React.Component {
 const mapStateToProps = state => (
     { store: state } // eslint-disable-line
   );
-  
+
   const mapDispatchToProps = dispatch => (
     { actions: bindActionCreators(actions, dispatch) }
   );

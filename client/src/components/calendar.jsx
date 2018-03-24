@@ -11,9 +11,6 @@ import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 
 const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
-  console.log()
-  console.log('outer part of calendar', actions.addBooking)
-  const addBookingToStore = actions.addBooking;
   $(function() {
     $('#calendar').fullCalendar({
       header: {
@@ -22,9 +19,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
         right: 'month,agendaWeek,agendaDay'
       },
 
-      footer: { /* can add if wanted */},
       droppable: true,
-      editable: true,
       selectable: true,
       selectHelper: true,
       unselectAuto: false,
@@ -32,6 +27,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
       height: window.innerHeight*.87,
 
       select: function(start, end, allDay) {
+        if(editable) {
         Modal.confirm({
           title: 'Event Info',
           content: (
@@ -73,35 +69,19 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
               console.log(start.format('YYYY-MM-DD h:mm:ss'))
               axios.post('/calendar', newBooking).then(res => {
               }).catch(err => {
-                console.log(err)
+                console.error(err)
               })
             } else {
               alert('You need a title')
             }
           },
-          onCancel(){
-
-          }
+          onCancel(){}
         })
-
+      }
         $('#calendar').fullCalendar('unselect');
       },
 
-      eventDrop: function(event, delta, revertFunc) {
-        let eventId = event.id
-        let timeChange = delta._data // delta contains the time change info + other jquery elements.
-
-        axios.post('/dragAndDrop', {
-          eventId: eventId,
-          timeChange: timeChange
-        }).then(res => {})
-          .catch(err => {
-            console.log(err)
-          })
-      },
-
       events: function(start, end, timezone, callback) {
-
           var events = []
           bookings.forEach((event) => {
             events.push({
@@ -115,8 +95,8 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
           callback(events)
       },
 
-      minTime: '04:00:00', // when the calendar starts the day.
-      // maxTime: '22:00:00', // when the calender ends the day.
+      minTime: '04:00:00',
+      // maxTime: '22:00:00',
 
       eventClick: function ( event, jsEvent, view ) {
          Modal.info({

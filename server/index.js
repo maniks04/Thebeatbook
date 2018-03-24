@@ -30,7 +30,7 @@ const isLoggedIn = (req, res, next) => {
 
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', function(req, res) {
-  
+
 });
 
 app.get('/logout', (req, res) => {
@@ -47,14 +47,14 @@ app.post('/register/artist', async (req, res) => {
   var hash = bcrypt.hashSync(req.body.password, 10);
   const registration = await db.registerArtist(req.body.username, hash, req.body.email, req.body.city, req.body.state);
   if (registration === 'username already exists') {
-     return res.send('username already exists') 
+     return res.send('username already exists')
   } if (registration === 'email already exists') {
      return res.send('email already exists')
   } else {
     // helpers.sendEmail(req.body.username, req.body.email)
     let user = await db.getUser(req.body.username)
     res.send(user)
-  } 
+  }
 })
 
 app.post('/register/venue', async (req, res) => {
@@ -68,7 +68,7 @@ app.post('/register/venue', async (req, res) => {
     // helpers.sendEmail(req.body.username, req.body.email)
     let user = await db.getUser(req.body.username)
     res.send(user)
-  } 
+  }
 })
 
 
@@ -89,13 +89,12 @@ app.post('/login', async (req, res) => {
     if(bcrypt.compareSync(req.body.password, user.password)) {
       // Passwords match
       let user = await db.getUser(req.body.username)
-      console.log(user)
       return res.send(user)
      } else {
       // Passwords don't match
       return res.send('your passwords dont match')
     }
-  } 
+  }
    res.send('Username does not exist')
 })
 

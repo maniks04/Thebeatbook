@@ -9,52 +9,6 @@ const Search = Input.Search;
 import axios from 'axios';
 import calendar from './calendar.jsx';
 
-// let bookings = [];
-
-// const columns = [{
-//   title: 'Name',
-//   key: 'name',
-//   dataIndex: 'venue_name',
-//   sorter: true,
-//   width: '40%',
-// }, {
-//   title: 'Capacity',
-//   key: 'capacity',
-//   dataIndex: 'capacity',
-//   sorter: true,
-//   width: '20%',
-// }, {
-//   title: 'Address',
-//   key: 'address',
-//   dataIndex: 'venue_address',
-// }, {
-//   title: 'Calendar',
-//   key: 'calendar',
-//   render: (text, record) => (
-//     <span>
-//       <a href="#" onClick={() => {
-//         viewCalendar(record.venue_id)
-//       }}>View Venue Calendar</a>
-//     </span>
-//   )
-// }];
-
-// const viewCalendar = (id) => {
-//   let artistId = this.props.store.artistId;
-//   axios.get('/venueCalendar', {
-//     params: {
-//       venue_id: id
-//     }
-//   }).then((res) => {
-//     bookings = res.data;
-//     Modal.success({
-//       title: 'Venue Calendar',
-//       content: calendar(bookings, false, artistId, id)
-//     })
-//   }).catch((err) => {
-//     console.error('error', err);
-//   })
-// };
 
 class SearchVenues extends React.Component {
 
@@ -108,7 +62,7 @@ class SearchVenues extends React.Component {
         venues: res.data.venues
       })
     }).catch(err => {
-      console.log('error', err)
+      console.error('error', err)
     })
   }
 

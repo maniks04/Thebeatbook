@@ -39,7 +39,6 @@ class Artist extends React.Component {
 
   view() {
     let key = this.state.key
-    console.log(this.props.store.bookings);
     if (key === '1') {
       return calendar(this.props.store.bookings, true)
     }
@@ -55,7 +54,7 @@ class Artist extends React.Component {
     if (key === '5') {
       return (<WrappedNormalLoginForm />)
     }
-    
+
   }
 
   render() {

@@ -22,19 +22,17 @@ class EPKView extends React.Component {
   }
 
   componentDidMount() {
-  	console.log('this is the artistID in the EPK', this.state.artistId);
   	//fetchEpk
   	 axios.get('/epk', {
       params: {
         artistId: this.state.artistId
       }
     }).then(res => {
-        console.log('EPK data', res.data)
         this.setState({
         	artistName: res.data.epk.artist_name
         })
     }).catch(err => {
-      console.log('error', err)
+      console.error('error', err)
     })
   }
 
@@ -64,7 +62,7 @@ class EPKView extends React.Component {
 	      <Col span={6}>col-6</Col>
 	    </Row>
 	  </div>
-    ); 
+    );
   }
 }
 
@@ -78,6 +76,3 @@ const mapStateToProps = state => (
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(EPKView);
-
-
-
