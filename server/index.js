@@ -51,7 +51,7 @@ app.post('/register/artist', async (req, res) => {
   } if (registration === 'email already exists') {
      return res.send('email already exists')
   } else {
-    helpers.sendEmail(req.body.username, req.body.email)
+    // helpers.sendEmail(req.body.username, req.body.email)
     let user = await db.getUser(req.body.username)
     res.send(user)
   } 
@@ -65,7 +65,7 @@ app.post('/register/venue', async (req, res) => {
   } if (registration === 'username already exists') {
     return res.send('email already exists')
   } else {
-    helpers.sendEmail(req.body.username, req.body.email)
+    // helpers.sendEmail(req.body.username, req.body.email)
     let user = await db.getUser(req.body.username)
     res.send(user)
   } 
@@ -156,6 +156,19 @@ app.get('/artist/city', async (req, res) => {
   res.json(artistList)
 })
 /*****************************************************************************/
+
+
+app.get('/venues', async (req, res) => {
+  const city = req.query.city;
+  let venues = await db.getVenues(city);
+  res.status(200).send({venues : venues})
+});
+
+app.get('/venueCalendar', async (req, res) => {
+  let venue_id = req.query.venue_id
+  let venueCalendar = await db.getVenueBookings(venue_id);
+  res.status(200).send(venueCalendar);
+})
 
 //BOOKINGS
 
