@@ -5,7 +5,7 @@ import 'fullcalendar';
 import axios from 'axios';
 import { Modal, Button, Form, Input } from 'antd';
 
-const Calendar = (data) => {
+const Calendar = (data, artistId, venueId) => {
   $(function() {
     $('#calendar').fullCalendar({
       header: {
@@ -37,6 +37,7 @@ const Calendar = (data) => {
             </div>
           ),
           onOk(){
+            console.log(data);
             let title = $('.title').val();
             let description = $('.description').val();
             if (title) {
