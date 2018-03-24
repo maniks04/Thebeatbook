@@ -57,7 +57,6 @@ const viewCalendar = (id) => {
 };
 
 class SearchVenues extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {

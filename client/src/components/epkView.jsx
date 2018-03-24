@@ -19,6 +19,7 @@ class EPKView extends React.Component {
     	artistDescription: null,
     	//other EPK pieces
     }
+    console.log(this.state)
   }
 
   componentDidMount() {

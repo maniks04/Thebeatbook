@@ -20,15 +20,8 @@ class Home extends React.Component {
         super(props)
     }
 
-
     componentDidMount() {
     }
-
-
-
-
-
-
 
     render() {
 

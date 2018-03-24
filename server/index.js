@@ -71,17 +71,6 @@ app.post('/register/venue', async (req, res) => {
   }
 })
 
-
-// app.post('/login', passport.authenticate('local-login'), (req, res) => {
-//   console.log(req.body)
-//   res.status(200).json({
-//     user_id: req.user.user_id,
-//     username: req.user.username,
-//     session_id: req.sessionID
-//   });
-// });
-
-
 app.post('/login', async (req, res) => {
   let userInfo = await db.checkCredentials(req.body.username);
   if (userInfo.length) {
@@ -117,32 +106,6 @@ app.post('/calendar', (req, res) => {
   res.status(200).end()
 })
 
-app.post('/dragAndDrop', (req, res) => {
-  let id = req.body.eventId;
-  let timeChange = req.body.timeChange;
-  res.status(200).end()
-})
-
-app.get('/calendar', (req, res) => {
-  testData = [
-    {
-      title: 'Tumble22',
-      start: '2018-03-22T12:30:00',
-      end: '2018-03-22T13:30:00',
-      description: 'OG Southern Chicken Sandwhich, Dang hot, with a side of chips, for here please.',
-      id: 1
-    },
-    {
-      title: 'Happy Chick',
-      start: '2018-03-23T11:30:00',
-      end: '2018-03-23T12:30:00',
-      description: 'Classic Chic, spicy, with honey siracha and ranch, to go please.',
-      id: 2
-    },
-  ]
-  res.status(200).send(testData).end()
-})
-
 app.get('/artist/epk', async (req, res) => {
   console.log(req.query.username)
   let epkInfo = await db.getEpkData(req.query.username)
@@ -154,8 +117,8 @@ app.get('/artist/city', async (req, res) => {
   let artistList = await db.getArtistsByCity(req.query.city)
   res.json(artistList)
 })
-/*****************************************************************************/
 
+/******************************Venue Stuff*************************************/
 
 app.get('/venues', async (req, res) => {
   const city = req.query.city;
@@ -169,13 +132,19 @@ app.get('/venueCalendar', async (req, res) => {
   res.status(200).send(venueCalendar);
 })
 
-//BOOKINGS
-
+/********************************EPK STUFF ************************************/
 app.get('/epk', async (req, res) => {
   let epk = await db.getEpk(req.query.artistId);
   res.status(200).send({epk : epk})
 });
 
+app.post('/updateEPK', async (req, res) => {
+  console.log('hit server updateEPK', req.body)
+})
+
+
+
+/******************************************************************************/
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/../client/dist' + '/index.html'))

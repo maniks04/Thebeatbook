@@ -15,48 +15,60 @@ class NormalLoginForm extends React.Component {
     super(props);
   }
 
-  handleSubmit (e) {
-    e.preventDefault();
+  onClick() {
+    console.log('clicked')
+    let band = $('.band').val();
+    let description = $('.description').val();
+    let city = $('.city').val();
+    let state = $('.state').val();
+    console.log('blah', band)
+    axios.post('/updateEPK', {
+      band: band,
+      description: description,
+      city: city,
+      state: state
+    }).then(res => {
+    }).catch(err => {
+      console.error(err)
+    })
   }
-
-  componentDidMount() {
-
-  }
-  
 
   render() {
-    const { getFieldDecorator } = this.props.form;
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
+      <Form className="login-form">
         <FormItem>
-          <Button 
-            type="primary" 
-            htmlType="submit" 
+            <Input
+              className='band'
+              placeholder='Band Name?'
+            ></Input>
+        </FormItem>
+        <FormItem>
+          <Input
+            className='city'
+            placeholder='Your City?'
+          ></Input>
+        </FormItem>
+        <FormItem>
+          <Input
+            className='state'
+            placeholder='Your State?'
+          ></Input>
+        </FormItem>
+        <FormItem>
+            <TextArea
+              className='description'
+              placeholder="Please Insert Your Band Bio Here!"
+              autosize={{ minRows: 4, maxRows: 12 }}
+             />
+        </FormItem>
+        <FormItem>
+          <Button
+            type="primary"
+            htmlType="submit"
+            onClick={this.onClick}
             className="login-form-button">
             Save Changes
           </Button>
-        </FormItem>
-        <FormItem>
-          {getFieldDecorator('artistName', {
-            rules: [{ required: true, message: 'Please input your band name!' }],
-          })(
-            <Input 
-              prefix={<Icon type="user" 
-              style={{ color: 'rgba(0,0,0,.25)' }} />} 
-              placeholder="BAND NAME" />
-          )}
-        </FormItem>
-        <FormItem>
-          {getFieldDecorator('artistBio', {
-            rules: [{ required: false}],
-          })(
-            <TextArea 
-              placeholder="Please Insert Your Band Bio Here!" 
-              autosize={{ minRows: 2, maxRows: 6 }} />
-          )}
-        </FormItem>
-        <FormItem>
-
         </FormItem>
       </Form>
     );
