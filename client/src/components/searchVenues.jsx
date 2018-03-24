@@ -8,7 +8,7 @@ import { Input, Table, Divider, Modal } from 'antd';
 const Search = Input.Search;
 import axios from 'axios';
 import calendar from './calendar.jsx';
-let data = {}
+let bookings = [];
 const columns = [{
   title: 'Name',
   key: 'name',
@@ -44,11 +44,10 @@ const viewCalendar = (id) => {
       venue_id: id
     }
   }).then((res) => {
-    data = res.data;
-    console.log(data)
+    bookings = res.data;
     Modal.success({
       title: 'Venue Calendar',
-      content: calendar(data)
+      content: calendar(bookings)
     })
   }).catch((err) => {
     console.error('error', err)

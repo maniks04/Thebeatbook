@@ -151,5 +151,6 @@ module.exports = {
   addBooking,
   getVenue,
   getVenues,
-  getEpk
+  getEpk,
+  getVenueBookings
 };
