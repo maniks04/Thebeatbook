@@ -48,8 +48,9 @@ const viewCalendar = (id) => {
     bookings = res.data;
     Modal.success({
       title: 'Venue Calendar',
-      content: calendar(bookings)
-    })
+      width: window.innerWidth*.6,
+      content: calendar(bookings, false)
+    });
   }).catch((err) => {
     console.error('error', err);
   })
@@ -78,7 +79,7 @@ class SearchVenues extends React.Component {
         venues: res.data.venues
       })
     }).catch(err => {
-      console.log('error', err)
+      console.error('error', err)
     })
   }
 
