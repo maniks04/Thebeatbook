@@ -36,7 +36,7 @@ class Requests extends React.Component {
   }
 
 
-//ADD ABILITY TO UNCOFIRM EVENT
+//ADD ABILITY TO UNCONFIRM EVENT
   onConfirmClick(item) {
     console.log(item)
     axios.patch('/booking', item)
