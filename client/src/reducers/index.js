@@ -42,7 +42,7 @@ const reducer = function(state = initialState, action) {
     case 'SET_VENUEID' :
       return Object.assign({}, state, {venueId: action.payload});
     case 'ADD_BOOKING' :
-      state.bookings.push(action.payload);
+      state.bookings.unshift(action.payload);
     case 'ERROR' :
       return Object.assign({}, state, {currentError: action.payload});
     default :

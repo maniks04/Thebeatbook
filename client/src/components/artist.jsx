@@ -4,14 +4,13 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import RaisedButton from 'material-ui/RaisedButton';
 import calendar from './calendar.jsx';
 import Requests from './requests.jsx';
 import SearchVenues from './searchVenues.jsx';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
-import WrappedNormalLoginForm from './epkEdit.jsx';
+import EPKEdit from './epkEdit.jsx';
 import EPKView from './epkView.jsx';
 const moment = require('moment');
 
@@ -38,7 +37,8 @@ class Artist extends React.Component {
 
 
   view() {
-    let key = this.state.key
+    let key = this.state.key;
+    let artistId = this.props.store.artistId;
     if (key === '1') {
       return calendar(this.props.store.bookings, true)
     }
@@ -52,7 +52,7 @@ class Artist extends React.Component {
       return (<EPKView artist={artistId}/>)
     }
     if (key === '5') {
-      return (<WrappedNormalLoginForm />)
+      return (<EPKEdit />)
     }
 
   }

@@ -4,9 +4,7 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import RaisedButton from 'material-ui/RaisedButton';
-import calendar from './calendar.jsx'
-import TextField from 'material-ui/TextField';
+import calendar from './calendar.jsx';
 import { Modal, Button, Avatar, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;

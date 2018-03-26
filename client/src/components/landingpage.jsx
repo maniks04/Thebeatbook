@@ -5,11 +5,8 @@ import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import axios from 'axios'
-import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
 import * as reducers from '../reducers/index.js'
 import Calendar from './calendar.jsx'
-import TextField from 'material-ui/TextField';
 import Login from './login.jsx'
 import Artist from './artist.jsx'
 import Venue from './venue.jsx'
