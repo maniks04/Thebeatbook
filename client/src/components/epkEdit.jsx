@@ -22,7 +22,7 @@ class NormalLoginForm extends React.Component {
     let artist_city = $('.city').val();
     let artist_state = $('.state').val();
     axios.post('/updateEPK', {
-      band: artist_name,
+      artist_name: artist_name,
       artist_description: artist_description,
       artist_city: artist_city,
       artist_state: artist_state,
