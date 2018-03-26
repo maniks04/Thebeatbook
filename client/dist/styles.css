@@ -1,7 +1,12 @@
 #calendar {
     /* float: right;
     width: 50%; */
+  
+}
 
+.landingpage {
+  background-color: blue;
+  background: linear-gradient(50deg, rgba(217, 161, 88, 0.92), rgba(171, 35, 53, 0.92)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
 }
 
 /* body {
@@ -42,7 +47,8 @@ body {
   height: 100%;
   background: linear-gradient(50deg, rgba(79, 5, 170, 0.82), rgba(0, 40, 107, 0.82)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
   background-size: cover;
-}
+} 
+
 
 /* body {
   width: 100%;
@@ -72,7 +78,7 @@ body {
     float: 'right'
   }
 
-  .venueBox: {
+  /* .venueBox: {
       backgroundColor: 'white',
       position: 'absolute',
       borderStyle: 'solid',
@@ -83,4 +89,32 @@ body {
       left: window.innerWidth*1/4,
       top: window.innerHeight*1/8,
       textAlign: 'center'
+  } */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  .ant-carousel .slick-slide {
+    text-align: center;
+    height: 650px;
+    line-height: 160px;
+    /* background: #364d79; */
+    overflow: hidden;
+  }
+  
+  .ant-carousel .slick-slide h3 {
+    color: #fff;
   }
