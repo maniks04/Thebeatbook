@@ -27,80 +27,81 @@ class Requests extends React.Component {
   }
 
 
-    onSelect(info) {
-    }
+  onSelect(info) {
+  }
 
-    callback(key) {
-    }
+  callback(key) {
+  }
 
 
-    render() {
-    	const { confirmed, pending } = this.state;
-      const isArtist = this.props.store.artist;
-    	// const loadMore = showLoadingMore ? (
-     //  <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
-     //    {loadingMore && <Spin />}
-     //    {!loadingMore && <Button onClick={}>loading more</Button>}
-
-     ///////PUT VENUE LINK IN THE 'A' ATTRIBUTES
-     //  </div>
-    // ) : null;
-        return (
-          <div>
-            <Tabs defaultActiveKey="1" onChange={this.callback}>
-              <TabPane tab="Confirmed" key="1">
-                <List
-        	        className="demo-loadmore-list"
-        	        itemLayout="horizontal"
-        	        dataSource={confirmed}
-        	        renderItem={item => {
-                    let name;
-                    let time = item.start_time || '';
-                    if (isArtist === true) {
-                      name = item.venue_name;
-                    } else {
-                      name = item.artist_name;
-                    }
-                    return (
-          	          <List.Item actions={[<a>edit</a>, <a>more</a>]}>
-          	            <List.Item.Meta
-          	              title={<a href="https://ant.design">{name}</a>}
-          	              description={item.booking_description}
-          	            />
-                        <div>Gig on: {moment(time.slice(0, 10)).format("MMM Do YY")}</div>
-          	          </List.Item>
-                    )
+  render() {
+  	const { confirmed, pending } = this.state;
+    const isArtist = this.props.store.artist;
+  	// const loadMore = showLoadingMore ? (
+   //  <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
+   //    {loadingMore && <Spin />}
+   //    {!loadingMore && <Button onClick={}>loading more</Button>}
+   //  </div>
+  // ) : null;
+      return (
+        <div>
+          <Tabs defaultActiveKey="1" onChange={this.callback}>
+            <TabPane tab="Confirmed" key="1">
+              <List
+      	        className="demo-loadmore-list"
+      	        itemLayout="horizontal"
+      	        dataSource={confirmed}
+      	        renderItem={item => {
+                  let name;
+                  let time = item.start_time || '';
+                  if (isArtist === true) {
+                    name = item.venue_name;
+                  } else {
+                    name = item.artist_name;
+                  }
+                  return (
+        	          <List.Item actions={[<a>See Event Details</a>]}>
+        	            <List.Item.Meta
+        	              title={<a href="https://ant.design">{name}</a>}
+        	              description={item.booking_description}
+        	            />
+                      <div>Gig on: {moment(time.slice(0, 10)).format("MMM Do YY")}</div>
+        	          </List.Item>
+                  )
+              }}
+              />
+            </TabPane>
+            <TabPane tab="Pending" key="2">
+              <List
+                className="demo-loadmore-list"
+                itemLayout="horizontal"
+                dataSource={pending}
+                renderItem={item => {
+                  let name;
+                  let subTab;
+                  let time = item.start_time || '';
+                  if (isArtist === true) {
+                    name = item.venue_name;
+                    subtab = [<a>See Event</a>, <a>more</a>];
+                  } else {
+                    name = item.artist_name;
+                    subtab = [<a>Confirm Event</a>, <a>See EPK</a>]
+                  }
+                  return (
+                    <List.Item actions={subtab}>
+                      <List.Item.Meta
+                        title={<a href="https://ant.design">{name}</a>}
+                        description={item.booking_description}
+                      />
+                      <div>Trying to gig: {moment(time.slice(0, 10)).format("MMM Do YY")}</div>
+                    </List.Item>
+                  )
                 }}
-                />
-              </TabPane>
-              <TabPane tab="Pending" key="2">
-                <List
-                  className="demo-loadmore-list"
-                  itemLayout="horizontal"
-                  dataSource={pending}
-                  renderItem={item => {
-                    let name;
-                    let time = item.start_time || '';
-                    if (isArtist === true) {
-                      name = item.venue_name;
-                    } else {
-                      name = item.artist_name;
-                    }
-                    return (
-                      <List.Item actions={[<a>See Event</a>, <a>more</a>]}>
-                        <List.Item.Meta
-                          title={<a href="https://ant.design">{name}</a>}
-                          description={item.booking_description}
-                        />
-                        <div>Trying to gig: {moment(time.slice(0, 10)).format("MMM Do YY")}</div>
-                      </List.Item>
-                    )
-                  }}
-                />
-              </TabPane>
-            </Tabs>
-          </div>
-        );
+              />
+            </TabPane>
+          </Tabs>
+        </div>
+      );
   }
 }
 
