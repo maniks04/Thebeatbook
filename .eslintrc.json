@@ -1,0 +1,14 @@
+{
+    "extends": "airbnb",
+    "env": {
+        "node": true,
+        "es6": true,
+        "browser": true
+    },
+    "rules": {
+        "react/prop-types": "off",
+        "import/extensions": "off",
+        "no-use-before-define": "off",
+        "max-len": ["error", { "code": 120 }]
+    }
+}
