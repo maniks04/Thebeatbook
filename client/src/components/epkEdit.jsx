@@ -16,17 +16,17 @@ class NormalLoginForm extends React.Component {
   }
 
   onClick() {
-    let id = this.props.artistID
-    let band = $('.band').val();
-    let description = $('.description').val();
-    let city = $('.city').val();
-    let state = $('.state').val();
+    let artist_id = this.props.artistID
+    let artist_name = $('.band').val();
+    let artist_description = $('.description').val();
+    let artist_city = $('.city').val();
+    let artist_state = $('.state').val();
     axios.post('/updateEPK', {
-      band: band,
-      description: description,
-      city: city,
-      state: state,
-      id: id
+      band: artist_name,
+      artist_description: artist_description,
+      artist_city: artist_city,
+      artist_state: artist_state,
+      artist_id: artist_id
     }).then(res => {
     }).catch(err => {
       console.error(err)

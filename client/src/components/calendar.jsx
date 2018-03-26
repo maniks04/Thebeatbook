@@ -65,7 +65,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
                 artistId: artistId,
                 venueId: venueId
               };
-              saveToStore(newBooking);
+              //saveToStore(newBooking);
               console.log(start.format('YYYY-MM-DD h:mm:ss'))
               axios.post('/calendar', newBooking).then(res => {
               }).catch(err => {

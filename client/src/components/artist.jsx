@@ -4,7 +4,7 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import RaisedButton from 'material-ui/RaisedButton';
+//import RaisedButton from 'material-ui/RaisedButton';
 import calendar from './calendar.jsx';
 import Requests from './requests.jsx';
 import SearchVenues from './searchVenues.jsx';
@@ -39,6 +39,7 @@ class Artist extends React.Component {
 
   view() {
     let key = this.state.key
+    let artist = this.props.store.artistId
     if (key === '1') {
       return calendar(this.props.store.bookings, true)
     }
@@ -49,7 +50,7 @@ class Artist extends React.Component {
       return (<Requests />)
     }
     if (key === '4') {
-      return (<EPKView artist={artistId}/>)
+      return (<EPKView artist={artist}/>)
     }
     if (key === '5') {
       return (<WrappedNormalLoginForm artistID={artist}/>)
