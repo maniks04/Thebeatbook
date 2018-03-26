@@ -4,8 +4,13 @@ const moment = require('moment');
 import 'fullcalendar';
 import axios from 'axios';
 import { Modal, Button, Form, Input } from 'antd';
+//REDUX STUFF
+import { connect } from 'react-redux';
+import * as actions from '../actions/index.js';
+import { bindActionCreators } from 'redux';
+import ReactDOM from 'react-dom';
 
-const Calendar = (data, artistId, venueId) => {
+const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
   $(function() {
     $('#calendar').fullCalendar({
       header: {
@@ -14,9 +19,7 @@ const Calendar = (data, artistId, venueId) => {
         right: 'month,agendaWeek,agendaDay'
       },
 
-      footer: { /* can add if wanted */},
       droppable: true,
-      editable: true,
       selectable: true,
       selectHelper: true,
       unselectAuto: false,
@@ -24,6 +27,7 @@ const Calendar = (data, artistId, venueId) => {
       height: window.innerHeight*.87,
 
       select: function(start, end, allDay) {
+        if(editable) {
         Modal.confirm({
           title: 'Event Info',
           content: (
@@ -39,7 +43,6 @@ const Calendar = (data, artistId, venueId) => {
             </div>
           ),
           onOk(){
-            console.log(data);
             let title = $('.title').val();
             let description = $('.description').val();
             if (title) {
@@ -53,44 +56,34 @@ const Calendar = (data, artistId, venueId) => {
                   },
                   true
               );
-              axios.post('/calendar', {
-                title: title,
-                description: description,
-                start: start,
-                end: end
-              }).then(res => {
+              //sendArtistId & VenueId****************
+              let newBooking = {
+                booking_title: title,
+                booking_description: description,
+                start_time: start.format('YYYY-MM-DD h:mm:ss'),
+                end_time: end.format('YYYY-MM-DD h:mm:ss'),
+                artistId: artistId,
+                venueId: venueId
+              };
+              saveToStore(newBooking);
+              console.log(start.format('YYYY-MM-DD h:mm:ss'))
+              axios.post('/calendar', newBooking).then(res => {
               }).catch(err => {
-                console.log(err)
+                console.error(err)
               })
             } else {
               alert('You need a title')
             }
           },
-          onCancel(){
-
-          }
+          onCancel(){}
         })
-
+      }
         $('#calendar').fullCalendar('unselect');
       },
 
-      eventDrop: function(event, delta, revertFunc) {
-        let eventId = event.id
-        let timeChange = delta._data // delta contains the time change info + other jquery elements.
-
-        axios.post('/dragAndDrop', {
-          eventId: eventId,
-          timeChange: timeChange
-        }).then(res => {})
-          .catch(err => {
-            console.log(err)
-          })
-      },
-
       events: function(start, end, timezone, callback) {
-
           var events = []
-          data.forEach((event) => {
+          bookings.forEach((event) => {
             events.push({
               title: event.booking_title,
               description: event.booking_description,
@@ -102,8 +95,8 @@ const Calendar = (data, artistId, venueId) => {
           callback(events)
       },
 
-      minTime: '04:00:00', // when the calendar starts the day.
-      // maxTime: '22:00:00', // when the calender ends the day.
+      minTime: '04:00:00',
+      // maxTime: '22:00:00',
 
       eventClick: function ( event, jsEvent, view ) {
          Modal.info({
@@ -125,4 +118,4 @@ return (
   )
 }
 
-export default Calendar
+export default Calendar;

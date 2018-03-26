@@ -25,18 +25,18 @@ class Home extends React.Component {
         }
     }
 
-    
+
     componentDidMount() {
-    console.log(this.props.store)
     }
 
 
 
 
-    
+
 
 
     render() {
+
      const styles = {
          
      }
@@ -47,6 +47,7 @@ class Home extends React.Component {
                          <Login history={this.props.history}/> 
                         //<PracticeLogin history={this.props.history}/>
                     } 
+
 
                     {this.props.store.artist &&
                        <Artist />
@@ -62,7 +63,7 @@ class Home extends React.Component {
 const mapStateToProps = state => (
     { store: state } // eslint-disable-line
   );
-  
+
   const mapDispatchToProps = dispatch => (
     { actions: bindActionCreators(actions, dispatch) }
   );

@@ -11,15 +11,14 @@ import { withRouter } from 'react-router';
 
 class VenueRegisterForm extends React.Component {
     constructor(props) {
-        super(props)    
+        super(props)
     }
 
-    
+
   registerVenue (e)   {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         this.props.registerVenue(values.username, values.password, values.email, values.venueName, values.address, values.city, values.state, values.capacity)
       }
     });
@@ -28,11 +27,11 @@ class VenueRegisterForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
- 
+
 
     return (
       <div>
-       
+
       <Form onSubmit={(e) => this.registerVenue(e)} className="login-form">
         <FormItem>
           {getFieldDecorator('username', {
@@ -98,11 +97,11 @@ class VenueRegisterForm extends React.Component {
           )}
         </FormItem>
         <FormItem>
-        
+
           <Button type="primary" htmlType="submit" className="login-form-button">
             Register
           </Button>
-          
+
         </FormItem>
       </Form>
       </div>

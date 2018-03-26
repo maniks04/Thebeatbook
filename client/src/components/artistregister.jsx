@@ -19,11 +19,9 @@ class ArtistRegister extends React.Component {
   };
 
   componentDidMount() {
-      console.log('artistregister', this)
   };
 
   goHome() {
-      console.log('clicked')
       this.props.history.replace('/')
   };
 
@@ -39,7 +37,7 @@ class ArtistRegister extends React.Component {
         this.actions.setArtist(res.data[1].artist_id)
         this.history.replace('/')
     }).catch(err => {
-        console.log('error', err)
+        console.error('error', err)
     })
   };
 

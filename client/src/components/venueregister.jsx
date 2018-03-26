@@ -18,7 +18,6 @@ class VenueRegister extends React.Component {
   }
 
   componentDidMount() {
-    console.log('artistregister', this.props.history)
   }
 
   goHome() {
@@ -37,12 +36,11 @@ class VenueRegister extends React.Component {
       state: state,
       capacity: capacity
     }).then(res => {
-      console.log(res.data)
       this.actions.loadVenuePage(res.data);
       this.actions.setVenue(res.data[1].artist_id)
       this.history.replace('/')
     }).catch(err => {
-      console.log('error', err)
+      console.error('error', err)
     })
   }
 

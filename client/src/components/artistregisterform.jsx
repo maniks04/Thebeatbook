@@ -18,7 +18,6 @@ class ArtistRegisterForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         this.props.registerArtist(values.username, values.password, values.email, values.city, values.state)
       }
     });
