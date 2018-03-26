@@ -159,7 +159,7 @@ module.exports = {
   getVenue,
   getVenues,
   getEpk,
-  getVenueBookings,
+  getVenueBookings2,
   updateBooking
 };
 

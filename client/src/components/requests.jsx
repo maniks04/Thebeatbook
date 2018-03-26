@@ -41,7 +41,12 @@ class Requests extends React.Component {
     console.log(item)
     axios.patch('/booking', item)
       .then(res => {
-
+        let updatedBookings = res.data.bookings;
+        this.props.actions.setBookings(updatedBookings)
+        this.setState({
+          pending: updatedBookings.filter((booking)=> booking.confirmed === 0),
+          confirmed: updatedBookings.filter((booking)=> booking.confirmed === 1),
+        })
       }).catch(err => console.log(err))
   }
 
@@ -105,7 +110,6 @@ class Requests extends React.Component {
                   let subtab = [];
                   if (isArtist === true) {
                     name = item.venue_name;
-                    /*this goes in venue side*/
                     subtab.push(<a onClick={() => this.onSeeVenueDetailsClick(item)}>See Venue Details</a>);
                   } else {
                     name = item.artist_name;

@@ -146,14 +146,15 @@ app.get('/venues', async (req, res) => {
 
 app.get('/venueCalendar', async (req, res) => {
   let venue_id = req.query.venue_id
-  let venueCalendar = await db.getVenueBookings(venue_id);
+  let venueCalendar = await db.getVenueBookings2(venue_id);
   res.status(200).send(venueCalendar);
 })
 
 //BOOKINGS
 app.patch('/booking', async (req, res) => {
   await db.updateBooking(req.body);
-  res.status(200).end()
+  let bookings = await db.getVenueBookings2(req.body.venue_id)
+  res.status(200).send({bookings: bookings})
 });
 
 app.get('/epk', async (req, res) => {
