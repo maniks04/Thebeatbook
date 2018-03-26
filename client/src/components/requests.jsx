@@ -111,7 +111,6 @@ class Requests extends React.Component {
                     name = item.artist_name;
                     subtab.push(<a onClick={() => this.onConfirmClick(item)}>Confirm Event</a>, <a>See EPK</a>);
                   }
-                  // let subtab = [<a>Confirm Event</a>, <a>See EPK</a>];
                   return (
                     <List.Item actions={subtab}>
                       <List.Item.Meta
