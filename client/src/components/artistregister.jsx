@@ -11,14 +11,11 @@ import ArtistRegisterForm from './artistregisterform.jsx'
 import { withRouter } from 'react-router';
 
 const logo = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.png'
-const ArtistRegisterFormContainer = Form.create()(ArtistRegisterForm); //component for antd loginform
+const ArtistRegisterFormContainer = Form.create()(ArtistRegisterForm);
 
 class ArtistRegister extends React.Component {
   constructor(props) {
       super(props)
-  };
-
-  componentDidMount() {
   };
 
   goHome() {
@@ -44,14 +41,14 @@ class ArtistRegister extends React.Component {
   render() {
       return(
           <div style={styles.registerbox}>
-                    <img src={logo} style={styles.logo}></img>
-                    <div style={styles.beatbook}>beatbook</div>
-                    <div style={styles.divider}></div>
-                    <div style={styles.registerform}>
-                      <ArtistRegisterFormContainer registerArtist={this.registerArtist}/>
-                    </div>
-                    <Icon style={styles.goback} type="left" onClick={() => this.goHome()}/>
-                  </div >
+            <img src={logo} style={styles.logo}></img>
+            <div style={styles.beatbook}>beatbook</div>
+            <div style={styles.divider}></div>
+            <div style={styles.registerform}>
+              <ArtistRegisterFormContainer registerArtist={this.registerArtist}/>
+            </div>
+            <Icon style={styles.goback} type="left" onClick={() => this.goHome()}/>
+          </div >
       )
   };
 };
@@ -65,7 +62,6 @@ const mapStateToProps = state => (
   );
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ArtistRegister));
-
 
 const styles = {
     logo: {

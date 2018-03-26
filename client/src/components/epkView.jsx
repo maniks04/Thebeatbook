@@ -8,52 +8,51 @@ import { Row, Col } from 'antd';
 import axios from 'axios';
 
 
-
 class EPKView extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
     	artistId: this.props.artist,
-    	artistName: null,
-    	artistDescription: null,
+    	artist_name: null,
+    	artist_description: null,
+      artist_city: null,
+      artist_state: null
     	//other EPK pieces
     }
-    console.log(this.state)
   }
 
   componentDidMount() {
-  	//fetchEpk
   	 axios.get('/epk', {
       params: {
         artistId: this.state.artistId
       }
     }).then(res => {
         this.setState({
-        	artistName: res.data.epk.artist_name
+        	artist_name: res.data.epk.artist_name,
+          artist_description: res.data.epk.artist_description,
+          artist_city: res.data.epk.artist_city,
+          artist_state: res.data.epk.artist_state
         })
     }).catch(err => {
       console.error('error', err)
     })
   }
 
-
   onSearch(info) {
 
   }
-
-
 
   render() {
   	return(
 	  <div>
 	    <Row>
-	      <Col span={12}>{this.state.artistName}</Col>
-	      <Col span={12}>col-12</Col>
+	      <Col span={12}>{this.state.artist_name}</Col>
+	      <Col span={12}>{this.state.artist_description}</Col>
 	    </Row>
 	    <Row>
-	      <Col span={8}>col-8</Col>
-	      <Col span={8}>col-8</Col>
+	      <Col span={8}>{this.state.artist_city}</Col>
+	      <Col span={8}>{this.state.artist_state}</Col>
 	      <Col span={8}>col-8</Col>
 	    </Row>
 	    <Row>
@@ -74,6 +73,5 @@ const mapStateToProps = state => (
   const mapDispatchToProps = dispatch => (
     { actions: bindActionCreators(actions, dispatch) }
   );
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(EPKView);

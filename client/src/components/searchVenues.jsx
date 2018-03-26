@@ -77,7 +77,7 @@ class SearchVenues extends React.Component {
     })
     Modal.success({
       title: 'Venue Calendar',
-      content: calendar(this.state.venueBookings, false, artistId, id, this.state.saveToStore)
+      content: calendar(this.state.venueBookings, true, artistId, id, this.state.saveToStore)
     })
   }).catch((err) => {
     console.error('error', err);

@@ -54,9 +54,8 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
                       description: description,
                       allDay: false
                   },
-                  true
+                  true // sticks to page so it doenst fall off when changing calendar vies month week etc...
               );
-              //sendArtistId & VenueId****************
               let newBooking = {
                 booking_title: title,
                 booking_description: description,
@@ -65,7 +64,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
                 artistId: artistId,
                 venueId: venueId
               };
-              //saveToStore(newBooking);
+              // saveToStore(newBooking);
               console.log(start.format('YYYY-MM-DD h:mm:ss'))
               axios.post('/calendar', newBooking).then(res => {
               }).catch(err => {

@@ -115,13 +115,12 @@ const addBooking = async (info) => {
     start_time: info.start_time,
     end_time: info.end_time,
     booking_description: info.booking_description,
-    // booking_title: info.booking_title
+    booking_title: info.booking_title
   });
 }
 
 const editEPK = async (info) => {
   let id = info.artist_id
-  console.log(id)
   await knex('artists').where('artist_id', id).update({
     artist_name: info.artist_name,
     artist_description: info.artist_description,
