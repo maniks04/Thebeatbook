@@ -32,7 +32,7 @@ exports.sendEmail = (username, email) => {
 
 
 
-exports.sendEmail = (username, email) => {
+exports.notifyRequest = (username, email) => {
     nodemailer.createTestAccount((err, account) => {
           var transporter = nodemailer.createTransport({
             service: 'Gmail',

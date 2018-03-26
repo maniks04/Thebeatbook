@@ -21,6 +21,11 @@ class VenueRegister extends React.Component {
     console.log('artistregister', this.props.history)
   }
 
+  goHome() {
+    console.log('clicked')
+    this.props.history.replace('/')
+};
+
   registerVenue(username, password, email, venueName, address, city, state, capacity) {
     axios.post('/register/venue', {
       username: username,
@@ -50,6 +55,7 @@ class VenueRegister extends React.Component {
                   <div style={styles.registerform}>
                     <VenueRegisterFormContainer registerVenue={this.registerVenue}/>
                   </div>
+                  <Icon style={styles.goback} type="left" onClick={() => this.goHome()}/>
                 </div >
     )
   }
@@ -87,11 +93,12 @@ const styles = {
         borderStyle: 'solid',
         borderWidth: .5,
         borderColor: '#e6e6e6',
-        width: window.innerWidth/4,
-        height: window.innerHeight*.75,
-        left: window.innerWidth*3/8,
-        top: window.innerHeight*1/8,
-        textAlign: 'center'
+        width: '25%',
+        height: '75%',
+        left: '37.5%',
+        top: '12.5%',
+        textAlign: 'center',
+        overflow:'auto'
     },
     registerform: {
         marginLeft: 50,
@@ -106,5 +113,9 @@ const styles = {
         marginRight: 25,
         marginTop: 50,
         marginBottom: 50
-    }
+    },
+    goback: {
+      fontSize: 25,
+      marginTop: 0
+  }
 }

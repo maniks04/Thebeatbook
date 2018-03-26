@@ -13,11 +13,16 @@ import TextField from 'material-ui/TextField';
 import Login from './login.jsx'
 import Artist from './artist.jsx'
 import Venue from './venue.jsx'
+import LandingPage from './landingpage.jsx'
+import PracticeLogin from './practicelogin.jsx'
 
 
 class Home extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            landingViewed : false
+        }
     }
 
     
@@ -32,11 +37,15 @@ class Home extends React.Component {
 
 
     render() {
-     
+     const styles = {
+         
+     }
         
-        return( <div>
+        return( <div >
                     {!this.props.store.artist && !this.props.store.venue &&
-                        <Login history={this.props.history}/> 
+                    this.state.landingViewed ? <LandingPage /> :
+                         <Login history={this.props.history}/> 
+                        //<PracticeLogin history={this.props.history}/>
                     } 
 
                     {this.props.store.artist &&
