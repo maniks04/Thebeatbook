@@ -9,9 +9,6 @@ import Venue from './components/venue.jsx'
 import ArtistRegister from './components/artistregister.jsx'
 import VenueRegister from './components/venueregister.jsx'
 import reducer from './reducers/index.js';
-// import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import $ from 'jquery'
 // import AnyComponent from './components/filename.jsx'

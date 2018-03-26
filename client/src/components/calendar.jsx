@@ -10,7 +10,7 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 
-const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
+const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName) => {
   $(function() {
     $('#calendar').fullCalendar({
       header: {
@@ -62,10 +62,15 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
                 start_time: start.format('YYYY-MM-DD h:mm:ss'),
                 end_time: end.format('YYYY-MM-DD h:mm:ss'),
                 artistId: artistId,
-                venueId: venueId
+                venueId: venueId,
+                venue_name: venueName,
+                confirmed: 0
               };
-              // saveToStore(newBooking);
-              console.log(start.format('YYYY-MM-DD h:mm:ss'))
+              let newBooking2 = Object.assign({}, newBooking,{
+                start_time: start.format('YYYY-MM-DD h:mm:ss'),
+                end_time: end.format('YYYY-MM-DD h:mm:ss')
+              });
+              saveToStore(newBooking);
               axios.post('/calendar', newBooking).then(res => {
               }).catch(err => {
                 console.error(err)
@@ -94,8 +99,8 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore) => {
           callback(events)
       },
 
-      minTime: '04:00:00',
-      // maxTime: '22:00:00',
+      minTime: '10:00:00',
+      maxTime: '26:00:00',
 
       eventClick: function ( event, jsEvent, view ) {
          Modal.info({

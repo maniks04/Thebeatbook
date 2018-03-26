@@ -39,7 +39,7 @@ export const submitLogin = (username, password) => {
 
 export const setArtist = (artistId) => ({ type: 'SET_ARTISTID', payload: artistId });
 export const setVenue = (venueId) => ({ type: 'SET_VENUEID', payload: venueId });
-const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
+export const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
 
 export const addBook = (booking) => ({ type: 'ADD_BOOKING', payload: booking });
 
@@ -49,43 +49,11 @@ export const addBooking = (booking) => {
        dispatch(addBook(booking))
     }
 }
+
 // ************************************************* TOGGLE LOADING BEORE ANY ACTIONS ; STILL NEED TO WRITE IT***
 
-//     axios.post('/login', {
-//         username: username,
-//         password: password
-//     }).then(res => {
-//         console.log(res.data)
-//     }).catch(err => {
-//         console.log(err)
-//     })
-// }
 
-// export const login = (username, password) => {
-//     return (dispatch) => {
-//       return axios({
-//         method: 'get',
-//         url: '/login',
-//         params: {
-//           username: username,
-//           password: password,
-//         },
-//       }).then(
-//         results => {
-//           if (results.data.error) {
-//             alert(results.data.message);
-//           } else {
-//             dispatch(authenticate());
-//             dispatch(fetchTrips(username));
-//           }
-//         },
-//         error => {
-//           console.log('error', error);
-//           dispatch(badStuff(error));
-//         }
-//       )
-//     }
-// }
+
 
 //*************************************************
 //FETCH BOOKINGS

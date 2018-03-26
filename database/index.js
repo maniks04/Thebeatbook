@@ -68,7 +68,6 @@ const getUser = async (username) => {
     let bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings]
   } else {
-    //refactor to getVenueBookings2*******************************
     let venue = await getVenue(user[0].user_id)
     let bookings = await getVenueBookings2(venue.venue_id);
     return [user[0], venue, bookings]
@@ -119,6 +118,13 @@ const addBooking = async (info) => {
   });
 }
 
+const updateBooking = async (info) => {
+  let toggle = info.confirmed === 0 ? 1 : 0;
+  await knex('bookings').where('booking_id', info.booking_id).update({
+    confirmed: toggle
+  });
+}
+
 const editEPK = async (info) => {
   let id = info.artist_id
   await knex('artists').where('artist_id', id).update({
@@ -163,6 +169,6 @@ module.exports = {
   getVenue,
   getVenues,
   getEpk,
-  getVenueBookings,
-  editEPK
+  getVenueBookings2,
+  updateBooking
 };

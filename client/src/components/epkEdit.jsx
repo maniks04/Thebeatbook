@@ -129,6 +129,6 @@ class NormalLoginForm extends React.Component {
   }
 }
 
-const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
+const EPKEdit = Form.create()(NormalLoginForm);
 
-export default WrappedNormalLoginForm;
+export default EPKEdit;

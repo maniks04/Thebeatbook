@@ -20,6 +20,7 @@ class SearchVenues extends React.Component {
       loading: false,
       fetched: false,
       venueBookings: [],
+      venueName: '',
       columns: [{
         title: 'Name',
         key: 'name',
@@ -42,7 +43,7 @@ class SearchVenues extends React.Component {
         render: (text, record) => (
           <span>
             <a href="#" onClick={() => {
-              this.viewCalendar(record.venue_id)
+              this.viewCalendar(record.venue_id, record.venue_name)
             }}>View Venue Calendar</a>
           </span>
         )
@@ -65,7 +66,7 @@ class SearchVenues extends React.Component {
     })
   }
 
-  viewCalendar (id) {
+  viewCalendar (id, venueName) {
   let artistId = this.props.store.artistId;
   axios.get('/venueCalendar', {
     params: {
@@ -73,11 +74,11 @@ class SearchVenues extends React.Component {
     }
   }).then((res) => {
     this.setState({
-      venueBookings: res.data
+      venueBookings: res.data,
     })
     Modal.success({
       title: 'Venue Calendar',
-      content: calendar(this.state.venueBookings, true, artistId, id, this.state.saveToStore)
+      content: calendar(this.state.venueBookings, true, artistId, id, this.state.saveToStore, venueName)
     })
   }).catch((err) => {
     console.error('error', err);

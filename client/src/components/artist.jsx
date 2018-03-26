@@ -10,7 +10,7 @@ import SearchVenues from './searchVenues.jsx';
 import { Modal, Button, Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
-import WrappedNormalLoginForm from './epkEdit.jsx';
+import EPKEdit from './epkEdit.jsx';
 import EPKView from './epkView.jsx';
 const moment = require('moment');
 
