@@ -119,7 +119,8 @@ const addBooking = async (info) => {
 }
 
 const editEPK = async (info) => {
-  await knex('artists').where(`artist_id = ${info.id}`).insert({
+  let id = info.id
+  await knex('artists').where(`artist_id = ${id}`).insert({
     artist_name: info.band,
     artist_description: info.description,
     artist_city: info.city,
