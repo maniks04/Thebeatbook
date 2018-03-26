@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+const moment = require('moment');
 
 export const openLoginModal = () => ({type: 'OPENLOGINMODAL'});
 export const closeLoginModal = () => ({type: 'CLOSELOGINMODAL'});
@@ -40,6 +40,15 @@ export const submitLogin = (username, password) => {
 export const setArtist = (artistId) => ({ type: 'SET_ARTISTID', payload: artistId });
 export const setVenue = (venueId) => ({ type: 'SET_VENUEID', payload: venueId });
 const setBookings = (bookings) => ({ type: 'SET_BOOKINGS', payload: bookings });
+
+export const addBook = (booking) => ({ type: 'ADD_BOOKING', payload: booking });
+
+
+export const addBooking = (booking) => {
+    return (dispatch) => {
+       dispatch(addBook(booking))
+    }
+}
 // ************************************************* TOGGLE LOADING BEORE ANY ACTIONS ; STILL NEED TO WRITE IT***
 
 //     axios.post('/login', {

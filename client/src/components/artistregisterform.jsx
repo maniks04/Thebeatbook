@@ -34,42 +34,42 @@ class ArtistRegisterForm extends React.Component {
           {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
-            <Input style={styles.username} id="shit" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+            <Input id="shit" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
           )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('password', {
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
-            <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
           )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('confirmPassword', {
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
-            <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Confirm Password" />
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Confirm Password" />
           )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('email', {
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
-            <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />
           )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('city', {
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
-            <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="city" placeholder="City" />
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="city" placeholder="City" />
           )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('state', {
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
-            <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="state" placeholder="State" />
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="state" placeholder="State" />
           )}
         </FormItem>
         <FormItem>
@@ -96,8 +96,5 @@ const mapDispatchToProps = dispatch => (
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ArtistRegisterForm));
 
 
-const styles = {
-  input: {
-    opacity: 0.5,
-  }
-}
+
+

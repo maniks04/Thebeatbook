@@ -98,11 +98,8 @@ app.post('/logout', isLoggedIn, (req, res) => {
 
 /******************************** Calendar ***********************************/
 
-app.post('/calendar', (req, res) => {
-  let title = req.body.title;
-  let description = req.body.description;
-  let start = req.body.start;
-  let end = req.body.end;
+app.post('/calendar', async (req, res) => {
+  await db.addBooking(req.body)
   res.status(200).end()
 })
 

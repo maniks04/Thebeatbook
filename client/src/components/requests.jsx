@@ -23,8 +23,8 @@ class Requests extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  // }
+  componentDidMount() {
+  }
 
 
     onSelect(info) {
@@ -55,6 +55,7 @@ class Requests extends React.Component {
         	        dataSource={confirmed}
         	        renderItem={item => {
                     let name;
+                    let time = item.start_time || '';
                     if (isArtist === true) {
                       name = item.venue_name;
                     } else {
@@ -66,7 +67,7 @@ class Requests extends React.Component {
           	              title={<a href="https://ant.design">{name}</a>}
           	              description={item.booking_description}
           	            />
-                        <div>Gig on: {moment(item.start_time.slice(0, 10)).format("MMM Do YY")}</div>
+                        <div>Gig on: {moment(time.slice(0, 10)).format("MMM Do YY")}</div>
           	          </List.Item>
                     )
                 }}
@@ -79,6 +80,7 @@ class Requests extends React.Component {
                   dataSource={pending}
                   renderItem={item => {
                     let name;
+                    let time = item.start_time || '';
                     if (isArtist === true) {
                       name = item.venue_name;
                     } else {
@@ -90,7 +92,7 @@ class Requests extends React.Component {
                           title={<a href="https://ant.design">{name}</a>}
                           description={item.booking_description}
                         />
-                        <div>Trying to gig: {moment(item.start_time.slice(0, 10)).format("MMM Do YY")}</div>
+                        <div>Trying to gig: {moment(time.slice(0, 10)).format("MMM Do YY")}</div>
                       </List.Item>
                     )
                   }}
