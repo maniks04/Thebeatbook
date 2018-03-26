@@ -1,21 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
-import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import { connect } from 'react-redux';
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import * as actions from '../actions/index.js';
 import calendar from './calendar.jsx';
 import Requests from './requests.jsx';
 import SearchVenues from './searchVenues.jsx';
-import { Modal, Button, Layout, Menu, Breadcrumb, Icon } from 'antd';
-const { Header, Content, Footer, Sider } = Layout;
-const SubMenu = Menu.SubMenu;
 import EPKEdit from './epkEdit.jsx';
 import EPKView from './epkView.jsx';
-const moment = require('moment');
+
+const {Content, Footer, Sider} = Layout /* eslint-disable-line */;
+const SubMenu = Menu.SubMenu /* eslint-disable-line */;
 
 class Artist extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +28,7 @@ class Artist extends React.Component {
     }
   }
 
-  view() {
+  view() {/* eslint-disable-line */
     const { key } = this.state;
     const artist = this.props.store.artistId;
     if (key === '1') {
@@ -47,9 +44,10 @@ class Artist extends React.Component {
       return (<EPKView artist={artist} />);
     }
     if (key === '5') {
-      return (<WrappedNormalLoginForm artistID={artist} />);
+      return (<EPKEdit artistID={artist} />);
     }
   }
+
 
   render() {
     return (
@@ -60,7 +58,7 @@ class Artist extends React.Component {
             theme="dark"
             defaultSelectedKeys={['1']}
             mode="inline"
-            onSelect={info =>this.onSelect(info)}
+            onSelect={info => this.onSelect(info)}
           >
             <Menu.Item key="1">
               <Icon type="calendar" />
@@ -95,12 +93,13 @@ class Artist extends React.Component {
         <Layout>
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item></Breadcrumb.Item>
+              <Breadcrumb.Item />
             </Breadcrumb>
-            <div style={
-              { padding: 24,
+            <div style={{
+                padding: 24,
                 background: '#fff',
-                minHeight: 360 }}>
+                minHeight: 360,
+              }}/* eslint-disable-line */>
               {this.view()}
             </div>
           </Content>
@@ -114,11 +113,11 @@ class Artist extends React.Component {
 }
 
 const mapStateToProps = state => (
-    { store: state }
-  );
+  { store: state }
+);
 
-  const mapDispatchToProps = dispatch => (
-    { actions: bindActionCreators(actions, dispatch) }
-  );
+const mapDispatchToProps = dispatch => (
+  { actions: bindActionCreators(actions, dispatch) }
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Artist);

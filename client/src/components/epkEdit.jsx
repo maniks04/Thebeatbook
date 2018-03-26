@@ -111,7 +111,7 @@ class NormalLoginForm extends React.Component {
           className="avatar-uploader"
           showUploadList={false}
           action="//jsonplaceholder.typicode.com/posts/"
-          beforeUpload={beforeUpload}
+          beforeUpload={beforeUpload}z
           onChange={this.handleChange} >
           {imageUrl ? <img src={imageUrl} alt="" /> : uploadButton}
         </Upload>
