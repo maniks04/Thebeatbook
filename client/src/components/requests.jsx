@@ -4,7 +4,8 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import calendar from './calendar.jsx'
+import axios from 'axios';
+import calendar from './calendar.jsx';
 import { Modal, Tabs, List, Button, Layout, Menu, Breadcrumb, Icon, Spin } from 'antd';
 const SubMenu = Menu.SubMenu;
 const TabPane = Tabs.TabPane;
@@ -24,6 +25,28 @@ class Requests extends React.Component {
   }
 
   componentDidMount() {
+  }
+
+  onSeeEventClick(item) {
+    console.log(item)
+  }
+
+  onSeeVenueDetailsClick (item) {
+    console.log(item)
+  }
+
+
+//ADD ABILITY TO UNCOFIRM EVENT
+  onConfirmClick(item) {
+    console.log(item)
+    axios.patch('/booking', item)
+      .then(res => {
+
+      }).catch(err => console.log(err))
+  }
+
+  onEpkClick(item) {
+    console.log(item)
   }
 
 
@@ -78,15 +101,17 @@ class Requests extends React.Component {
                 dataSource={pending}
                 renderItem={item => {
                   let name;
-                  let subTab;
                   let time = item.start_time || '';
+                  let subtab = [];
                   if (isArtist === true) {
                     name = item.venue_name;
-                    subtab = [<a>See Event</a>, <a>more</a>];
+                    /*this goes in venue side*/
+                    subtab.push(<a onClick={() => this.onSeeVenueDetailsClick(item)}>See Venue Details</a>);
                   } else {
                     name = item.artist_name;
-                    subtab = [<a>Confirm Event</a>, <a>See EPK</a>]
+                    subtab.push(<a onClick={() => this.onConfirmClick(item)}>Confirm Event</a>, <a>See EPK</a>);
                   }
+                  // let subtab = [<a>Confirm Event</a>, <a>See EPK</a>];
                   return (
                     <List.Item actions={subtab}>
                       <List.Item.Meta

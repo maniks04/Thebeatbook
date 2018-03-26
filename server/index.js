@@ -151,6 +151,10 @@ app.get('/venueCalendar', async (req, res) => {
 })
 
 //BOOKINGS
+app.patch('/booking', async (req, res) => {
+  await db.updateBooking(req.body);
+  res.status(200).end()
+});
 
 app.get('/epk', async (req, res) => {
   let epk = await db.getEpk(req.query.artistId);

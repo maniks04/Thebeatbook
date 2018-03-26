@@ -4,7 +4,6 @@ import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import RaisedButton from 'material-ui/RaisedButton';
 import calendar from './calendar.jsx';
 import Requests from './requests.jsx';
 import SearchVenues from './searchVenues.jsx';
@@ -38,7 +37,8 @@ class Artist extends React.Component {
 
 
   view() {
-    let key = this.state.key
+    let key = this.state.key;
+    let artistId = this.props.store.artistId;
     if (key === '1') {
       return calendar(this.props.store.bookings, true)
     }

@@ -68,7 +68,6 @@ const getUser = async (username) => {
     let bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings]
   } else {
-    //refactor to getVenueBookings2*******************************
     let venue = await getVenue(user[0].user_id)
     let bookings = await getVenueBookings2(venue.venue_id);
     return [user[0], venue, bookings]
@@ -115,7 +114,14 @@ const addBooking = async (info) => {
     start_time: info.start_time, 
     end_time: info.end_time, 
     booking_description: info.booking_description,
-    // booking_title: info.booking_title
+    booking_title: info.booking_title
+  });
+}
+
+const updateBooking = async (info) => {
+  let toggle = info.confirmed === 0 ? 1 : 0;
+  await knex('bookings').where('booking_id', info.booking_id).update({ 
+    confirmed: toggle
   });
 }
 
@@ -153,6 +159,7 @@ module.exports = {
   getVenue,
   getVenues,
   getEpk,
-  getVenueBookings
+  getVenueBookings,
+  updateBooking
 };
 
