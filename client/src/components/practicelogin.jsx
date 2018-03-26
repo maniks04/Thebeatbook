@@ -8,11 +8,12 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import LoginForm from './loginform.jsx';
+import { Row, Col } from 'antd';
 
 const logo = 'https://cdn3.iconfinder.com/data/icons/business-vol-2/72/57-512.png'
 const LoginFormContainer = Form.create()(LoginForm); //component for antd loginform
 
-class Login extends React.Component {
+class PracticeLogin extends React.Component {
   constructor(props) {
       super(props)
   }
@@ -29,6 +30,9 @@ class Login extends React.Component {
         </div>
         <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">facebook login</div>
       </div>
+
+  
+
     )
   }
 }
@@ -41,7 +45,7 @@ const mapDispatchToProps = dispatch => (
   { actions: bindActionCreators(actions, dispatch) }
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(PracticeLogin);
 
 
 const styles = {
@@ -72,6 +76,7 @@ const styles = {
         top: '12.5%',
         textAlign: 'center',
         overflow:'auto'
+
     },
     loginform: {
         marginLeft: 50,
