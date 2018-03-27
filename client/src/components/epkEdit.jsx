@@ -45,16 +45,16 @@ class NormalLoginForm extends React.Component {
     let artist_state = $('.state').val();
 
     if (artist_name === '') {
-      artist_name = this.state.artist_name; /* eslint-disable-line */
+      artist_name = this.state.artist_name || ''; /* eslint-disable-line */
     }
     if (artist_description === '') {
-      artist_description = this.state.artist_description; /* eslint-disable-line */
+      artist_description = this.state.artist_description || ''; /* eslint-disable-line */
     }
     if (artist_city === '') {
-      artist_city = this.state.artist_city; /* eslint-disable-line */
+      artist_city = this.state.artist_city || ''; /* eslint-disable-line */
     }
     if (artist_state === '') {
-      artist_state = this.state.artist_state; /* eslint-disable-line */
+      artist_state = this.state.artist_state || ''; /* eslint-disable-line */
     }
     axios.post('/updateEPK', {
       artist_name,
@@ -97,7 +97,7 @@ class NormalLoginForm extends React.Component {
     return (
       <Row gutter={40}>
         <Col span={8}>
-          <FormItem> Bane Name
+          <FormItem> Band Name
             <Input
               className="band"
               placeholder={this.state.artist_name}
@@ -122,7 +122,14 @@ class NormalLoginForm extends React.Component {
               <TextArea
                 className="description"
                 placeholder={this.state.artist_description}
-                autosize={{ minRows: 4, maxRows: 12 }}
+                autosize={{ minRows: 4, maxRows: 18 }}
+              />
+            </FormItem>
+            <FormItem> If you liked our music try:
+              <TextArea
+                className="support"
+                placeholder={this.state.artist_description}
+                autosize={{ minRows: 4, maxRows: 18 }}
               />
             </FormItem>
             <div> Change Image of your band.</div>
