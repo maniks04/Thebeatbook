@@ -3,17 +3,17 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Form} from 'antd';
 import * as actions from '../actions/index.js';
-import {open} from '../actions'
 import LoginForm from './loginform.jsx';
-import logo from '../../../beatbooklogo.png'
+import logo from '../../../beatbooklogo.png';
 
-const LoginFormContainer = Form.create()(LoginForm); //component for antd loginform
+const LoginFormContainer = Form.create()(LoginForm); 
 
 class Login extends React.Component {
   constructor(props) {
-      super(props)
+    super(props)
   }
 
+  
   render() {
     return(
       <div style={styles.loginbox}>
