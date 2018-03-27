@@ -77,14 +77,14 @@ class ArtistRegister extends React.Component {
       this.actions.setArtist(res.data[1].artist_id);
       this.history.replace('/');
     }).catch((err) => {
-      console.error('error', err);
+      console.error('error', err)/* eslint-disable-line */;
     });
   }
 
   render() {
     return (
       <div style={styles.registerbox}>
-        <img src={logo} style={styles.logo}></img>
+        <img src={logo} style={styles.logo}></img> {/* eslint-disable-line */}
         <div style={styles.beatbook}>beatbook</div>
         <div style={styles.divider} />
         <div style={styles.registerform}>
