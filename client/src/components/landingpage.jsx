@@ -91,5 +91,5 @@ const styles = {
         display: 'inline-block',
         float: 'right'
     }
-    
+
 }

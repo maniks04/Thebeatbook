@@ -10,8 +10,7 @@ export const loadArtistPage = (data) => ({type: 'LOADARTISTPAGE'});
 export const loadVenuePage = (data) => ({type: 'LOADVENUEPAGE'});
 
 export const submitLogin = (username, password) => {
-    return(dispatch) => {
-        return axios({
+    return (dispatch) => axios({
             method: 'post',
             url: '/login',
             data: {
@@ -34,7 +33,6 @@ export const submitLogin = (username, password) => {
         }).catch(err => {
             console.log(err)
         })
-    }
 }
 
 export const setArtist = (artistId) => ({ type: 'SET_ARTISTID', payload: artistId });

@@ -71,17 +71,6 @@ app.post('/register/venue', async (req, res) => {
   }
 })
 
-
-// app.post('/login', passport.authenticate('local-login'), (req, res) => {
-//   console.log(req.body)
-//   res.status(200).json({
-//     user_id: req.user.user_id,
-//     username: req.user.username,
-//     session_id: req.sessionID
-//   });
-// });
-
-
 app.post('/login', async (req, res) => {
   let userInfo = await db.checkCredentials(req.body.username);
   if (userInfo.length) {
@@ -114,16 +103,6 @@ app.post('/calendar', async (req, res) => {
   res.status(200).end()
 })
 
-app.post('/dragAndDrop', (req, res) => {
-  let id = req.body.eventId;
-  let timeChange = req.body.timeChange;
-  res.status(200).end()
-})
-
-app.get('/calendar', (req, res) => {
-  res.status(200).send(testData).end()
-})
-
 app.get('/artist/epk', async (req, res) => {
   console.log(req.query.username)
   let epkInfo = await db.getEpkData(req.query.username)
@@ -135,8 +114,8 @@ app.get('/artist/city', async (req, res) => {
   let artistList = await db.getArtistsByCity(req.query.city)
   res.json(artistList)
 })
-/*****************************************************************************/
 
+/******************************Venue Stuff*************************************/
 
 app.get('/venues', async (req, res) => {
   const city = req.query.city;
@@ -162,6 +141,15 @@ app.get('/epk', async (req, res) => {
   res.status(200).send({epk : epk})
 });
 
+app.post('/updateEPK', async (req, res) => {
+  console.log('hit server updateEPK', req.body)
+  db.editEPK(req.body)
+  res.status(200)
+})
+
+
+
+/******************************************************************************/
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/../client/dist' + '/index.html'))
