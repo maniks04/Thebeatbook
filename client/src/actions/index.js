@@ -25,7 +25,9 @@ export const submitLogin = (username, password) => dispatch => axios({
     } if (type === 'venue') {
       dispatch(loadVenuePage(res.data));
       dispatch(setVenue(res.data[1].artist_id));
-
+    }
+  }
+});
 export const setArtist = artistId => ({ type: 'SET_ARTISTID', payload: artistId });
 export const setVenue = venueId => ({ type: 'SET_VENUEID', payload: venueId });
 export const setBookings = bookings => ({ type: 'SET_BOOKINGS', payload: bookings });
@@ -35,6 +37,8 @@ export const addBooking = booking => (dispatch) => {
   dispatch(addBook(booking));
 };
 // ************************************************* TOGGLE LOADING BEORE ANY ACTIONS ; STILL NEED TO WRITE IT***
+
+const renderArtistCityList = list => ({ type: 'RENDERARTISTCITYLIST', payload: list });
 export const getArtistsByCity = city => dispatch => axios({
   method: 'get',
   url: 'artist/city',
@@ -46,4 +50,3 @@ export const getArtistsByCity = city => dispatch => axios({
 }).catch((err) => {
   console.error(err);
 });
-const renderArtistCityList = list => ({ type: 'RENDERARTISTCITYLIST', payload: list });
