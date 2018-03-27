@@ -33,6 +33,7 @@ class NormalLoginForm extends React.Component {
         artist_facebook: data.epk.artist_facebook,
         artist_instagram: data.epk.artist_instagram,
         artist_support: data.epk.artist_support,
+        artist_contact: data.epk.artist_contact,
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -50,6 +51,7 @@ class NormalLoginForm extends React.Component {
     const { artist_description } = this.state;
     const { artist_city } = this.state;
     const { artist_state } = this.state;
+    const { artist_contact } = this.state;
 
     axios.post('/updateEPK', {
       artist_name,
@@ -62,6 +64,7 @@ class NormalLoginForm extends React.Component {
       artist_facebook,
       artist_instagram,
       artist_support,
+      artist_contact,
     }).then(() => {
     }).catch((err) => {
       console.error(err) /* eslint-disable-line */
@@ -98,6 +101,10 @@ class NormalLoginForm extends React.Component {
 
   onChangeSupport(e) {
     this.setState({ artist_support: e.target.value });
+  }
+
+  onChangeContact(e) {
+    this.setState({ artist_contact: e.target.value });
   }
 
   onChangeImage(info) {
@@ -146,6 +153,13 @@ class NormalLoginForm extends React.Component {
               className="state"
               placeholder={this.state.artist_state}
               onChange={val => this.onChangeState(val)}
+            />
+          </FormItem>
+          <FormItem> Contact Info
+            <Input
+              className="contact"
+              placeholder={this.state.artist_contact}
+              onChange={val => this.onChangeContact(val)}
             />
           </FormItem>
         </Col>

@@ -53,6 +53,7 @@ CREATE TABLE artists
   artist_twitter VARCHAR(30),
   artist_instagram VARCHAR(30),
   artist_support VARCHAR(30),
+  artist_contact VARCHAR(100),
   PRIMARY KEY (artist_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
