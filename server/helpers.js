@@ -2,8 +2,8 @@
 
 // exports.sendEmail = (username, email) => {
 //      nodemailer.createTestAccount((err, account) => {
-        
-        
+
+
 //         var transporter = nodemailer.createTransport({
 //             service: 'Gmail',
 //              auth: {
@@ -24,12 +24,8 @@
 //               }
 //               console.log('Message sent: %s', info.messageId);
 //             })
-//     }) 
+//     })
 // }
-
-
-
-
 
 
 // exports.notifyRequest = (username, email) => {
@@ -57,11 +53,3 @@
 //     })
 // }
 
-
- 
-
-
-
-
-
-  
