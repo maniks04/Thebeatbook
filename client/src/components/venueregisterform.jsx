@@ -16,7 +16,15 @@ class VenueRegisterForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.registerVenue(values.username, values.password, values.email, values.venueName, values.address, values.city, values.state, values.capacity);
+        this.props.registerVenue(
+          values.username,
+          values.password,
+          values.email,
+          values.venueName,
+          values.address,
+          values.city,
+          values.state,
+          values.capacity);
       }
     });
   }

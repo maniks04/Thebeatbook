@@ -1,57 +1,55 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../actions/index.js';
 import $ from 'jquery';
-import * as reducers from '../reducers/index.js'
 import { Carousel } from 'antd';
-import beatbookdisplay from '../../../beatbookmac.png'
-import logo from '../../../beatbooklogo.png'
+import * as actions from '../actions/index.js';
+import beatbookdisplay from '../../../beatbookmac.png';
+import logo from '../../../beatbooklogo.png';
 
 
 class LandingPage extends React.Component {
   constructor(props) {
-      super(props)
+    super(props);
   }
 
   loadLoginPage() {
-    this.props.actions.loadLoginPage()
+    this.props.actions.loadLoginPage();
   }
 
 
-  scrollDown(id){
-    $('html,body').animate({scrollTop: $("#"+id).offset().top},'slow');
+  scrollDown(id) {
+    $('html,body').animate({ scrollTop: $(`#${id}`).offset().top }, 'slow');
   }
-
 
   render() {
-    return(
-        <div>
-          <div style={styles.logocontainer}>
-            <img src={logo} style={styles.logo}></img>
-            <div style={styles.beatbook}>beatbook</div>
-            <div style={styles.test}>
-              <div onClick={() => this.loadLoginPage()} style={styles.login}>login/register</div>
-              <div style={styles.login}>contact us</div>
-            </div>
+    return (
+      <div>
+        <div style={styles.logocontainer}>
+          <img src={logo} style={styles.logo} alt="" />
+          <div style={styles.beatbook}>beatbook</div>
+          <div style={styles.test}>
+            <div onClick={() => this.loadLoginPage()} style={styles.login}>login/register</div>
+            <div style={styles.login}>contact us</div>
           </div>
-        <div>
-        <Carousel autoplay>
-          <div><h3><img src={beatbookdisplay} style={styles.image}></img></h3></div>
-          <div><h3><img src={beatbookdisplay} style={styles.image}></img></h3></div>
-          <div><h3><img src={beatbookdisplay} style={styles.image}></img></h3></div>
-          <div><h3><img src={beatbookdisplay} style={styles.image}></img></h3></div>
-        </Carousel>
         </div>
-        <button onClick={() => this.scrollDown('below')}></button>
+        <div>
+          <Carousel autoplay>
+            <div><h3><img src={beatbookdisplay} style={styles.image} alt="" /></h3></div>
+            <div><h3><img src={beatbookdisplay} style={styles.image} alt="" /></h3></div>
+            <div><h3><img src={beatbookdisplay} style={styles.image} alt="" /></h3></div>
+            <div><h3><img src={beatbookdisplay} style={styles.image} alt="" /></h3></div>
+          </Carousel>
+        </div>
+        <button onClick={() => this.scrollDown('below')} />
         <div style={styles.below}>
-        <div id="below">start</div>
+          <div id="below">start</div>
           <div>lower part of page</div>
         </div>
-        
+
 
       </div>
-    )
+    );
   }
 }
 
@@ -71,13 +69,13 @@ const styles = {
     height: 40,
     width: 40,
     display: 'inline-block',
-    filter: 'invert(1)'
+    filter: 'invert(1)',
   },
   beatbook: {
     fontSize: 40,
     fontFamily: 'system-ui',
     color: 'white',
-    display: 'inline-block'
+    display: 'inline-block',
   },
 
   image: {
@@ -92,7 +90,7 @@ const styles = {
     fontFamily: 'system-ui',
     color: 'white',
     display: 'inline-block',
-    paddingRight: 50
+    paddingRight: 50,
   },
   test: {
     marginTop: '2%',
@@ -104,6 +102,6 @@ const styles = {
     top: '100%',
     width: '100%',
     backgroundColor: 'white',
-    overflow: 'scroll'
-  }
-}
+    overflow: 'scroll',
+  },
+};

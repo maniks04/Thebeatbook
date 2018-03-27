@@ -22,18 +22,19 @@ class SearchVenues extends React.Component {
         title: 'Name',
         key: 'name',
         dataIndex: 'venue_name',
-        sorter: true,
-        width: '40%',
+        sorter: (a, b) => (a.venue_name.toUpperCase() > b.venue_name.toUpperCase() ? -1 : 1),
+        width: '35%',
       }, {
         title: 'Capacity',
         key: 'capacity',
         dataIndex: 'capacity',
-        sorter: true,
-        width: '20%',
+        sorter: (a, b) => a.capacity - b.capacity,
+        width: '15%',
       }, {
         title: 'Address',
         key: 'address',
         dataIndex: 'venue_address',
+        width: '30%',
       }, {
         title: 'Calendar',
         key: 'calendar',
@@ -78,9 +79,12 @@ class SearchVenues extends React.Component {
       this.setState({
         venueBookings: res.data,
       });
-      Modal.success({
+      Modal.info({
         title: 'Venue Calendar',
         content: calendar(this.state.venueBookings, true, artistId, id, this.state.saveToStore, venueName),
+        width: 800,
+        okText: 'Close',
+        maskClosable: true,
       });
     }).catch((err) => {
       console.error('error', err);
@@ -107,9 +111,10 @@ class SearchVenues extends React.Component {
           enterButton
         />
         <Divider />
+        {/* xx Venues found for [city] */}
         <Table
           columns={this.state.columns}
-          rowKey={record => record.registered}
+          rowKey={record => record.venue_id}
           onClick={this.viewCalendar}
           dataSource={this.state.venues}
           pagination={this.state.pagination}

@@ -9,38 +9,37 @@ import LandingPage from './landingpage.jsx';
 
 
 class Home extends React.Component {
-constructor(props) {
-  super(props)
-}
-
+  constructor(props) {
+    super(props);
+  }
 
   render() {
-    return( 
+    return (
       <div >
-        {!this.props.store.landingViewed && 
-          <LandingPage/> 
-        }  
-        {!this.props.store.artist && !this.props.store.venue && this.props.store.landingViewed &&
-          <Login/> 
-        } 
-        {this.props.store.artist &&
-          <Artist/>
+        {!this.props.store.landingViewed &&
+          <LandingPage />
         }
-        {this.props.store.venue  &&
-          <Venue/>
+        {!this.props.store.artist && !this.props.store.venue && this.props.store.landingViewed &&
+          <Login />
+        }
+        {this.props.store.artist &&
+          <Artist />
+        }
+        {this.props.store.venue &&
+          <Venue />
         }
       </div>
-    )
+    );
   }
 }
 
 
 const mapStateToProps = state => (
     { store: state } // eslint-disable-line
-  );
+);
 
-  const mapDispatchToProps = dispatch => (
-    { actions: bindActionCreators(actions, dispatch) }
-  );
+const mapDispatchToProps = dispatch => (
+  { actions: bindActionCreators(actions, dispatch) }
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
