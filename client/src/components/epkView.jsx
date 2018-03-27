@@ -10,6 +10,7 @@ class EPKView extends React.Component {
     super(props);
     this.state = {
       artistId: this.props.artist,
+      imageUrl: null,
     };
   }
 
@@ -19,6 +20,7 @@ class EPKView extends React.Component {
         artistId: this.state.artistId,
       },
     }).then(({ data }) => {
+      console.log(data);
       this.setState({
         artist_name: data.epk.artist_name,
         artist_description: data.epk.artist_description,
@@ -28,6 +30,7 @@ class EPKView extends React.Component {
         artist_facebook: data.epk.artist_facebook,
         artist_instagram: data.epk.artist_instagram,
         artist_support: data.epk.artist_support,
+        imageUrl: Buffer.from(data.epk.imageUrl),
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
