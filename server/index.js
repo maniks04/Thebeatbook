@@ -9,25 +9,18 @@ const passport = require('passport');
 const helpers = require('./helpers.js');//eslint-disable-line
 require('../server/config/passport')(passport);
 
-app.use(express.static(`${__dirname}/../client/dist`));
+app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({
   secret: process.env.SESSION_PASSWORD || 'supersecretsecret',
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
-
-const isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.status(401).end('You must log in to do that!');
-};
 
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', (req, res) => {
@@ -44,59 +37,73 @@ app.get('/logout', (req, res) => {
   res.end();
 });
 
-app.post('/register/artist', async ({ body }, res) => {
-  const hash = bcrypt.hashSync(body.password, 10);
-  const registration = await db.registerArtist(body.username, hash, body.email, body.city, body.state);
+app.post('/register/artist', async (req, res) => {
+  const hash = bcrypt.hashSync(req.body.password, 10);
+  const registration = await db.registerArtist(req.body.username, hash, req.body.email, req.body.city, req.body.state);
   if (registration === 'username already exists') {
     return res.send('username already exists');
   } if (registration === 'email already exists') {
     return res.send('email already exists');
   }
-  // helpers.sendEmail(body.username, body.email)
-  const user = await db.getUser(body.username);
-  res.send(user);
+  // helpers.sendEmail(req.body.username, req.body.email)
+  const user = await db.getUser(req.body.username);
+  req.login(user[0], () => {
+    console.log(req.sessionId);
+    res.send(user);
+  });
 });
 
-app.post('/register/venue', async ({ body }, res) => {
-  const hash = bcrypt.hashSync(body.password, 10);
-  const registration = await db.registerVenue(body.username, hash, body.email, body.venueName, body.address, body.city, body.state, body.capacity);//eslint-disable-line
+app.post('/register/venue', async (req, res) => {
+  const hash = bcrypt.hashSync(req.body.password, 10);
+  const registration = await db.registerVenue(req.body.username, hash, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);//eslint-disable-line
   if (registration === 'username already exists') {
     return res.send('username already exists');
   } if (registration === 'username already exists') {
     return res.send('email already exists');
   }
-  // helpers.sendEmail(body.username, body.email)
-  const user = await db.getUser(body.username);
-  res.send(user);
+  // helpers.sendEmail(req.body.username, req.body.email)
+  const user = await db.getUser(req.body.username);
+  req.login(user[0], () => {
+    console.log(req.sessionId);
+    res.send(user);
+  });
 });
 
-// app.post('/login', passport.authenticate('local-login'), (req, res) => {
-//   console.log(req.body)
-//   res.status(200).json({
-//     user_id: req.user.user_id,
-//     username: req.user.username,
-//     session_id: req.sessionID
-//   });
-// });
-
-app.post('/login', async ({ body }, res) => {
-  const userInfo = await db.checkCredentials(body.username);
+app.post('/login', async (req, res) => {
+  const userInfo = await db.checkCredentials(req.body.username);
   if (userInfo.length) {
     const checkUser = userInfo[0];
-    if (bcrypt.compareSync(body.password, checkUser.password)) {
-      // Passwords match
-      const user = await db.getUser(body.username);
-      return res.send(user);
+    if (bcrypt.compareSync(req.body.password, checkUser.password)) {
+      const user = await db.getUser(req.body.username);
+      req.login(user[0], () => {
+        console.log(req.sessionId);
+        res.send(user);
+      });
+    } else {
+      res.send('your passwords dont match');
     }
-    // Passwords don't match
-    return res.send('your passwords dont match');
+  } else {
+    res.send('Username does not exist');
   }
-  res.send('Username does not exist');
 });
 
-app.post('/logout', isLoggedIn, (req, res) => {
-  req.logout();
-  res.clearCookie('connect.sid').status(200);
+passport.serializeUser((user, done) => {
+  console.log(user);
+  done(null, user);
+});
+
+app.get('/isloggedin', async (req, res) => {
+  console.log('current passport session:', req.session.passport);
+  if (req.session.passport && req.session.passport.user) {
+    const userInfo = await db.getUser(req.session.passport.user.username);
+    res.send(userInfo);
+  } else {
+    res.send();
+  }
+});
+
+app.get('/logout', (req, res) => {
+  res.send();
 });
 
 /** ****************************** Calendar ********************************** */
@@ -140,7 +147,7 @@ app.get('/epk', async (req, res) => {
 });
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(`${__dirname}/../client/dist/index.html`));
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
 app.listen(process.env.PORT || 3000, () => {
