@@ -4,11 +4,23 @@ export const openLoginModal = () => ({ type: 'OPENLOGINMODAL' });
 export const closeLoginModal = () => ({ type: 'CLOSELOGINMODAL' });
 export const openRegisterModal = () => ({ type: 'OPENREGISTERMODAL' });
 export const closeRegisterModal = () => ({ type: 'CLOSEREGISTERMODAL' });
-export const logout = () => ({ type: 'LOGOUT' });
+const logoutState = () => ({ type: 'LOGOUT' });
+export const logout = () => dispatch => axios({
+  method: 'get',
+  url: '/logout',
+}).then(() => {
+  dispatch(logoutState());
+}).catch((err) => {
+  console.log(err);
+});
+
+
 export const loadArtistPage = () => ({ type: 'LOADARTISTPAGE' });
 export const loadVenuePage = () => ({ type: 'LOADVENUEPAGE' });
-export const loadLoginPage = () => dispatch => dispatch(landingViewed())
-const landingViewed = () => ({type: 'LOADLOGINPAGE'})
+export const loadLoginPage = () => dispatch => dispatch(landingViewed());
+const landingViewed = () => ({ type: 'LOADLOGINPAGE' });
+
+
 export const submitLogin = (username, password) => dispatch => axios({
   method: 'post',
   url: '/login',
@@ -50,4 +62,23 @@ export const getArtistsByCity = city => dispatch => axios({
   dispatch(renderArtistCityList(res.data));
 }).catch((err) => {
   console.error(err);
+});
+
+export const isLoggedIn = () => dispatch => axios({
+  method: 'get',
+  url: '/isloggedin',
+}).then((res) => {
+  const type = res.data[0].user_type;
+  dispatch(setBookings(res.data[2]));
+  if (type === 'artist') {
+    dispatch(loadArtistPage(res.data));
+    dispatch(setArtist(res.data[1].artist_id));
+    dispatch(landingViewed());
+  } if (type === 'venue') {
+    dispatch(loadVenuePage(res.data));
+    dispatch(setVenue(res.data[1].artist_id));
+    dispatch(landingViewed());
+  }
+}).catch((err) => {
+  console.log(err);
 });

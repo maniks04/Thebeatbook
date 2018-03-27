@@ -8,15 +8,15 @@ module.exports = {
     filename: 'bundle.js',
     path: DIST_DIR
   },
-  module : {
-    loaders : [
+  module: {
+    loaders: [
       {
-        test : /\.jsx?/,
-        include : SRC_DIR,
-        loader : 'babel-loader',      
+        test: /\.jsx?/,
+        include: SRC_DIR,
+        loader: 'babel-loader',      
         query: {
           presets: ['react', 'es2015']
-       }
+        }
       },
       {test: /\.(jpe?g|png|gif|svg)$/i, 
         loader: "url-loader?name=app/images/[name].[ext]"
