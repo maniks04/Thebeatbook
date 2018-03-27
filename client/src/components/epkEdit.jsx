@@ -100,13 +100,12 @@ class NormalLoginForm extends React.Component {
     this.setState({ artist_support: e.target.value });
   }
 
-  handleChange(info) {
+  onChangeImage(info) {
     if (info.file.status === 'uploading') {
       this.setState({ loading: true });
       return;
     }
     if (info.file.status === 'done') {
-      // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl => this.setState({
         imageUrl,
         loading: false,
@@ -175,7 +174,7 @@ class NormalLoginForm extends React.Component {
             className="avatar-uploader"
             showUploadList={false}
             action="http://localhost:3000/epkImgUpload"
-            onChange={val => this.handleChange(val)}
+            onChange={val => this.onChangeImage(val)}
           >
             {imageUrl ? <img src={imageUrl} alt="" /> : uploadButton}
           </Upload>
