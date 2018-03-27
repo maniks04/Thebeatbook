@@ -93,14 +93,15 @@ const updateBooking = async (info) => {
 };
 
 const editEPK = async (info) => {
-  let id = info.artist_id
+  const id = info.artist_id;
   await knex('artists').where('artist_id', id).update({
     artist_name: info.artist_name,
     artist_description: info.artist_description,
     artist_city: info.artist_city,
-    artist_state: info.artist_state
-  })
-}
+    artist_state: info.artist_state,
+    imageUrl: info.imageUrl,
+  });
+};
 
 const getVenueBookings2 = async venueId => knex.column(knex.raw('b.*, a.artist_name')).select()
   .from(knex.raw('bookings b'))
@@ -130,4 +131,5 @@ module.exports = {
   getEpk,
   getVenueBookings2,
   updateBooking,
+  editEPK,
 };

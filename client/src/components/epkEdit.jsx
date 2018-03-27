@@ -1,10 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
 import axios from 'axios';
-import { Form, Icon, Input, Button, Upload } from 'antd'; /* eslint-disable-line */
+import { Form, Icon, Input, Button, Upload, message } from 'antd'; /* eslint-disable-line */
 const FormItem = Form.Item;
 const { TextArea } = Input;
-
 
 function getBase64(img, callback) {
   const reader = new FileReader();
@@ -20,18 +19,50 @@ class NormalLoginForm extends React.Component {
     };
   }
 
+  componentDidMount() {
+    axios.get('/epk', {
+      params: {
+        artistId: this.props.artistID,
+      },
+    }).then((res) => {
+      this.setState({
+        artist_name: res.data.epk.artist_name,
+        artist_description: res.data.epk.artist_description,
+        artist_city: res.data.epk.artist_city,
+        artist_state: res.data.epk.artist_state,
+      });
+    }).catch((err) => {
+      console.error('error', err); /* eslint-disable-line */
+    });
+  }
+
   onClick() {
     const artist_id = this.props.artistID;
-    const artist_name = $('.band').val();
-    const artist_description = $('.description').val();
-    const artist_city = $('.city').val();
-    const artist_state = $('.state').val();
+    let artist_name = $('.band').val();
+    let artist_description = $('.description').val();
+    let artist_city = $('.city').val();
+    let artist_state = $('.state').val();
+    let { imageUrl } = this.state;
+
+    if (artist_name === '') {
+      artist_name = this.state.artist_name; /* eslint-disable-line */
+    }
+    if (artist_description === '') {
+      artist_description = this.state.artist_description; /* eslint-disable-line */
+    }
+    if (artist_city === '') {
+      artist_city = this.state.artist_city; /* eslint-disable-line */
+    }
+    if (artist_state === '') {
+      artist_state = this.state.artist_state; /* eslint-disable-line */
+    }
     axios.post('/updateEPK', {
       artist_name,
       artist_description,
       artist_city,
       artist_state,
       artist_id,
+      imageUrl,
     }).then(() => {
     }).catch((err) => {
       console.error(err) /* eslint-disable-line */
@@ -45,6 +76,7 @@ class NormalLoginForm extends React.Component {
     }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
+      console.log('info done: ', info);
       getBase64(info.file.originFileObj, imageUrl => this.setState({
         imageUrl,
         loading: false,
@@ -59,42 +91,44 @@ class NormalLoginForm extends React.Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
+
     const { imageUrl } = this.state;
 
     return (
       <Form className="login-form">
-        <FormItem>
+        <FormItem> Bane Name?
           <Input
             className="band"
-            placeholder="Band Name?"
+            placeholder={this.state.artist_name}
           />
         </FormItem>
-        <FormItem>
+        <FormItem> Your City?
           <Input
             className="city"
-            placeholder="Your City?"
+            placeholder={this.state.artist_city}
           />
         </FormItem>
-        <FormItem>
+        <FormItem> Your State
           <Input
             className="state"
-            placeholder="Your State?"
+            placeholder={this.state.artist_state}
           />
         </FormItem>
-        <FormItem>
+        <FormItem> Band Bio
           <TextArea
             className="description"
-            placeholder="Please Insert Your Band Bio Here!"
+            placeholder={this.state.artist_description}
             autosize={{ minRows: 4, maxRows: 12 }}
           />
         </FormItem>
+        <div> Change Image of your band.</div>
         <Upload
           name="avatar"
           listType="picture-card"
           className="avatar-uploader"
           showUploadList={false}
-          action="//jsonplaceholder.typicode.com/posts/"
-          onChange={this.handleChange}
+          action="http://localhost:3000/epkImgUpload"
+          onChange={val => this.handleChange(val)}
         >
           {imageUrl ? <img src={imageUrl} alt="" /> : uploadButton}
         </Upload>

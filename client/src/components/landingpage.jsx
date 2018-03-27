@@ -48,7 +48,7 @@ class LandingPage extends React.Component {
         <div id="below">start</div>
           <div>lower part of page</div>
         </div>
-        
+
 
       </div>
     )

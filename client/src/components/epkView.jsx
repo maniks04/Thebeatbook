@@ -14,6 +14,7 @@ class EPKView extends React.Component {
       artist_description: null,
       artist_city: null,
       artist_state: null,
+      imageUrl: null,
     };
   }
 
@@ -28,6 +29,7 @@ class EPKView extends React.Component {
         artist_description: res.data.epk.artist_description,
         artist_city: res.data.epk.artist_city,
         artist_state: res.data.epk.artist_state,
+        imageUrl: Buffer.from(res.data.epk.imageUrl),
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -44,13 +46,7 @@ class EPKView extends React.Component {
         <Row>
           <Col span={8}>{this.state.artist_city}</Col>
           <Col span={8}>{this.state.artist_state}</Col>
-          <Col span={8}>col-8</Col>
-        </Row>
-        <Row>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
+          <Col span={8}><img src={this.state.imageUrl} /></Col>
         </Row>
       </div>
     );

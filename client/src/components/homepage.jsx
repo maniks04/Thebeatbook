@@ -9,20 +9,20 @@ import LandingPage from './landingpage.jsx';
 
 
 class Home extends React.Component {
-constructor(props) {
-  super(props)
-}
+  constructor(props) {
+    super(props)
+  }
 
 
   render() {
-    return( 
+    return(
       <div >
-        {!this.props.store.landingViewed && 
-          <LandingPage/> 
-        }  
+        {!this.props.store.landingViewed &&
+          <LandingPage/>
+        }
         {!this.props.store.artist && !this.props.store.venue && this.props.store.landingViewed &&
-          <Login/> 
-        } 
+          <Login/>
+        }
         {this.props.store.artist &&
           <Artist/>
         }
