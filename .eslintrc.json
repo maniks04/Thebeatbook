@@ -7,9 +7,18 @@
     },
     "rules": {
         "react/prop-types": "off",
-        "import/extensions": "off",
+        "import/extensions": "warn",
         "no-use-before-define": "off",
-        "max-len": ["error", { "code": 120 }],
-        "camelcase": "off"
+        "max-len": ["warn", { "code": 120 }],
+        "no-console": "off",
+        "consistent-return": "off",
+        "camelcase": "warn",
+        "no-fallthrough": "off",
+        "no-shadow": "warn",
+        "no-useless-constructor": "off",
+        "function-paren-newline": "off",
+        "jsx-a11y/anchor-is-valid": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "jsx-a11y/click-events-have-key-events": "off"
     }
 }
