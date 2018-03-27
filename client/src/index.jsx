@@ -18,6 +18,7 @@ const Base = ({ store }) => (
         <Route exact path="/" component={Home} />
         <Route exact path="/artistregister" component={ArtistRegister} />
         <Route exact path="/venueregister" component={VenueRegister} />
+        {/* <Route  path="/artist/:username" component={Artist} /> */}
       </Switch>
     </Router>
   </Provider>
