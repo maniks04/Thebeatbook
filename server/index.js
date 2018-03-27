@@ -146,10 +146,10 @@ app.get('/epk', async (req, res) => {
   res.status(200).send({ epk });
 });
 
-app.get('/*', (req, res) => {
-  //res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
-  res.redirect('/')
-});
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+//   //res.redirect('/')
+// });
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('listening on port 3000!');
