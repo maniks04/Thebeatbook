@@ -66,11 +66,12 @@ const styles = {
         borderStyle: 'solid',
         borderWidth: .5,
         borderColor: '#e6e6e6',
-        width: window.innerWidth/4,
-        height: window.innerHeight*.75,
-        left: window.innerWidth*3/8,
-        top: window.innerHeight*1/8,
-        textAlign: 'center'
+        width: '25%',
+        height: '75%',
+        left: '37.5%',
+        top: '12.5%',
+        textAlign: 'center',
+        overflow:'auto'
     },
     loginform: {
         marginLeft: 50,

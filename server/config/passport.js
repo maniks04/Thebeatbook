@@ -1,45 +1,42 @@
-let LocalStrategy = require('passport-local').Strategy;
-let db = require('../../database/index.js');
-let bcrypt = require('bcrypt');
-let bodyParser = require('body-parser');
+const LocalStrategy = require('passport-local').Strategy;
+const db = require('../../database/index.js');
+const bcrypt = require('bcrypt');
+// const bodyParser = require('body-parser');
 
-module.exports = function(passport) {
-
-  passport.serializeUser(function(user, done) { // creating sessions
+module.exports = (passport) => {
+  passport.serializeUser((user, done) => { // creating sessions
     done(null, user);
   });
 
-  passport.deserializeUser(function(user, done) {
+  passport.deserializeUser((user, done) => {
     done(null, user);
   });
-
-
   // LOCAL LOGIN STRATEGY
-  passport.use('local-login', new LocalStrategy( // strategy = type of logging in (e.g. fb)
+  passport.use('local-login', new LocalStrategy( //eslint-disable-line
     async (username, password, cb) => {
       const userInfo = await db.checkCredentials(username);
 
       if (userInfo.length) {
         const user = userInfo[0];
-        bcrypt.compare(password, user.password, (err, res) => {
+        bcrypt.compare(password, user.password, (err) => {
           if (err) {
             cb(err, null);
           } else {
             cb(null, user);
           }
-        })
+        });
       } else {
         cb(null, false);
       }
-    }
-  ));
+    }));
 
-  //LOCAL SIGNUP Strategy
-  passport.use('local-signup', new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password',
-    passReqToCallback: true
-  },
+  // LOCAL SIGNUP Strategy
+  passport.use('local-signup', new LocalStrategy(
+    {
+      usernameField: 'username',
+      passwordField: 'password',
+      passReqToCallback: true,
+    },
     (req, username, password, cb) => {
       bcrypt.hash(password, 10, async (err, hash) => {
         if (err) {
@@ -49,11 +46,11 @@ module.exports = function(passport) {
           if (data === 'already exists') {
             cb(data, null);
           } else {
-            let userInfo = await db.checkCredentials(username);
+            const userInfo = await db.checkCredentials(username);
             cb(null, userInfo);
           }
         }
       });
-    }
+    },
   ));
-}
+};

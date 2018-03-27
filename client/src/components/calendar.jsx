@@ -1,128 +1,121 @@
 import React from 'react';
 import $ from 'jquery';
-const moment = require('moment');
 import 'fullcalendar';
+import { Modal, Form, Input } from 'antd';
 import axios from 'axios';
-import { Modal, Button, Form, Input } from 'antd';
+// const moment = require('moment')/* eslint-disable-line */; // check back in a couple days
 
-const Calendar = (data, artistId, venueId) => {
-  $(function() {
+const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName) => {
+  $(function () { /* eslint-disable-line */
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: 'month,agendaWeek,agendaDay',
       },
 
-      footer: { /* can add if wanted */},
       droppable: true,
-      editable: true,
       selectable: true,
       selectHelper: true,
       unselectAuto: false,
       nowIndicator: true,
-      height: window.innerHeight*.87,
+      height: window.innerHeight * 0.87,
 
-      select: function(start, end, allDay) {
-        Modal.confirm({
-          title: 'Event Info',
-          content: (
-            <div>
-              <Form layout={'horizontal'}>
-                <Form.Item  label='Event Title' required='true'>
-                    <Input className="title" placeholder='Super Awsome Event'/>
-                </Form.Item>
-                <Form.Item label='Event Description'>
-                  <Input className="description" placeholder='Super Awsome Event Description'/>
-                </Form.Item>
-              </Form>
-            </div>
-          ),
-          onOk(){
-            console.log(data);
-            let title = $('.title').val();
-            let description = $('.description').val();
-            if (title) {
-              $('#calendar').fullCalendar('renderEvent',
+      select(start, end) {
+        if (editable) {
+          Modal.confirm({
+            title: 'Event Info',
+            content: (
+              <div>
+                <Form layout="horizontal">
+                  <Form.Item label="Event Title" required="true">
+                    <Input className="title" placeholder="Super Awsome Event" />
+                  </Form.Item>
+                  <Form.Item label="Event Description">
+                    <Input className="description" placeholder="Super Awsome Event Description" />
+                  </Form.Item>
+                </Form>
+              </div>
+            ),
+            onOk() {
+              const title = $('.title').val();
+              const description = $('.description').val();
+              if (title) {
+                $('#calendar').fullCalendar(
+                  'renderEvent',
                   {
-                      title: title,
-                      start: start,
-                      end: end,
-                      description: description,
-                      allDay: false
+                    title,
+                    start,
+                    end,
+                    description,
+                    allDay: false,
                   },
-                  true
-              );
-              axios.post('/calendar', {
-                title: title,
-                description: description,
-                start: start,
-                end: end
-              }).then(res => {
-              }).catch(err => {
-                console.log(err)
-              })
-            } else {
-              alert('You need a title')
-            }
-          },
-          onCancel(){
-
-          }
-        })
-
+                  true, // sticks to page so it doenst fall off when changing calendar vies month week etc...
+                );
+                const newBooking = {
+                  booking_title: title,
+                  booking_description: description,
+                  start_time: start.format('YYYY-MM-DD h:mm:ss'),
+                  end_time: end.format('YYYY-MM-DD h:mm:ss'),
+                  artistId,
+                  venueId,
+                  venue_name: venueName,
+                  confirmed: 0,
+                };
+                const newBooking2 = Object.assign({}, newBooking, { /* eslint-disable-line */
+                  start_time: start.format('YYYY-MM-DD h:mm:ss'),
+                  end_time: end.format('YYYY-MM-DD h:mm:ss'),
+                });
+                saveToStore(newBooking);
+                axios.post('/calendar', newBooking).then(() => {
+                }).catch((err) => {
+                  console.error(err) /* eslint-disable-line */
+                });
+              } else {
+                alert('You need a title') /* eslint-disable-line */
+              }
+            },
+            onCancel() {},
+          });
+        }
         $('#calendar').fullCalendar('unselect');
       },
 
-      eventDrop: function(event, delta, revertFunc) {
-        let eventId = event.id
-        let timeChange = delta._data // delta contains the time change info + other jquery elements.
-
-        axios.post('/dragAndDrop', {
-          eventId: eventId,
-          timeChange: timeChange
-        }).then(res => {})
-          .catch(err => {
-            console.log(err)
-          })
+      events(start, end, timezone, callback) {
+        const events = [];
+        bookings.forEach((event) => {
+          events.push({
+            title: event.booking_title,
+            description: event.booking_description,
+            start: event.start_time,
+            end: event.end_time,
+            id: event.booking_id,
+          });
+        });
+        callback(events);
       },
 
-      events: function(start, end, timezone, callback) {
+      minTime: '10:00:00',
+      maxTime: '26:00:00',
 
-          var events = []
-          data.forEach((event) => {
-            events.push({
-              title: event.booking_title,
-              description: event.booking_description,
-              start: event.start_time,
-              end: event.end_time,
-              id: event.booking_id
-            })
-          })
-          callback(events)
+      eventClick(event) {
+        Modal.info({
+          title: 'Event Description',
+          content: (
+            <div>{event.description}</div>
+          ),
+          onOk() {},
+          onCancel() {},
+        });
       },
-
-      minTime: '04:00:00', // when the calendar starts the day.
-      // maxTime: '22:00:00', // when the calender ends the day.
-
-      eventClick: function ( event, jsEvent, view ) {
-         Modal.info({
-           title: 'Event Description',
-           content: (
-             <div>{event.description}</div>
-           ),
-           onOk(){},
-           onCancel(){}
-         })
-      }
     });
   });
 
-return (
+  return (
     <div>
-      <div id='calendar'></div>
+      <div id="calendar" />
     </div>
-  )
-}
+  );
+};
 
-export default Calendar
+export default Calendar;

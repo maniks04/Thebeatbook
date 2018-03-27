@@ -5,39 +5,37 @@ import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import axios from 'axios'
-import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
 import * as reducers from '../reducers/index.js'
 import Calendar from './calendar.jsx'
-import TextField from 'material-ui/TextField';
 import Login from './login.jsx'
 import Artist from './artist.jsx'
 import Venue from './venue.jsx'
+import LandingPage from './landingpage.jsx'
 
 
 class Home extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            landingViewed : false
+        }
     }
 
-    
     componentDidMount() {
-    console.log(this.props.store)
     }
-
-
-
-
-    
-
 
     render() {
-     
-        
-        return( <div>
+
+     const styles = {
+
+     }
+
+        return( <div >
                     {!this.props.store.artist && !this.props.store.venue &&
-                        <Login history={this.props.history}/> 
-                    } 
+                    // this.state.landingViewed ? <LandingPage /> :
+                         <Login history={this.props.history}/>
+                    }
+
 
                     {this.props.store.artist &&
                        <Artist />
@@ -53,7 +51,7 @@ class Home extends React.Component {
 const mapStateToProps = state => (
     { store: state } // eslint-disable-line
   );
-  
+
   const mapDispatchToProps = dispatch => (
     { actions: bindActionCreators(actions, dispatch) }
   );

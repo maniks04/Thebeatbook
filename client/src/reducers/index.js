@@ -10,40 +10,42 @@ export const initialState = {
   currentError: '',
   username: '',
   chosenArtist: '',
-  searchedArtistCityList: []
-}
+  searchedArtistCityList: [],
+};
 
-
-const reducer = function(state = initialState, action) {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'OPENLOGINMODAL' :
-      return Object.assign({},  state, {loginModalStatus: true});
-    case 'CLOSELOGINMODAL' :
-      return Object.assign({},  state, {loginModalStatus: false});
-    case 'OPENREGISTERMODAL' :
-      return Object.assign({},  state, {registerModalStatus: true});
-    case 'CLOSEREGISTERMODAL' :
-      return Object.assign({},  state, {registerModalStatus: false})
-    case 'LOADARTISTPAGE' :
-      return Object.assign({},  state, {artist: true, username: action.payload})
-    case 'LOADVENUEPAGE' :
-      return Object.assign({},  state, {venue:true})
-    case 'LOGOUT' :
-      return Object.assign({},  state, {
-        artist: false, venue: false, username: '', searchedArtistCityList: [], chosenArtist: ''})
-    case 'TOGGLE_LOADING' :
-      return Object.assign({}, state, {loading: !state.loading});
-    case 'SET_BOOKINGS' :
-      return Object.assign({}, state, {bookings: action.payload});
-    case 'SET_ARTISTID' :
-      return Object.assign({}, state, {artistId: action.payload});
-    case 'SET_VENUEID' :
-      return Object.assign({}, state, {venueId: action.payload});
-    case 'ERROR' :
-      return Object.assign({}, state, {currentError: action.payload});
-    default :
-      return state
+    case 'OPENLOGINMODAL':
+      return Object.assign({}, state, { loginModalStatus: true });
+    case 'CLOSELOGINMODAL':
+      return Object.assign({}, state, { loginModalStatus: false });
+    case 'OPENREGISTERMODAL':
+      return Object.assign({}, state, { registerModalStatus: true });
+    case 'CLOSEREGISTERMODAL':
+      return Object.assign({}, state, { registerModalStatus: false });
+    case 'LOADARTISTPAGE':
+      return Object.assign({}, state, { artist: true, username: action.payload });
+    case 'LOADVENUEPAGE':
+      return Object.assign({}, state, { venue: true });
+    case 'LOGOUT':
+      return Object.assign({}, state, {
+        artist: false, venue: false, username: '', searchedArtistCityList: [], chosenArtist: '',
+      });
+    case 'TOGGLE_LOADING':
+      return Object.assign({}, state, { loading: !state.loading });
+    case 'SET_BOOKINGS':
+      return Object.assign({}, state, { bookings: action.payload });
+    case 'SET_ARTISTID':
+      return Object.assign({}, state, { artistId: action.payload });
+    case 'SET_VENUEID':
+      return Object.assign({}, state, { venueId: action.payload });
+    case 'ADD_BOOKING':
+      state.bookings.unshift(action.payload);
+    case 'ERROR':
+      return Object.assign({}, state, { currentError: action.payload });
+    default:
+      return state;
   }
-}
+};
 
 export default reducer;
