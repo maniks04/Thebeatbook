@@ -11,6 +11,7 @@ export const initialState = {
   username: '',
   chosenArtist: '',
   searchedArtistCityList: [],
+  landingViewed: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,6 +44,8 @@ const reducer = (state = initialState, action) => {
       state.bookings.unshift(action.payload);
     case 'ERROR':
       return Object.assign({}, state, { currentError: action.payload });
+      case 'LOADLOGINPAGE':
+      return Object.assign({}, state, { landingViewed: true });
     default:
       return state;
   }

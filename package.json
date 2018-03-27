@@ -25,6 +25,7 @@
     "less-loader": "^4.1.0",
     "less-vars-to-js": "^1.2.1",
     "style-loader": "^0.20.3",
+    "url-loader": "^1.0.1",
     "webpack": "^2.2.1"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.15.0",
     "express-session": "^1.15.6",
+    "file-loader": "^1.1.11",
     "fullcalendar": "^3.9.0",
     "jquery": "^3.1.1",
     "knex": "^0.14.4",

@@ -7,7 +7,8 @@ export const closeRegisterModal = () => ({ type: 'CLOSEREGISTERMODAL' });
 export const logout = () => ({ type: 'LOGOUT' });
 export const loadArtistPage = () => ({ type: 'LOADARTISTPAGE' });
 export const loadVenuePage = () => ({ type: 'LOADVENUEPAGE' });
-
+export const loadLoginPage = () => dispatch => dispatch(landingViewed())
+const landingViewed = () => ({type: 'LOADLOGINPAGE'})
 export const submitLogin = (username, password) => dispatch => axios({
   method: 'post',
   url: '/login',
