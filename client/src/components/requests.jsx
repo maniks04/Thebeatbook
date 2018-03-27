@@ -23,6 +23,7 @@ class Requests extends React.Component {
   }
 
   onSeeEventClick(item) {
+    console.log(item);
   }
 
   onSeeVenueDetailsClick(item) {
@@ -80,7 +81,7 @@ class Requests extends React.Component {
                   name = item.artist_name;
                 }
                 return (
-                  <List.Item actions={[<a>See Event Details</a>]}>
+                  <List.Item actions={[<a onClick={() => this.onSeeEventClick(item)} >See Event Details</a>]}>
                     <List.Item.Meta
                       title={<a href="https://ant.design">{name}</a>}
                       description={item.booking_description}
