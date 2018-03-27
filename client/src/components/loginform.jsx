@@ -1,22 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import $ from 'jquery';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import { Modal } from 'antd';
-const FormItem = Form.Item;
-import { connect } from 'react-redux';
-import * as actions from '../actions/index.js';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
 import { withRouter } from 'react-router';
+import * as actions from '../actions/index.js';
+
+const FormItem = Form.Item;
+
 
 class LoginForm extends React.Component {
   constructor(props) {
-      super(props)
+    super(props)
   }
 
-  componentDidMount() {
-
-  }
 
   submitLogin (e)   {
     e.preventDefault();
@@ -63,7 +59,7 @@ class LoginForm extends React.Component {
           {getFieldDecorator('userName', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
-            <Input id="shit" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+            <Input id="username" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
           )}
         </FormItem>
         <FormItem>
@@ -103,4 +99,3 @@ const mapDispatchToProps = dispatch => (
 );
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));
-//export default NormalLoginForm

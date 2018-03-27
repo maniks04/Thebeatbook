@@ -28,7 +28,7 @@ class ArtistRegisterForm extends React.Component {
             {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your username!' }],
             })(<Input
-              id="shit"
+              id="username"
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="Username"
             />)}
