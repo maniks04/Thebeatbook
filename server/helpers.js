@@ -26,8 +26,6 @@
 //             })
 //     })
 // }
-
-
 // exports.notifyRequest = (username, email) => {
 //     nodemailer.createTestAccount((err, account) => {
 //           var transporter = nodemailer.createTransport({

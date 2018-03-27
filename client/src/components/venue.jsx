@@ -53,14 +53,17 @@ class Venue extends React.Component {
               <Icon type="calendar" />
               <span>Calendar</span>
             </Menu.Item>
+
             <Menu.Item key="2">
               <Icon type="search" />
               <span>Find Artist</span>
             </Menu.Item>
+
             <Menu.Item key="3">
               <Icon type="book" />
               <span>Booking Requests</span>
             </Menu.Item>
+
             <Menu.Item key="4">
               <Icon type="logout" />
               <span>Logout</span>

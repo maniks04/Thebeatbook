@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const app = express();
 const path = require('path');
 const bcrypt = require('bcrypt');
@@ -101,9 +100,15 @@ app.post('/logout', isLoggedIn, (req, res) => {
 
 /** ****************************** Calendar ********************************** */
 app.post('/calendar', async (req, res) => {
+<<<<<<< HEAD
   await db.addBooking(req.body);
   res.status(200).end();
 });
+=======
+  await db.addBooking(req.body)
+  res.status(200).end()
+})
+>>>>>>> 7460236fd54f14ce55e98c9e8031f5d23c0887d6
 
 app.get('/artist/epk', async (req, res) => {
   console.log(req.query.username);
@@ -112,9 +117,17 @@ app.get('/artist/epk', async (req, res) => {
 });
 
 app.get('/artist/city', async (req, res) => {
+<<<<<<< HEAD
   const artistList = await db.getArtistsByCity(req.query.city);
   res.json(artistList);
 });
+=======
+  let artistList = await db.getArtistsByCity(req.query.city)
+  res.json(artistList)
+})
+
+/******************************Venue Stuff*************************************/
+>>>>>>> 7460236fd54f14ce55e98c9e8031f5d23c0887d6
 
 app.get('/venues', async (req, res) => {
   const { city } = req.query;
@@ -139,6 +152,19 @@ app.get('/epk', async (req, res) => {
   res.status(200).send({ epk });
 });
 
+<<<<<<< HEAD
+=======
+app.post('/updateEPK', async (req, res) => {
+  console.log('hit server updateEPK', req.body)
+  db.editEPK(req.body)
+  res.status(200)
+})
+
+
+
+/******************************************************************************/
+
+>>>>>>> 7460236fd54f14ce55e98c9e8031f5d23c0887d6
 app.get('/*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/../client/dist/index.html`));
 });

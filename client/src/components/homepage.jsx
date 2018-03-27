@@ -21,27 +21,20 @@ class Home extends React.Component {
         }
     }
 
-
     componentDidMount() {
     }
-
-
-
-
-
-
 
     render() {
 
      const styles = {
-         
+
      }
-        
+
         return( <div >
                     {!this.props.store.artist && !this.props.store.venue &&
                     // this.state.landingViewed ? <LandingPage /> :
-                         <Login history={this.props.history}/> 
-                    } 
+                         <Login history={this.props.history}/>
+                    }
 
 
                     {this.props.store.artist &&
