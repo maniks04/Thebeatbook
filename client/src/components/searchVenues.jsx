@@ -78,9 +78,10 @@ class SearchVenues extends React.Component {
       this.setState({
         venueBookings: res.data,
       });
-      Modal.success({
+      Modal.info({
         title: 'Venue Calendar',
         content: calendar(this.state.venueBookings, true, artistId, id, this.state.saveToStore, venueName),
+        width: 800,
       });
     }).catch((err) => {
       console.error('error', err);
@@ -109,7 +110,7 @@ class SearchVenues extends React.Component {
         <Divider />
         <Table
           columns={this.state.columns}
-          rowKey={record => record.registered}
+          rowKey={record => record.venue_id}
           onClick={this.viewCalendar}
           dataSource={this.state.venues}
           pagination={this.state.pagination}
