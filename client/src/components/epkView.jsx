@@ -47,10 +47,15 @@ class EPKView extends React.Component {
           <Col span={8}>col-8</Col>
         </Row>
         <Row>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
+          <iframe
+            title="spotify"
+            src="https://open.spotify.com/embed?uri=spotify:album:1DFixLWuPkv3KT3TnV35m3"
+            width="300"
+            height="380"
+            frameBorder="0"
+            allowTransparency="true"
+            allow="encrypted-media"
+          />
         </Row>
       </div>
     );

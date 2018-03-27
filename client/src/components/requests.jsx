@@ -33,7 +33,6 @@ class Requests extends React.Component {
   onSeeVenueDetailsClick(item) {
   }
 
-
   // ADD ABILITY TO UNCONFIRM EVENT
   onConfirmClick(item) {
     axios.patch('/booking', item)
@@ -92,17 +91,17 @@ class Requests extends React.Component {
                       title={<a href="https://ant.design">{name}</a>}
                       description={item.booking_description}
                     />
-                    <Modal 
+                    <Modal
                       visible={this.state.visible}
-                      maskClosable={true} 
+                      maskClosable={true}
                       onOk={() => this.setState({ visible: false })}
                       cancelText={'Edit event'}
                       title={item.booking_title}
                     >
                       <em>{item.artist_name}</em>
-                      <div>Playing {moment(item.start_time).format('MMMM Do YYYY')} 
-                           from {moment(item.start_time).format('h:mm')} 
-                           til {moment(item.end_time).format('h:mm')}
+                      <div>Playing {moment(item.start_time).format('MMMM Do YYYY')+' '}
+                           from {moment(item.start_time).format('h:mm')+' '}
+                           til {' ' + moment(item.end_time).format('h:mm')}
                       </div>
                     </Modal>
                     <div>Gig on: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>

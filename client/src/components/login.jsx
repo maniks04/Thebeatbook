@@ -12,7 +12,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
   }
- 
+
   render() {
     return (
       <div style={styles.loginbox}>
@@ -43,7 +43,6 @@ const styles = {
     height: 20,
     width: 20,
     display: 'inline-block',
-
   },
   beatbook: {
     fontSize: 20,
@@ -70,7 +69,6 @@ const styles = {
   loginform: {
     marginLeft: 50,
     marginRight: 50,
-
   },
   divider: {
     borderStyle: 'solid',
