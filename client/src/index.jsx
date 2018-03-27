@@ -3,37 +3,29 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import Home from './components/homepage.jsx'
-import Artist from './components/artist.jsx'
-import Venue from './components/venue.jsx'
-import ArtistRegister from './components/artistregister.jsx'
-import VenueRegister from './components/venueregister.jsx'
+import Home from './components/homepage.jsx';
+import ArtistRegister from './components/artistregister.jsx';
+import VenueRegister from './components/venueregister.jsx';
 import reducer from './reducers/index.js';
-import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
-import $ from 'jquery'
-// import AnyComponent from './components/filename.jsx'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';//eslint-disable-line
 
-
-let store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 const Base = ({ store }) => (
   <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          {/* <Route exact path="/artist" component={Artist} />
-          <Route exact path="/venue" component={Venue} /> */}
-          <Route exact path="/artistregister" component={ArtistRegister} />
-          <Route exact path="/venueregister" component={VenueRegister} />
-        </Switch>
-      </Router>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/artistregister" component={ArtistRegister} />
+        <Route exact path="/venueregister" component={VenueRegister} />
+      </Switch>
+    </Router>
   </Provider>
 );
 
-
-function render() {
-ReactDOM.render(<Base store={store} />, document.getElementById('app'));
-}
+const render = () => {
+  ReactDOM.render(<Base store={store} />, document.getElementById('app'));
+};
 
 store.subscribe(render);
-render()
+render();

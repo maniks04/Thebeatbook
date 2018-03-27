@@ -7,11 +7,15 @@
     },
     "rules": {
         "react/prop-types": "off",
-        "import/extensions": "off",
+        "import/extensions": "warn",
         "no-use-before-define": "off",
-        "max-len": ["error", { "code": 120 }],
+        "max-len": ["warn", { "code": 120 }],
         "no-console": "off",
         "consistent-return": "off",
-        "camelcase": "off"
+        "camelcase": "warn",
+        "no-fallthrough": "off",
+        "no-shadow": "warn",
+        "no-useless-constructor": "off",
+        "function-paren-newline": "off"
     }
 }
