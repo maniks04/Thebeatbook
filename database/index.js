@@ -100,6 +100,10 @@ const editEPK = async (info) => {
     artist_city: info.artist_city,
     artist_state: info.artist_state,
     imageUrl: info.imageUrl,
+    artist_twitter: info.artist_twitter,
+    artist_facebook: info.artist_facebook,
+    artist_instagram: info.artist_instagram,
+    artist_support: info.artist_support,
   });
 };
 

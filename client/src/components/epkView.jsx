@@ -10,11 +10,6 @@ class EPKView extends React.Component {
     super(props);
     this.state = {
       artistId: this.props.artist,
-      artist_name: null,
-      artist_description: null,
-      artist_city: null,
-      artist_state: null,
-      imageUrl: null,
     };
   }
 
@@ -23,13 +18,16 @@ class EPKView extends React.Component {
       params: {
         artistId: this.state.artistId,
       },
-    }).then((res) => {
+    }).then(({ data }) => {
       this.setState({
-        artist_name: res.data.epk.artist_name,
-        artist_description: res.data.epk.artist_description,
-        artist_city: res.data.epk.artist_city,
-        artist_state: res.data.epk.artist_state,
-        imageUrl: Buffer.from(res.data.epk.imageUrl),
+        artist_name: data.epk.artist_name,
+        artist_description: data.epk.artist_description,
+        artist_city: data.epk.artist_city,
+        artist_state: data.epk.artist_state,
+        artist_twitter: data.epk.artist_twitter,
+        artist_facebook: data.epk.artist_facebook,
+        artist_instagram: data.epk.artist_instagram,
+        artist_support: data.epk.artist_support,
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -47,6 +45,12 @@ class EPKView extends React.Component {
           <Col span={8}>{this.state.artist_city}</Col>
           <Col span={8}>{this.state.artist_state}</Col>
           <Col span={8}><img src={this.state.imageUrl} /></Col>
+        </Row>
+        <Row>
+          <Col span={8}>{this.state.artist_twitter}</Col>
+          <Col span={8}>{this.state.artist_facebook}</Col>
+          <Col span={8}>{this.state.artist_instagram}</Col>
+          <Col span={8}>{this.state.artist_support}</Col>
         </Row>
       </div>
     );
