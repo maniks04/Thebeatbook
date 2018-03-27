@@ -48,6 +48,11 @@ CREATE TABLE artists
   artist_city VARCHAR(25),
   artist_state VARCHAR(25),
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  imageUrl LONGBLOB,
+  artist_facebook VARCHAR(30),
+  artist_twitter VARCHAR(30),
+  artist_instagram VARCHAR(30),
+  artist_support VARCHAR(30),
   PRIMARY KEY (artist_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
