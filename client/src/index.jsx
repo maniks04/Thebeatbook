@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import Home from './components/homepage.jsx';
 import ArtistRegister from './components/artistregister.jsx';
 import VenueRegister from './components/venueregister.jsx';
-import Test from './components/test.jsx';
+//import Test from './components/test.jsx';
 import reducer from './reducers/index.js';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';//eslint-disable-line
 
@@ -19,7 +19,7 @@ const Base = ({ store }) => (
         <Route exact path="/" component={Home} />
         <Route exact path="/artistregister" component={ArtistRegister} />
         <Route exact path="/venueregister" component={VenueRegister} />
-        <Route path="/artist/:username" component={Test} />
+        {/* <Route path="/artist/:username" component={Test} /> */}
       </Switch>
     </Router>
   </Provider>
