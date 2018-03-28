@@ -141,6 +141,16 @@ app.patch('/booking', async ({ body }, res) => {
   res.status(200).send({ bookings });
 });
 
+app.post('/epkImgUpload', async (req, res) => {
+  res.status(200).send();
+});
+
+app.post('/updateEPK', async (req, res) => {
+  console.log('hit server updateEPK');
+  db.editEPK(req.body);
+  res.status(200).send();
+});
+
 app.get('/epk', async (req, res) => {
   const epk = await db.getEpk(req.query.artistId);
   res.status(200).send({ epk });
