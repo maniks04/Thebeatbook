@@ -1,7 +1,7 @@
 node_modules/
 bower_components/
 client/dist/bundle.js
-database/config.js
+
 
 ### node etc ###
 

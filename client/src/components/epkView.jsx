@@ -10,10 +10,7 @@ class EPKView extends React.Component {
     super(props);
     this.state = {
       artistId: this.props.artist,
-      artist_name: null,
-      artist_description: null,
-      artist_city: null,
-      artist_state: null,
+      imageUrl: null,
     };
   }
 
@@ -22,12 +19,18 @@ class EPKView extends React.Component {
       params: {
         artistId: this.state.artistId,
       },
-    }).then((res) => {
+    }).then(({ data }) => {
+      console.log(data);
       this.setState({
-        artist_name: res.data.epk.artist_name,
-        artist_description: res.data.epk.artist_description,
-        artist_city: res.data.epk.artist_city,
-        artist_state: res.data.epk.artist_state,
+        artist_name: data.epk.artist_name,
+        artist_description: data.epk.artist_description,
+        artist_city: data.epk.artist_city,
+        artist_state: data.epk.artist_state,
+        artist_twitter: data.epk.artist_twitter,
+        artist_facebook: data.epk.artist_facebook,
+        artist_instagram: data.epk.artist_instagram,
+        artist_support: data.epk.artist_support,
+        imageUrl: Buffer.from(data.epk.imageUrl),
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -44,13 +47,18 @@ class EPKView extends React.Component {
         <Row>
           <Col span={8}>{this.state.artist_city}</Col>
           <Col span={8}>{this.state.artist_state}</Col>
-          <Col span={8}>col-8</Col>
+          <Col span={8}><img src={this.state.imageUrl} /></Col>
         </Row>
         <Row>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
+          <iframe
+            title="spotify"
+            src="https://open.spotify.com/embed?uri=spotify:artist:0OiYrpibZx4wUXrcjY8Kbb"
+            width="300"
+            height="380"
+            frameBorder="0"
+            allowTransparency="true"
+            allow="encrypted-media"
+          />
         </Row>
       </div>
     );
