@@ -49,7 +49,7 @@ class EPKView extends React.Component {
         <Row>
           <iframe
             title="spotify"
-            src="https://open.spotify.com/embed?uri=spotify:album:1DFixLWuPkv3KT3TnV35m3"
+            src="https://open.spotify.com/embed?uri=spotify:artist:0OiYrpibZx4wUXrcjY8Kbb"
             width="300"
             height="380"
             frameBorder="0"
