@@ -9,8 +9,8 @@ import SearchVenues from './searchVenues.jsx';
 import EPKEdit from './epkEdit.jsx';
 import EPKView from './epkView.jsx';
 
-const {Content, Footer, Sider} = Layout /* eslint-disable-line */;
-const SubMenu = Menu.SubMenu /* eslint-disable-line */;
+const { Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
 
 class Artist extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Artist extends React.Component {
     }
   }
 
-  view() {/* eslint-disable-line */
+  view() {
     const { key } = this.state;
     const artist = this.props.store.artistId;
     if (key === '1') {
@@ -48,7 +48,6 @@ class Artist extends React.Component {
     }
   }
 
-
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
@@ -64,17 +63,14 @@ class Artist extends React.Component {
               <Icon type="calendar" />
               <span>Calendar</span>
             </Menu.Item>
-
             <Menu.Item key="2">
               <Icon type="search" />
               <span>Find Venue</span>
             </Menu.Item>
-
             <Menu.Item key="3">
               <Icon type="folder" />
               <span>My Requests</span>
             </Menu.Item>
-
             <SubMenu
               key="sub1"
               title={<span>

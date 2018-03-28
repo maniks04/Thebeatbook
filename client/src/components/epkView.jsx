@@ -50,10 +50,15 @@ class EPKView extends React.Component {
           <Col span={8}><img src={this.state.imageUrl} /></Col>
         </Row>
         <Row>
-          <Col span={8}>{this.state.artist_twitter}</Col>
-          <Col span={8}>{this.state.artist_facebook}</Col>
-          <Col span={8}>{this.state.artist_instagram}</Col>
-          <Col span={8}>{this.state.artist_support}</Col>
+          <iframe
+            title="spotify"
+            src="https://open.spotify.com/embed?uri=spotify:artist:0OiYrpibZx4wUXrcjY8Kbb"
+            width="300"
+            height="380"
+            frameBorder="0"
+            allowTransparency="true"
+            allow="encrypted-media"
+          />
         </Row>
       </div>
     );
