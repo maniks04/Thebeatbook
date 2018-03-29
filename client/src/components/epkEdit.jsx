@@ -45,6 +45,7 @@ class NormalLoginForm extends React.Component {
     const { artist_twitter } = this.state;
     const { artist_facebook } = this.state;
     const { artist_instagram } = this.state;
+    const { artist_spotify } = this.state;
     const { artist_support } = this.state;
     const { artist_name } = this.state;
     const { artist_description } = this.state;
@@ -60,6 +61,7 @@ class NormalLoginForm extends React.Component {
       imageUrl,
       artist_twitter,
       artist_facebook,
+      artist_spotify,
       artist_instagram,
       artist_support,
     }).then(() => {
@@ -78,6 +80,10 @@ class NormalLoginForm extends React.Component {
 
   onChangeTwitter(e) {
     this.setState({ artist_twitter: e.target.value });
+  }
+
+  onChangeSpotify(e) {
+    this.setState({ artist_spotify: e.target.value });
   }
 
   onChangeArtist(e) {
@@ -217,6 +223,14 @@ class NormalLoginForm extends React.Component {
               onChange={val => this.onChangeTwitter(val)}
             />
           </FormItem>
+          <FormItem>
+            Spotify
+            <Input
+              prefix={<Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              className="spotify"
+              placeholder={this.state.artist_spotify}
+              onChange={val => this.onChangeSpotify(val)}
+            />
         </Col>
       </Row>
     );

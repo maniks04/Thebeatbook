@@ -29,7 +29,8 @@ class EPKView extends React.Component {
         artist_twitter: data.epk.artist_twitter,
         artist_facebook: data.epk.artist_facebook,
         artist_instagram: data.epk.artist_instagram,
-        artist_support: data.epk.artist_support,
+        artist_instagram: data.epk.artist_instagram,
+        artist_spotify: data.epk.artist_spotify.slice(32),
         imageUrl: Buffer.from(data.epk.imageUrl),
       });
     }).catch((err) => {
@@ -52,7 +53,7 @@ class EPKView extends React.Component {
         <Row>
           <iframe
             title="spotify"
-            src="https://open.spotify.com/embed?uri=spotify:artist:0OiYrpibZx4wUXrcjY8Kbb"
+            src={`https://open.spoify.com/embed?uri=spotify:artist:${this.state.artist_spotify}`}
             width="300"
             height="380"
             frameBorder="0"
