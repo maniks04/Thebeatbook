@@ -20,11 +20,10 @@ class EPKView extends React.Component {
         artistId: this.state.artistId,
       },
     }).then(({ data }) => {
-      console.log(data);
       if (data.epk.imageUrl !== null) {
         data.epk.imageUrl = Buffer.from(data.epk.imageUrl); /* eslint-disable-line */
       }
-      let splitYoutube = data.epk.artist_youtube.split('/');
+      let splitYoutube = data.epk.artist_youtube ? data.epk.artist_youtube.split('/') : '';
       splitYoutube = `https://www.youtube.com/embed/${splitYoutube[splitYoutube.length - 1]}`;
       this.setState({
         artist_name: data.epk.artist_name,
@@ -103,7 +102,6 @@ class EPKView extends React.Component {
         <Row>
           <Col span={3} />
           <Col span={16}>
-            <h1>Band Bio</h1>
             <iframe // eslint-disable-line
               width="560"
               height="315"
