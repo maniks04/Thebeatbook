@@ -52,8 +52,10 @@ CREATE TABLE artists
   artist_facebook VARCHAR(30),
   artist_twitter VARCHAR(30),
   artist_instagram VARCHAR(30),
-  artist_spotify VARCHAR(30),
-  artist_support VARCHAR(30),
+  artist_support VARCHAR(8000),
+  artist_contact VARCHAR(100),
+  artist_youtube VARCHAR(100),
+  artist_spotify VARCHAR(100),
   PRIMARY KEY (artist_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
