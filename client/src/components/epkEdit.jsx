@@ -70,6 +70,7 @@ class NormalLoginForm extends React.Component {
       imageUrl,
       artist_twitter,
       artist_facebook,
+      artist_spotify,
       artist_instagram,
       artist_support,
       artist_contact,
@@ -91,6 +92,10 @@ class NormalLoginForm extends React.Component {
 
   onChangeTwitter(e) {
     this.setState({ artist_twitter: e.target.value });
+  }
+
+  onChangeSpotify(e) {
+    this.setState({ artist_spotify: e.target.value });
   }
 
   onChangeArtist(e) {
@@ -283,7 +288,7 @@ class NormalLoginForm extends React.Component {
             Spotify Link
             <Input
               prefix={<Icon type="sound" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              className="artist_spotify"
+              className="spotify"
               placeholder={this.state.artist_spotify}
               onChange={val => this.onChangeSpotify(val)}
             />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Tabs, List } from 'antd';
+import { Tabs, List, Modal } from 'antd';
 import axios from 'axios';
 import * as actions from '../actions/index.js';
 
@@ -17,21 +17,24 @@ class Requests extends React.Component {
     this.state = {
       pending: bookings.filter(booking => booking.confirmed === 0),
       confirmed: bookings.filter(booking => booking.confirmed === 1),
+      visible: false,
       // loadingMore: false,
       // showLoadingMore: true,
     };
   }
 
   onSeeEventClick(item) {
+    console.log(item);
+    this.setState({
+      visible: true,
+    });
   }
 
   onSeeVenueDetailsClick(item) {
   }
 
-
   // ADD ABILITY TO UNCONFIRM EVENT
   onConfirmClick(item) {
-    console.log(item);
     axios.patch('/booking', item)
       .then((res) => {
         const updatedBookings = res.data.bookings;
@@ -46,6 +49,9 @@ class Requests extends React.Component {
   onEpkClick(item) {
   }
 
+  onCancelClick() {
+    //use the modal onCancel method to EDIT events
+  }
 
   onSelect(info) {
   }
@@ -80,11 +86,24 @@ class Requests extends React.Component {
                   name = item.artist_name;
                 }
                 return (
-                  <List.Item actions={[<a>See Event Details</a>]}>
+                  <List.Item actions={[<a onClick={() => this.onSeeEventClick(item)} >See Event Details</a>]}>
                     <List.Item.Meta
                       title={<a href="https://ant.design">{name}</a>}
                       description={item.booking_description}
                     />
+                    <Modal
+                      visible={this.state.visible}
+                      maskClosable={true}
+                      onOk={() => this.setState({ visible: false })}
+                      cancelText={'Edit event'}
+                      title={item.booking_title}
+                    >
+                      <em>{item.artist_name}</em>
+                      <div>Playing {moment(item.start_time).format('MMMM Do YYYY')+' '}
+                           from {moment(item.start_time).format('h:mm')+' '}
+                           til {' ' + moment(item.end_time).format('h:mm')}
+                      </div>
+                    </Modal>
                     <div>Gig on: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>
                   </List.Item>
                   );

@@ -37,7 +37,7 @@ class EPKView extends React.Component {
         artist_contact: data.epk.artist_contact,
         imageUrl: data.epk.imageUrl,
         artist_youtube: splitYoutube,
-        artist_spotify: data.epk.artist_spotify,
+        artist_spotify: data.epk.artist_spotify.slice(32),
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -111,6 +111,16 @@ class EPKView extends React.Component {
             >
             </iframe>
           </Col>
+          <iframe
+            title="spotify"
+            src={`https://open.spoify.com/embed?uri=spotify:artist:${this.state.artist_spotify}`}
+            width="300"
+            height="380"
+            frameBorder="0"
+            allowTransparency="true"
+            allow="encrypted-media"
+          />
+
         </Row>
       </div>
     );
