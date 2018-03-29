@@ -231,6 +231,7 @@ class NormalLoginForm extends React.Component {
               placeholder={this.state.artist_spotify}
               onChange={val => this.onChangeSpotify(val)}
             />
+          </FormItem>
         </Col>
       </Row>
     );
