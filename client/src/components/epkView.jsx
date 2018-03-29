@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Icon } from 'antd';
 import axios from 'axios';
-import * as actions from '../actions/index.js';
+import * as actions from '../actions/index.js'; /* eslint-disable-line */
 
 class EPKView extends React.Component {
   constructor(props) {
@@ -100,8 +100,19 @@ class EPKView extends React.Component {
             {this.state.artist_description}
           </Col>
         </Row>
+        <br />
         <Row gutter={32}>
-          <Col span={5}>
+          <Col span={5} />
+          <Col span={16}>
+            <iframe
+              title="youtube"
+              width="100%"
+              height="315"
+              src={this.state.artist_youtube}
+              frameBorder="0"
+              allowFullScreen
+            />
+            <br />
             <iframe
               title="spotify"
               src={`https://open.spotify.com/embed?uri=spotify:artist:${this.state.artist_spotify}`}
@@ -109,16 +120,6 @@ class EPKView extends React.Component {
               height="380"
               frameBorder="0"
               allowTransparency="true"
-            />
-          </Col>
-          <Col span={16}>
-            <iframe
-              title="youtube"
-              width="560"
-              height="315"
-              src={this.state.artist_youtube}
-              frameBorder="0"
-              allowFullScreen
             />
           </Col>
         </Row>
