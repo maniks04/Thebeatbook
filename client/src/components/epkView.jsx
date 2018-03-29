@@ -24,6 +24,7 @@ class EPKView extends React.Component {
         data.epk.imageUrl = Buffer.from(data.epk.imageUrl); /* eslint-disable-line */
       }
       let splitYoutube = data.epk.artist_youtube ? data.epk.artist_youtube.split('/') : '';
+      const sliceSpot = data.epk.artist_spotify ? data.epk.artist_spotify.slice(32) : '';
       splitYoutube = `https://www.youtube.com/embed/${splitYoutube[splitYoutube.length - 1]}`;
       this.setState({
         artist_name: data.epk.artist_name,
@@ -37,7 +38,7 @@ class EPKView extends React.Component {
         artist_contact: data.epk.artist_contact,
         imageUrl: data.epk.imageUrl,
         artist_youtube: splitYoutube,
-        artist_spotify: data.epk.artist_spotify.slice(32),
+        artist_spotify: sliceSpot,
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -65,15 +66,15 @@ class EPKView extends React.Component {
     return (
       <div>
         <Row align="bottom" type="flex" gutter={32}>
-          <Col span={3}><img src={this.state.imageUrl} width="100%" /></Col>
-          <Col span={20}>
+          <Col span={5}><img src={this.state.imageUrl} width="100%" /></Col>
+          <Col span={16}>
             <h1 size="56">
               {this.state.artist_name} - {this.state.artist_city}, {this.state.artist_state}
             </h1>
           </Col>
         </Row>
         <Row gutter={32}>
-          <Col span={3}>
+          <Col span={5}>
             <h2 style={{ color: 'rgba(0,0,0,.25)' }}><Icon type="facebook" style={{ color: 'rgba(0,0,0,.25)' }} />
               {this.state.artist_facebook}
             </h2>
@@ -92,35 +93,34 @@ class EPKView extends React.Component {
             {this.mapSupport()}
           </Col>
         </Row>
-        <Row>
-          <Col span={3} />
+        <Row gutter={32}>
+          <Col span={5} />
           <Col span={16}>
             <h1>Band Bio</h1>
             {this.state.artist_description}
           </Col>
         </Row>
-        <Row>
-          <Col span={3} />
+        <Row gutter={32}>
+          <Col span={5}>
+            <iframe
+              title="spotify"
+              src={`https://open.spotify.com/embed?uri=spotify:artist:${this.state.artist_spotify}`}
+              width="100%"
+              height="380"
+              frameBorder="0"
+              allowTransparency="true"
+            />
+          </Col>
           <Col span={16}>
-            <iframe // eslint-disable-line
+            <iframe
+              title="youtube"
               width="560"
               height="315"
               src={this.state.artist_youtube}
               frameBorder="0"
               allowFullScreen
-            >
-            </iframe>
+            />
           </Col>
-          <iframe
-            title="spotify"
-            src={`https://open.spoify.com/embed?uri=spotify:artist:${this.state.artist_spotify}`}
-            width="300"
-            height="380"
-            frameBorder="0"
-            allowTransparency="true"
-            allow="encrypted-media"
-          />
-
         </Row>
       </div>
     );
