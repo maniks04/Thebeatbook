@@ -18,6 +18,10 @@ class Requests extends React.Component {
       pending: bookings.filter(booking => booking.confirmed === 0),
       confirmed: bookings.filter(booking => booking.confirmed === 1),
       visible: false,
+      booking_description: null,
+      booking_title: null,
+      start_time: null,
+      end_time: null
       // loadingMore: false,
       // showLoadingMore: true,
     };
@@ -27,6 +31,10 @@ class Requests extends React.Component {
     console.log(item);
     this.setState({
       visible: true,
+      booking_description: item.booking_description,
+      booking_title: item.booking_title,
+      start_time: item.start_time,
+      end_time: item.end_time
     });
   }
 
@@ -79,7 +87,7 @@ class Requests extends React.Component {
               dataSource={confirmed}
               renderItem={(item) => {
                 let name;
-                const time = item.start_time || '';
+                let time = item.start_time || '';
                 if (isArtist === true) {
                   name = item.venue_name;
                 } else {
@@ -96,12 +104,12 @@ class Requests extends React.Component {
                       maskClosable={true}
                       onOk={() => this.setState({ visible: false })}
                       cancelText={'Edit event'}
-                      title={item.booking_title}
+                      title={this.state.booking_title}
                     >
                       <em>{item.artist_name}</em>
-                      <div>Playing {moment(item.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(item.start_time).format('h:mm')+' '}
-                           til {' ' + moment(item.end_time).format('h:mm')}
+                      <div>Playing {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
+                           from {moment(this.state.start_time).format('h:mm')+' '}
+                           til {' ' + moment(this.state.end_time).format('h:mm')}
                       </div>
                     </Modal>
                     <div>Gig on: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>

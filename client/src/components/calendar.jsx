@@ -100,7 +100,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
 
       eventClick(event) {
         Modal.info({
-          title: 'Event Description',
+          title: event.title,
           content: (
             <div>{event.description}</div>
           ),

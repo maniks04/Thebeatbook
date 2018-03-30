@@ -24,6 +24,7 @@ class NormalLoginForm extends React.Component {
         artistId: this.props.artistID,
       },
     }).then(({ data }) => {
+      const splitSupport = data.epk.artist_support ? data.epk.artist_support.split('||') : ['', '', ''];
       this.setState({
         artist_name: data.epk.artist_name,
         artist_description: data.epk.artist_description,
@@ -32,7 +33,12 @@ class NormalLoginForm extends React.Component {
         artist_twitter: data.epk.artist_twitter,
         artist_facebook: data.epk.artist_facebook,
         artist_instagram: data.epk.artist_instagram,
-        artist_support: data.epk.artist_support,
+        artist_support: splitSupport[0],
+        artist_supportTwo: splitSupport[1],
+        artist_supportThree: splitSupport[2],
+        artist_contact: data.epk.artist_contact,
+        artist_youtube: data.epk.artist_youtube,
+        artist_spotify: data.epk.artist_spotify,
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -40,17 +46,20 @@ class NormalLoginForm extends React.Component {
   }
 
   onClick() {
+    const temp = `${this.state.artist_support}||${this.state.artist_supportTwo}||${this.state.artist_supportThree}`;
     const artist_id = this.props.artistID;
     const { imageUrl } = this.state;
     const { artist_twitter } = this.state;
     const { artist_facebook } = this.state;
     const { artist_instagram } = this.state;
-    const { artist_spotify } = this.state;
-    const { artist_support } = this.state;
+    const artist_support = temp;
     const { artist_name } = this.state;
     const { artist_description } = this.state;
     const { artist_city } = this.state;
     const { artist_state } = this.state;
+    const { artist_contact } = this.state;
+    const { artist_youtube } = this.state;
+    const { artist_spotify } = this.state;
 
     axios.post('/updateEPK', {
       artist_name,
@@ -64,6 +73,9 @@ class NormalLoginForm extends React.Component {
       artist_spotify,
       artist_instagram,
       artist_support,
+      artist_contact,
+      artist_youtube,
+      artist_spotify,
     }).then(() => {
     }).catch((err) => {
       console.error(err) /* eslint-disable-line */
@@ -104,6 +116,26 @@ class NormalLoginForm extends React.Component {
 
   onChangeSupport(e) {
     this.setState({ artist_support: e.target.value });
+  }
+
+  onChangeSupportTwo(e) {
+    this.setState({ artist_supportTwo: e.target.value });
+  }
+
+  onChangeSupportThree(e) {
+    this.setState({ artist_supportThree: e.target.value });
+  }
+
+  onChangeContact(e) {
+    this.setState({ artist_contact: e.target.value });
+  }
+
+  onChangeYoutube(e) {
+    this.setState({ artist_youtube: e.target.value });
+  }
+
+  onChangeSpotify(e) {
+    this.setState({ artist_spotify: e.target.value });
   }
 
   onChangeImage(info) {
@@ -154,6 +186,13 @@ class NormalLoginForm extends React.Component {
               onChange={val => this.onChangeState(val)}
             />
           </FormItem>
+          <FormItem> Contact Info
+            <Input
+              className="contact"
+              placeholder={this.state.artist_contact}
+              onChange={val => this.onChangeContact(val)}
+            />
+          </FormItem>
         </Col>
         <Col span={8}>
           <FormItem> Band Bio
@@ -166,11 +205,24 @@ class NormalLoginForm extends React.Component {
             />
           </FormItem>
           <FormItem> If you liked our music try:
-            <TextArea
+            <Input
               className="support"
               placeholder={this.state.artist_support}
-              autosize={{ minRows: 4, maxRows: 18 }}
               onChange={val => this.onChangeSupport(val)}
+            />
+          </FormItem>
+          <FormItem>
+            <Input
+              className="supportTwo"
+              placeholder={this.state.artist_supportTwo}
+              onChange={val => this.onChangeSupportTwo(val)}
+            />
+          </FormItem>
+          <FormItem>
+            <Input
+              className="supportThree"
+              placeholder={this.state.artist_supportThree}
+              onChange={val => this.onChangeSupportThree(val)}
             />
           </FormItem>
           <div> Change Image of your band.</div>
@@ -224,9 +276,18 @@ class NormalLoginForm extends React.Component {
             />
           </FormItem>
           <FormItem>
-            Spotify
+            Youtube Embed
             <Input
-              prefix={<Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              prefix={<Icon type="youtube" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              className="youtube"
+              placeholder={this.state.artist_youtube}
+              onChange={val => this.onChangeYoutube(val)}
+            />
+          </FormItem>
+          <FormItem>
+            Spotify Link
+            <Input
+              prefix={<Icon type="sound" style={{ color: 'rgba(0,0,0,.25)' }} />}
               className="spotify"
               placeholder={this.state.artist_spotify}
               onChange={val => this.onChangeSpotify(val)}

@@ -1,4 +1,5 @@
 const config = require('./config.js');
+const moment = require('moment');
 
 const knex = require('knex')({
   client: 'mysql',
@@ -104,6 +105,9 @@ const editEPK = async (info) => {
     artist_facebook: info.artist_facebook,
     artist_instagram: info.artist_instagram,
     artist_support: info.artist_support,
+    artist_contact: info.artist_contact,
+    artist_youtube: info.artist_youtube,
+    artist_spotify: info.artist_spotify,
   });
 };
 
