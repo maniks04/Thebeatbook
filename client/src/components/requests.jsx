@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Tabs, List, Modal } from 'antd';
 import axios from 'axios';
 import * as actions from '../actions/index.js';
+import EPKView from './epkView.jsx';
 
 const moment = require('moment');
 
@@ -18,22 +19,21 @@ class Requests extends React.Component {
       pending: bookings.filter(booking => booking.confirmed === 0),
       confirmed: bookings.filter(booking => booking.confirmed === 1),
       visible: false,
+      epkVisible: false,
       // loadingMore: false,
       // showLoadingMore: true,
     };
   }
 
-  onSeeEventClick(item) {
-    console.log(item);
+  onSeeEventClick() {
     this.setState({
       visible: true,
     });
   }
 
-  onSeeVenueDetailsClick(item) {
+  onSeeVenueDetailsClick() {
   }
 
-  // ADD ABILITY TO UNCONFIRM EVENT
   onConfirmClick(item) {
     axios.patch('/booking', item)
       .then((res) => {
@@ -47,28 +47,17 @@ class Requests extends React.Component {
   }
 
   onEpkClick(item) {
+    this.setState({
+      epkVisible: true,
+    })
+    console.log('epk clicked', item);
+    return (<EPKView artist={item.artist_id} />);
   }
-
-  onCancelClick() {
-    //use the modal onCancel method to EDIT events
-  }
-
-  onSelect(info) {
-  }
-
-  callback(key) {
-  }
-
 
   render() {
     const { confirmed, pending } = this.state;
     const isArtist = this.props.store.artist;
-    // const loadMore = showLoadingMore ? (
-    //  <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
-    //    {loadingMore && <Spin />}
-    //    {!loadingMore && <Button onClick={}>loading more</Button>}
-    //  </div>
-    // ) : null;
+
     return (
       <div>
         <Tabs defaultActiveKey="1" onChange={this.callback}>
@@ -121,10 +110,15 @@ class Requests extends React.Component {
                 const subtab = [];
                 if (isArtist === true) {
                   name = item.venue_name;
-                  subtab.push(<a onClick={() => this.onSeeVenueDetailsClick(item)}>See Venue Details</a>);
+                  subtab.push(
+                    <a onClick={() => this.onSeeVenueDetailsClick(item)}>
+                      See Venue Details
+                    </a>);
                 } else {
                   name = item.artist_name;
-                  subtab.push(<a onClick={() => this.onConfirmClick(item)}>Confirm Event</a>, <a>See EPK</a>);
+                  subtab.push(
+                    <a onClick={() => this.onConfirmClick(item)}>Confirm Event</a>,
+                    <a onClick={() => this.onEpkClick(item)}>See EPK</a>);
                 }
                 return (
                   <List.Item actions={subtab}>
@@ -132,6 +126,15 @@ class Requests extends React.Component {
                       title={<a href="https://ant.design">{name}</a>}
                       description={item.booking_description}
                     />
+                    <Modal
+                      visible={this.state.epkVisible}
+                      maskClosable={true}
+                      onOk={() => this.setState({ epkVisible: false })}
+                      cancelText={'Cancel'}
+                      title={item.artist_name}
+                    >
+                      <EPKView artist={item.artist_id} />
+                    </Modal>
                     <div>Trying to gig: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>
                   </List.Item>
                 );
