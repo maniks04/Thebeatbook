@@ -15,15 +15,17 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div style={styles.loginbox}>
-        <img src={logo} style={styles.logo} alt="" />
-        <div style={styles.beatbook}>beatbook</div>
-        <div style={styles.divider} />
-        <div style={styles.loginform}>
-          <LoginFormContainer />
-        </div>
-        <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">facebook login</div>
+     
+    <div style={styles.loginbox} >
+      <img src={logo} style={styles.logo} alt="" />
+      <div style={styles.beatbook}>beatbook</div>
+      <div style={styles.divider} />
+      <div style={styles.loginform}>
+        <LoginFormContainer />
       </div>
+      <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">facebook login</div>
+    </div>
+      
     );
   }
 }
@@ -65,6 +67,7 @@ const styles = {
     top: '12.5%',
     textAlign: 'center',
     overflow: 'auto',
+    
   },
   loginform: {
     marginLeft: 50,

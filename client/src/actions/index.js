@@ -82,3 +82,17 @@ export const isLoggedIn = () => dispatch => axios({
 }).catch((err) => {
   console.log(err);
 });
+
+
+export const checkLoginStatus = () => axios({
+  method: 'get',
+  url: '/checkloginstatus',
+}).then((res) => {
+  console.log('res', res.data);
+  if (res.data === true) {
+    console.log('true');
+    return true;
+  }
+  console.log('false');
+  return false;
+});

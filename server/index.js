@@ -102,6 +102,14 @@ app.get('/isloggedin', async (req, res) => {
   }
 });
 
+app.get('/checkloginstatus', (req, res) => {
+  if (req.session.passport && req.session.passport.user) {
+    res.send(true);
+  } else {
+    res.send(false);
+  }
+});
+
 app.get('/logout', (req, res) => {
   res.send();
 });
@@ -113,9 +121,8 @@ app.post('/calendar', async (req, res) => {
 });
 
 app.get('/artist/epk', async (req, res) => {
-  console.log(req.query.username);
-  const epkInfo = await db.getEpkData(req.query.username);
-  res.json(epkInfo);
+  const epk = await db.getEpkData(req.query.username);
+  res.status(200).send({ epk });
 });
 
 app.get('/artist/city', async (req, res) => {

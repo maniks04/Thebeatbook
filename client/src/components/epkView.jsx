@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Row, Col } from 'antd';
 import axios from 'axios';
 import * as actions from '../actions/index.js';
+import {withRouter} from 'react-router';
 
 class EPKView extends React.Component {
   constructor(props) {
@@ -15,6 +16,12 @@ class EPKView extends React.Component {
   }
 
   componentDidMount() {
+    return this.props.artist ?
+      this.getArtistById() :
+      this.getArtistByName();
+  }
+
+  getArtistById() {
     axios.get('/epk', {
       params: {
         artistId: this.state.artistId,
@@ -30,12 +37,37 @@ class EPKView extends React.Component {
         artist_facebook: data.epk.artist_facebook,
         artist_instagram: data.epk.artist_instagram,
         artist_support: data.epk.artist_support,
-        imageUrl: Buffer.from(data.epk.imageUrl),
+        //imageUrl: Buffer.from(data.epk.imageUrl),
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
     });
   }
+
+  getArtistByName() {
+    console.log('match', this.props)
+    axios.get('/artist/epk', {
+      params: {
+        username: this.props.match.params.username,
+      },
+    }).then(({ data }) => {
+      console.log(data)
+      this.setState({
+        artist_name: data.epk.artist_name,
+        artist_description: data.epk.artist_description,
+        artist_city: data.epk.artist_city,
+        artist_state: data.epk.artist_state,
+        artist_twitter: data.epk.artist_twitter,
+        artist_facebook: data.epk.artist_facebook,
+        artist_instagram: data.epk.artist_instagram,
+        artist_support: data.epk.artist_support,
+        //imageUrl: Buffer.from(data.epk.imageUrl),
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+
 
   render() {
     return (
@@ -49,7 +81,7 @@ class EPKView extends React.Component {
           <Col span={8}>{this.state.artist_state}</Col>
           <Col span={8}><img src={this.state.imageUrl} /></Col>
         </Row>
-        <Row>
+        {/* <Row>
           <iframe
             title="spotify"
             src="https://open.spotify.com/embed?uri=spotify:artist:0OiYrpibZx4wUXrcjY8Kbb"
@@ -59,7 +91,7 @@ class EPKView extends React.Component {
             allowTransparency="true"
             allow="encrypted-media"
           />
-        </Row>
+        </Row> */}
       </div>
     );
   }

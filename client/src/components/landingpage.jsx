@@ -24,7 +24,7 @@ class LandingPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="landingpage">
         <div style={styles.logocontainer}>
           <img src={logo} style={styles.logo} alt="" />
           <div style={styles.beatbook}>beatbook</div>

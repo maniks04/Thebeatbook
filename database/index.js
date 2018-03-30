@@ -124,6 +124,11 @@ const getEpk = async (artistId) => {
   return artist[0];
 };
 
+const getEpkData = async (artistName) => {
+  const artist = await knex.select('*').from('artists').where('artists.artist_name', artistName);
+  return artist[0];
+}
+
 module.exports = {
   registerArtist,
   registerVenue,
@@ -136,4 +141,5 @@ module.exports = {
   getVenueBookings2,
   updateBooking,
   editEPK,
+  getEpkData,
 };

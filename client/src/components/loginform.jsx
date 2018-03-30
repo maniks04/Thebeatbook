@@ -57,7 +57,7 @@ class LoginForm extends React.Component {
             {getFieldDecorator('userName', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
-            <Input id="username" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />,
+            <Input style={styles.input} id="username" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />,
           )}
           </FormItem>
           <FormItem>
@@ -95,3 +95,14 @@ const mapDispatchToProps = dispatch => (
 );
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));
+
+
+const styles = {
+  input: {
+    // opacity: 0.1,
+    type: 'text',
+    backgroundColor: '#3CBC8D',
+    color: 'white',
+  },
+};
+
