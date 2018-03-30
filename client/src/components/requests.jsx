@@ -84,7 +84,8 @@ class Requests extends React.Component {
                       visible={this.state.visible}
                       maskClosable={true}
                       onOk={() => this.setState({ visible: false })}
-                      cancelText={'Edit event'}
+                      cancelText={'Cancel'}
+                      onCancel={() => this.setState({ visible: false })}
                       title={item.booking_title}
                     >
                       <em>{item.artist_name}</em>
@@ -118,6 +119,7 @@ class Requests extends React.Component {
                   name = item.artist_name;
                   subtab.push(
                     <a onClick={() => this.onConfirmClick(item)}>Confirm Event</a>,
+                    <a onClick={() => this.onSeeEventClick(item)}> View Details</a>,
                     <a onClick={() => this.onEpkClick(item)}>See EPK</a>);
                 }
                 return (
@@ -131,9 +133,24 @@ class Requests extends React.Component {
                       maskClosable={true}
                       onOk={() => this.setState({ epkVisible: false })}
                       cancelText={'Cancel'}
+                      onCancel={() => this.setState({ epkVisible: false })}
                       title={item.artist_name}
                     >
                       <EPKView artist={item.artist_id} />
+                    </Modal>
+                    <Modal
+                      visible={this.state.visible}
+                      maskClosable={true}
+                      onOk={() => this.setState({ visible: false })}
+                      cancelText={'Cancel'}
+                      onCancel={() => this.setState({ visible: false })}
+                      title={item.booking_title}
+                    >
+                      <em>{item.artist_name}</em>
+                      <div>Playing {moment(item.start_time).format('MMMM Do YYYY')+' '}
+                           from {moment(item.start_time).format('h:mm')+' '}
+                           til {' ' + moment(item.end_time).format('h:mm')}
+                      </div>
                     </Modal>
                     <div>Trying to gig: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>
                   </List.Item>
