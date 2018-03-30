@@ -56,6 +56,7 @@ CREATE TABLE artists
   artist_contact VARCHAR(100),
   artist_youtube VARCHAR(100),
   artist_spotify VARCHAR(100),
+  artist_contactEmail VARCHAR(40),
   PRIMARY KEY (artist_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );

@@ -48,7 +48,6 @@ app.post('/register/artist', async (req, res) => {
   // helpers.sendEmail(req.body.username, req.body.email)
   const user = await db.getUser(req.body.username);
   req.login(user[0], () => {
-    console.log(req.sessionId);
     res.send(user);
   });
 });
@@ -64,7 +63,6 @@ app.post('/register/venue', async (req, res) => {
   // helpers.sendEmail(req.body.username, req.body.email)
   const user = await db.getUser(req.body.username);
   req.login(user[0], () => {
-    console.log(req.sessionId);
     res.send(user);
   });
 });
@@ -76,7 +74,6 @@ app.post('/login', async (req, res) => {
     if (bcrypt.compareSync(req.body.password, checkUser.password)) {
       const user = await db.getUser(req.body.username);
       req.login(user[0], () => {
-        console.log(req.sessionId);
         res.send(user);
       });
     } else {
@@ -88,12 +85,10 @@ app.post('/login', async (req, res) => {
 });
 
 passport.serializeUser((user, done) => {
-  console.log(user);
   done(null, user);
 });
 
 app.get('/isloggedin', async (req, res) => {
-  console.log('current passport session:', req.session.passport);
   if (req.session.passport && req.session.passport.user) {
     const userInfo = await db.getUser(req.session.passport.user.username);
     res.send(userInfo);
@@ -113,7 +108,6 @@ app.post('/calendar', async (req, res) => {
 });
 
 app.get('/artist/epk', async (req, res) => {
-  console.log(req.query.username);
   const epkInfo = await db.getEpkData(req.query.username);
   res.json(epkInfo);
 });

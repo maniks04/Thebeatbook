@@ -39,6 +39,7 @@ class NormalLoginForm extends React.Component {
         artist_contact: data.epk.artist_contact,
         artist_youtube: data.epk.artist_youtube,
         artist_spotify: data.epk.artist_spotify,
+        artist_contactEmail: data.epk.artist_contactEmail,
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -60,6 +61,7 @@ class NormalLoginForm extends React.Component {
     const { artist_contact } = this.state;
     const { artist_youtube } = this.state;
     const { artist_spotify } = this.state;
+    const { artist_contactEmail } = this.state;
 
     axios.post('/updateEPK', {
       artist_name,
@@ -75,7 +77,7 @@ class NormalLoginForm extends React.Component {
       artist_support,
       artist_contact,
       artist_youtube,
-      artist_spotify,
+      artist_contactEmail,
     }).then(() => {
     }).catch((err) => {
       console.error(err) /* eslint-disable-line */
@@ -92,10 +94,6 @@ class NormalLoginForm extends React.Component {
 
   onChangeTwitter(e) {
     this.setState({ artist_twitter: e.target.value });
-  }
-
-  onChangeSpotify(e) {
-    this.setState({ artist_spotify: e.target.value });
   }
 
   onChangeArtist(e) {
@@ -128,6 +126,10 @@ class NormalLoginForm extends React.Component {
 
   onChangeContact(e) {
     this.setState({ artist_contact: e.target.value });
+  }
+
+  onChangeContactEmail(e) {
+    this.setState({ artist_contactEmail: e.target.value });
   }
 
   onChangeYoutube(e) {
@@ -186,11 +188,18 @@ class NormalLoginForm extends React.Component {
               onChange={val => this.onChangeState(val)}
             />
           </FormItem>
-          <FormItem> Contact Info
+          <FormItem> Contact Number
             <Input
               className="contact"
               placeholder={this.state.artist_contact}
               onChange={val => this.onChangeContact(val)}
+            />
+          </FormItem>
+          <FormItem> Contact Email
+            <Input
+              className="contactEmail"
+              placeholder={this.state.artist_contactEmail}
+              onChange={val => this.onChangeContactEmail(val)}
             />
           </FormItem>
         </Col>

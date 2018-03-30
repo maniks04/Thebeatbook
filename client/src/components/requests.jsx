@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Tabs, List, Modal } from 'antd';
 import axios from 'axios';
-import * as actions from '../actions/index.js';
+import * as actions from '../actions/index.js'; // eslint-disable-line
+import EPKView from './epkView.jsx'; // eslint-disable-line
 
 const moment = require('moment');
 
@@ -18,22 +19,16 @@ class Requests extends React.Component {
       pending: bookings.filter(booking => booking.confirmed === 0),
       confirmed: bookings.filter(booking => booking.confirmed === 1),
       visible: false,
-      // loadingMore: false,
-      // showLoadingMore: true,
+      epkVisible: false,
     };
   }
 
-  onSeeEventClick(item) {
-    console.log(item);
+  onSeeEventClick() {
     this.setState({
       visible: true,
     });
   }
 
-  onSeeVenueDetailsClick(item) {
-  }
-
-  // ADD ABILITY TO UNCONFIRM EVENT
   onConfirmClick(item) {
     axios.patch('/booking', item)
       .then((res) => {
@@ -46,29 +41,16 @@ class Requests extends React.Component {
       }).catch(err => console.log(err));
   }
 
-  onEpkClick(item) {
+  onEpkClick() {
+    this.setState({
+      epkVisible: true,
+    });
   }
-
-  onCancelClick() {
-    //use the modal onCancel method to EDIT events
-  }
-
-  onSelect(info) {
-  }
-
-  callback(key) {
-  }
-
 
   render() {
     const { confirmed, pending } = this.state;
     const isArtist = this.props.store.artist;
-    // const loadMore = showLoadingMore ? (
-    //  <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
-    //    {loadingMore && <Spin />}
-    //    {!loadingMore && <Button onClick={}>loading more</Button>}
-    //  </div>
-    // ) : null;
+
     return (
       <div>
         <Tabs defaultActiveKey="1" onChange={this.callback}>
@@ -93,15 +75,16 @@ class Requests extends React.Component {
                     />
                     <Modal
                       visible={this.state.visible}
-                      maskClosable={true}
+                      maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
-                      cancelText={'Edit event'}
+                      cancelText="Cancel"
+                      onCancel={() => this.setState({ visible: false })}
                       title={item.booking_title}
                     >
                       <em>{item.artist_name}</em>
-                      <div>Playing {moment(item.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(item.start_time).format('h:mm')+' '}
-                           til {' ' + moment(item.end_time).format('h:mm')}
+                      <div>Playing {`${moment(item.start_time).format('MMMM Do YYYY')} `}
+                           from {`${moment(item.start_time).format('h:mm')} `}
+                           til {`${moment(item.end_time).format('h:mm')}`}
                       </div>
                     </Modal>
                     <div>Gig on: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>
@@ -121,10 +104,16 @@ class Requests extends React.Component {
                 const subtab = [];
                 if (isArtist === true) {
                   name = item.venue_name;
-                  subtab.push(<a onClick={() => this.onSeeVenueDetailsClick(item)}>See Venue Details</a>);
+                  subtab.push(
+                    <a onClick={() => this.onSeeVenueDetailsClick(item)}>
+                      See Venue Details
+                    </a>);
                 } else {
                   name = item.artist_name;
-                  subtab.push(<a onClick={() => this.onConfirmClick(item)}>Confirm Event</a>, <a>See EPK</a>);
+                  subtab.push(
+                    <a onClick={() => this.onConfirmClick(item)}>Confirm Event</a>,
+                    <a onClick={() => this.onSeeEventClick(item)}> View Details</a>,
+                    <a onClick={() => this.onEpkClick(item)}>See EPK</a>);
                 }
                 return (
                   <List.Item actions={subtab}>
@@ -132,6 +121,30 @@ class Requests extends React.Component {
                       title={<a href="https://ant.design">{name}</a>}
                       description={item.booking_description}
                     />
+                    <Modal
+                      visible={this.state.epkVisible}
+                      maskClosable={true} // eslint-disable-line
+                      onOk={() => this.setState({ epkVisible: false })}
+                      cancelText="Cancel"
+                      onCancel={() => this.setState({ epkVisible: false })}
+                      title={item.artist_name}
+                    >
+                      <EPKView artist={item.artist_id} />
+                    </Modal>
+                    <Modal
+                      visible={this.state.visible}
+                      maskClosable={true} // eslint-disable-line
+                      onOk={() => this.setState({ visible: false })}
+                      cancelText="Cancel"
+                      onCancel={() => this.setState({ visible: false })}
+                      title={item.booking_title}
+                    >
+                      <em>{item.artist_name}</em>
+                      <div>Playing {`${moment(item.start_time).format('MMMM Do YYYY')} `}
+                           from {`${moment(item.start_time).format('h:mm')} `}
+                           til {`${moment(item.end_time).format('h:mm')}`}
+                      </div>
+                    </Modal>
                     <div>Trying to gig: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>
                   </List.Item>
                 );
