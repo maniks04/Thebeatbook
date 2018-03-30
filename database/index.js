@@ -107,6 +107,7 @@ const editEPK = async (info) => {
     artist_contact: info.artist_contact,
     artist_youtube: info.artist_youtube,
     artist_spotify: info.artist_spotify,
+    artist_contactEmail: info.artist_contactEmail,
   });
 };
 
