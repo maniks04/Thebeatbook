@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Tabs, List, Modal } from 'antd';
 import axios from 'axios';
-import * as actions from '../actions/index.js';
-import EPKView from './epkView.jsx';
+import * as actions from '../actions/index.js'; // eslint-disable-line
+import EPKView from './epkView.jsx'; // eslint-disable-line
 
 const moment = require('moment');
 
@@ -20,8 +20,6 @@ class Requests extends React.Component {
       confirmed: bookings.filter(booking => booking.confirmed === 1),
       visible: false,
       epkVisible: false,
-      // loadingMore: false,
-      // showLoadingMore: true,
     };
   }
 
@@ -29,9 +27,6 @@ class Requests extends React.Component {
     this.setState({
       visible: true,
     });
-  }
-
-  onSeeVenueDetailsClick() {
   }
 
   onConfirmClick(item) {
@@ -46,12 +41,10 @@ class Requests extends React.Component {
       }).catch(err => console.log(err));
   }
 
-  onEpkClick(item) {
+  onEpkClick() {
     this.setState({
       epkVisible: true,
-    })
-    console.log('epk clicked', item);
-    return (<EPKView artist={item.artist_id} />);
+    });
   }
 
   render() {
@@ -82,16 +75,16 @@ class Requests extends React.Component {
                     />
                     <Modal
                       visible={this.state.visible}
-                      maskClosable={true}
+                      maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
-                      cancelText={'Cancel'}
+                      cancelText="Cancel"
                       onCancel={() => this.setState({ visible: false })}
                       title={item.booking_title}
                     >
                       <em>{item.artist_name}</em>
-                      <div>Playing {moment(item.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(item.start_time).format('h:mm')+' '}
-                           til {' ' + moment(item.end_time).format('h:mm')}
+                      <div>Playing {`${moment(item.start_time).format('MMMM Do YYYY')} `}
+                           from {`${moment(item.start_time).format('h:mm')} `}
+                           til {`${moment(item.end_time).format('h:mm')}`}
                       </div>
                     </Modal>
                     <div>Gig on: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>
@@ -130,9 +123,9 @@ class Requests extends React.Component {
                     />
                     <Modal
                       visible={this.state.epkVisible}
-                      maskClosable={true}
+                      maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ epkVisible: false })}
-                      cancelText={'Cancel'}
+                      cancelText="Cancel"
                       onCancel={() => this.setState({ epkVisible: false })}
                       title={item.artist_name}
                     >
@@ -140,16 +133,16 @@ class Requests extends React.Component {
                     </Modal>
                     <Modal
                       visible={this.state.visible}
-                      maskClosable={true}
+                      maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
-                      cancelText={'Cancel'}
+                      cancelText="Cancel"
                       onCancel={() => this.setState({ visible: false })}
                       title={item.booking_title}
                     >
                       <em>{item.artist_name}</em>
-                      <div>Playing {moment(item.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(item.start_time).format('h:mm')+' '}
-                           til {' ' + moment(item.end_time).format('h:mm')}
+                      <div>Playing {`${moment(item.start_time).format('MMMM Do YYYY')} `}
+                           from {`${moment(item.start_time).format('h:mm')} `}
+                           til {`${moment(item.end_time).format('h:mm')}`}
                       </div>
                     </Modal>
                     <div>Trying to gig: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>
