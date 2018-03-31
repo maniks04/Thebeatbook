@@ -50,12 +50,12 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
             ),
             onOk() {
               message.success('Your booking request has been sent!');
-              console.log('local format', momentStart.local().format('YYYY-MM-DD h:mm:ss'));
+              console.log('local format', momentStart.local().format());
               console.log('UTC format', momentStart.utc().format());
               const title = $('.title').val();
               const description = $('.description').val();
-              const startTime = momentStart.local().format('YYYY-MM-DD h:mm:ss');//<<<<<use this
-              const endTime = momentEnd.local().format('YYYY-MM-DD h:mm:ss');
+              const startTime = momentStart.local().format();//<<<<<use this old format query: 'YYYY-MM-DD h:mm:ss'
+              const endTime = momentEnd.local().format();
               if (title) {
                 $('#calendar').fullCalendar(
                   'renderEvent',
@@ -79,10 +79,12 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                   confirmed: 0,
                 };
                 const newUTCBooking = Object.assign({}, newLocalBooking, { /* eslint-disable-line */
-                  start_time: startTime.utc().format(),
-                  end_time: endTime.utc().format(),
+                  start_time: momentStart.utc().format(),
+                  end_time: momentEnd.utc().format(),
                 });
                 saveToStore(newLocalBooking);
+                console.log('new local booking object', newLocalBooking);
+                console.log('new utc booking object', newUTCBooking);
                 axios.post('/calendar', newUTCBooking).then(() => {
                 }).catch((err) => {
                   console.error(err) /* eslint-disable-line */
@@ -100,13 +102,14 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
       events(start, end, timezone, callback) {
         const events = [];
         bookings.forEach((event) => {
-
+          const startLocal = moment.utc(event.start_time).local().format();
+          const endLocal = moment.utc(event.end_time).local().format();
           //use moment to convert to local time
           events.push({
             title: event.booking_title,
             description: event.booking_description,
-            start: event.start_time,
-            end: event.end_time,
+            start: startLocal,
+            end: endLocal,
             id: event.booking_id,
           });
         });
