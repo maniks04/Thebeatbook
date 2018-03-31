@@ -57,7 +57,7 @@ const getUser = async (username) => {
     const bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings];
   }
-  const venue = await getVenue(user[0].user_id);
+  const venue = await getVenueById(user[0].user_id);
   const bookings = await getVenueBookings2(venue.venue_id);
   return [user[0], venue, bookings];
 };
@@ -67,12 +67,29 @@ const getArtist = async (userId) => {
   return artist[0];
 };
 
-const getVenue = async (userId) => {
+const getVenueById = async (userId) => {
   const venue = await knex.select('*').from('venues').where('venues.user_id', userId);
   return venue[0];
 };
 
-const getVenues = city => knex.select('*').from('venues').where('venues.venue_city', city);
+const getVenueDetails = async (venue_id) => {
+  const venue = await knex.select('*').from('venues').where('venues.venue_id', venue_id);
+  return venue[0];
+};
+
+const updateVenue = async (info) => {
+  await knex('venues').where('venue_id', info.venueId).update({
+    venue_city: info.venue_city,
+    venue_state: info.venue_state,
+    venue_name: info.venue_name,
+    venue_address: info.venue_address,
+    capacity: info.capacity,
+    venue_stage: info.venue_stage,
+    venue_description: info.venue_description,
+  });
+};
+
+const getVenuesByCity = city => knex.select('*').from('venues').where('venues.venue_city', city);
 
 const addBooking = async (info) => {
   await knex('bookings').insert({
@@ -134,10 +151,12 @@ module.exports = {
   getUser,
   checkCredentials,
   addBooking,
-  getVenue,
-  getVenues,
+  getVenueById,
+  getVenuesByCity,
   getEpk,
   getVenueBookings2,
   updateBooking,
   editEPK,
+  getVenueDetails,
+  updateVenue,
 };

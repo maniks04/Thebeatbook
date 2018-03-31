@@ -37,7 +37,7 @@ export const submitLogin = (username, password) => dispatch => axios({
       dispatch(setArtist(res.data[1].artist_id));
     } if (type === 'venue') {
       dispatch(loadVenuePage(res.data));
-      dispatch(setVenue(res.data[1].artist_id));
+      dispatch(setVenue(res.data[1].venue_id));
     }
   }
 });
