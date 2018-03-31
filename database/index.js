@@ -53,14 +53,16 @@ const registerVenue = async (username, password, email, venueName, address, city
 
 const getUser = async (username) => {
   const user = await knex.select('*').from('users').where('username', username);
+  let bookings;
   if (user[0].user_type === 'artist') {
     const artist = await getArtist(user[0].user_id);
-    const bookings = await getArtistBookings2(artist.artist_id);
+    bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings];
-  }
-  const venue = await getVenue(user[0].user_id);
-  const bookings = await getVenueBookings2(venue.venue_id);
-  return [user[0], venue, bookings];
+  } 
+    const venue = await getVenue(user[0].user_id);
+    bookings = await getVenueBookings2(venue.venue_id);
+    return [user[0], venue, bookings];
+  
 };
 
 const getArtist = async (userId) => {
@@ -78,7 +80,7 @@ const getVenues = city => knex.select('*').from('venues').where('venues.venue_ci
 const addBooking = async (info) => {
   await knex('bookings').insert({
     artist_id: info.artistId,
-    venue_id: info.venueId,
+    venue_id: info.venueId || 0,
     start_time: info.start_time,
     end_time: info.end_time,
     booking_description: info.booking_description,
