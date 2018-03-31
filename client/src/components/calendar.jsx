@@ -1,9 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
 import 'fullcalendar';
-import { Modal, Form, Input } from 'antd';
+import { Modal, Form, Input, TimePicker, message } from 'antd';
 import axios from 'axios';
-// const moment = require('moment')/* eslint-disable-line */; // check back in a couple days
+const moment = require('moment')/* eslint-disable-line */; // check back in a couple days
 
 const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName) => {
   $(function () { /* eslint-disable-line */
@@ -23,51 +23,69 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
 
       select(start, end) {
         if (editable) {
+
+          let momentStart;
+          let momentEnd;
+          let setStart = (value) => {momentStart = value};
+          let setEnd = (value) => {momentEnd = value};
           Modal.confirm({
             title: 'Event Info',
             content: (
               <div>
                 <Form layout="horizontal">
                   <Form.Item label="Event Title" required="true">
-                    <Input className="title" placeholder="Super Awsome Event" />
+                    <Input className="title" placeholder="Name Your Proposed Event Here" />
                   </Form.Item>
                   <Form.Item label="Event Description">
-                    <Input className="description" placeholder="Super Awsome Event Description" />
+                    <Input className="description" placeholder="Give some details about the event here..." />
+                  </Form.Item>
+                  <Form.Item label="Start Time">
+                    <TimePicker className="start" defaultValue={moment(start, "HH:mm")} format="HH:mm" minuteStep={15} onChange={value=>setStart(value)} />
+                  </Form.Item>
+                  <Form.Item label="End Time">
+                    <TimePicker className="end" defaultValue={moment(end, "HH:mm")} format="HH:mm" minuteStep={15} onChange={value=>setEnd(value)} />
                   </Form.Item>
                 </Form>
               </div>
             ),
             onOk() {
+              message.success('Your booking request has been sent!');
+              console.log('local format', momentStart.local().format('YYYY-MM-DD h:mm:ss'));
+              console.log('UTC format', momentStart.utc().format());
+              // console.log(moment($('.start').val()).format())
               const title = $('.title').val();
               const description = $('.description').val();
+              //grab start and end times
+              const startTime = momentStart.local().format('YYYY-MM-DD h:mm:ss');//<<<<<use this
+              const endTime = momentEnd.local().format('YYYY-MM-DD h:mm:ss');
               if (title) {
                 $('#calendar').fullCalendar(
                   'renderEvent',
                   {
                     title,
-                    start,
-                    end,
+                    startTime,
+                    endTime,
                     description,
                     allDay: false,
                   },
                   true, // sticks to page so it doenst fall off when changing calendar vies month week etc...
                 );
-                const newBooking = {
+                const newLocalBooking = {
                   booking_title: title,
                   booking_description: description,
-                  start_time: start.format('YYYY-MM-DD h:mm:ss'),
-                  end_time: end.format('YYYY-MM-DD h:mm:ss'),
+                  start_time: startTime,
+                  end_time: endTime,
                   artistId,
                   venueId,
                   venue_name: venueName,
                   confirmed: 0,
                 };
-                const newBooking2 = Object.assign({}, newBooking, { /* eslint-disable-line */
-                  start_time: start.format('YYYY-MM-DD h:mm:ss'),
-                  end_time: end.format('YYYY-MM-DD h:mm:ss'),
+                const newUTCBooking = Object.assign({}, newLocalBooking, { /* eslint-disable-line */
+                  start_time: startTime.utc().format(),
+                  end_time: endTime.utc().format(),
                 });
-                saveToStore(newBooking);
-                axios.post('/calendar', newBooking).then(() => {
+                saveToStore(newLocalBooking);
+                axios.post('/calendar', newUTCBooking).then(() => {
                 }).catch((err) => {
                   console.error(err) /* eslint-disable-line */
                 });
@@ -84,6 +102,8 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
       events(start, end, timezone, callback) {
         const events = [];
         bookings.forEach((event) => {
+
+          //use moment to convert to local time
           events.push({
             title: event.booking_title,
             description: event.booking_description,
