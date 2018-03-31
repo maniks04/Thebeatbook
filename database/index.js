@@ -58,11 +58,18 @@ const getUser = async (username) => {
     const artist = await getArtist(user[0].user_id);
     bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings];
+<<<<<<< HEAD
   } 
     const venue = await getVenue(user[0].user_id);
     bookings = await getVenueBookings2(venue.venue_id);
     return [user[0], venue, bookings];
   
+=======
+  }
+  const venue = await getVenueById(user[0].user_id);
+  const bookings = await getVenueBookings2(venue.venue_id);
+  return [user[0], venue, bookings];
+>>>>>>> 68011ef77b7897af3782f4b51ed7073eca39ef49
 };
 
 const getArtist = async (userId) => {
@@ -70,12 +77,29 @@ const getArtist = async (userId) => {
   return artist[0];
 };
 
-const getVenue = async (userId) => {
+const getVenueById = async (userId) => {
   const venue = await knex.select('*').from('venues').where('venues.user_id', userId);
   return venue[0];
 };
 
-const getVenues = city => knex.select('*').from('venues').where('venues.venue_city', city);
+const getVenueDetails = async (venue_id) => {
+  const venue = await knex.select('*').from('venues').where('venues.venue_id', venue_id);
+  return venue[0];
+};
+
+const updateVenue = async (info) => {
+  await knex('venues').where('venue_id', info.venueId).update({
+    venue_city: info.venue_city,
+    venue_state: info.venue_state,
+    venue_name: info.venue_name,
+    venue_address: info.venue_address,
+    capacity: info.capacity,
+    venue_stage: info.venue_stage,
+    venue_description: info.venue_description,
+  });
+};
+
+const getVenuesByCity = city => knex.select('*').from('venues').where('venues.venue_city', city);
 
 const addBooking = async (info) => {
   await knex('bookings').insert({
@@ -110,6 +134,7 @@ const editEPK = async (info) => {
     artist_contact: info.artist_contact,
     artist_youtube: info.artist_youtube,
     artist_spotify: info.artist_spotify,
+    artist_contactEmail: info.artist_contactEmail,
   });
 };
 
@@ -136,10 +161,12 @@ module.exports = {
   getUser,
   checkCredentials,
   addBooking,
-  getVenue,
-  getVenues,
+  getVenueById,
+  getVenuesByCity,
   getEpk,
   getVenueBookings2,
   updateBooking,
   editEPK,
+  getVenueDetails,
+  updateVenue,
 };

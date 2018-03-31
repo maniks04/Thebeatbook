@@ -115,7 +115,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
         callback(events);
       },
 
-      minTime: '10:00:00',
+      minTime: '6:00:00',
       maxTime: '26:00:00',
 
       eventClick(event) {

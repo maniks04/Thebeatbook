@@ -48,7 +48,6 @@ app.post('/register/artist', async (req, res) => {
   // helpers.sendEmail(req.body.username, req.body.email)
   const user = await db.getUser(req.body.username);
   req.login(user[0], () => {
-    console.log(req.sessionId);
     res.send(user);
   });
 });
@@ -64,7 +63,6 @@ app.post('/register/venue', async (req, res) => {
   // helpers.sendEmail(req.body.username, req.body.email)
   const user = await db.getUser(req.body.username);
   req.login(user[0], () => {
-    console.log(req.sessionId);
     res.send(user);
   });
 });
@@ -76,7 +74,6 @@ app.post('/login', async (req, res) => {
     if (bcrypt.compareSync(req.body.password, checkUser.password)) {
       const user = await db.getUser(req.body.username);
       req.login(user[0], () => {
-        console.log(req.sessionId);
         res.send(user);
       });
     } else {
@@ -88,12 +85,10 @@ app.post('/login', async (req, res) => {
 });
 
 passport.serializeUser((user, done) => {
-  console.log(user);
   done(null, user);
 });
 
 app.get('/isloggedin', async (req, res) => {
-  console.log('current passport session:', req.session.passport);
   if (req.session.passport && req.session.passport.user) {
     const userInfo = await db.getUser(req.session.passport.user.username);
     res.send(userInfo);
@@ -106,14 +101,13 @@ app.get('/logout', (req, res) => {
   res.send();
 });
 
-/** ****************************** Calendar ********************************** */
+/** ****************************** Calendar ********************************* */
 app.post('/calendar', async (req, res) => {
   await db.addBooking(req.body);
   res.status(200).end();
 });
 
 app.get('/artist/epk', async (req, res) => {
-  console.log(req.query.username);
   const epkInfo = await db.getEpkData(req.query.username);
   res.json(epkInfo);
 });
@@ -123,9 +117,11 @@ app.get('/artist/city', async (req, res) => {
   res.json(artistList);
 });
 
+
+/* ******************************** Venue *********************************** */
 app.get('/venues', async (req, res) => {
   const { city } = req.query;
-  const venues = await db.getVenues(city);
+  const venues = await db.getVenuesByCity(city);
   res.status(200).send({ venues });
 });
 
@@ -141,6 +137,17 @@ app.patch('/booking', async ({ body }, res) => {
   res.status(200).send({ bookings });
 });
 
+app.get('/venueDetails', async (req, res) => {
+  const venueDetails = await db.getVenueDetails(req.query.venue_id);
+  res.status(200).send(venueDetails);
+});
+
+app.post('/updateVenue', async (req, res) => {
+  db.updateVenue(req.body);
+  res.status(200).send();
+});
+
+/* ******************************** EPK ************************************* */
 app.post('/epkImgUpload', async (req, res) => {
   res.status(200).send();
 });
