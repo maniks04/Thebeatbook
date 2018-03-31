@@ -52,10 +52,8 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
               message.success('Your booking request has been sent!');
               console.log('local format', momentStart.local().format('YYYY-MM-DD h:mm:ss'));
               console.log('UTC format', momentStart.utc().format());
-              // console.log(moment($('.start').val()).format())
               const title = $('.title').val();
               const description = $('.description').val();
-              //grab start and end times
               const startTime = momentStart.local().format('YYYY-MM-DD h:mm:ss');//<<<<<use this
               const endTime = momentEnd.local().format('YYYY-MM-DD h:mm:ss');
               if (title) {
