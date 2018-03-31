@@ -5,6 +5,7 @@ import { Tabs, List, Modal } from 'antd';
 import axios from 'axios';
 import * as actions from '../actions/index.js'; // eslint-disable-line
 import EPKView from './epkView.jsx'; // eslint-disable-line
+import VenueDetailView from './venueDetailView.jsx';
 
 const moment = require('moment');
 
@@ -19,13 +20,12 @@ class Requests extends React.Component {
       confirmed: bookings.filter(booking => booking.confirmed === 1),
       visible: false,
       epkVisible: false,
+      venueDetailVisible: false,
     };
   }
 
   onSeeEventClick() {
-    this.setState({
-      visible: true,
-    });
+    this.setState({ visible: true });
   }
 
   onConfirmClick(item) {
@@ -40,8 +40,8 @@ class Requests extends React.Component {
       }).catch(err => console.log(err));
   }
 
-  onSeeVenueDetailsClick(item) {
-    console.log('venueDetalClick', item);
+  onSeeVenueDetailsClick() {
+    this.setState({ venueDetailVisible: true });
   }
 
   onEpkClick() {
@@ -110,6 +110,18 @@ class Requests extends React.Component {
                   subtab.push(
                     <a onClick={() => this.onSeeVenueDetailsClick(item)}>
                       See Venue Details
+                      <Modal
+                        visible={this.state.venueDetailVisible}
+                        onOk={() => this.setState({ venueDetailVisible: false })}
+                        cancelText="Cancel"
+                        onCancel={() => this.setState({ venueDetailVisible: false })}
+                        title={item.booking_title}
+                      >
+                        <em>{item.artist_name}</em>
+                        <div>
+                          <VenueDetailView venueId={item.venue_id} />
+                        </div>
+                      </Modal>
                     </a>);
                 } else {
                   name = item.artist_name;
