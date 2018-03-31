@@ -65,11 +65,11 @@ CREATE TABLE artists
 CREATE TABLE bookings
 (
   booking_id INT NOT NULL AUTO_INCREMENT,
-  artist_id INT NOT NULL,
-  venue_id INT NOT NULL,
+  artist_id INT DEFAULT 0,
+  venue_id INT DEFAULT 0,
   booking_title VARCHAR(50),
-  start_time DATETIME,
-  end_time DATETIME,
+  start_time VARCHAR(50),
+  end_time VARCHAR(50),
   booking_description VARCHAR(8000),
   confirmed boolean DEFAULT FALSE,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),

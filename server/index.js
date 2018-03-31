@@ -133,7 +133,7 @@ app.get('/venueCalendar', async (req, res) => {
 
 app.patch('/booking', async ({ body }, res) => {
   await db.updateBooking(body);
-  const bookings = await db.getVenueBookings2(body.venue_id);
+  let bookings = await db.getVenueBookings2(body.venue_id);
   res.status(200).send({ bookings });
 });
 
