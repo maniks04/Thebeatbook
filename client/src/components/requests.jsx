@@ -10,7 +10,6 @@ const moment = require('moment');
 
 const { TabPane } = Tabs;
 //* ******************************************DO NOT LINT, WORK IN PROGRESS*******************
-
 class Requests extends React.Component {
   constructor(props) {
     super(props);
@@ -39,6 +38,10 @@ class Requests extends React.Component {
           confirmed: updatedBookings.filter(booking => booking.confirmed === 1),
         });
       }).catch(err => console.log(err));
+  }
+
+  onSeeVenueDetailsClick(item) {
+    console.log('venueDetalClick', item);
   }
 
   onEpkClick() {

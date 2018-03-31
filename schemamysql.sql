@@ -33,6 +33,7 @@ CREATE TABLE venues
   venue_city VARCHAR(25),
   venue_state VARCHAR(25),
   venue_address VARCHAR (25),
+  venue_stage VARCHAR(1000) DEFAULT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   PRIMARY KEY (venue_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)

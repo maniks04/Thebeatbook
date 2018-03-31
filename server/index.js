@@ -101,7 +101,7 @@ app.get('/logout', (req, res) => {
   res.send();
 });
 
-/** ****************************** Calendar ********************************** */
+/** ****************************** Calendar ********************************* */
 app.post('/calendar', async (req, res) => {
   await db.addBooking(req.body);
   res.status(200).end();
@@ -117,9 +117,11 @@ app.get('/artist/city', async (req, res) => {
   res.json(artistList);
 });
 
+
+/* ******************************** Venue *********************************** */
 app.get('/venues', async (req, res) => {
   const { city } = req.query;
-  const venues = await db.getVenues(city);
+  const venues = await db.getVenuesByCity(city);
   res.status(200).send({ venues });
 });
 
@@ -135,6 +137,17 @@ app.patch('/booking', async ({ body }, res) => {
   res.status(200).send({ bookings });
 });
 
+app.get('/venueDetails', async (req, res) => {
+  const venueDetails = await db.getVenueDetails(req.query.venue_id);
+  res.status(200).send(venueDetails);
+});
+
+app.post('/updateVenue', async (req, res) => {
+  db.updateVenue(req.body);
+  res.status(200).send();
+});
+
+/* ******************************** EPK ************************************* */
 app.post('/epkImgUpload', async (req, res) => {
   res.status(200).send();
 });
