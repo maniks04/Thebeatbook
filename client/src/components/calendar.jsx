@@ -43,26 +43,25 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                     <TimePicker className="start" defaultValue={moment(start, "HH:mm")} format="HH:mm" minuteStep={15} onChange={value=>setStart(value)} />
                   </Form.Item>
                   <Form.Item label="End Time">
-                    <TimePicker className="end" defaultValue={moment(end, "HH:mm")} format="HH:mm" minuteStep={15} onChange={value=>setEnd(value)} />
+                    <TimePicker className="end" defaultValue={moment(start, "HH:mm")} format="HH:mm" minuteStep={15} onChange={value=>setEnd(value)} />
                   </Form.Item>
                 </Form>
               </div>
             ),
             onOk() {
               message.success('Your booking request has been sent!');
-              console.log('local format', momentStart.local().format());
-              console.log('UTC format', momentStart.utc().format());
+              console.log(artistId);
               const title = $('.title').val();
               const description = $('.description').val();
-              const startTime = momentStart.local().format();//<<<<<use this old format query: 'YYYY-MM-DD h:mm:ss'
+              const startTime = momentStart.local().format();
               const endTime = momentEnd.local().format();
               if (title) {
                 $('#calendar').fullCalendar(
                   'renderEvent',
                   {
                     title,
-                    startTime,
-                    endTime,
+                    start: startTime,
+                    end: endTime,
                     description,
                     allDay: false,
                   },
