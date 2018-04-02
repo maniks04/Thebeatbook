@@ -19,7 +19,7 @@ class Requests extends React.Component {
       pending: bookings.filter(booking => booking.confirmed === 0),
       confirmed: bookings.filter(booking => booking.confirmed === 1),
       visible: false,
-      booking_description: null,
+      booking_description: null, // eslint-disable-line
       booking_title: null,
       start_time: null,
       end_time: null,
@@ -31,17 +31,13 @@ class Requests extends React.Component {
   }
 
   onSeeEventClick(item) {
-    console.log(item);
     this.setState({
       visible: true,
-      booking_description: item.booking_description,
+      booking_description: item.booking_description, // eslint-disable-line
       booking_title: item.booking_title,
       start_time: item.start_time,
-      end_time: item.end_time
+      end_time: item.end_time,
     });
-  }
-
-  onSeeVenueDetailsClick(item) {
   }
 
   onConfirmClick(item) {
@@ -53,7 +49,7 @@ class Requests extends React.Component {
           pending: updatedBookings.filter(booking => booking.confirmed === 0),
           confirmed: updatedBookings.filter(booking => booking.confirmed === 1),
         });
-      }).catch(err => console.log(err));
+      }).catch(err => console.error(err));
   }
 
   onSeeVenueDetailsClick() {
@@ -80,7 +76,7 @@ class Requests extends React.Component {
               dataSource={confirmed}
               renderItem={(item) => {
                 let name;
-                let time = item.start_time || '';
+                const time = item.start_time || '';
                 if (isArtist === true) {
                   name = item.venue_name;
                 } else {
@@ -96,13 +92,13 @@ class Requests extends React.Component {
                       visible={this.state.visible}
                       maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
-                      cancelText={'Edit event'}
+                      cancelText="Edit event"
                       title={this.state.booking_title}
                     >
                       <em>{item.artist_name}</em>
-                      <div>Playing {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(this.state.start_time).format('h:mm')+' '}
-                           til {' ' + moment(this.state.end_time).format('h:mm')}
+                      <div>Playing {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
+                           from {`${moment(this.state.start_time).format('h:mm')} `}
+                           til {` ${moment(this.state.end_time).format('h:mm')}`}
                       </div>
                     </Modal>
                     <div>Gig on: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>

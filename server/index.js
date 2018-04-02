@@ -58,7 +58,8 @@ app.post('/register/venue', async (req, res) => {
   const registration = await db.registerVenue(req.body.username, hash, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);//eslint-disable-line
   if (registration === 'username already exists') {
     return res.send('username already exists');
-  } if (registration === 'username already exists') {
+  }
+  if (registration === 'username already exists') {
     return res.send('email already exists');
   }
   // helpers.sendEmail(req.body.username, req.body.email)

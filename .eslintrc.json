@@ -7,7 +7,7 @@
     },
     "rules": {
         "react/prop-types": "off",
-        "import/extensions": "warn",
+        "import/extensions": "off",
         "no-use-before-define": "off",
         "max-len": ["warn", { "code": 120 }],
         "no-console": "off",

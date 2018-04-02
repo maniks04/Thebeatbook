@@ -6,7 +6,7 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import * as actions from '../actions/index.js';
 import calendar from './calendar.jsx';
 import Requests from './requests.jsx';
-import VenueDetails from './venueDetails.jsx'
+import VenueDetails from './venueDetails.jsx';
 
 const { Header, Content, Footer, Sider } = Layout;//eslint-disable-line
 
@@ -39,8 +39,7 @@ class Venue extends React.Component {
       return (<Requests />);
     }
     if (key === '4') {
-      console.log(this.props.store)
-      return (<VenueDetails venueId={this.props.store.venueId}/>);
+      return (<VenueDetails venueId={this.props.store.venueId} />);
     }
   }
 

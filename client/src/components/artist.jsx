@@ -31,8 +31,7 @@ class Artist extends React.Component {
   view() {
     const { key } = this.state;
     const artist = this.props.store.artistId;
-    const artist2 = parseInt(artist.toString());
-    console.log(artist)
+    const artist2 = parseInt(artist.toString()); /* eslint-disable-line */
     if (key === '1') {
       return calendar(this.props.store.bookings, true, artist2, null, this.props.actions.addBooking);
     }
