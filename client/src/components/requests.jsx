@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Tabs, List, Modal } from 'antd';
+import { Tabs, List, Modal, message } from 'antd';
 import axios from 'axios';
 import * as actions from '../actions/index.js'; // eslint-disable-line
 import EPKView from './epkView.jsx'; // eslint-disable-line
@@ -50,6 +50,7 @@ class Requests extends React.Component {
           pending: updatedBookings.filter(booking => booking.confirmed === 0),
           confirmed: updatedBookings.filter(booking => booking.confirmed === 1),
         });
+        message.success('This event has been confirmed! We have notified the Artist');
       }).catch(err => console.log(err));
   }
 

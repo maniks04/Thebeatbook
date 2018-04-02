@@ -70,6 +70,11 @@ const getArtist = async (userId) => {
   return artist[0];
 };
 
+const getVenue = async (userId) => {
+  const venue = await knex.select('*').from('venues').where('venues.user_id', userId);
+  return venue[0];
+};
+
 const getVenueById = async (userId) => {
   const venue = await knex.select('*').from('venues').where('venues.user_id', userId);
   return venue[0];
