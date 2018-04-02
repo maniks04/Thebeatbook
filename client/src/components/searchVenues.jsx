@@ -77,7 +77,7 @@ class SearchVenues extends React.Component {
       },
     }).then((res) => {
       this.setState({
-        venueBookings: res.data.filter(booking => booking.denied === 0),
+        venueBookings: res.data.filter(booking => booking.denied === 0 && booking.confirmed === 1),
       });
       Modal.info({
         title: 'Venue Calendar',
