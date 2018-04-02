@@ -69,13 +69,18 @@ const getArtist = async (userId) => {
   return artist[0];
 };
 
+const getVenue = async (userId) => {
+  const venue = await knex.select('*').from('venues').where('venues.user_id', userId);
+  return venue[0];
+};
+
 const getVenueById = async (userId) => {
   const venue = await knex.select('*').from('venues').where('venues.user_id', userId);
   return venue[0];
 };
 
 const getVenueDetails = async (venue_id) => {
-  const venue = await knex.select('*').from('venues').where('venues.venue_id', venue_id);
+  const venue = await knex.select('*').from('venues').where('venue_id', venue_id);
   return venue[0];
 };
 
@@ -105,10 +110,17 @@ const addBooking = async (info) => {
   });
 };
 
-const updateBooking = async (info) => {
+const updateConfirmBooking = async (info) => {
   const toggle = info.confirmed === 0 ? 1 : 0;
   await knex('bookings').where('booking_id', info.booking_id).update({
     confirmed: toggle,
+  });
+};
+
+const updateDenyBooking = async (info) => {
+  const toggle = info.denied === 0 ? 1 : 0;
+  await knex('bookings').where('booking_id', info.booking_id).update({
+    denied: toggle,
   });
 };
 
@@ -159,7 +171,8 @@ module.exports = {
   getVenuesByCity,
   getEpk,
   getVenueBookings2,
-  updateBooking,
+  updateConfirmBooking,
+  updateDenyBooking,
   editEPK,
   getVenueDetails,
   updateVenue,
