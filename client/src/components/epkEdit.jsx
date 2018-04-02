@@ -79,8 +79,10 @@ class NormalLoginForm extends React.Component {
       artist_youtube,
       artist_contactEmail,
     }).then(() => {
+      message.success('Your EPK has been edited!');
     }).catch((err) => {
-      console.error(err) /* eslint-disable-line */
+      message.error('Something went wrong with your EKP edit.');
+      console.error(err);
     });
   }
 

@@ -58,11 +58,10 @@ const getUser = async (username) => {
     const artist = await getArtist(user[0].user_id);
     bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings];
-  } 
-  const venue = await getVenue(user[0].user_id);
+  }
+  const venue = await getVenueById(user[0].user_id);
   bookings = await getVenueBookings2(venue.venue_id);
   return [user[0], venue, bookings];
-  
 };
 
 const getArtist = async (userId) => {

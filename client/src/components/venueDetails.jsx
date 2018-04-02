@@ -79,6 +79,7 @@ class NormalLoginForm extends React.Component {
       venue_state,
       venueId,
     }).then(() => {
+      message.success('Your EPK has been edited!');
     }).catch((err) => {
       console.error(err) /* eslint-disable-line */
     });
