@@ -16,8 +16,9 @@ class Requests extends React.Component {
     super(props);
     const { bookings } = this.props.store;
     this.state = {
-      pending: bookings.filter(booking => booking.confirmed === 0),
-      confirmed: bookings.filter(booking => booking.confirmed === 1),
+      pending: bookings.filter(booking => booking.confirmed === 0 && booking.denied === 0),
+      confirmed: bookings.filter(booking => booking.confirmed === 1 && booking.denied === 0),
+      denied: bookings.filter(booking => booking.denied === 1),
       visible: false,
       booking_description: null,
       booking_title: null,
@@ -64,8 +65,13 @@ class Requests extends React.Component {
     });
   }
 
+  onRestoreClick() {
+    
+  }
+
+
   render() {
-    const { confirmed, pending } = this.state;
+    const { confirmed, pending, denied } = this.state;
     const isArtist = this.props.store.artist;
 
     return (
@@ -130,7 +136,7 @@ class Requests extends React.Component {
                         onCancel={() => this.setState({ venueDetailVisible: false })}
                         title={item.booking_title}
                       >
-                        <em>{item.artist_name}</em>
+                        <em>{name}</em>
                         <div>
                           <VenueDetailView venueId={item.venue_id} />
                         </div>
@@ -170,12 +176,68 @@ class Requests extends React.Component {
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
-                      <div>Playing {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
+                      <div>Requesting to play {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
                            from {moment(this.state.start_time).format('h:mm a')+' '}
                            til {' ' + moment(this.state.end_time).format('h:mm a')}
                       </div>
                     </Modal>
                     <div>Trying to gig: {moment(time.slice(0, 10)).format('MMM Do')}</div>
+                  </List.Item>
+                );
+              }}
+            />
+          </TabPane>
+          <TabPane tab="Denied" key="3">
+            <List
+              className="demo-loadmore-list"
+              itemLayout="horizontal"
+              dataSource={denied}
+              renderItem={(item) => {
+                let name;
+                const time = item.start_time || '';
+                const subtab = [];
+                if (isArtist === true) {
+                  name = item.venue_name;
+                } else {
+                  name = item.artist_name;
+                  subtab.push(
+                    <Popconfirm 
+                      title="Are you sure you want to Restore this request(it will move to Pending)?"
+                      onConfirm={() => this.onRestoreClick(item)} 
+                      okText="Yes" cancelText="No">
+                      <a href="#" >Confirm Event</a>
+                    </Popconfirm>,
+                    <a onClick={() => this.onSeeEventClick(item)}> View Details</a>,
+                    <a onClick={() => this.onEpkClick(item)}>See EPK</a>);
+                }
+                return (
+                  <List.Item actions={subtab}>
+                    <List.Item.Meta
+                      title={<em>{name}</em>}
+                      description={<em>{item.booking_description}</em>}
+                    />
+                    <Modal
+                      visible={this.state.epkVisible}
+                      maskClosable={true} // eslint-disable-line
+                      onOk={() => this.setState({ epkVisible: false })}
+                      onCancel={() => this.setState({ epkVisible: false })}
+                      title={item.artist_name}
+                    >
+                      <EPKView artist={item.artist_id} />
+                    </Modal>
+                    <Modal
+                      visible={this.state.visible}
+                      maskClosable={true} // eslint-disable-line
+                      onOk={() => this.setState({ visible: false })}
+                      title={this.state.booking_title}
+                    >
+                      <em>{name}</em>
+                      <div>Initial request sent for {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
+                           from {moment(this.state.start_time).format('h:mm a')+' '}
+                           til {' ' + moment(this.state.end_time).format('h:mm a')}
+                      </div>
+                    </Modal>
+                    <div>Attempted to gig: {moment(time.slice(0, 10)).format('MMM Do')}</div>
                   </List.Item>
                 );
               }}

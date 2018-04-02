@@ -72,6 +72,7 @@ CREATE TABLE bookings
   end_time VARCHAR(50),
   booking_description VARCHAR(8000),
   confirmed boolean DEFAULT FALSE,
+  denied boolean DEFAULT FALSE,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   PRIMARY KEY (booking_id),
   FOREIGN KEY (artist_id) REFERENCES artists (artist_id),
