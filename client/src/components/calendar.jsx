@@ -76,6 +76,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                   venueId,
                   venue_name: venueName,
                   confirmed: 0,
+                  denied: 0,
                 };
                 const newUTCBooking = Object.assign({}, newLocalBooking, { /* eslint-disable-line */
                   start_time: momentStart.utc().format(),

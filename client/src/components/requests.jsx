@@ -65,7 +65,7 @@ class Requests extends React.Component {
     });
   }
 
-  onRestoreClick() {
+  onDenyClick(item) {
     
   }
 
@@ -152,7 +152,13 @@ class Requests extends React.Component {
                       <a href="#" >Confirm Event</a>
                     </Popconfirm>,
                     <a onClick={() => this.onSeeEventClick(item)}> View Details</a>,
-                    <a onClick={() => this.onEpkClick(item)}>See EPK</a>);
+                    <a onClick={() => this.onEpkClick(item)}>See EPK</a>,
+                    <Popconfirm 
+                      title="Are you sure you want to deny this request?"
+                      onConfirm={() => this.onDenyClick(item)} 
+                      okText="Yes" cancelText="No">
+                      <a href="#" >Deny</a>
+                  </Popconfirm>);
                 }
                 return (
                   <List.Item actions={subtab}>
@@ -165,7 +171,7 @@ class Requests extends React.Component {
                       maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ epkVisible: false })}
                       onCancel={() => this.setState({ epkVisible: false })}
-                      title={item.artist_name}
+                      title={name}
                     >
                       <EPKView artist={item.artist_id} />
                     </Modal>
@@ -221,7 +227,7 @@ class Requests extends React.Component {
                       maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ epkVisible: false })}
                       onCancel={() => this.setState({ epkVisible: false })}
-                      title={item.artist_name}
+                      title={name}
                     >
                       <EPKView artist={item.artist_id} />
                     </Modal>
@@ -232,12 +238,12 @@ class Requests extends React.Component {
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
-                      <div>Initial request sent for {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
+                      <div><em>Initial request sent for {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
                            from {moment(this.state.start_time).format('h:mm a')+' '}
                            til {' ' + moment(this.state.end_time).format('h:mm a')}
-                      </div>
+                      </em></div>
                     </Modal>
-                    <div>Attempted to gig: {moment(time.slice(0, 10)).format('MMM Do')}</div>
+                    <div><em>Attempted to gig: {moment(time.slice(0, 10)).format('MMM Do')}</em></div>
                   </List.Item>
                 );
               }}
