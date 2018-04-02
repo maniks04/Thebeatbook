@@ -222,7 +222,7 @@ class Requests extends React.Component {
                       title="Are you sure you want to Restore this request(it will move to Pending)?"
                       onConfirm={() => this.onRestoreClick(item)} 
                       okText="Yes" cancelText="No">
-                      <a href="#" >Confirm Event</a>
+                      <a href="#" >Restore Request</a>
                     </Popconfirm>,
                     <a onClick={() => this.onSeeEventClick(item)}> View Details</a>,
                     <a onClick={() => this.onEpkClick(item)}>See EPK</a>);

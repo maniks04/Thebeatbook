@@ -81,7 +81,7 @@ const getVenueById = async (userId) => {
 };
 
 const getVenueDetails = async (venue_id) => {
-  const venue = await knex.select('*').from('venues').where('venues.venue_id', venue_id);
+  const venue = await knex.select('*').from('venues').where('venue_id', venue_id);
   return venue[0];
 };
 
