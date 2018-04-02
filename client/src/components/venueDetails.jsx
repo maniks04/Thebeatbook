@@ -25,6 +25,7 @@ class NormalLoginForm extends React.Component {
         venue_description: data.venue_description,
         venue_name: data.venue_name,
         venue_state: data.venue_state,
+        venue_website: data.venue_website,
       });
     }).catch((err) => {
       console.error(err);
@@ -59,6 +60,10 @@ class NormalLoginForm extends React.Component {
     this.setState({ venue_city: e.target.value });
   }
 
+  onChangeWebsite(e) {
+    this.setState({ venue_website: e.target.value });
+  }
+
   onClick() {
     const { venueId } = this.props;
     const { capacity } = this.state;
@@ -68,6 +73,7 @@ class NormalLoginForm extends React.Component {
     const { venue_description } = this.state;
     const { venue_name } = this.state;
     const { venue_state } = this.state;
+    const { venue_website } = this.state;
 
     axios.post('/updateVenue', {
       capacity,
@@ -78,6 +84,7 @@ class NormalLoginForm extends React.Component {
       venue_name,
       venue_state,
       venueId,
+      venue_website,
     }).then(() => {
       message.success('Your EPK has been edited!');
     }).catch((err) => {
@@ -101,6 +108,13 @@ class NormalLoginForm extends React.Component {
               className="capacity"
               placeholder={this.state.capacity}
               onChange={val => this.onChangeCapacity(val)}
+            />
+          </FormItem>
+          <FormItem> Venue Website
+            <Input
+              placeholder={this.state.venue_website}
+              className="venue_website"
+              onChange={val => this.onChangeWebsite(val)}
             />
           </FormItem>
         </Col>

@@ -40,6 +40,7 @@ class NormalLoginForm extends React.Component {
         artist_youtube: data.epk.artist_youtube,
         artist_spotify: data.epk.artist_spotify,
         artist_contactEmail: data.epk.artist_contactEmail,
+        artist_website: data.epk.artist_website,
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -62,6 +63,7 @@ class NormalLoginForm extends React.Component {
     const { artist_youtube } = this.state;
     const { artist_spotify } = this.state;
     const { artist_contactEmail } = this.state;
+    const { artist_website } = this.state;
 
     axios.post('/updateEPK', {
       artist_name,
@@ -78,6 +80,7 @@ class NormalLoginForm extends React.Component {
       artist_contact,
       artist_youtube,
       artist_contactEmail,
+      artist_website,
     }).then(() => {
       message.success('Your EPK has been edited!');
     }).catch((err) => {
@@ -140,6 +143,10 @@ class NormalLoginForm extends React.Component {
 
   onChangeSpotify(e) {
     this.setState({ artist_spotify: e.target.value });
+  }
+
+  onChangeWebsite(e) {
+    this.setState({ artist_website: e.target.value });
   }
 
   onChangeImage(info) {
@@ -243,9 +250,10 @@ class NormalLoginForm extends React.Component {
             className="avatar-uploader"
             showUploadList={false}
             action="http://localhost:3000/epkImgUpload"
+            onPreview={val => console.log(val)}
             onChange={val => this.onChangeImage(val)}
           >
-            {imageUrl ? <img src={imageUrl} alt="" /> : uploadButton}
+            {imageUrl ? <img src={imageUrl} width="100%" /> : uploadButton}
           </Upload>
           <FormItem>
             <Button
@@ -302,6 +310,15 @@ class NormalLoginForm extends React.Component {
               className="spotify"
               placeholder={this.state.artist_spotify}
               onChange={val => this.onChangeSpotify(val)}
+            />
+          </FormItem>
+          <FormItem>
+            Personal Website
+            <Input
+              prefix={<Icon type="sound" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              className="website"
+              placeholder={this.state.artist_website}
+              onChange={val => this.onChangeWebsite(val)}
             />
           </FormItem>
         </Col>

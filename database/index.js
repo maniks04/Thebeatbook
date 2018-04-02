@@ -88,6 +88,7 @@ const updateVenue = async (info) => {
     capacity: info.capacity,
     venue_stage: info.venue_stage,
     venue_description: info.venue_description,
+    venue_website: info.venue_website,
   });
 };
 
@@ -127,6 +128,7 @@ const editEPK = async (info) => {
     artist_youtube: info.artist_youtube,
     artist_spotify: info.artist_spotify,
     artist_contactEmail: info.artist_contactEmail,
+    artist_website: info.artist_website,
   });
 };
 

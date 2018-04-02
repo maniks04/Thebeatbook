@@ -154,7 +154,6 @@ class Requests extends React.Component {
                       onOk={() => this.setState({ epkVisible: false })}
                       cancelText="Cancel"
                       onCancel={() => this.setState({ epkVisible: false })}
-                      title={item.artist_name}
                       width="40%"
                     >
                       <EPKView artist={item.artist_id} />

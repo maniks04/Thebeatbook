@@ -40,6 +40,7 @@ class EPKView extends React.Component {
         artist_youtube: splitYoutube,
         artist_spotify: sliceSpot,
         artist_contactEmail: data.epk.artist_contactEmail,
+        artist_website: data.epk.artist_website,
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -84,6 +85,9 @@ class EPKView extends React.Component {
             </h2>
             <h2 style={{ color: 'rgba(0,0,0,.25)' }}><Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />
               {this.state.artist_instagram}
+            </h2>
+            <h2 style={{ color: 'rgba(0,0,0,.25)' }}><Icon type="desktop" style={{ color: 'rgba(0,0,0,.25)' }} />
+              {this.state.artist_website}
             </h2>
           </Col>
           <Col span={16}>

@@ -24,6 +24,7 @@ class VenueDetailView extends React.Component {
         venue_description: data.venue_description,
         venue_name: data.venue_name,
         venue_state: data.venue_state,
+        venue_website: data.venue_website,
       });
     }).catch((err) => {
         console.error(err); /* eslint-disable-line */
@@ -38,6 +39,7 @@ class VenueDetailView extends React.Component {
         <div>Venue Capacity: {this.state.capacity}</div>
         <div>Venue Description: {this.state.venue_description} </div>
         <div> Venue Stage Info: {this.state.venue_stage} </div>
+        <div> Venue Website: {this.state.venue_website} </div>
       </div>
     );
   }
