@@ -110,10 +110,17 @@ const addBooking = async (info) => {
   });
 };
 
-const updateBooking = async (info) => {
+const updateConfirmBooking = async (info) => {
   const toggle = info.confirmed === 0 ? 1 : 0;
   await knex('bookings').where('booking_id', info.booking_id).update({
     confirmed: toggle,
+  });
+};
+
+const updateDenyBooking = async (info) => {
+  const toggle = info.denied === 0 ? 1 : 0;
+  await knex('bookings').where('booking_id', info.booking_id).update({
+    denied: toggle,
   });
 };
 
@@ -163,7 +170,8 @@ module.exports = {
   getVenuesByCity,
   getEpk,
   getVenueBookings2,
-  updateBooking,
+  updateConfirmBooking,
+  updateDenyBooking,
   editEPK,
   getVenueDetails,
   updateVenue,

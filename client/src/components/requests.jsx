@@ -43,15 +43,16 @@ class Requests extends React.Component {
   }
 
   onConfirmClick(item) {
-    axios.patch('/booking', item)
+    axios.patch('/confirm', item)
       .then((res) => {
         const updatedBookings = res.data.bookings;
         this.props.actions.setBookings(updatedBookings);
         this.setState({
-          pending: updatedBookings.filter(booking => booking.confirmed === 0),
-          confirmed: updatedBookings.filter(booking => booking.confirmed === 1),
+          pending: updatedBookings.filter(booking => booking.confirmed === 0 && booking.denied === 0),
+          confirmed: updatedBookings.filter(booking => booking.confirmed === 1 && booking.denied === 0),
+          denied: updatedBookings.filter(booking => booking.denied === 1),
         });
-        message.success('This event has been confirmed! We have notified the Artist');
+        message.sucess('This request has been confirmed! We have notified the Artist.');
       }).catch(err => console.log(err));
   }
 
@@ -66,7 +67,17 @@ class Requests extends React.Component {
   }
 
   onDenyClick(item) {
-    
+    axios.patch('/deny', item)
+      .then((res) => {
+        const updatedBookings = res.data.bookings;
+        this.props.actions.setBookings(updatedBookings);
+        this.setState({
+          pending: updatedBookings.filter(booking => booking.confirmed === 0 && booking.denied === 0),
+          confirmed: updatedBookings.filter(booking => booking.confirmed === 1 && booking.denied === 0),
+          denied: updatedBookings.filter(booking => booking.denied === 1),
+        });
+        message.error('This request has been denied. We have notified the Artist.');
+      }).catch(err => console.log(err));
   }
 
 

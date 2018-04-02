@@ -50,7 +50,6 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
             ),
             onOk() {
               message.success('Your booking request has been sent!');
-              console.log(artistId);
               const title = $('.title').val();
               const description = $('.description').val();
               const startTime = momentStart.local().format();
@@ -83,8 +82,6 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                   end_time: momentEnd.utc().format(),
                 });
                 saveToStore(newLocalBooking);
-                console.log('new local booking object', newLocalBooking);
-                console.log('new utc booking object', newUTCBooking);
                 axios.post('/calendar', newUTCBooking).then(() => {
                 }).catch((err) => {
                   console.error(err) /* eslint-disable-line */
