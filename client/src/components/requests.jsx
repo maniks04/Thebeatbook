@@ -41,9 +41,6 @@ class Requests extends React.Component {
     });
   }
 
-  onSeeVenueDetailsClick(item) {
-  }
-
   onConfirmClick(item) {
     axios.patch('/booking', item)
       .then((res) => {
