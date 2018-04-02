@@ -97,13 +97,13 @@ class Requests extends React.Component {
                       cancelText={'Edit event'}
                       title={this.state.booking_title}
                     >
-                      <em>{item.artist_name}</em>
+                      <em>{name}</em>
                       <div>Playing {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(this.state.start_time).format('h:mm')+' '}
-                           til {' ' + moment(this.state.end_time).format('h:mm')}
+                           from {moment(this.state.start_time).format('h:mm a')+' '}
+                           til {' ' + moment(this.state.end_time).format('h:mm a')}
                       </div>
                     </Modal>
-                    <div>Gig on: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>
+                    <div>Gig on: {moment(time.slice(0, 10)).format('MMM Do')}</div>
                   </List.Item>
                   );
               }}
@@ -158,7 +158,6 @@ class Requests extends React.Component {
                       visible={this.state.epkVisible}
                       maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ epkVisible: false })}
-                      cancelText="Cancel"
                       onCancel={() => this.setState({ epkVisible: false })}
                       title={item.artist_name}
                     >
@@ -168,17 +167,15 @@ class Requests extends React.Component {
                       visible={this.state.visible}
                       maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
-                      cancelText="Cancel"
-                      onCancel={() => this.setState({ visible: false })}
-                      title={item.booking_title}
+                      title={this.state.booking_title}
                     >
-                      <em>{item.artist_name}</em>
-                      <div>Playing {`${moment(item.start_time).format('MMMM Do YYYY')} `}
-                           from {`${moment(item.start_time).format('h:mm')} `}
-                           til {`${moment(item.end_time).format('h:mm')}`}
+                      <em>{name}</em>
+                      <div>Playing {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
+                           from {moment(this.state.start_time).format('h:mm a')+' '}
+                           til {' ' + moment(this.state.end_time).format('h:mm a')}
                       </div>
                     </Modal>
-                    <div>Trying to gig: {moment(time.slice(0, 10)).format('MMM Do YY')}</div>
+                    <div>Trying to gig: {moment(time.slice(0, 10)).format('MMM Do')}</div>
                   </List.Item>
                 );
               }}
