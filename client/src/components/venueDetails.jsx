@@ -154,18 +154,18 @@ class NormalLoginForm extends React.Component {
               onChange={val => this.onChangeVenueAddress(val)}
             />
           </FormItem>
-          <FormItem> Venue State
-            <Input
-              placeholder={this.state.venue_state}
-              className="venue_state"
-              onChange={val => this.onChangeVenueState(val)}
-            />
-          </FormItem>
           <FormItem> Venue City
             <Input
               placeholder={this.state.venue_city}
               className="venue_city"
               onChange={val => this.onChangeVenueCity(val)}
+            />
+          </FormItem>
+          <FormItem> Venue State
+            <Input
+              placeholder={this.state.venue_state}
+              className="venue_state"
+              onChange={val => this.onChangeVenueState(val)}
             />
           </FormItem>
         </Col>

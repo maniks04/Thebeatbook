@@ -52,7 +52,7 @@ class Requests extends React.Component {
           denied: updatedBookings.filter(booking => booking.denied === 1),
         });
         message.sucess('This request has been confirmed! We have notified the Artist.');
-      }).catch(err => console.log(err));
+      }).catch(err => console.error(err));
   }
 
   onSeeVenueDetailsClick() {
@@ -76,7 +76,7 @@ class Requests extends React.Component {
           denied: updatedBookings.filter(booking => booking.denied === 1),
         });
         message.error('This request has been denied. We have notified the Artist.');
-      }).catch(err => console.log(err));
+      }).catch(err => console.error(err));
   }
 
 
@@ -115,9 +115,9 @@ class Requests extends React.Component {
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
-                      <div>Playing {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(this.state.start_time).format('h:mm a')+' '}
-                           til {' ' + moment(this.state.end_time).format('h:mm a')}
+                      <div>Playing {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
+                           from {`${moment(this.state.start_time).format('h:mm a')} `}
+                           til {` ${moment(this.state.end_time).format('h:mm a')}`}
                       </div>
                     </Modal>
                     <div>Gig on: {moment(time.slice(0, 10)).format('MMM Do')}</div>
@@ -197,9 +197,9 @@ class Requests extends React.Component {
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
-                      <div>Requesting to play {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(this.state.start_time).format('h:mm a')+' '}
-                           til {' ' + moment(this.state.end_time).format('h:mm a')}
+                      <div>Requesting to play {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
+                           from {`${moment(this.state.start_time).format('h:mm a')} `}
+                           til {` ${moment(this.state.end_time).format('h:mm a')}`}
                       </div>
                     </Modal>
                     <div>Trying to gig: {moment(time.slice(0, 10)).format('MMM Do')}</div>
@@ -255,10 +255,12 @@ class Requests extends React.Component {
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
-                      <div><em>Initial request sent for {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(this.state.start_time).format('h:mm a')+' '}
-                           til {' ' + moment(this.state.end_time).format('h:mm a')}
-                      </em></div>
+                      <div>
+                        <em>Initial request sent for {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
+                           from {`${moment(this.state.start_time).format('h:mm a')} `}
+                           til {` ${moment(this.state.end_time).format('h:mm a')}`}
+                        </em>
+                      </div>
                     </Modal>
                     <div><em>Attempted to gig: {moment(time.slice(0, 10)).format('MMM Do')}</em></div>
                   </List.Item>
