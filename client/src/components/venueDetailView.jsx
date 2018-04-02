@@ -16,6 +16,7 @@ class VenueDetailView extends React.Component {
         venue_id: this.props.venueId,
       },
     }).then(({ data }) => {
+      console.log(data);
       this.setState({
         capacity: data.capacity,
         venue_stage: data.venue_stage,

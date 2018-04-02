@@ -24,8 +24,8 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
 
       select(start, end) { /* eslint-disable-line */
         if (editable) {
-          let momentStart;
-          let momentEnd;
+          let momentStart = start;
+          let momentEnd = end;
           const setStart = (value) => { momentStart = value; };
           const setEnd = (value) => { momentEnd = value; };
           Modal.confirm({
@@ -51,7 +51,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                   <Form.Item label="End Time">
                     <TimePicker
                       className="end"
-                      defaultValue={moment(start, 'HH:mm')}
+                      defaultValue={moment(end, 'HH:mm')}
                       format="HH:mm"
                       minuteStep={15}
                       onChange={value => setEnd(value)}
