@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Tabs, List, Modal, message } from 'antd';
+import { Tabs, List, Modal, Popconfirm, message } from 'antd';
 import axios from 'axios';
 import * as actions from '../actions/index.js'; // eslint-disable-line
 import EPKView from './epkView.jsx'; // eslint-disable-line
@@ -139,7 +139,12 @@ class Requests extends React.Component {
                 } else {
                   name = item.artist_name;
                   subtab.push(
-                    <a onClick={() => this.onConfirmClick(item)}>Confirm Event</a>,
+                    <Popconfirm 
+                      title="Are you sure you want to confirm this show?"
+                      onConfirm={() => this.onConfirmClick(item)} 
+                      okText="Yes" cancelText="No">
+                      <a href="#" >Confirm Event</a>
+                    </Popconfirm>,
                     <a onClick={() => this.onSeeEventClick(item)}> View Details</a>,
                     <a onClick={() => this.onEpkClick(item)}>See EPK</a>);
                 }
