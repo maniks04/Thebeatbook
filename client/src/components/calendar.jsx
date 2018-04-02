@@ -76,7 +76,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                     description,
                     allDay: false,
                   },
-                  true, // sticks to page so it doenst fall off when changing calendar vies month week etc...
+                  true,
                 );
                 const newLocalBooking = {
                   booking_title: title,
@@ -88,17 +88,17 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                   venue_name: venueName,
                   confirmed: 0,
                 };
-                const newUTCBooking = Object.assign({}, newLocalBooking, { /* eslint-disable-line */
+                const newUTCBooking = Object.assign({}, newLocalBooking, {
                   start_time: momentStart.utc().format(),
                   end_time: momentEnd.utc().format(),
                 });
                 saveToStore(newLocalBooking);
                 axios.post('/calendar', newUTCBooking).then(() => {
                 }).catch((err) => {
-                  console.error(err) /* eslint-disable-line */
+                  console.error(err);
                 });
               } else {
-                alert('You need a title') /* eslint-disable-line */
+                alert('You need a title'); /* eslint-disable-line */
               }
             },
             onCancel() {},

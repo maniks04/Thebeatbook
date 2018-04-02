@@ -52,7 +52,12 @@ class Venue extends React.Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider>
           <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onSelect={info => this.onSelect(info)} >
+          <Menu
+            theme="dark"
+            defaultSelectedKeys={['1']}
+            mode="inline"
+            onSelect={info => this.onSelect(info)}
+          >
             <Menu.Item key="1">
               <Icon type="calendar" />
               <span>Calendar</span>
