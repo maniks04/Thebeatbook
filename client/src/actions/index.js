@@ -11,7 +11,7 @@ export const logout = () => dispatch => axios({
 }).then(() => {
   dispatch(logoutState());
 }).catch((err) => {
-  console.log(err);
+  console.error(err);
 });
 
 
@@ -80,5 +80,5 @@ export const isLoggedIn = () => dispatch => axios({
     dispatch(landingViewed());
   }
 }).catch((err) => {
-  console.log(err);
+  console.error(err);
 });

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Icon } from 'antd';
 import axios from 'axios';
-import * as actions from '../actions/index.js'; /* eslint-disable-line */
+import * as actions from '../actions/index.js';
 
 class EPKView extends React.Component {
   constructor(props) {
