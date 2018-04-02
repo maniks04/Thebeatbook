@@ -133,8 +133,14 @@ app.get('/venueCalendar', async (req, res) => {
   res.status(200).send(venueCalendar);
 });
 
-app.patch('/booking', async ({ body }, res) => {
-  await db.updateBooking(body);
+app.patch('/confirm', async ({ body }, res) => {
+  await db.updateConfirmBooking(body);
+  let bookings = await db.getVenueBookings2(body.venue_id);
+  res.status(200).send({ bookings });
+});
+
+app.patch('/deny', async ({ body }, res) => {
+  await db.updateDenyBooking(body);
   let bookings = await db.getVenueBookings2(body.venue_id);
   res.status(200).send({ bookings });
 });
