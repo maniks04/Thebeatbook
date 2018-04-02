@@ -135,7 +135,6 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
             <div>{event.description}</div>
           ),
           onOk() {},
-          onCancel() {},
         });
       },
     });
