@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Row, Col, Icon } from 'antd';
 import axios from 'axios';
 import * as actions from '../actions/index.js';
 

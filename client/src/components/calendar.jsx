@@ -3,6 +3,7 @@ import $ from 'jquery';
 import 'fullcalendar';
 import { Modal, Form, Input, TimePicker, message } from 'antd';
 import axios from 'axios';
+
 const moment = require('moment')/* eslint-disable-line */; // check back in a couple days
 
 const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName) => {
@@ -21,13 +22,12 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
       nowIndicator: true,
       height: window.innerHeight * 0.87,
 
-      select(start, end) {
+      select(start, end) { /* eslint-disable-line */
         if (editable) {
-
           let momentStart;
           let momentEnd;
-          let setStart = (value) => {momentStart = value};
-          let setEnd = (value) => {momentEnd = value};
+          const setStart = (value) => { momentStart = value; };
+          const setEnd = (value) => { momentEnd = value; };
           Modal.confirm({
             title: 'Event Info',
             content: (
@@ -40,10 +40,22 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                     <Input className="description" placeholder="Give some details about the event here..." />
                   </Form.Item>
                   <Form.Item label="Start Time">
-                    <TimePicker className="start" defaultValue={moment(start, "HH:mm")} format="HH:mm" minuteStep={15} onChange={value=>setStart(value)} />
+                    <TimePicker
+                      className="start"
+                      defaultValue={moment(start, 'HH:mm')}
+                      format="HH:mm"
+                      minuteStep={15}
+                      onChange={value => setStart(value)}
+                    />
                   </Form.Item>
                   <Form.Item label="End Time">
-                    <TimePicker className="end" defaultValue={moment(start, "HH:mm")} format="HH:mm" minuteStep={15} onChange={value=>setEnd(value)} />
+                    <TimePicker
+                      className="end"
+                      defaultValue={moment(start, 'HH:mm')}
+                      format="HH:mm"
+                      minuteStep={15}
+                      onChange={value => setEnd(value)}
+                    />
                   </Form.Item>
                 </Form>
               </div>
@@ -101,7 +113,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
         bookings.forEach((event) => {
           const startLocal = moment.utc(event.start_time).local().format();
           const endLocal = moment.utc(event.end_time).local().format();
-          //use moment to convert to local time
+          // use moment to convert to local time
           events.push({
             title: event.booking_title,
             description: event.booking_description,

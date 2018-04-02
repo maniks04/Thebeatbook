@@ -9,18 +9,19 @@ const passport = require('passport');
 const helpers = require('./helpers.js');//eslint-disable-line
 require('../server/config/passport')(passport);
 
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('body-parser').urlencoded({ extended: true, limit: '50mb' }));
 app.use(require('express-session')({
   secret: process.env.SESSION_PASSWORD || 'supersecretsecret',
   resave: false,
   saveUninitialized: false,
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(bodyParser.json());
 
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', (req, res) => {
@@ -57,7 +58,8 @@ app.post('/register/venue', async (req, res) => {
   const registration = await db.registerVenue(req.body.username, hash, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);//eslint-disable-line
   if (registration === 'username already exists') {
     return res.send('username already exists');
-  } if (registration === 'username already exists') {
+  }
+  if (registration === 'username already exists') {
     return res.send('email already exists');
   }
   // helpers.sendEmail(req.body.username, req.body.email)

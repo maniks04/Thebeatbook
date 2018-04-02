@@ -20,7 +20,7 @@ class Requests extends React.Component {
       confirmed: bookings.filter(booking => booking.confirmed === 1 && booking.denied === 0),
       denied: bookings.filter(booking => booking.denied === 1),
       visible: false,
-      booking_description: null,
+      booking_description: null, // eslint-disable-line
       booking_title: null,
       start_time: null,
       end_time: null,
@@ -32,13 +32,12 @@ class Requests extends React.Component {
   }
 
   onSeeEventClick(item) {
-    console.log(item);
     this.setState({
       visible: true,
-      booking_description: item.booking_description,
+      booking_description: item.booking_description, // eslint-disable-line
       booking_title: item.booking_title,
       start_time: item.start_time,
-      end_time: item.end_time
+      end_time: item.end_time,
     });
   }
 
@@ -95,7 +94,7 @@ class Requests extends React.Component {
               dataSource={confirmed}
               renderItem={(item) => {
                 let name;
-                let time = item.start_time || '';
+                const time = item.start_time || '';
                 if (isArtist === true) {
                   name = item.venue_name;
                 } else {
@@ -111,7 +110,7 @@ class Requests extends React.Component {
                       visible={this.state.visible}
                       maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
-                      cancelText={'Edit event'}
+                      cancelText="Edit event"
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
