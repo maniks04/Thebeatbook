@@ -182,7 +182,7 @@ class Requests extends React.Component {
                       maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ epkVisible: false })}
                       onCancel={() => this.setState({ epkVisible: false })}
-                      width="40%"
+                      width="70%"
                     >
                       <EPKView artist={item.artist_id} />
                     </Modal>

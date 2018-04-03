@@ -122,7 +122,7 @@ class EPKView extends React.Component {
               <Icon type="facebook" style={{ color: 'rgba(0,0,0,.25)' }} />
               <a
                 href={`https://www.facebook.com/${this.state.artist_facebook}`}
-                style={{ color: 'rgba(0,0,0,.25)' }}
+                style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
                 target="_blank"
               >{this.state.artist_facebook}
               </a>
@@ -131,7 +131,7 @@ class EPKView extends React.Component {
               <Icon type="twitter" style={{ color: 'rgba(0,0,0,.25)' }} />
               <a
                 href={`https://twitter.com/${this.state.artist_twitter}`}
-                style={{ color: 'rgba(0,0,0,.25)' }}
+                style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
                 target="_blank"
               >{this.state.artist_twitter}
               </a>
@@ -140,7 +140,7 @@ class EPKView extends React.Component {
               <Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />
               <a
                 href={`https://www.instagram.com/${this.state.artist_instagram}`}
-                style={{ color: 'rgba(0,0,0,.25)' }}
+                style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
                 target="_blank"
               > {this.state.artist_instagram}
               </a>
@@ -148,8 +148,8 @@ class EPKView extends React.Component {
             <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
               <Icon type="desktop" style={{ color: 'rgba(0,0,0,.25)' }} />
               <a
-                href={this.state.artist_website}
-                style={{ color: 'rgba(0,0,0,.25)' }}
+                href={`https://${this.state.artist_website}`}
+                style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
                 target="_blank"
               > {this.state.artist_website}
               </a>
