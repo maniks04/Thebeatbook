@@ -113,13 +113,14 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
         bookings.forEach((event) => {
           const startLocal = moment.utc(event.start_time).local().format();
           const endLocal = moment.utc(event.end_time).local().format();
-          // use moment to convert to local time
+          let calendarColor = event.confirmed === 1 ? '#00c853' : '#ffd54f';
           events.push({
             title: event.booking_title,
             description: event.booking_description,
             start: startLocal,
             end: endLocal,
             id: event.booking_id,
+            color: calendarColor,
           });
         });
         callback(events);

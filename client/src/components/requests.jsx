@@ -57,6 +57,19 @@ class Requests extends React.Component {
 
   onSeeVenueDetailsClick() {
     this.setState({ venueDetailVisible: true });
+  //   Modal.info()
+  //   <Modal
+  //   visible={this.state.venueDetailVisible}
+  //   onOk={() => this.setState({ venueDetailVisible: false })}
+  //   cancelText="Cancel"
+  //   onCancel={() => this.setState({ venueDetailVisible: false })}
+  //   title={item.booking_title}
+  // >
+  //   <em>{name}</em>
+  //   <div>
+  //     <VenueDetailView venueId={item.venue_id} />
+  //   </div>
+  // </Modal>
   }
 
   onEpkClick() {
@@ -65,7 +78,7 @@ class Requests extends React.Component {
     });
   }
 
-  onDenyClick(item) {
+  onDenyClick(item, denied) {
     axios.patch('/deny', item)
       .then((res) => {
         const updatedBookings = res.data.bookings;
@@ -75,7 +88,11 @@ class Requests extends React.Component {
           confirmed: updatedBookings.filter(booking => booking.confirmed === 1 && booking.denied === 0),
           denied: updatedBookings.filter(booking => booking.denied === 1),
         });
-        message.error('This request has been denied. We have notified the Artist.');
+        if (denied) {
+          message.error('This request has been denied. We have notified the Artist.');
+        } else {
+          message.success('This request has been restored and is now in Pending.')
+        }
       }).catch(err => console.log(err));
   }
 
@@ -114,12 +131,12 @@ class Requests extends React.Component {
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
-                      <div>Playing {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(this.state.start_time).format('h:mm a')+' '}
-                           til {' ' + moment(this.state.end_time).format('h:mm a')}
+                      <div>Playing {moment(this.state.start_time).local().format('MMMM Do YYYY')+' '}
+                           from {moment(this.state.start_time).local().format('h:mm a')+' '}
+                           til {' ' + moment(this.state.end_time).local().format('h:mm a')}
                       </div>
                     </Modal>
-                    <div>Gig on: {moment(time.slice(0, 10)).format('MMM Do')}</div>
+                    <div>Gig on: {moment(time.slice(0, 10)).local().format('MMM Do')}</div>
                   </List.Item>
                   );
               }}
@@ -139,7 +156,7 @@ class Requests extends React.Component {
                   subtab.push(
                     <a onClick={() => this.onSeeVenueDetailsClick(item)}>
                       See Venue Details
-                      <Modal
+                      {/* <Modal
                         visible={this.state.venueDetailVisible}
                         onOk={() => this.setState({ venueDetailVisible: false })}
                         cancelText="Cancel"
@@ -150,7 +167,7 @@ class Requests extends React.Component {
                         <div>
                           <VenueDetailView venueId={item.venue_id} />
                         </div>
-                      </Modal>
+                      </Modal> */}
                     </a>);
                 } else {
                   name = item.artist_name;
@@ -165,7 +182,7 @@ class Requests extends React.Component {
                     <a onClick={() => this.onEpkClick(item)}>See EPK</a>,
                     <Popconfirm 
                       title="Are you sure you want to deny this request?"
-                      onConfirm={() => this.onDenyClick(item)} 
+                      onConfirm={() => this.onDenyClick(item, true)} 
                       okText="Yes" cancelText="No">
                       <a href="#" >Deny</a>
                   </Popconfirm>);
@@ -193,11 +210,11 @@ class Requests extends React.Component {
                     >
                       <em>{name}</em>
                       <div>Requesting to play {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(this.state.start_time).format('h:mm a')+' '}
-                           til {' ' + moment(this.state.end_time).format('h:mm a')}
+                           from {moment(this.state.start_time).local().format('h:mm a')+' '}
+                           til {' ' + moment(this.state.end_time).local().format('h:mm a')}
                       </div>
                     </Modal>
-                    <div>Trying to gig: {moment(time.slice(0, 10)).format('MMM Do')}</div>
+                    <div>Trying to gig: {moment(time.slice(0, 10)).local().format('MMM Do')}</div>
                   </List.Item>
                 );
               }}
@@ -218,8 +235,8 @@ class Requests extends React.Component {
                   name = item.artist_name;
                   subtab.push(
                     <Popconfirm 
-                      title="Are you sure you want to Restore this request(it will move to Pending)?"
-                      onConfirm={() => this.onRestoreClick(item)} 
+                      title="Are you sure you want to Restore this request (it will move to Pending)?"
+                      onConfirm={() => this.onDenyClick(item, false)} 
                       okText="Yes" cancelText="No">
                       <a href="#" >Restore Request</a>
                     </Popconfirm>,
@@ -241,7 +258,7 @@ class Requests extends React.Component {
                     >
                       <EPKView artist={item.artist_id} />
                     </Modal>
-                    <Modal
+                    {/* <Modal
                       visible={this.state.visible}
                       maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
@@ -252,8 +269,8 @@ class Requests extends React.Component {
                            from {moment(this.state.start_time).format('h:mm a')+' '}
                            til {' ' + moment(this.state.end_time).format('h:mm a')}
                       </em></div>
-                    </Modal>
-                    <div><em>Attempted to gig: {moment(time.slice(0, 10)).format('MMM Do')}</em></div>
+                    </Modal> */}
+                    <div><em>Attempted to gig: {moment(time.slice(0, 10)).local().format('MMM Do')}</em></div>
                   </List.Item>
                 );
               }}
