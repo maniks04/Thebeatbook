@@ -11,6 +11,7 @@ const LoginFormContainer = Form.create()(LoginForm); // component for antd login
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   submitLogin(username, password) {
@@ -69,4 +70,3 @@ const styles = {
     textAlign: 'center',
   },
 };
-

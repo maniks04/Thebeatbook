@@ -9,18 +9,19 @@ const passport = require('passport');
 const helpers = require('./helpers.js');//eslint-disable-line
 require('../server/config/passport')(passport);
 
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('body-parser').urlencoded({ extended: true, limit: '50mb' }));
 app.use(require('express-session')({
   secret: process.env.SESSION_PASSWORD || 'supersecretsecret',
   resave: false,
   saveUninitialized: false,
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(bodyParser.json());
 
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', (req, res) => {
@@ -48,7 +49,6 @@ app.post('/register/artist', async (req, res) => {
   // helpers.sendEmail(req.body.username, req.body.email)
   const user = await db.getUser(req.body.username);
   req.login(user[0], () => {
-    console.log(req.sessionId);
     res.send(user);
   });
 });
@@ -58,13 +58,17 @@ app.post('/register/venue', async (req, res) => {
   const registration = await db.registerVenue(req.body.username, hash, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);//eslint-disable-line
   if (registration === 'username already exists') {
     return res.send('username already exists');
+<<<<<<< HEAD
   } if (registration === 'email already exists') {
+=======
+  }
+  if (registration === 'username already exists') {
+>>>>>>> 1e397069530f81289569f3b9974a2503dc6381cf
     return res.send('email already exists');
   }
   // helpers.sendEmail(req.body.username, req.body.email)
   const user = await db.getUser(req.body.username);
   req.login(user[0], () => {
-    console.log(req.sessionId);
     res.send(user);
   });
 });
@@ -76,7 +80,6 @@ app.post('/login', async (req, res) => {
     if (bcrypt.compareSync(req.body.password, checkUser.password)) {
       const user = await db.getUser(req.body.username);
       req.login(user[0], () => {
-        console.log(req.sessionId);
         res.send(user);
       });
     } else {
@@ -88,12 +91,10 @@ app.post('/login', async (req, res) => {
 });
 
 passport.serializeUser((user, done) => {
-  console.log(user);
   done(null, user);
 });
 
 app.get('/isloggedin', async (req, res) => {
-  console.log('current passport session:', req.session.passport);
   if (req.session.passport && req.session.passport.user) {
     console.log('session');
     const userInfo = await db.getUser(req.session.passport.user.username);
@@ -116,15 +117,20 @@ app.get('/logout', (req, res) => {
   res.send();
 });
 
-/** ****************************** Calendar ********************************** */
+/** ****************************** Calendar ********************************* */
 app.post('/calendar', async (req, res) => {
   await db.addBooking(req.body);
   res.status(200).end();
 });
 
 app.get('/artist/epk', async (req, res) => {
+<<<<<<< HEAD
   const epk = await db.getEpkData(req.query.username);
   res.status(200).send({ epk });
+=======
+  const epkInfo = await db.getEpkData(req.query.username);
+  res.json(epkInfo);
+>>>>>>> 1e397069530f81289569f3b9974a2503dc6381cf
 });
 
 app.get('/artist/city', async (req, res) => {
@@ -132,9 +138,11 @@ app.get('/artist/city', async (req, res) => {
   res.json(artistList);
 });
 
+
+/* ******************************** Venue *********************************** */
 app.get('/venues', async (req, res) => {
   const { city } = req.query;
-  const venues = await db.getVenues(city);
+  const venues = await db.getVenuesByCity(city);
   res.status(200).send({ venues });
 });
 
@@ -144,12 +152,29 @@ app.get('/venueCalendar', async (req, res) => {
   res.status(200).send(venueCalendar);
 });
 
-app.patch('/booking', async ({ body }, res) => {
-  await db.updateBooking(body);
-  const bookings = await db.getVenueBookings2(body.venue_id);
+app.patch('/confirm', async ({ body }, res) => {
+  await db.updateConfirmBooking(body);
+  let bookings = await db.getVenueBookings2(body.venue_id);
   res.status(200).send({ bookings });
 });
 
+app.patch('/deny', async ({ body }, res) => {
+  await db.updateDenyBooking(body);
+  let bookings = await db.getVenueBookings2(body.venue_id);
+  res.status(200).send({ bookings });
+});
+
+app.get('/venueDetails', async (req, res) => {
+  const venueDetails = await db.getVenueDetails(req.query.venue_id);
+  res.status(200).send(venueDetails);
+});
+
+app.post('/updateVenue', async (req, res) => {
+  db.updateVenue(req.body);
+  res.status(200).send();
+});
+
+/* ******************************** EPK ************************************* */
 app.post('/epkImgUpload', async (req, res) => {
   res.status(200).send();
 });

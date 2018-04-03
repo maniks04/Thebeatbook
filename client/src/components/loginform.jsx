@@ -57,6 +57,7 @@ class LoginForm extends React.Component {
         />
 
         <Form onSubmit={e => this.submitLogin(e)} className="login-form">
+<<<<<<< HEAD
 
           <Col span={24}>
             <FormItem>
@@ -88,6 +89,36 @@ class LoginForm extends React.Component {
             </FormItem>
           </Col>
 
+=======
+          <FormItem>
+            {getFieldDecorator('userName', {
+            rules: [{ required: true, message: 'Please input your username!' }],
+          })(
+            <Input
+              id="username"
+              prefix={<Icon
+                type="user"
+                style={{ color: 'rgba(0,0,0,.25)' }}
+              />}
+              placeholder="Username"
+            />,
+          )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input
+              prefix={<Icon
+                type="lock"
+                style={{ color: 'rgba(0,0,0,.25)' }}
+              />}
+              type="password"
+              placeholder="Password"
+            />,
+          )}
+          </FormItem>
+>>>>>>> 1e397069530f81289569f3b9974a2503dc6381cf
           <FormItem>
             {getFieldDecorator('remember', {
             valuePropName: 'checked',

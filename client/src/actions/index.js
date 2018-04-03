@@ -11,7 +11,7 @@ export const logout = () => dispatch => axios({
 }).then(() => {
   dispatch(logoutState());
 }).catch((err) => {
-  console.log(err);
+  console.error(err);
 });
 
 
@@ -38,7 +38,7 @@ export const submitLogin = (username, password, cb) => dispatch => axios({
       dispatch(setArtist(res.data[1].artist_id));
     } if (type === 'venue') {
       dispatch(loadVenuePage(res.data));
-      dispatch(setVenue(res.data[1].artist_id));
+      dispatch(setVenue(res.data[1].venue_id));
     }
   }
 });
@@ -84,7 +84,7 @@ export const isLoggedIn = () => dispatch => axios({
     return console.log('not logged in');
   }
 }).catch((err) => {
-  console.log(err);
+  console.error(err);
 });
 
 

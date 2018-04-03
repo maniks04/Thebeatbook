@@ -6,6 +6,7 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import * as actions from '../actions/index.js';
 import calendar from './calendar.jsx';
 import Requests from './requests.jsx';
+import VenueDetails from './venueDetails.jsx';
 
 const { Header, Content, Footer, Sider } = Layout;//eslint-disable-line
 
@@ -18,7 +19,7 @@ class Venue extends React.Component {
   }
 
   onSelect(info) {
-    if (info.key === '4') {
+    if (info.key === '5') {
       this.props.actions.logout();
     } else {
       this.setState({ key: info.key });
@@ -36,6 +37,9 @@ class Venue extends React.Component {
     }
     if (key === '3') {
       return (<Requests />);
+    }
+    if (key === '4') {
+      return (<VenueDetails venueId={this.props.store.venueId} />);
     }
   }
 
@@ -62,6 +66,10 @@ class Venue extends React.Component {
               <span>Booking Requests</span>
             </Menu.Item>
             <Menu.Item key="4">
+              <Icon type="profile" />
+              <span>Venue Details</span>
+            </Menu.Item>
+            <Menu.Item key="5">
               <Icon type="logout" />
               <span>Logout</span>
             </Menu.Item>

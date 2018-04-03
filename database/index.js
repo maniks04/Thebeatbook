@@ -1,4 +1,5 @@
 const config = require('./config.js');
+const moment = require('moment');
 
 const knex = require('knex')({
   client: 'mysql',
@@ -52,14 +53,16 @@ const registerVenue = async (username, password, email, venueName, address, city
 
 const getUser = async (username) => {
   const user = await knex.select('*').from('users').where('username', username);
+  let bookings;
   if (user[0].user_type === 'artist') {
     const artist = await getArtist(user[0].user_id);
-    const bookings = await getArtistBookings2(artist.artist_id);
+    bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings];
-  }
+  } 
   const venue = await getVenue(user[0].user_id);
-  const bookings = await getVenueBookings2(venue.venue_id);
+  bookings = await getVenueBookings2(venue.venue_id);
   return [user[0], venue, bookings];
+  
 };
 
 const getArtist = async (userId) => {
@@ -72,12 +75,34 @@ const getVenue = async (userId) => {
   return venue[0];
 };
 
-const getVenues = city => knex.select('*').from('venues').where('venues.venue_city', city);
+const getVenueById = async (userId) => {
+  const venue = await knex.select('*').from('venues').where('venues.user_id', userId);
+  return venue[0];
+};
+
+const getVenueDetails = async (venue_id) => {
+  const venue = await knex.select('*').from('venues').where('venue_id', venue_id);
+  return venue[0];
+};
+
+const updateVenue = async (info) => {
+  await knex('venues').where('venue_id', info.venueId).update({
+    venue_city: info.venue_city,
+    venue_state: info.venue_state,
+    venue_name: info.venue_name,
+    venue_address: info.venue_address,
+    capacity: info.capacity,
+    venue_stage: info.venue_stage,
+    venue_description: info.venue_description,
+  });
+};
+
+const getVenuesByCity = city => knex.select('*').from('venues').where('venues.venue_city', city);
 
 const addBooking = async (info) => {
   await knex('bookings').insert({
     artist_id: info.artistId,
-    venue_id: info.venueId,
+    venue_id: info.venueId || 0,
     start_time: info.start_time,
     end_time: info.end_time,
     booking_description: info.booking_description,
@@ -85,10 +110,17 @@ const addBooking = async (info) => {
   });
 };
 
-const updateBooking = async (info) => {
+const updateConfirmBooking = async (info) => {
   const toggle = info.confirmed === 0 ? 1 : 0;
   await knex('bookings').where('booking_id', info.booking_id).update({
     confirmed: toggle,
+  });
+};
+
+const updateDenyBooking = async (info) => {
+  const toggle = info.denied === 0 ? 1 : 0;
+  await knex('bookings').where('booking_id', info.booking_id).update({
+    denied: toggle,
   });
 };
 
@@ -107,6 +139,7 @@ const editEPK = async (info) => {
     artist_contact: info.artist_contact,
     artist_youtube: info.artist_youtube,
     artist_spotify: info.artist_spotify,
+    artist_contactEmail: info.artist_contactEmail,
   });
 };
 
@@ -138,11 +171,17 @@ module.exports = {
   getUser,
   checkCredentials,
   addBooking,
-  getVenue,
-  getVenues,
+  getVenueById,
+  getVenuesByCity,
   getEpk,
   getVenueBookings2,
-  updateBooking,
+  updateConfirmBooking,
+  updateDenyBooking,
   editEPK,
+<<<<<<< HEAD
   getEpkData,
+=======
+  getVenueDetails,
+  updateVenue,
+>>>>>>> 1e397069530f81289569f3b9974a2503dc6381cf
 };

@@ -46,6 +46,7 @@ class EPKView extends React.Component {
         imageUrl: data.epk.imageUrl,
         artist_youtube: splitYoutube,
         artist_spotify: sliceSpot,
+        artist_contactEmail: data.epk.artist_contactEmail,
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -124,9 +125,6 @@ class EPKView extends React.Component {
             <h2 style={{ color: 'rgba(0,0,0,.25)' }}><Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />
               {this.state.artist_instagram}
             </h2>
-            <h2 style={{ color: 'rgba(0,0,0,.25)' }}><Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
-              {this.state.artist_contact}
-            </h2>
           </Col>
           <Col span={16}>
             <h1>Similar Bands</h1>
@@ -140,8 +138,19 @@ class EPKView extends React.Component {
             {this.state.artist_description}
           </Col>
         </Row>
+        <br />
         <Row gutter={32}>
-          <Col span={5}>
+          <Col span={5} />
+          <Col span={16}>
+            <iframe
+              title="youtube"
+              width="100%"
+              height="315"
+              src={this.state.artist_youtube}
+              frameBorder="0"
+              allowFullScreen
+            />
+            <br />
             <iframe
               title="spotify"
               src={`https://open.spotify.com/embed?uri=spotify:artist:${this.state.artist_spotify}`}
@@ -151,15 +160,13 @@ class EPKView extends React.Component {
               allowTransparency="true"
             />
           </Col>
+        </Row>
+        <Row gutter={32}>
+          <Col span={5} />
           <Col span={16}>
-            <iframe
-              title="youtube"
-              width="560"
-              height="315"
-              src={this.state.artist_youtube}
-              frameBorder="0"
-              allowFullScreen
-            />
+            <h1>Contact </h1>
+            Email: {this.state.artist_contactEmail} <br />
+            Number: {this.state.artist_contact}
           </Col>
         </Row>
       </div>
