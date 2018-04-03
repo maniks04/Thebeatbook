@@ -97,10 +97,6 @@ class EPKView extends React.Component {
           );
         }
       });
-    } else { // eslint-disable-line
-      return (
-        <p />
-      );
     }
   }
 

@@ -28,7 +28,7 @@ class LandingPageBeta extends React.Component {
           <img src={logo} style={styles.logo} alt="" />
           <div style={styles.beatbook}>beatbook</div>
         </div>
-        <div style={styles.info}>Book A Venue/Talent has never been easier</div>
+        <div style={styles.info}>Booking A Venue/Talent has never been easier</div>
         <div style={styles.buttoncontainer}>
           <Button style={styles.learnbutton} onClick={() => this.scrollDown('below')}>Learn more</Button>
           <Button style={styles.loginbutton} onClick={() => this.loadLoginPage()}>Signup / Login</Button>
