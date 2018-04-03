@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Modal, Col } from 'antd';
 import { withRouter } from 'react-router';
 import * as actions from '../actions/index.js';
 
@@ -13,11 +13,14 @@ class LoginForm extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
   submitLogin(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.actions.submitLogin(values.userName, values.password);
+        this.props.submitLogin(values.userName, values.password);
       }
     });
   }
@@ -52,35 +55,38 @@ class LoginForm extends React.Component {
           ]}
           onCancel={() => this.closeRegisterModal()}
         />
+
         <Form onSubmit={e => this.submitLogin(e)} className="login-form">
-          <FormItem>
-            {getFieldDecorator('userName', {
-            rules: [{ required: true, message: 'Please input your username!' }],
-          })(
-            <Input
-              id="username"
-              prefix={<Icon
-                type="user"
-                style={{ color: 'rgba(0,0,0,.25)' }}
-              />}
-              placeholder="Username"
-            />,
-          )}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Please input your Password!' }],
-          })(
-            <Input
-              prefix={<Icon
-                type="lock"
-                style={{ color: 'rgba(0,0,0,.25)' }}
-              />}
-              type="password"
-              placeholder="Password"
-            />,
-          )}
-          </FormItem>
+          <Col span={24}>
+            <FormItem>
+              {getFieldDecorator('userName', {
+              rules: [{ required: true, message: 'Please input your username!' }],
+            })(
+              <Input
+                className="logininput"
+                id="username"
+                prefix={<Icon type="user" style={{ color: 'rgba(255,255,255,1)' }} />}
+                placeholder="Username"
+                style={styles.input}
+              />)}
+            </FormItem>
+          </Col>
+
+          <Col span={24}>
+            <FormItem>
+              {getFieldDecorator('password', {
+              rules: [{ required: true, message: 'Please input your Password!' }],
+            })(
+              <Input
+                className="logininput"
+                prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,1)' }} />}
+                type="password"
+                placeholder="Password"
+                style={styles.input}
+              />)}
+            </FormItem>
+          </Col>
+
           <FormItem>
             {getFieldDecorator('remember', {
             valuePropName: 'checked',
@@ -89,11 +95,12 @@ class LoginForm extends React.Component {
             <Checkbox>Remember me</Checkbox>,
           )}
             <a className="login-form-forgot" href="">Forgot password</a>
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button type="primary" htmlType="submit" className="login-form-button" style={styles.button}>
             Log in
             </Button>
-          Or <a onClick={() => this.openRegisterModal()}>register now!</a>
+            <a onClick={() => this.openRegisterModal()}>register now!</a>
           </FormItem>
+
         </Form>
       </div>
     );
@@ -109,3 +116,18 @@ const mapDispatchToProps = dispatch => (
 );
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));
+
+
+const styles = {
+  input: {
+    height: 50,
+  },
+  button: {
+    height: 50,
+    backgroundColor: '#e6005c',
+    borderRadius: 25,
+    borderColor: 'Transparent',
+    fontSize: 17,
+  },
+};
+

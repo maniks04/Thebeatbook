@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Row, Col, Icon } from 'antd';
 import axios from 'axios';
 import * as actions from '../actions/index.js';
+import {withRouter} from 'react-router';
 
 class EPKView extends React.Component {
   constructor(props) {
@@ -15,6 +16,12 @@ class EPKView extends React.Component {
   }
 
   componentDidMount() {
+    return this.props.artist ?
+      this.getArtistById() :
+      this.getArtistByName();
+  }
+
+  getArtistById() {
     axios.get('/epk', {
       params: {
         artistId: this.state.artistId,
@@ -45,6 +52,39 @@ class EPKView extends React.Component {
       console.error('error', err); /* eslint-disable-line */
     });
   }
+
+  getArtistByName() {
+    console.log('match', this.props)
+    axios.get('/artist/epk', {
+      params: {
+        username: this.props.match.params.username,
+      },
+    }).then(({ data }) => {
+      if (data.epk.imageUrl !== null) {
+        data.epk.imageUrl = Buffer.from(data.epk.imageUrl); /* eslint-disable-line */
+      }
+      let splitYoutube = data.epk.artist_youtube ? data.epk.artist_youtube.split('/') : '';
+      const sliceSpot = data.epk.artist_spotify ? data.epk.artist_spotify.slice(32) : '';
+      splitYoutube = `https://www.youtube.com/embed/${splitYoutube[splitYoutube.length - 1]}`;
+      this.setState({
+        artist_name: data.epk.artist_name,
+        artist_description: data.epk.artist_description,
+        artist_city: data.epk.artist_city,
+        artist_state: data.epk.artist_state,
+        artist_twitter: data.epk.artist_twitter,
+        artist_facebook: data.epk.artist_facebook,
+        artist_instagram: data.epk.artist_instagram,
+        artist_support: data.epk.artist_support,
+        artist_contact: data.epk.artist_contact,
+        imageUrl: data.epk.imageUrl,
+        artist_youtube: splitYoutube,
+        artist_spotify: sliceSpot,
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+
 
   mapSupport() {
     const splitSupport = this.state.artist_support ? this.state.artist_support.split('||') : [];

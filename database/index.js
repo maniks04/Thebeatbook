@@ -1,5 +1,5 @@
 const config = require('./config.js');
-const moment = require('moment');
+// const moment = require('moment');
 
 const knex = require('knex')({
   client: 'mysql',
@@ -58,11 +58,10 @@ const getUser = async (username) => {
     const artist = await getArtist(user[0].user_id);
     bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings];
-  } 
+  }
   const venue = await getVenue(user[0].user_id);
   bookings = await getVenueBookings2(venue.venue_id);
   return [user[0], venue, bookings];
-  
 };
 
 const getArtist = async (userId) => {
@@ -160,6 +159,11 @@ const getEpk = async (artistId) => {
   return artist[0];
 };
 
+const getEpkData = async (artistName) => {
+  const artist = await knex.select('*').from('artists').where('artists.artist_name', artistName);
+  return artist[0];
+}
+
 module.exports = {
   registerArtist,
   registerVenue,
@@ -173,6 +177,7 @@ module.exports = {
   updateConfirmBooking,
   updateDenyBooking,
   editEPK,
+  getEpkData,
   getVenueDetails,
   updateVenue,
 };

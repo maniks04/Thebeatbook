@@ -20,7 +20,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div >
+      <div className="loginpage">
         {!this.props.store.landingViewed &&
           <LandingPage />
         }
