@@ -19,7 +19,7 @@ class Venue extends React.Component {
   }
 
   onSelect(info) {
-    if (info.key === '5') {
+    if (info.key === '4') {
       this.props.actions.logout();
     } else {
       this.setState({ key: info.key });
@@ -33,12 +33,9 @@ class Venue extends React.Component {
       return calendar(bookings, true);
     }
     if (key === '2') {
-      return (<div>Find Artist</div>);
-    }
-    if (key === '3') {
       return (<Requests />);
     }
-    if (key === '4') {
+    if (key === '3') {
       return (<VenueDetails venueId={this.props.store.venueId} />);
     }
   }
@@ -63,18 +60,14 @@ class Venue extends React.Component {
               <span>Calendar</span>
             </Menu.Item>
             <Menu.Item key="2">
-              <Icon type="search" />
-              <span>Find Artist</span>
-            </Menu.Item>
-            <Menu.Item key="3">
               <Icon type="book" />
               <span>Booking Requests</span>
             </Menu.Item>
-            <Menu.Item key="4">
+            <Menu.Item key="3">
               <Icon type="profile" />
               <span>Venue Details</span>
             </Menu.Item>
-            <Menu.Item key="5">
+            <Menu.Item key="4">
               <Icon type="logout" />
               <span>Logout</span>
             </Menu.Item>
