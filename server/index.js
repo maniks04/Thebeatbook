@@ -58,12 +58,7 @@ app.post('/register/venue', async (req, res) => {
   const registration = await db.registerVenue(req.body.username, hash, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);//eslint-disable-line
   if (registration === 'username already exists') {
     return res.send('username already exists');
-<<<<<<< HEAD
   } if (registration === 'email already exists') {
-=======
-  }
-  if (registration === 'username already exists') {
->>>>>>> 1e397069530f81289569f3b9974a2503dc6381cf
     return res.send('email already exists');
   }
   // helpers.sendEmail(req.body.username, req.body.email)
@@ -124,13 +119,8 @@ app.post('/calendar', async (req, res) => {
 });
 
 app.get('/artist/epk', async (req, res) => {
-<<<<<<< HEAD
-  const epk = await db.getEpkData(req.query.username);
-  res.status(200).send({ epk });
-=======
   const epkInfo = await db.getEpkData(req.query.username);
   res.json(epkInfo);
->>>>>>> 1e397069530f81289569f3b9974a2503dc6381cf
 });
 
 app.get('/artist/city', async (req, res) => {
@@ -154,13 +144,13 @@ app.get('/venueCalendar', async (req, res) => {
 
 app.patch('/confirm', async ({ body }, res) => {
   await db.updateConfirmBooking(body);
-  let bookings = await db.getVenueBookings2(body.venue_id);
+  const bookings = await db.getVenueBookings2(body.venue_id);
   res.status(200).send({ bookings });
 });
 
 app.patch('/deny', async ({ body }, res) => {
   await db.updateDenyBooking(body);
-  let bookings = await db.getVenueBookings2(body.venue_id);
+  const bookings = await db.getVenueBookings2(body.venue_id);
   res.status(200).send({ bookings });
 });
 

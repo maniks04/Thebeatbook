@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
-import { Form, Icon, Input, Button, Checkbox, Col, notification } from 'antd' /* eslint-disable-line */;
-=======
-import { Form, Icon, Input, Button } from 'antd';
->>>>>>> 1e397069530f81289569f3b9974a2503dc6381cf
+import { Form, Icon, Input, Button, Checkbox, Col, notification } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';

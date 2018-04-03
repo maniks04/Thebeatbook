@@ -41,7 +41,6 @@ class VenueRegisterForm extends React.Component {
     return (
       <div>
         <Form onSubmit={e => this.registerVenue(e)} className="login-form">
-<<<<<<< HEAD
           <Col span={24}>
             <FormItem>{getFieldDecorator('username', { rules: [{ required: true, message: 'Please input your username!' }] })(
               <Input
@@ -55,41 +54,6 @@ class VenueRegisterForm extends React.Component {
           </Col>
           <Col span={12} >
             <FormItem>{getFieldDecorator('password', { rules: [{ required: true, message: 'Please input your Password!' }] })(
-=======
-          <FormItem>
-            {getFieldDecorator('username', {
-              rules: [{
-                required: true,
-                message: 'Please input your username!',
-              }],
-            })(
-              <Input
-                id="username"
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Username"
-              />)}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('password', {
-              rules: [{
-                required: true,
-                message: 'Please input your Password!',
-              }],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="Password"
-              />)}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('confirmPassword', {
-              rules: [{
-                required: true,
-                message: 'Please confirm your Password!',
-              }],
-            })(
->>>>>>> 1e397069530f81289569f3b9974a2503dc6381cf
               <Input
                 className="registerinput"
                 prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,1)' }} />}
@@ -142,7 +106,6 @@ class VenueRegisterForm extends React.Component {
                 placeholder="Address"
                 style={styles.input}
               />)}
-<<<<<<< HEAD
             </FormItem>
           </Col>
           <Col span={12}>
@@ -185,90 +148,6 @@ class VenueRegisterForm extends React.Component {
             </FormItem>
           </Col>
 
-=======
-          </FormItem>
-          <FormItem>{
-            getFieldDecorator('email', {
-              rules: [{
-                required: true,
-                message: 'Please input your Password!',
-              }],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="email"
-                placeholder="Email"
-              />)}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('venueName', {
-              rules: [{
-                required: true,
-                message: 'Please input your Password!',
-              }],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="venueName"
-                placeholder="Venue Name"
-              />)}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('address', {
-              rules: [{
-                required: true,
-                message: 'Please input your Password!',
-              }],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="address"
-                placeholder="Address"
-              />)}
-          </FormItem>
-          <FormItem>{getFieldDecorator('city', {
-            rules: [{
-              required: true,
-              message: 'Please input your Password!',
-            }],
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              type="city"
-              placeholder="City"
-            />)}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('state', {
-              rules: [{
-                required: true,
-                message: 'Please input your Password!',
-              }],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="state"
-                placeholder="State"
-              />)}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('capacity', {
-              rules: [{
-                required: true,
-                message: 'Please input your Password!',
-              }],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="capacity"
-                placeholder="Venue Capacity"
-              />)}
-          </FormItem>
-          <FormItem>
-            <Button type="primary" htmlType="submit" className="login-form-button">Register
-            </Button>
-          </FormItem>
->>>>>>> 1e397069530f81289569f3b9974a2503dc6381cf
         </Form>
       </div>
     );
