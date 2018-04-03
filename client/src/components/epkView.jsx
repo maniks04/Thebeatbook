@@ -42,21 +42,16 @@ class EPKView extends React.Component {
         artist_facebook: data.epk.artist_facebook,
         artist_instagram: data.epk.artist_instagram,
         artist_support: data.epk.artist_support,
-<<<<<<< HEAD
-        //imageUrl: Buffer.from(data.epk.imageUrl),
-=======
         artist_contact: data.epk.artist_contact,
         imageUrl: data.epk.imageUrl,
         artist_youtube: splitYoutube,
         artist_spotify: sliceSpot,
->>>>>>> 0f0a9b85275f6fe4c65fa6a8bebf209e1a83dab6
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
     });
   }
 
-<<<<<<< HEAD
   getArtistByName() {
     console.log('match', this.props)
     axios.get('/artist/epk', {
@@ -64,7 +59,12 @@ class EPKView extends React.Component {
         username: this.props.match.params.username,
       },
     }).then(({ data }) => {
-      console.log(data)
+      if (data.epk.imageUrl !== null) {
+        data.epk.imageUrl = Buffer.from(data.epk.imageUrl); /* eslint-disable-line */
+      }
+      let splitYoutube = data.epk.artist_youtube ? data.epk.artist_youtube.split('/') : '';
+      const sliceSpot = data.epk.artist_spotify ? data.epk.artist_spotify.slice(32) : '';
+      splitYoutube = `https://www.youtube.com/embed/${splitYoutube[splitYoutube.length - 1]}`;
       this.setState({
         artist_name: data.epk.artist_name,
         artist_description: data.epk.artist_description,
@@ -74,7 +74,10 @@ class EPKView extends React.Component {
         artist_facebook: data.epk.artist_facebook,
         artist_instagram: data.epk.artist_instagram,
         artist_support: data.epk.artist_support,
-        //imageUrl: Buffer.from(data.epk.imageUrl),
+        artist_contact: data.epk.artist_contact,
+        imageUrl: data.epk.imageUrl,
+        artist_youtube: splitYoutube,
+        artist_spotify: sliceSpot,
       });
     }).catch((err) => {
       console.log(err);
@@ -82,7 +85,6 @@ class EPKView extends React.Component {
   }
 
 
-=======
   mapSupport() {
     const splitSupport = this.state.artist_support ? this.state.artist_support.split('||') : [];
     if (splitSupport.length) {
@@ -100,7 +102,6 @@ class EPKView extends React.Component {
     }
   }
 
->>>>>>> 0f0a9b85275f6fe4c65fa6a8bebf209e1a83dab6
   render() {
     return (
       <div>
@@ -139,19 +140,6 @@ class EPKView extends React.Component {
             {this.state.artist_description}
           </Col>
         </Row>
-<<<<<<< HEAD
-        {/* <Row>
-          <iframe
-            title="spotify"
-            src="https://open.spotify.com/embed?uri=spotify:artist:0OiYrpibZx4wUXrcjY8Kbb"
-            width="300"
-            height="380"
-            frameBorder="0"
-            allowTransparency="true"
-            allow="encrypted-media"
-          />
-        </Row> */}
-=======
         <Row gutter={32}>
           <Col span={5}>
             <iframe
@@ -174,7 +162,6 @@ class EPKView extends React.Component {
             />
           </Col>
         </Row>
->>>>>>> 0f0a9b85275f6fe4c65fa6a8bebf209e1a83dab6
       </div>
     );
   }

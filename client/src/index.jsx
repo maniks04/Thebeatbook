@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import * as actions from './actions/index.js';
+// import * as actions from './actions/index.js';
 import Home from './components/homepage.jsx';
 import ArtistRegister from './components/artistregister.jsx';
+// import ArtistRegisterBeta from './components/artistregisterbeta.jsx';
 import VenueRegister from './components/venueregister.jsx';
-import Test from './components/test.jsx';
+// import Test from './components/test.jsx';
 import EPKView from './components/epkView.jsx';
-import Artist from './components/artist.jsx';
+// import Artist from './components/artist.jsx';
 import reducer from './reducers/index.js';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';//eslint-disable-line
 
 const store = createStore(reducer, applyMiddleware(thunk));
-console.log(actions);
 const Base = ({ store }) => (
   <Provider store={store}>
     <Router>

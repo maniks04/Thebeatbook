@@ -5,8 +5,8 @@ import * as actions from '../actions/index.js';
 import Login from './login.jsx';
 import Artist from './artist.jsx';
 import Venue from './venue.jsx';
-// import LandingPage from './landingpage.jsx';
-import LandingPageBeta from './landingpagebeta.jsx';
+import LandingPage from './landingpage.jsx';
+
 
 class Home extends React.Component {
   constructor(props) {
@@ -22,8 +22,7 @@ class Home extends React.Component {
     return (
       <div className="loginpage">
         {!this.props.store.landingViewed &&
-          // <LandingPage />
-          <LandingPageBeta />
+          <LandingPage />
         }
         {!this.props.store.artist && !this.props.store.venue && this.props.store.landingViewed &&
           <Login />

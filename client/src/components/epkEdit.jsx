@@ -70,7 +70,6 @@ class NormalLoginForm extends React.Component {
       imageUrl,
       artist_twitter,
       artist_facebook,
-      artist_spotify,
       artist_instagram,
       artist_support,
       artist_contact,
@@ -92,10 +91,6 @@ class NormalLoginForm extends React.Component {
 
   onChangeTwitter(e) {
     this.setState({ artist_twitter: e.target.value });
-  }
-
-  onChangeSpotify(e) {
-    this.setState({ artist_spotify: e.target.value });
   }
 
   onChangeArtist(e) {
