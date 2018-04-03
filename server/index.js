@@ -58,8 +58,7 @@ app.post('/register/venue', async (req, res) => {
   const registration = await db.registerVenue(req.body.username, hash, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);//eslint-disable-line
   if (registration === 'username already exists') {
     return res.send('username already exists');
-  }
-  if (registration === 'username already exists') {
+  } if (registration === 'email already exists') {
     return res.send('email already exists');
   }
   // helpers.sendEmail(req.body.username, req.body.email)
@@ -79,7 +78,7 @@ app.post('/login', async (req, res) => {
         res.send(user);
       });
     } else {
-      res.send('your passwords dont match');
+      res.send('your password is incorrect');
     }
   } else {
     res.send('Username does not exist');
@@ -92,10 +91,20 @@ passport.serializeUser((user, done) => {
 
 app.get('/isloggedin', async (req, res) => {
   if (req.session.passport && req.session.passport.user) {
+    console.log('session');
     const userInfo = await db.getUser(req.session.passport.user.username);
     res.send(userInfo);
   } else {
-    res.send();
+    console.log('undefined');
+    res.json([{ user_type: 'none' }]);
+  }
+});
+
+app.get('/checkloginstatus', (req, res) => {
+  if (req.session.passport && req.session.passport.user) {
+    res.send(true);
+  } else {
+    res.send(false);
   }
 });
 
