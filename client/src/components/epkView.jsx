@@ -120,19 +120,39 @@ class EPKView extends React.Component {
           <Col span={5}>
             <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
               <Icon type="facebook" style={{ color: 'rgba(0,0,0,.25)' }} />
-              {this.state.artist_facebook}
+              <a
+                href={`https://www.facebook.com/${this.state.artist_facebook}`}
+                style={{ color: 'rgba(0,0,0,.25)' }}
+                target="_blank"
+              >{this.state.artist_facebook}
+              </a>
             </h2>
             <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
               <Icon type="twitter" style={{ color: 'rgba(0,0,0,.25)' }} />
-              {this.state.artist_twitter}
+              <a
+                href={`https://twitter.com/${this.state.artist_twitter}`}
+                style={{ color: 'rgba(0,0,0,.25)' }}
+                target="_blank"
+              >{this.state.artist_twitter}
+              </a>
             </h2>
             <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
               <Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />
-              {this.state.artist_instagram}
+              <a
+                href={`https://www.instagram.com/${this.state.artist_instagram}`}
+                style={{ color: 'rgba(0,0,0,.25)' }}
+                target="_blank"
+              > {this.state.artist_instagram}
+              </a>
             </h2>
             <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
               <Icon type="desktop" style={{ color: 'rgba(0,0,0,.25)' }} />
-              {this.state.artist_website}
+              <a
+                href={this.state.artist_website}
+                style={{ color: 'rgba(0,0,0,.25)' }}
+                target="_blank"
+              > {this.state.artist_website}
+              </a>
             </h2>
           </Col>
           <Col span={16}>

@@ -10,7 +10,6 @@ import VenueDetailView from './venueDetailView.jsx';
 const moment = require('moment');
 
 const { TabPane } = Tabs;
-//* ******************************************DO NOT LINT, WORK IN PROGRESS*******************
 class Requests extends React.Component {
   constructor(props) {
     super(props);
@@ -26,8 +25,6 @@ class Requests extends React.Component {
       end_time: null,
       epkVisible: false,
       venueDetailVisible: false,
-      // loadingMore: false,
-      // showLoadingMore: true,
     };
   }
 

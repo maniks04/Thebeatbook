@@ -80,6 +80,7 @@ class NormalLoginForm extends React.Component {
       artist_youtube,
       artist_contactEmail,
       artist_website,
+      artist_spotify,
     }).then(() => {
       message.success('Your EPK has been edited!');
     }).catch((err) => {
