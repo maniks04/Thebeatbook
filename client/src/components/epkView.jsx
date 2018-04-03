@@ -47,6 +47,7 @@ class EPKView extends React.Component {
         artist_youtube: splitYoutube,
         artist_spotify: sliceSpot,
         artist_contactEmail: data.epk.artist_contactEmail,
+        artist_website: data.epk.artist_website,
       });
     }).catch((err) => {
       console.error('error', err); /* eslint-disable-line */
@@ -54,7 +55,6 @@ class EPKView extends React.Component {
   }
 
   getArtistByName() {
-    console.log('match', this.props)
     axios.get('/artist/epk', {
       params: {
         username: this.props.match.params.username,
@@ -81,7 +81,7 @@ class EPKView extends React.Component {
         artist_spotify: sliceSpot,
       });
     }).catch((err) => {
-      console.log(err);
+      console.error(err);
     });
   }
 
@@ -90,11 +90,13 @@ class EPKView extends React.Component {
     const splitSupport = this.state.artist_support ? this.state.artist_support.split('||') : [];
     if (splitSupport.length) {
       return splitSupport.map((support, i) => {// eslint-disable-line
-        return (
-          <h2 key={i}>{/* eslint-disable-line */}
-            <Icon type='right' style={{ color: 'rgba(0,0,0,.25)' }} /> {support}{/* eslint-disable-line */}
-          </h2>
-        );
+        if (support.length) {
+          return (
+            <h2 key={i}>{/* eslint-disable-line */}
+              <Icon type='right' style={{ color: 'rgba(0,0,0,.25)' }} /> {support}{/* eslint-disable-line */}
+            </h2>
+          );
+        }
       });
     } else { // eslint-disable-line
       return (
@@ -109,33 +111,40 @@ class EPKView extends React.Component {
         <Row align="bottom" type="flex" gutter={32}>
           <Col span={5}><img src={this.state.imageUrl} width="100%" /></Col>
           <Col span={16}>
-            <h1 size="56">
+            <h1 style={{ fontSize: '3vw' }}>
               {this.state.artist_name} - {this.state.artist_city}, {this.state.artist_state}
             </h1>
           </Col>
         </Row>
         <Row gutter={32}>
           <Col span={5}>
-            <h2 style={{ color: 'rgba(0,0,0,.25)' }}><Icon type="facebook" style={{ color: 'rgba(0,0,0,.25)' }} />
+            <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
+              <Icon type="facebook" style={{ color: 'rgba(0,0,0,.25)' }} />
               {this.state.artist_facebook}
             </h2>
-            <h2 style={{ color: 'rgba(0,0,0,.25)' }}><Icon type="twitter" style={{ color: 'rgba(0,0,0,.25)' }} />
+            <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
+              <Icon type="twitter" style={{ color: 'rgba(0,0,0,.25)' }} />
               {this.state.artist_twitter}
             </h2>
-            <h2 style={{ color: 'rgba(0,0,0,.25)' }}><Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />
+            <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
+              <Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />
               {this.state.artist_instagram}
+            </h2>
+            <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
+              <Icon type="desktop" style={{ color: 'rgba(0,0,0,.25)' }} />
+              {this.state.artist_website}
             </h2>
           </Col>
           <Col span={16}>
-            <h1>Similar Bands</h1>
-            {this.mapSupport()}
+            <h1 style={{ fontSize: '1.5vw' }}>Similar Bands</h1>
+            <p style={{ fontSize: '0.8vw' }}>{this.mapSupport()}</p>
           </Col>
         </Row>
         <Row gutter={32}>
           <Col span={5} />
           <Col span={16}>
-            <h1>Band Bio</h1>
-            {this.state.artist_description}
+            <h1 style={{ fontSize: '1.5vw' }}>Band Bio</h1>
+            <p style={{ fontSize: '0.8vw' }}>{this.state.artist_description}</p>
           </Col>
         </Row>
         <br />
@@ -164,9 +173,11 @@ class EPKView extends React.Component {
         <Row gutter={32}>
           <Col span={5} />
           <Col span={16}>
-            <h1>Contact </h1>
+            <h1 style={{ fontSize: '1.5vw' }}>Contact </h1>
+            <p style={{ fontSize: '0.8vw' }}>
             Email: {this.state.artist_contactEmail} <br />
             Number: {this.state.artist_contact}
+            </p>
           </Col>
         </Row>
       </div>

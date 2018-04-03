@@ -52,12 +52,28 @@ class LandingPageBeta extends React.Component {
               </div>
             </div>
             <div style={styles.articlegif}>
-              <iframe title="gif" src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9" width="480" height="294" frameBorder="0" className="giphy-embed" style={styles.gifright} />
+              <iframe
+                title="gif"
+                src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9"
+                width="480"
+                height="294"
+                frameBorder="0"
+                className="giphy-embed"
+                style={styles.gifright}
+              />
             </div>
           </article>
           <article style={styles.article}>
             <div style={styles.articlegif}>
-              <iframe title="gif" src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9" width="480" height="294" frameBorder="0" className="giphy-embed" style={styles.gifleft} />
+              <iframe
+                title="gif"
+                src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9"
+                width="480"
+                height="294"
+                frameBorder="0"
+                className="giphy-embed"
+                style={styles.gifleft}
+              />
             </div>
             <div style={styles.articlecontent}>
               <h1 style={styles.h3}>Live Calendar viewing/updating</h1>
@@ -80,7 +96,15 @@ class LandingPageBeta extends React.Component {
               </div>
             </div>
             <div style={styles.articlegif}>
-              <iframe title="gif" src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9" width="480" height="294" frameBorder="0" className="giphy-embed" style={styles.gifright} />
+              <iframe
+                title="gif"
+                src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9"
+                width="480"
+                height="294"
+                frameBorder="0"
+                className="giphy-embed"
+                style={styles.gifright}
+              />
             </div>
           </article>
 
