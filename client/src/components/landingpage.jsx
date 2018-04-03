@@ -2,13 +2,12 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import $ from 'jquery';
-import { Carousel } from 'antd';
+import { Button } from 'antd';
 import * as actions from '../actions/index.js';
-import beatbookdisplay from '../../../beatbookmac.png';
 import logo from '../../../beatbooklogo.png';
 
 
-class LandingPage extends React.Component {
+class LandingPageBeta extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -28,23 +27,64 @@ class LandingPage extends React.Component {
         <div style={styles.logocontainer}>
           <img src={logo} style={styles.logo} alt="" />
           <div style={styles.beatbook}>beatbook</div>
-          <div style={styles.test}>
-            <div onClick={() => this.loadLoginPage()} style={styles.login}>login/register</div>
-            <div style={styles.login}>contact us</div>
-          </div>
         </div>
-        <div>
-          <Carousel autoplay>
-            <div><h3><img src={beatbookdisplay} style={styles.image} alt="" /></h3></div>
-            <div><h3><img src={beatbookdisplay} style={styles.image} alt="" /></h3></div>
-            <div><h3><img src={beatbookdisplay} style={styles.image} alt="" /></h3></div>
-            <div><h3><img src={beatbookdisplay} style={styles.image} alt="" /></h3></div>
-          </Carousel>
+        <div style={styles.info}>Book A Venue/Talent has never been easier</div>
+        <div style={styles.buttoncontainer}>
+          <Button style={styles.learnbutton} onClick={() => this.scrollDown('below')}>Learn more</Button>
+          <Button style={styles.loginbutton} onClick={() => this.loadLoginPage()}>Signup / Login</Button>
         </div>
-        <button onClick={() => this.scrollDown('below')} />
-        <div style={styles.below}>
-          <div id="below">start</div>
-          <div>lower part of page</div>
+        <div style={styles.bottombulletscontainer}>
+          <div style={styles.bottombulletleft}>faq</div>
+          <div style={styles.bottombulletleft}>•</div>
+          <div style={styles.bottombullet}>contact</div>
+          <div style={styles.bottombulletright}>•</div>
+          <div style={styles.bottombulletright}>help</div>
+        </div>
+        <div id="below" style={styles.below}>
+          <article style={styles.article}>
+            <div style={styles.articlecontent}>
+              <h1 style={styles.h3}>Easy Registration for Venue/Artist</h1>
+              <div style={styles.text}>
+                Manage holds for all your rooms and shows on one calendar.
+                Automatically select best available hold levels and easily input large multi date hold requests.
+                One click hold status reporting.
+                Automatically populate agent/promoter contact info for each hold.
+              </div>
+            </div>
+            <div style={styles.articlegif}>
+              <iframe title="gif" src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9" width="480" height="294" frameBorder="0" className="giphy-embed" style={styles.gifright} />
+            </div>
+          </article>
+          <article style={styles.article}>
+            <div style={styles.articlegif}>
+              <iframe title="gif" src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9" width="480" height="294" frameBorder="0" className="giphy-embed" style={styles.gifleft} />
+            </div>
+            <div style={styles.articlecontent}>
+              <h1 style={styles.h3}>Live Calendar viewing/updating</h1>
+              <div style={styles.text}>
+                Manage holds for all your rooms and shows on one calendar.
+                Automatically select best available hold levels and easily input large multi date hold requests.
+                One click hold status reporting.
+                Automatically populate agent/promoter contact info for each hold.
+              </div>
+            </div>
+          </article>
+          <article style={styles.article}>
+            <div style={styles.articlecontent}>
+              <h1 style={styles.h3}>Artist EPK</h1>
+              <div style={styles.text}>
+                Manage holds for all your rooms and shows on one calendar.
+                Automatically select best available hold levels and easily input large multi date hold requests.
+                One click hold status reporting.
+                Automatically populate agent/promoter contact info for each hold.
+              </div>
+            </div>
+            <div style={styles.articlegif}>
+              <iframe title="gif" src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9" width="480" height="294" frameBorder="0" className="giphy-embed" style={styles.gifright} />
+            </div>
+          </article>
+
+
         </div>
       </div>
     );
@@ -59,41 +99,70 @@ const mapDispatchToProps = dispatch => (
   { actions: bindActionCreators(actions, dispatch) }
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPageBeta);
 
 
 const styles = {
   logo: {
-    height: 40,
-    width: 40,
+    height: 150,
+    width: 150,
     display: 'inline-block',
     filter: 'invert(1)',
   },
   beatbook: {
-    fontSize: 40,
+    fontSize: 150,
     fontFamily: 'system-ui',
     color: 'white',
     display: 'inline-block',
   },
-
-  image: {
-    position: 'relative',
-    zIndex: 1,
-    margin: '0 auto',
-    marginTop: '7%',
-    height: '75%',
-  },
-  login: {
+  info: {
+    color: 'white',
     fontSize: 20,
-    fontFamily: 'system-ui',
+    marginTop: -40,
+    opacity: 0.7,
+    marginLeft: '40%',
+  },
+  logocontainer: {
+    textAlign: 'center',
+    margin: '0 auto',
+    marginTop: '10%',
+  },
+  buttoncontainer: {
+    textAlign: 'center',
+    marginTop: '15%',
+  },
+  learnbutton: {
+    display: 'inline-block',
+    backgroundColor: 'white',
+    color: 'Translucent',
+    width: '120px',
+    height: '40px',
+  },
+  loginbutton: {
+    display: 'inline-block',
+    backgroundColor: 'Transparent',
+    color: 'white',
+    width: '120px',
+    height: '40px',
+    marginLeft: '10px',
+  },
+  bottombulletscontainer: {
+    marginTop: 150,
+    textAlign: 'center',
+  },
+  bottombullet: {
     color: 'white',
     display: 'inline-block',
-    paddingRight: 50,
   },
-  test: {
-    marginTop: '2%',
+  bottombulletleft: {
+    color: 'white',
     display: 'inline-block',
-    float: 'right',
+    marginRight: 10,
+  },
+  bottombulletright: {
+    color: 'white',
+    display: 'inline-block',
+    marginLeft: 10,
   },
   below: {
     position: 'absolute',
@@ -101,5 +170,51 @@ const styles = {
     width: '100%',
     backgroundColor: 'white',
     overflow: 'scroll',
+  },
+  gifonecontainer: {
+    borderStyle: 'solid',
+    borderWidth: 0.5,
+    borderColor: 'white',
+    width: '100%',
+    height: 400,
+  },
+  gifonetext: {
+    borderStyle: 'solid',
+    borderColor: 'white',
+    width: '50%',
+    height: 400,
+    marginLeft: 100,
+    display: 'inline-block',
+  },
+  gifright: {
+    float: 'right',
+    marginRight: 100,
+    display: 'inline-block',
+    boxShadow: '10px 10px 10px 0px #888888',
+  },
+  gifleft: {
+    float: 'right',
+    marginRight: 100,
+    display: 'inline-block',
+    boxShadow: '10px 10px 10px 0px #888888',
+  },
+  article: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 100,
+  },
+  h3: {
+    textAlign: 'center',
+    fontSize: 25,
+  },
+  articlecontent: {
+    flex: '0 0 calc(50% - 50px)',
+  },
+  articlegif: {
+    flex: '0 0 50%',
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 20,
   },
 };

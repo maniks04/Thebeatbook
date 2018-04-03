@@ -20,8 +20,7 @@ export const loadVenuePage = () => ({ type: 'LOADVENUEPAGE' });
 export const loadLoginPage = () => dispatch => dispatch(landingViewed());
 const landingViewed = () => ({ type: 'LOADLOGINPAGE' });
 
-
-export const submitLogin = (username, password) => dispatch => axios({
+export const submitLogin = (username, password, cb) => dispatch => axios({
   method: 'post',
   url: '/login',
   data: {
@@ -29,7 +28,9 @@ export const submitLogin = (username, password) => dispatch => axios({
     password,
   },
 }).then((res) => {
-  if (res.data !== 'your passwords dont match' && res.data !== 'Username does not exist') {
+  if (res.data === 'your password is incorrect' || res.data === 'Username does not exist') {
+    cb(res.data);
+  } if (res.data !== 'your passwords dont match' && res.data !== 'Username does not exist') {
     const type = res.data[0].user_type;
     dispatch(setBookings(res.data[2]));
     if (type === 'artist') {
@@ -68,6 +69,7 @@ export const isLoggedIn = () => dispatch => axios({
   method: 'get',
   url: '/isloggedin',
 }).then((res) => {
+  console.log(res.data)
   const type = res.data[0].user_type;
   dispatch(setBookings(res.data[2]));
   if (type === 'artist') {
@@ -78,7 +80,23 @@ export const isLoggedIn = () => dispatch => axios({
     dispatch(loadVenuePage(res.data));
     dispatch(setVenue(res.data[1].artist_id));
     dispatch(landingViewed());
+  } else {
+    return console.log('not logged in');
   }
 }).catch((err) => {
   console.error(err);
+});
+
+
+export const checkLoginStatus = () => axios({
+  method: 'get',
+  url: '/checkloginstatus',
+}).then((res) => {
+  console.log('res', res.data);
+  if (res.data === true) {
+    console.log('true');
+    return true;
+  }
+  console.log('false');
+  return false;
 });
