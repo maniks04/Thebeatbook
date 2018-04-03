@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { Row, Col, Icon } from 'antd';
 import axios from 'axios';
 import * as actions from '../actions/index.js';
-import {withRouter} from 'react-router';
 
 class EPKView extends React.Component {
   constructor(props) {
