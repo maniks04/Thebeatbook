@@ -40,10 +40,6 @@ class Venue extends React.Component {
     }
   }
 
-  logout() {
-    this.props.actions.logout();
-  }
-
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
