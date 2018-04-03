@@ -136,7 +136,7 @@ class Requests extends React.Component {
                            til {' ' + moment(this.state.end_time).local().format('h:mm a')}
                       </div>
                     </Modal>
-                    <div>Gig on: {moment(time.slice(0, 10)).local().format('MMM Do')}</div>
+                    <div>Gig on: {moment(time).local().format('MMM Do')}</div>
                   </List.Item>
                   );
               }}
