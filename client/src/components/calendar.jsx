@@ -131,6 +131,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
       eventClick(event) {
         Modal.info({
           title: event.title,
+          maskClosable: true,
           content: (
             <div>{event.description}</div>
           ),

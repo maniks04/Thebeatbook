@@ -1,8 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import * as actions from '../actions/index.js';
 
 class VenueDetailView extends React.Component {
   constructor(props) {
@@ -45,12 +42,4 @@ class VenueDetailView extends React.Component {
   }
 }
 
-const mapStateToProps = state => (
-    { store: state } // eslint-disable-line
-);
-
-const mapDispatchToProps = dispatch => (
-  { actions: bindActionCreators(actions, dispatch) } /* eslint-disable-line */
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(VenueDetailView);
+export default VenueDetailView;
