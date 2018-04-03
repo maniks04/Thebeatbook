@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Row, Col, Icon } from 'antd';
 
 class VenueDetailView extends React.Component {
   constructor(props) {
@@ -31,12 +32,35 @@ class VenueDetailView extends React.Component {
   render() {
     return (
       <div>
-        <div>Venue Name:  {this.state.venue_name}</div>
-        <div>Venue Location: {this.state.venue_address} - {this.state.venue_city}, {this.state.venue_state} </div>
-        <div>Venue Capacity: {this.state.capacity}</div>
-        <div>Venue Description: {this.state.venue_description} </div>
-        <div> Venue Stage Info: {this.state.venue_stage} </div>
-        <div> Venue Website: {this.state.venue_website} </div>
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Venue Name:</p></Col>
+          <Col span={19}>{this.state.venue_name}</Col>
+        </Row>
+        <br />
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Location:</p></Col>
+          <Col span={19}>{this.state.venue_address} - {this.state.venue_city}, {this.state.venue_state}</Col>
+        </Row>
+        <br />
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Capacity:</p></Col>
+          <Col span={19}>{this.state.capacity}</Col>
+        </Row>
+        <br />
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Desctiption:</p></Col>
+          <Col span={19}>{this.state.venue_description}</Col>
+        </Row>
+        <br />
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Stage Info:</p></Col>
+          <Col span={19}>{this.state.venue_stage}</Col>
+        </Row>
+        <br />
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Website:</p></Col>
+          <Col span={19}>{this.state.venue_website}</Col>
+        </Row>
       </div>
     );
   }

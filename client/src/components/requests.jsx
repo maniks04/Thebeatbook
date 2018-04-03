@@ -145,9 +145,8 @@ class Requests extends React.Component {
                         onOk={() => this.setState({ venueDetailVisible: false })}
                         cancelText="Cancel"
                         onCancel={() => this.setState({ venueDetailVisible: false })}
-                        title={item.booking_title}
+                        title="Venue Details"
                       >
-                        <em>{name}</em>
                         <div>
                           <VenueDetailView venueId={item.venue_id} />
                         </div>

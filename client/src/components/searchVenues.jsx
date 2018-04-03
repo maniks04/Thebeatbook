@@ -87,9 +87,10 @@ class SearchVenues extends React.Component {
 
   viewDetails(venue_id) {
     Modal.info({
-      title: 'blah',
+      title: 'Venue Details',
       content: <VenueDetailView venueId={venue_id} />,
       okText: 'Close',
+      width: 600,
       maskClosable: true,
     });
   }
