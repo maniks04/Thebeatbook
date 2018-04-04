@@ -1,9 +1,11 @@
-const config = require('./config.js');
+const configEnv = require('./config.js');
+const configLocal = require('../config.js');
 // const moment = require('moment');
+
 
 const knex = require('knex')({
   client: 'mysql',
-  connection: config,
+  connection: configEnv.user ? configEnv : configLocal,
 });
 
 const checkCredentials = username => knex.select().from('users')
