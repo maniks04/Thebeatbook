@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import * as actions from '../actions/index.js';
 import Login from './login.jsx';
 import Artist from './artist.jsx';
@@ -15,6 +16,10 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.props.actions.isLoggedIn();
+    axios.get('/poop')
+      .then((res) => {
+        console.log(res.data);
+      });
   }
 
 

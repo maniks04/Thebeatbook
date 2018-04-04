@@ -8,6 +8,10 @@ const db = require('../database/index.js');
 const passport = require('passport');
 const helpers = require('./helpers.js');//eslint-disable-line
 require('../server/config/passport')(passport);
+// require('dotenv').config();
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(passport.initialize());
@@ -22,6 +26,10 @@ app.use(require('express-session')({
   saveUninitialized: false,
 }));
 
+app.get('/poop', (req, res) => {
+  console.log('db', process.env.DB_USER);
+  res.send('');
+});
 
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', (req, res) => {
