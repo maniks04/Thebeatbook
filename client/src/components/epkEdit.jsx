@@ -75,6 +75,7 @@ class NormalLoginForm extends React.Component {
       artist_twitter,
       artist_facebook,
       artist_instagram,
+      artist_spotify,
       artist_support,
       artist_contact,
       artist_youtube,
