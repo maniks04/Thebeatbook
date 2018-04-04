@@ -24,7 +24,6 @@ class Requests extends React.Component {
       start_time: null,
       end_time: null,
       epkVisible: false,
-      venueDetailVisible: false,
     };
   }
 
@@ -52,21 +51,14 @@ class Requests extends React.Component {
       }).catch(err => console.error(err));
   }
 
-  onSeeVenueDetailsClick() {
-    this.setState({ venueDetailVisible: true });
-  //   Modal.info()
-  //   <Modal
-  //   visible={this.state.venueDetailVisible}
-  //   onOk={() => this.setState({ venueDetailVisible: false })}
-  //   cancelText="Cancel"
-  //   onCancel={() => this.setState({ venueDetailVisible: false })}
-  //   title={item.booking_title}
-  // >
-  //   <em>{name}</em>
-  //   <div>
-  //     <VenueDetailView venueId={item.venue_id} />
-  //   </div>
-  // </Modal>
+  onSeeVenueDetailsClick(item) {
+    Modal.info({
+      title: 'Venue Details',
+      content: <VenueDetailView venueId={item.venue_id} />,
+      okText: 'Close',
+      width: 600,
+      maskClosable: true,
+    });
   }
 
   onEpkClick() {
@@ -108,21 +100,23 @@ class Requests extends React.Component {
               dataSource={confirmed}
               renderItem={(item) => {
                 let name;
+                let titleFunction;
                 const time = item.start_time || '';
                 if (isArtist === true) {
                   name = item.venue_name;
+                  titleFunction = this.onSeeVenueDetailsClick;
                 } else {
                   name = item.artist_name;
+                  titleFunction = this.onSeeEventClick;
                 }
                 return (
                   <List.Item actions={[<a onClick={() => this.onSeeEventClick(item)} >See Event Details</a>]}>
                     <List.Item.Meta
-                      title={<a href="https://ant.design">{name}</a>}
+                      title={<a onClick={() => titleFunction(item)} >{name}</a>}
                       description={item.booking_description}
                     />
                     <Modal
                       visible={this.state.visible}
-                      maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
                       onCancel={() => this.setState({ visible: false })}
                       cancelText="Edit event"
@@ -147,27 +141,19 @@ class Requests extends React.Component {
               dataSource={pending}
               renderItem={(item) => {
                 let name;
+                let titleFunction;
                 const time = item.start_time || '';
                 const subtab = [];
                 if (isArtist === true) {
                   name = item.venue_name;
+                  titleFunction = this.onSeeVenueDetailsClick;
                   subtab.push(
                     <a onClick={() => this.onSeeVenueDetailsClick(item)}>
                       See Venue Details
-                      {/* <Modal
-                        visible={this.state.venueDetailVisible}
-                        onOk={() => this.setState({ venueDetailVisible: false })}
-                        cancelText="Cancel"
-                        onCancel={() => this.setState({ venueDetailVisible: false })}
-                        title="Venue Details"
-                      >
-                        <div>
-                          <VenueDetailView venueId={item.venue_id} />
-                        </div>
-                      </Modal> */}
                     </a>);
                 } else {
                   name = item.artist_name;
+                  titleFunction = this.onEpkClick;
                   subtab.push(
                     <Popconfirm
                       title="Are you sure you want to confirm this show?"
@@ -178,7 +164,7 @@ class Requests extends React.Component {
                       <a href="#" >Confirm Event</a>
                     </Popconfirm>,
                     <a onClick={() => this.onSeeEventClick(item)}> View Details</a>,
-                    <a onClick={() => this.onEpkClick(item)}>See EPK</a>,
+                    <a onClick={() => this.onEpkClick()}>See EPK</a>,
                     <Popconfirm
                       title="Are you sure you want to deny this request?"
                       onConfirm={() => this.onDenyClick(item)}
@@ -191,12 +177,11 @@ class Requests extends React.Component {
                 return (
                   <List.Item actions={subtab}>
                     <List.Item.Meta
-                      title={<a href="https://ant.design">{name}</a>}
+                      title={<a onClick={() => titleFunction(item)} >{name}</a>}
                       description={item.booking_description}
                     />
                     <Modal
                       visible={this.state.epkVisible}
-                      maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ epkVisible: false })}
                       onCancel={() => this.setState({ epkVisible: false })}
                       width="70%"
@@ -205,7 +190,6 @@ class Requests extends React.Component {
                     </Modal>
                     <Modal
                       visible={this.state.visible}
-                      maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
                       onCancel={() => this.setState({ visible: false })}
                       title={this.state.booking_title}
@@ -216,7 +200,7 @@ class Requests extends React.Component {
                            til {' ' + moment(this.state.end_time).local().format('h:mm a')}
                       </div>
                     </Modal>
-                    <div>Trying to gig: {moment(time.slice(0, 10)).local().format('MMM Do')}</div>
+                    <div>Trying to gig: {moment(time).local().format('MMM Do')} at {moment(time).local().format('h:mm a')}</div>
                   </List.Item>
                 );
               }}
@@ -245,7 +229,7 @@ class Requests extends React.Component {
                       <a href="#" >Restore Request</a>
                     </Popconfirm>,
                     <a onClick={() => this.onSeeEventClick(item)}> View Details</a>,
-                    <a onClick={() => this.onEpkClick(item)}>See EPK</a>);
+                    <a onClick={() => this.onEpkClick()}>See EPK</a>);
                 }
                 return (
                   <List.Item actions={subtab}>
@@ -255,7 +239,6 @@ class Requests extends React.Component {
                     />
                     <Modal
                       visible={this.state.epkVisible}
-                      maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ epkVisible: false })}
                       onCancel={() => this.setState({ epkVisible: false })}
                       title={name}
@@ -263,9 +246,8 @@ class Requests extends React.Component {
                     >
                       <EPKView artist={item.artist_id} />
                     </Modal>
-                    {/* <Modal
+                    <Modal
                       visible={this.state.visible}
-                      maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
                       onCancel={() => this.setState({ visible: false })}
                       title={this.state.booking_title}
@@ -275,8 +257,8 @@ class Requests extends React.Component {
                            from {moment(this.state.start_time).format('h:mm a')+' '}
                            til {' ' + moment(this.state.end_time).format('h:mm a')}
                       </em></div>
-                    </Modal> */}
-                    <div><em>Attempted to gig: {moment(time.slice(0, 10)).local().format('MMM Do')}</em></div>
+                    </Modal>
+                    <div><em>Attempted to gig: {moment(time).local().format('MMM Do')}</em></div>
                   </List.Item>
                 );
               }}

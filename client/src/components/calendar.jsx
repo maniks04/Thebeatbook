@@ -51,7 +51,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                   <Form.Item label="End Time">
                     <TimePicker
                       className="end"
-                      defaultValue={moment(end, 'HH:mm')}
+                      defaultValue={end.subtract(1, 'm')}
                       format="HH:mm"
                       minuteStep={15}
                       onChange={value => setEnd(value)}
