@@ -146,7 +146,9 @@ class NormalLoginForm extends React.Component {
   }
 
   onChangeWebsite(e) {
-    this.setState({ artist_website: e.target.value });
+    const index = e.target.value.indexOf('w');
+    const web = e.target.value.slice(index, e.target.value.length - 1);
+    this.setState({ artist_website: web });
   }
 
   onChangeImage(info) {
@@ -314,7 +316,7 @@ class NormalLoginForm extends React.Component {
           <FormItem>
             Personal Website
             <Input
-              prefix={<Icon type="sound" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              prefix={<Icon type="desktop" style={{ color: 'rgba(0,0,0,.25)' }} />}
               className="website"
               placeholder={this.state.artist_website}
               onChange={val => this.onChangeWebsite(val)}

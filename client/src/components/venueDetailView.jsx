@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Row, Col, Icon } from 'antd';
+import { Row, Col } from 'antd';
 
 class VenueDetailView extends React.Component {
   constructor(props) {
