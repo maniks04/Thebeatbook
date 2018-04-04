@@ -105,7 +105,7 @@ class EPKView extends React.Component {
     return (
       <div>
         <Row align="bottom" type="flex" gutter={32}>
-          <Col span={5}><img src={this.state.imageUrl} width="100%" /></Col>
+          <Col span={4}><img src={this.state.imageUrl} width="100%" /></Col>
           <Col span={16}>
             <h1 style={{
               fontSize: '3vw',
@@ -117,7 +117,7 @@ class EPKView extends React.Component {
           </Col>
         </Row>
         <Row gutter={32}>
-          <Col span={5}>
+          <Col span={4}>
             {this.state.artist_facebook &&
               <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
                 <Icon type="facebook" style={{ color: 'rgba(0,0,0,.25)' }} />
@@ -189,7 +189,7 @@ class EPKView extends React.Component {
           </Col>
         </Row>
         <Row gutter={32}>
-          <Col span={5} />
+          <Col span={4} />
           <Col span={16}>
             <h1 style={{ fontSize: '1.5vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
               Band Bio
@@ -201,7 +201,7 @@ class EPKView extends React.Component {
         </Row>
         <br />
         <Row gutter={32}>
-          <Col span={5} />
+          <Col span={4} />
           <Col span={16}>
             {this.state.artist_youtube &&
               <iframe
@@ -227,12 +227,12 @@ class EPKView extends React.Component {
           </Col>
         </Row>
         <Row gutter={32}>
-          <Col span={5} />
+          <Col span={4} />
           <Col span={16}>
-            <h1 style={{ fontSize: '1.5vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
+            <h1 style={{ fontSize: '1.5vw', fontFamily: "'Roboto Condensed', sans-serif", textAlign: 'center' }}>
             Contact
             </h1>
-            <p style={{ fontSize: '0.8vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
+            <p style={{ fontSize: '0.8vw', fontFamily: "'Roboto Condensed', sans-serif", textAlign: 'center' }}>
             Email: {this.state.artist_contactEmail} <br />
             Number: {this.state.artist_contact}
             </p>
