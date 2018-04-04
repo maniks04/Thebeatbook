@@ -39,7 +39,7 @@ class VenueRegisterForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div>
+      <div style={styles.container}>
         <Form onSubmit={e => this.registerVenue(e)} className="login-form">
           <Col span={24}>
             <FormItem>{getFieldDecorator('username', {
@@ -189,6 +189,9 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(VenueRegi
 
 
 const styles = {
+  container: {
+    display: 'inline-block',
+  },
   input: {
     height: 50,
   },

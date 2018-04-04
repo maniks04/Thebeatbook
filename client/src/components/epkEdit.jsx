@@ -147,7 +147,7 @@ class NormalLoginForm extends React.Component {
 
   onChangeWebsite(e) {
     const index = e.target.value.indexOf('w');
-    const web = e.target.value.slice(index, e.target.value.length - 1);
+    const web = e.target.value.slice(index, e.target.value.length);
     this.setState({ artist_website: web });
   }
 
