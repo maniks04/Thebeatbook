@@ -24,18 +24,16 @@ class SearchVenues extends React.Component {
         key: 'name',
         dataIndex: 'venue_name',
         sorter: (a, b) => (a.venue_name.toUpperCase() > b.venue_name.toUpperCase() ? -1 : 1),
-        width: '35%',
+        width: '200px',
       }, {
         title: 'Capacity',
         key: 'capacity',
         dataIndex: 'capacity',
         sorter: (a, b) => a.capacity - b.capacity,
-        width: '15%',
       }, {
         title: 'Address',
         key: 'address',
         dataIndex: 'venue_address',
-        width: '30%',
       }, {
         title: 'Calendar',
         key: 'calendar',
