@@ -69,6 +69,7 @@ export const isLoggedIn = () => dispatch => axios({
   method: 'get',
   url: '/isloggedin',
 }).then((res) => {
+  console.log(res.data);
   const type = res.data[0].user_type;
   dispatch(setBookings(res.data[2]));
   if (type === 'artist') {

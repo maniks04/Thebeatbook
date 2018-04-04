@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Icon } from 'antd';
 import axios from 'axios';
+import { withRouter } from 'react-router';
 import * as actions from '../actions/index.js';
 
 class EPKView extends React.Component {
@@ -208,4 +209,4 @@ const mapDispatchToProps = dispatch => (
   { actions: bindActionCreators(actions, dispatch) } /* eslint-disable-line */
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(EPKView);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EPKView));
