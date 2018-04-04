@@ -206,6 +206,7 @@ class Requests extends React.Component {
                       visible={this.state.visible}
                       maskClosable={true} // eslint-disable-line
                       onOk={() => this.setState({ visible: false })}
+                      onCancel={() => this.setState({ visible: false })}
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
