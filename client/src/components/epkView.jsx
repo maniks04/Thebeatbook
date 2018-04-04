@@ -107,7 +107,11 @@ class EPKView extends React.Component {
         <Row align="bottom" type="flex" gutter={32}>
           <Col span={5}><img src={this.state.imageUrl} width="100%" /></Col>
           <Col span={16}>
-            <h1 style={{ fontSize: '3vw' }}>
+            <h1 style={{
+              fontSize: '3vw',
+              fontFamily: "'Roboto Condensed', sans-serif",
+             }
+           }>
               {this.state.artist_name} - {this.state.artist_city}, {this.state.artist_state}
             </h1>
           </Col>
@@ -119,7 +123,11 @@ class EPKView extends React.Component {
                 <Icon type="facebook" style={{ color: 'rgba(0,0,0,.25)' }} />
                 <a
                   href={`https://www.facebook.com/${this.state.artist_facebook}`}
-                  style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
+                  style={{
+                    color: 'rgba(0,0,0,.25)',
+                    fontSize: '1.2vw',
+                    fontFamily: "'Roboto Condensed', sans-serif",
+                  }}
                   target="_blank"
                 >{this.state.artist_facebook}
                 </a>
@@ -130,7 +138,11 @@ class EPKView extends React.Component {
                 <Icon type="twitter" style={{ color: 'rgba(0,0,0,.25)' }} />
                 <a
                   href={`https://twitter.com/${this.state.artist_twitter}`}
-                  style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
+                  style={{
+                    color: 'rgba(0,0,0,.25)',
+                    fontSize: '1.2vw',
+                    fontFamily: "'Roboto Condensed', sans-serif",
+                  }}
                   target="_blank"
                 >{this.state.artist_twitter}
                 </a>
@@ -141,7 +153,11 @@ class EPKView extends React.Component {
                 <Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />
                 <a
                   href={`https://www.instagram.com/${this.state.artist_instagram}`}
-                  style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
+                  style={{
+                    color: 'rgba(0,0,0,.25)',
+                    fontSize: '1.2vw',
+                    fontFamily: "'Roboto Condensed', sans-serif",
+                  }}
                   target="_blank"
                 > {this.state.artist_instagram}
                 </a>
@@ -152,7 +168,11 @@ class EPKView extends React.Component {
                 <Icon type="desktop" style={{ color: 'rgba(0,0,0,.25)' }} />
                 <a
                   href={`https://${this.state.artist_website}`}
-                  style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
+                  style={{
+                    color: 'rgba(0,0,0,.25)',
+                    fontSize: '1.2vw',
+                    fontFamily: "'Roboto Condensed', sans-serif",
+                  }}
                   target="_blank"
                 > {this.state.artist_website}
                 </a>
@@ -160,15 +180,23 @@ class EPKView extends React.Component {
             }
           </Col>
           <Col span={16}>
-            <h1 style={{ fontSize: '1.5vw' }}>Similar Bands</h1>
-            <p style={{ fontSize: '0.8vw' }}>{this.mapSupport()}</p>
+            <h1 style={{ fontSize: '1.5vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
+              Similar Bands
+            </h1>
+            <p style={{ fontSize: '0.8vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
+              {this.mapSupport()}
+            </p>
           </Col>
         </Row>
         <Row gutter={32}>
           <Col span={5} />
           <Col span={16}>
-            <h1 style={{ fontSize: '1.5vw' }}>Band Bio</h1>
-            <p style={{ fontSize: '0.8vw' }}>{this.state.artist_description}</p>
+            <h1 style={{ fontSize: '1.5vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
+              Band Bio
+            </h1>
+            <p style={{ fontSize: '0.95vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
+              {this.state.artist_description}
+            </p>
           </Col>
         </Row>
         <br />
@@ -201,8 +229,10 @@ class EPKView extends React.Component {
         <Row gutter={32}>
           <Col span={5} />
           <Col span={16}>
-            <h1 style={{ fontSize: '1.5vw' }}>Contact </h1>
-            <p style={{ fontSize: '0.8vw' }}>
+            <h1 style={{ fontSize: '1.5vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
+            Contact
+            </h1>
+            <p style={{ fontSize: '0.8vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
             Email: {this.state.artist_contactEmail} <br />
             Number: {this.state.artist_contact}
             </p>
