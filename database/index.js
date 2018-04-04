@@ -1,9 +1,11 @@
-const config = require('./config.js');
+const configEnv = require('./config.js');
+const configLocal = require('../config.js');
 // const moment = require('moment');
+
 
 const knex = require('knex')({
   client: 'mysql',
-  connection: config,
+  connection: configEnv.user ? configEnv : configLocal,
 });
 
 const checkCredentials = username => knex.select().from('users')
@@ -162,7 +164,7 @@ const getEpk = async (artistId) => {
 const getEpkData = async (artistName) => {
   const artist = await knex.select('*').from('artists').where('artists.artist_name', artistName);
   return artist[0];
-}
+};
 
 module.exports = {
   registerArtist,
