@@ -164,7 +164,7 @@ app.post('/epkImgUpload', async (req, res) => {
 });
 
 app.post('/updateEPK', async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   db.editEPK(req.body);
   res.status(200).send();
 });
