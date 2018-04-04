@@ -24,8 +24,8 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
 
       select(start, end) { /* eslint-disable-line */
         if (editable) {
-          let momentStart;
-          let momentEnd;
+          let momentStart = start;
+          let momentEnd = end;
           const setStart = (value) => { momentStart = value; };
           const setEnd = (value) => { momentEnd = value; };
           Modal.confirm({
@@ -51,7 +51,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                   <Form.Item label="End Time">
                     <TimePicker
                       className="end"
-                      defaultValue={moment(start, 'HH:mm')}
+                      defaultValue={moment(end, 'HH:mm')}
                       format="HH:mm"
                       minuteStep={15}
                       onChange={value => setEnd(value)}
@@ -76,7 +76,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                     description,
                     allDay: false,
                   },
-                  true, // sticks to page so it doenst fall off when changing calendar vies month week etc...
+                  true,
                 );
                 const newLocalBooking = {
                   booking_title: title,
@@ -89,17 +89,17 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                   confirmed: 0,
                   denied: 0,
                 };
-                const newUTCBooking = Object.assign({}, newLocalBooking, { /* eslint-disable-line */
+                const newUTCBooking = Object.assign({}, newLocalBooking, {
                   start_time: momentStart.utc().format(),
                   end_time: momentEnd.utc().format(),
                 });
                 saveToStore(newLocalBooking);
                 axios.post('/calendar', newUTCBooking).then(() => {
                 }).catch((err) => {
-                  console.error(err) /* eslint-disable-line */
+                  console.error(err);
                 });
               } else {
-                alert('You need a title') /* eslint-disable-line */
+                alert('You need a title'); /* eslint-disable-line */
               }
             },
             onCancel() {},
@@ -132,6 +132,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
       eventClick(event) {
         Modal.info({
           title: event.title,
+          maskClosable: true,
           content: (
             <div>{event.description}</div>
           ),

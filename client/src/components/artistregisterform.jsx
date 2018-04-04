@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Checkbox, Col, notification } from 'antd';
+import { Form, Icon, Input, Button, Col, notification } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';

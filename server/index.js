@@ -91,11 +91,9 @@ passport.serializeUser((user, done) => {
 
 app.get('/isloggedin', async (req, res) => {
   if (req.session.passport && req.session.passport.user) {
-    console.log('session');
     const userInfo = await db.getUser(req.session.passport.user.username);
     res.send(userInfo);
   } else {
-    console.log('undefined');
     res.json([{ user_type: 'none' }]);
   }
 });
@@ -118,10 +116,6 @@ app.post('/calendar', async (req, res) => {
   res.status(200).end();
 });
 
-app.get('/artist/epk', async (req, res) => {
-  const epkInfo = await db.getEpkData(req.query.username);
-  res.json(epkInfo);
-});
 
 app.get('/artist/city', async (req, res) => {
   const artistList = await db.getArtistsByCity(req.query.city);
@@ -176,6 +170,11 @@ app.post('/updateEPK', async (req, res) => {
 
 app.get('/epk', async (req, res) => {
   const epk = await db.getEpk(req.query.artistId);
+  res.status(200).send({ epk });
+});
+
+app.get('/artist/epk', async (req, res) => {
+  const epk = await db.getEpkData(req.query.username);
   res.status(200).send({ epk });
 });
 

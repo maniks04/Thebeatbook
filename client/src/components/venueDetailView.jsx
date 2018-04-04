@@ -1,8 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import * as actions from '../actions/index.js';
+import { Row, Col } from 'antd';
 
 class VenueDetailView extends React.Component {
   constructor(props) {
@@ -24,6 +22,7 @@ class VenueDetailView extends React.Component {
         venue_description: data.venue_description,
         venue_name: data.venue_name,
         venue_state: data.venue_state,
+        venue_website: data.venue_website,
       });
     }).catch((err) => {
         console.error(err); /* eslint-disable-line */
@@ -33,22 +32,38 @@ class VenueDetailView extends React.Component {
   render() {
     return (
       <div>
-        <div>Venue Name:  {this.state.venue_name}</div>
-        <div>Venue Location: {this.state.venue_address} - {this.state.venue_city}, {this.state.venue_state} </div>
-        <div>Venue Capacity: {this.state.capacity}</div>
-        <div>Venue Description: {this.state.venue_description} </div>
-        <div> Venue Stage Info: {this.state.venue_stage} </div>
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Venue Name:</p></Col>
+          <Col span={19}>{this.state.venue_name}</Col>
+        </Row>
+        <br />
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Location:</p></Col>
+          <Col span={19}>{this.state.venue_address} - {this.state.venue_city}, {this.state.venue_state}</Col>
+        </Row>
+        <br />
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Capacity:</p></Col>
+          <Col span={19}>{this.state.capacity}</Col>
+        </Row>
+        <br />
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Desctiption:</p></Col>
+          <Col span={19}>{this.state.venue_description}</Col>
+        </Row>
+        <br />
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Stage Info:</p></Col>
+          <Col span={19}>{this.state.venue_stage}</Col>
+        </Row>
+        <br />
+        <Row type="flex" gutter={2}>
+          <Col span={5}><p>Website:</p></Col>
+          <Col span={19}>{this.state.venue_website}</Col>
+        </Row>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => (
-    { store: state } // eslint-disable-line
-);
-
-const mapDispatchToProps = dispatch => (
-  { actions: bindActionCreators(actions, dispatch) } /* eslint-disable-line */
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(VenueDetailView);
+export default VenueDetailView;

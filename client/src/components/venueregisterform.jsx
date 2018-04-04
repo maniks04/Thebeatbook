@@ -42,7 +42,9 @@ class VenueRegisterForm extends React.Component {
       <div>
         <Form onSubmit={e => this.registerVenue(e)} className="login-form">
           <Col span={24}>
-            <FormItem>{getFieldDecorator('username', { rules: [{ required: true, message: 'Please input your username!' }] })(
+            <FormItem>{getFieldDecorator('username', {
+              rules: [{ required: true, message: 'Please input your username!' }],
+            })(
               <Input
                 className="registerinput"
                 id="username"
@@ -53,7 +55,9 @@ class VenueRegisterForm extends React.Component {
             </FormItem>
           </Col>
           <Col span={12} >
-            <FormItem>{getFieldDecorator('password', { rules: [{ required: true, message: 'Please input your Password!' }] })(
+            <FormItem>{getFieldDecorator('password', {
+              rules: [{ required: true, message: 'Please input your Password!' }],
+            })(
               <Input
                 className="registerinput"
                 prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,1)' }} />}
@@ -65,7 +69,9 @@ class VenueRegisterForm extends React.Component {
           </Col>
           <Col span={12}>
             <FormItem>
-              {getFieldDecorator('confirmPassword', { rules: [{ required: true, message: 'Please confirm your Password!' }] })(
+              {getFieldDecorator('confirmPassword', {
+                rules: [{ required: true, message: 'Please confirm your Password!' }],
+              })(
                 <Input
                   className="registerinput"
                   prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,1)' }} />}
@@ -76,7 +82,9 @@ class VenueRegisterForm extends React.Component {
             </FormItem>
           </Col>
           <Col span={24}>
-            <FormItem>{getFieldDecorator('email', { rules: [{ required: true, message: 'Please input your Email!' }] })(
+            <FormItem>{getFieldDecorator('email', {
+              rules: [{ required: true, message: 'Please input your Email!' }],
+            })(
               <Input
                 className="registerinput"
                 prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,1)' }} />}
@@ -87,7 +95,9 @@ class VenueRegisterForm extends React.Component {
             </FormItem>
           </Col>
           <Col span={24}>
-            <FormItem>{getFieldDecorator('venueName', { rules: [{ required: true, message: 'Please input your Venue Name!' }] })(
+            <FormItem>{getFieldDecorator('venueName', {
+              rules: [{ required: true, message: 'Please input your Venue Name!' }],
+            })(
               <Input
                 className="registerinput"
                 prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,1)' }} />}
@@ -98,7 +108,9 @@ class VenueRegisterForm extends React.Component {
             </FormItem>
           </Col>
           <Col span={24}>
-            <FormItem>{getFieldDecorator('address', { rules: [{ required: true, message: 'Please input your Address!' }] })(
+            <FormItem>{getFieldDecorator('address', {
+              rules: [{ required: true, message: 'Please input your Address!' }],
+            })(
               <Input
                 className="registerinput"
                 prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,1)' }} />}
@@ -109,7 +121,9 @@ class VenueRegisterForm extends React.Component {
             </FormItem>
           </Col>
           <Col span={12}>
-            <FormItem>{getFieldDecorator('city', { rules: [{ required: true, message: 'Please input your City!' }] })(
+            <FormItem>{getFieldDecorator('city', {
+              rules: [{ required: true, message: 'Please input your City!' }],
+            })(
               <Input
                 className="registerinput"
                 prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,1)' }} />}
@@ -120,7 +134,9 @@ class VenueRegisterForm extends React.Component {
             </FormItem>
           </Col>
           <Col span={12}>
-            <FormItem>{getFieldDecorator('state', { rules: [{ required: true, message: 'Please input your State!' }] })(
+            <FormItem>{getFieldDecorator('state', {
+              rules: [{ required: true, message: 'Please input your State!' }],
+            })(
               <Input
                 className="registerinput"
                 prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,1)' }} />}
@@ -131,7 +147,9 @@ class VenueRegisterForm extends React.Component {
             </FormItem>
           </Col>
           <Col span={24}>
-            <FormItem>{getFieldDecorator('capacity', { rules: [{ required: true, message: 'Please input your Venue Capacity!' }] })(
+            <FormItem>{getFieldDecorator('capacity', {
+              rules: [{ required: true, message: 'Please input your Venue Capacity!' }],
+            })(
               <Input
                 className="registerinput"
                 prefix={<Icon type="lock" style={{ color: 'rgba(255,255,255,1)' }} />}
@@ -143,7 +161,12 @@ class VenueRegisterForm extends React.Component {
           </Col>
           <Col span={24}>
             <FormItem>
-              <Button type="primary" htmlType="submit" className="login-form-button" style={styles.button}>Register
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+                style={styles.button}
+              >Register
               </Button>
             </FormItem>
           </Col>
