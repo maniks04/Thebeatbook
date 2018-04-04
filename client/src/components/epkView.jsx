@@ -113,42 +113,50 @@ class EPKView extends React.Component {
         </Row>
         <Row gutter={32}>
           <Col span={5}>
-            <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
-              <Icon type="facebook" style={{ color: 'rgba(0,0,0,.25)' }} />
-              <a
-                href={`https://www.facebook.com/${this.state.artist_facebook}`}
-                style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
-                target="_blank"
-              >{this.state.artist_facebook}
-              </a>
-            </h2>
-            <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
-              <Icon type="twitter" style={{ color: 'rgba(0,0,0,.25)' }} />
-              <a
-                href={`https://twitter.com/${this.state.artist_twitter}`}
-                style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
-                target="_blank"
-              >{this.state.artist_twitter}
-              </a>
-            </h2>
-            <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
-              <Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />
-              <a
-                href={`https://www.instagram.com/${this.state.artist_instagram}`}
-                style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
-                target="_blank"
-              > {this.state.artist_instagram}
-              </a>
-            </h2>
-            <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
-              <Icon type="desktop" style={{ color: 'rgba(0,0,0,.25)' }} />
-              <a
-                href={`https://${this.state.artist_website}`}
-                style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
-                target="_blank"
-              > {this.state.artist_website}
-              </a>
-            </h2>
+            {this.state.artist_facebook &&
+              <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
+                <Icon type="facebook" style={{ color: 'rgba(0,0,0,.25)' }} />
+                <a
+                  href={`https://www.facebook.com/${this.state.artist_facebook}`}
+                  style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
+                  target="_blank"
+                >{this.state.artist_facebook}
+                </a>
+              </h2>
+            }
+            {this.state.artist_twitter &&
+              <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
+                <Icon type="twitter" style={{ color: 'rgba(0,0,0,.25)' }} />
+                <a
+                  href={`https://twitter.com/${this.state.artist_twitter}`}
+                  style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
+                  target="_blank"
+                >{this.state.artist_twitter}
+                </a>
+              </h2>
+            }
+            {this.state.artist_instagram &&
+              <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
+                <Icon type="instagram" style={{ color: 'rgba(0,0,0,.25)' }} />
+                <a
+                  href={`https://www.instagram.com/${this.state.artist_instagram}`}
+                  style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
+                  target="_blank"
+                > {this.state.artist_instagram}
+                </a>
+              </h2>
+            }
+            {this.state.artist_website &&
+              <h2 style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}>
+                <Icon type="desktop" style={{ color: 'rgba(0,0,0,.25)' }} />
+                <a
+                  href={`https://${this.state.artist_website}`}
+                  style={{ color: 'rgba(0,0,0,.25)', fontSize: '1.2vw' }}
+                  target="_blank"
+                > {this.state.artist_website}
+                </a>
+              </h2>
+            }
           </Col>
           <Col span={16}>
             <h1 style={{ fontSize: '1.5vw' }}>Similar Bands</h1>
@@ -166,23 +174,27 @@ class EPKView extends React.Component {
         <Row gutter={32}>
           <Col span={5} />
           <Col span={16}>
-            <iframe
-              title="youtube"
-              width="100%"
-              height="315"
-              src={this.state.artist_youtube}
-              frameBorder="0"
-              allowFullScreen
-            />
+            {this.state.artist_youtube &&
+              <iframe
+                title="youtube"
+                width="100%"
+                height="315"
+                src={this.state.artist_youtube}
+                frameBorder="0"
+                allowFullScreen
+              />
+            }
             <br />
-            <iframe
-              title="spotify"
-              src={`https://open.spotify.com/embed?uri=spotify:artist:${this.state.artist_spotify}`}
-              width="100%"
-              height="380"
-              frameBorder="0"
-              allowTransparency="true"
-            />
+            {this.state.artist_spotify &&
+              <iframe
+                title="spotify"
+                src={`https://open.spotify.com/embed?uri=spotify:artist:${this.state.artist_spotify}`}
+                width="100%"
+                height="380"
+                frameBorder="0"
+                allowTransparency="true"
+              />
+            }
           </Col>
         </Row>
         <Row gutter={32}>
