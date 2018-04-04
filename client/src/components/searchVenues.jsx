@@ -104,7 +104,7 @@ class SearchVenues extends React.Component {
         venueBookings: res.data.filter(booking => booking.denied === 0 && booking.confirmed === 1),
       });
       Modal.info({
-        title: 'Venue Calendar',
+        title: `${venueName}'s Calendar`,
         content: calendar(this.state.venueBookings, true, artistId, id, this.state.saveToStore, venueName),
         width: 800,
         okText: 'Close',
