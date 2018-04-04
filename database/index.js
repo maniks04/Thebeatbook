@@ -162,7 +162,7 @@ const getEpk = async (artistId) => {
 const getEpkData = async (artistName) => {
   const artist = await knex.select('*').from('artists').where('artists.artist_name', artistName);
   return artist[0];
-}
+};
 
 module.exports = {
   registerArtist,

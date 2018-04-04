@@ -55,7 +55,7 @@ class EPKView extends React.Component {
   }
 
   getArtistByName() {
-    console.log('match', this.props)
+    console.log('match', this.props);
     axios.get('/artist/epk', {
       params: {
         username: this.props.match.params.username,
