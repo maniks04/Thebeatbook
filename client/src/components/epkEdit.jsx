@@ -251,7 +251,7 @@ class NormalLoginForm extends React.Component {
             listType="picture-card"
             className="avatar-uploader"
             showUploadList={false}
-            action="http://localhost:3000/epkImgUpload"
+            action="/epkImgUpload"
             onChange={val => this.onChangeImage(val)}
           >
             {imageUrl ? <img src={imageUrl} width="100%" /> : uploadButton}
