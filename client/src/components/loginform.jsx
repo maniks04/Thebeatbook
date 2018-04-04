@@ -14,7 +14,6 @@ class LoginForm extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
   }
   submitLogin(e) {
     e.preventDefault();
@@ -130,4 +129,3 @@ const styles = {
     fontSize: 17,
   },
 };
-

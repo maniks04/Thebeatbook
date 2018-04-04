@@ -59,7 +59,7 @@ const getUser = async (username) => {
     bookings = await getArtistBookings2(artist.artist_id);
     return [user[0], artist, bookings];
   }
-  const venue = await getVenue(user[0].user_id);
+  const venue = await getVenueById(user[0].user_id);
   bookings = await getVenueBookings2(venue.venue_id);
   return [user[0], venue, bookings];
 };
@@ -67,11 +67,6 @@ const getUser = async (username) => {
 const getArtist = async (userId) => {
   const artist = await knex.select('*').from('artists').where('artists.user_id', userId);
   return artist[0];
-};
-
-const getVenue = async (userId) => {
-  const venue = await knex.select('*').from('venues').where('venues.user_id', userId);
-  return venue[0];
 };
 
 const getVenueById = async (userId) => {
@@ -93,6 +88,7 @@ const updateVenue = async (info) => {
     capacity: info.capacity,
     venue_stage: info.venue_stage,
     venue_description: info.venue_description,
+    venue_website: info.venue_website,
   });
 };
 
@@ -139,6 +135,7 @@ const editEPK = async (info) => {
     artist_youtube: info.artist_youtube,
     artist_spotify: info.artist_spotify,
     artist_contactEmail: info.artist_contactEmail,
+    artist_website: info.artist_website,
   });
 };
 

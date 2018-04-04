@@ -80,8 +80,6 @@ export const isLoggedIn = () => dispatch => axios({
     dispatch(loadVenuePage(res.data));
     dispatch(setVenue(res.data[1].artist_id));
     dispatch(landingViewed());
-  } else {
-    return console.log('not logged in');
   }
 }).catch((err) => {
   console.error(err);
@@ -92,11 +90,8 @@ export const checkLoginStatus = () => axios({
   method: 'get',
   url: '/checkloginstatus',
 }).then((res) => {
-  console.log('res', res.data);
   if (res.data === true) {
-    console.log('true');
     return true;
   }
-  console.log('false');
   return false;
 });
