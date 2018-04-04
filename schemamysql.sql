@@ -35,6 +35,7 @@ CREATE TABLE venues
   venue_address VARCHAR (25),
   venue_stage VARCHAR(1000) DEFAULT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  venue_website VARCHAR(50),
   PRIMARY KEY (venue_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
@@ -58,6 +59,7 @@ CREATE TABLE artists
   artist_youtube VARCHAR(100),
   artist_spotify VARCHAR(100),
   artist_contactEmail VARCHAR(40),
+  artist_website VARCHAR(50),
   PRIMARY KEY (artist_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );

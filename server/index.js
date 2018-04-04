@@ -91,11 +91,9 @@ passport.serializeUser((user, done) => {
 
 app.get('/isloggedin', async (req, res) => {
   if (req.session.passport && req.session.passport.user) {
-    console.log('session');
     const userInfo = await db.getUser(req.session.passport.user.username);
     res.send(userInfo);
   } else {
-    console.log('undefined');
     res.json([{ user_type: 'none' }]);
   }
 });
