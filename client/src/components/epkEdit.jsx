@@ -75,7 +75,6 @@ class NormalLoginForm extends React.Component {
       artist_twitter,
       artist_facebook,
       artist_instagram,
-      artist_spotify,
       artist_support,
       artist_contact,
       artist_youtube,
@@ -148,7 +147,7 @@ class NormalLoginForm extends React.Component {
 
   onChangeWebsite(e) {
     const index = e.target.value.indexOf('w');
-    const web = e.target.value.slice(index, e.target.value.length - 1);
+    const web = e.target.value.slice(index, e.target.value.length);
     this.setState({ artist_website: web });
   }
 
@@ -252,7 +251,7 @@ class NormalLoginForm extends React.Component {
             listType="picture-card"
             className="avatar-uploader"
             showUploadList={false}
-            action="http://localhost:3000/epkImgUpload"
+            action="/epkImgUpload"
             onChange={val => this.onChangeImage(val)}
           >
             {imageUrl ? <img src={imageUrl} width="100%" /> : uploadButton}

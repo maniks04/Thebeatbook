@@ -29,7 +29,7 @@ class ArtistRegisterForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <div>
+      <div style={styles.container}>
         <Form onSubmit={e => this.registerArtist(e)} className="login-form">
           <Col span={24}>
             <FormItem >
@@ -134,6 +134,9 @@ const mapDispatchToProps = dispatch => (
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ArtistRegisterForm));
 
 const styles = {
+  container: {
+    display: 'inline-block',
+  },
   input: {
     height: 50,
   },
