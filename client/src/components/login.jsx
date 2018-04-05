@@ -69,4 +69,7 @@ const styles = {
     top: '5%',
     textAlign: 'center',
   },
+  log: {
+    display: 'inline-block',
+  },
 };

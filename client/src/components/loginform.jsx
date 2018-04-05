@@ -45,7 +45,7 @@ class LoginForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div>
+      <div style={styles.container}>
         <Modal
           visible={this.props.store.registerModalStatus}
           footer={[
@@ -118,6 +118,9 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm
 
 
 const styles = {
+  container: {
+    display: 'inline-block',
+  },
   input: {
     height: 50,
   },
