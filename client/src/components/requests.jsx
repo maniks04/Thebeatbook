@@ -52,6 +52,7 @@ class Requests extends React.Component {
   }
 
   onSeeVenueDetailsClick(item) {
+    console.log(item)
     Modal.info({
       title: 'Venue Details',
       content: <VenueDetailView venueId={item.venue_id} />,
