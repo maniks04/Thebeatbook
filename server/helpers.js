@@ -66,7 +66,7 @@ exports.sendPasswordRecoveryEmail = (email, token) => {
       to: email, // list of receivers
       subject: `Welcome ${email} ✔`, // Subject line
       text: `Hello ${email}! Welcome to BeatBook!`, // plain text body
-      html: `<p>Click <a href=http://localhost:3000/password/recover/${email}/${token}>here</a> to reset your password</p>`,
+      html: `<p>Click <a href=http://thebeatbook.com/password/recover/${email}/${token}>here</a> to reset your password</p>`,
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
