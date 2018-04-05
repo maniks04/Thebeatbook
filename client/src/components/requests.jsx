@@ -52,7 +52,6 @@ class Requests extends React.Component {
   }
 
   onSeeVenueDetailsClick(item) {
-    console.log(item)
     Modal.info({
       title: 'Venue Details',
       content: <VenueDetailView venueId={item.venue_id} />,
@@ -86,6 +85,20 @@ class Requests extends React.Component {
       }).catch(err => console.log(err));
   }
 
+  onDeleteClick(item) {
+    console.log(item)
+    axios.post('/booking', item)
+      .then((res) => {
+        const updatedBookings = res.data.bookings;
+        this.props.actions.setBookings(updatedBookings);
+        this.setState({
+          pending: updatedBookings.filter(booking => booking.confirmed === 0 && booking.denied === 0),
+          confirmed: updatedBookings.filter(booking => booking.confirmed === 1 && booking.denied === 0),
+          denied: updatedBookings.filter(booking => booking.denied === 1),
+        });
+        message.error('This request has been deleted. It has been removed from the Venue\'s inbox.');
+      }).catch(err => console.log(err));
+  }
 
   render() {
     const { confirmed, pending, denied } = this.state;
@@ -151,7 +164,16 @@ class Requests extends React.Component {
                   subtab.push(
                     <a onClick={() => this.onSeeVenueDetailsClick(item)}>
                       See Venue Details
-                    </a>);
+                    </a>,
+                    <Popconfirm
+                      title="Are you sure you want to delete this request?"
+                      onConfirm={() => this.onDeleteClick(item)}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <a href="#" >Delete Request</a>
+                    </Popconfirm>,
+                  );
                 } else {
                   name = item.artist_name;
                   titleFunction = this.onEpkClick;

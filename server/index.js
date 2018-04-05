@@ -148,6 +148,12 @@ app.patch('/deny', async ({ body }, res) => {
   res.status(200).send({ bookings });
 });
 
+app.post('/booking', async ({ body }, res) => {
+  await db.deleteBooking(body.booking_id);
+  const bookings = await db.getArtistBookings2(body.artist_id);
+  res.status(200).send({ bookings });
+});
+
 app.get('/venueDetails', async (req, res) => {
   const venueDetails = await db.getVenueDetails(req.query.venue_id);
   res.status(200).send(venueDetails);
@@ -164,7 +170,6 @@ app.post('/epkImgUpload', async (req, res) => {
 });
 
 app.post('/updateEPK', async (req, res) => {
-  console.log(req.body);
   db.editEPK(req.body);
   res.status(200).send();
 });
