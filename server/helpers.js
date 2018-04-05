@@ -1,4 +1,4 @@
-// const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
 // exports.sendEmail = (username, email) => {
 //      nodemailer.createTestAccount((err, account) => {
@@ -51,3 +51,28 @@
 //     })
 // }
 
+
+exports.sendPasswordRecoveryEmail = (email, token) => {
+  nodemailer.createTestAccount(() => {
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: 'trumpchange2@gmail.com',
+        pass: '8~a8UH"Ju"m`8vY\\',
+      },
+    });
+    const mailOptions = {
+      from: '"TrumpChange" <trumpchange2@gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: `Welcome ${email} ✔`, // Subject line
+      text: `Hello ${email}! Welcome to BeatBook!`, // plain text body
+      html: `<p>Click <a href=http://localhost:3000/password/recover/${email}/${token}>here</a> to reset your password</p>`,
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);
+    });
+  });
+};
