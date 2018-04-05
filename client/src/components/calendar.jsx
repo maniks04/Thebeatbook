@@ -115,9 +115,10 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
             const startLocal = moment.utc(event.start_time).local().format();
             const endLocal = moment.utc(event.end_time).local().format();
             let calendarColor = event.confirmed === 1 ? '#00c853' : '#ffd54f';
+            let subtext = event.venue_name ? event.venue_name : event.artist_name;
             events.push({
               title: event.booking_title,
-              description: event.booking_description,
+              description: `${event.booking_description} - ${subtext} `,
               start: startLocal,
               end: endLocal,
               id: event.booking_id,
@@ -132,11 +133,15 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
       maxTime: '26:00:00',
 
       eventClick(event) {
+        console.log(event)
         Modal.info({
           title: event.title,
           maskClosable: true,
           content: (
-            <div>{event.description}</div>
+            <div>
+              <div>{event.description}</div>
+              <div>{event.start.format('MMMM Do, h:mm a')} - {event.end.format('h:mm a')}</div>
+            </div>
           ),
           onOk() {},
         });
