@@ -24,6 +24,7 @@ class Requests extends React.Component {
       start_time: null,
       end_time: null,
       epkVisible: false,
+      item: '',
     };
     this.onSeeEventClick = this.onSeeEventClick.bind(this);
     this.onSeeVenueDetailsClick = this.onSeeVenueDetailsClick.bind(this);
@@ -37,6 +38,7 @@ class Requests extends React.Component {
       booking_title: item.booking_title,
       start_time: item.start_time,
       end_time: item.end_time,
+      item,
     });
   }
 
@@ -64,8 +66,10 @@ class Requests extends React.Component {
     });
   }
 
-  onEpkClick() {
+  onEpkClick(item) {
+    console.log(item);
     this.setState({
+      item,
       epkVisible: true,
     });
   }
@@ -189,7 +193,7 @@ class Requests extends React.Component {
                       <a href="#" >Confirm Event</a>
                     </Popconfirm>,
                     <a onClick={() => this.onSeeEventClick(item)}> View Details</a>,
-                    <a onClick={() => this.onEpkClick()}>See EPK</a>,
+                    <a onClick={() => this.onEpkClick(item)}>See EPK</a>,
                     <Popconfirm
                       title="Are you sure you want to deny this request?"
                       onConfirm={() => this.onDenyClick(item)}
@@ -205,28 +209,6 @@ class Requests extends React.Component {
                       title={<a onClick={() => titleFunction(item)} >{name}</a>}
                       description={item.booking_description}
                     />
-                    <Modal
-                      visible={this.state.epkVisible}
-                      maskClosable
-                      onOk={() => this.setState({ epkVisible: false })}
-                      onCancel={() => this.setState({ epkVisible: false })}
-                      width="70%"
-                    >
-                      <EPKView artist={item.artist_id} />
-                    </Modal>
-                    <Modal
-                      visible={this.state.visible}
-                      maskClosable
-                      onOk={() => this.setState({ visible: false })}
-                      onCancel={() => this.setState({ visible: false })}
-                      title={this.state.booking_title}
-                    >
-                      <em>{name}</em>
-                      <div>Requesting to play {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
-                           from {`${moment(this.state.start_time).local().format('h:mm a')} `}
-                           til {`${moment(this.state.end_time).local().format('h:mm a')}`}
-                      </div>
-                    </Modal>
                     <div>Trying to gig: {moment(time).local().format('MMM Do')} at {moment(time).local().format('h:mm a')}</div>
                   </List.Item>
                 );
@@ -256,7 +238,7 @@ class Requests extends React.Component {
                       <a href="#" >Restore Request</a>
                     </Popconfirm>,
                     <a onClick={() => this.onSeeEventClick(item)}> View Details</a>,
-                    <a onClick={() => this.onEpkClick()}>See EPK</a>);
+                    <a onClick={() => this.onEpkClick(item)}>See EPK</a>);
                 }
                 return (
                   <List.Item actions={subtab}>
@@ -264,20 +246,6 @@ class Requests extends React.Component {
                       title={<em>{name}</em>}
                       description={<em>{item.booking_description}</em>}
                     />
-                    <Modal
-                      visible={this.state.visible}
-                      onOk={() => this.setState({ visible: false })}
-                      onCancel={() => this.setState({ visible: false })}
-                      title={this.state.booking_title}
-                    >
-                      <em>{name}</em>
-                      <div>
-                        <em>Initial request sent for {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
-                           from {`${moment(this.state.start_time).format('h:mm a')} `}
-                           til {`${moment(this.state.end_time).format('h:mm a')}`}
-                        </em>
-                      </div>
-                    </Modal>
                     <div><em>Attempted to gig: {moment(time).local().format('MMM Do')}</em></div>
                   </List.Item>
                 );
@@ -285,6 +253,28 @@ class Requests extends React.Component {
             />
           </TabPane>
         </Tabs>
+        <Modal
+          visible={this.state.epkVisible}
+          maskClosable
+          onOk={() => this.setState({ epkVisible: false })}
+          onCancel={() => this.setState({ epkVisible: false })}
+          width="70%"
+        >
+          <EPKView artist={this.state.item.artist_id} />
+        </Modal>
+        <Modal
+          visible={this.state.visible}
+          maskClosable
+          onOk={() => this.setState({ visible: false })}
+          onCancel={() => this.setState({ visible: false })}
+          title={this.state.booking_title}
+        >
+          <em>{this.state.item.artist_name}</em>
+          <div>Requesting to play {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
+               from {`${moment(this.state.start_time).local().format('h:mm a')} `}
+               til {`${moment(this.state.end_time).local().format('h:mm a')}`}
+          </div>
+        </Modal>
       </div>
     );
   }
