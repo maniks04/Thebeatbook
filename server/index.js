@@ -22,6 +22,30 @@ app.use(require('express-session')({
   saveUninitialized: false,
 }));
 
+const randomUrl = (length) => {
+  let text = '';
+  const possible = '$2a$10$yBVgx0p7IJJgfrswML8VVun9LprDc1.GYvav6sm3aQKsZOqM1gU8G';
+  for (let i = 0; i < length; i += 1) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
+
+app.post('/forgot/password', (req, res) => {
+  console.log(req.body);
+  const token = randomUrl(40);
+  db.addTokenToUser(req.body.email, token);
+  helpers.sendPasswordRecoveryEmail(req.body.email, token);
+  res.end('email sent');
+});
+
+app.post('/change/password', (req, res) => {
+  console.log(req.body);
+  const hash = bcrypt.hashSync(req.body.password, 10);
+  db.changePassword(req.body.email, hash, req.body.token);
+  res.send('changed password');
+});
+
 
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', (req, res) => {

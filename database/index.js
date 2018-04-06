@@ -167,6 +167,18 @@ const getEpkData = async (artistName) => {
   return artist[0];
 };
 
+const addTokenToUser = async (email, token) => {
+  await knex('users').where('email', email).update({
+    password: token,
+  });
+};
+
+const changePassword = async (email, password, token) => {
+  await knex('users').where('password', token).update({
+    password,
+  });
+};
+
 module.exports = {
   registerArtist,
   registerVenue,
@@ -185,4 +197,6 @@ module.exports = {
   getVenueDetails,
   updateVenue,
   deleteBooking,
+  addTokenToUser,
+  changePassword,
 };

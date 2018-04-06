@@ -135,7 +135,7 @@ const styles = {
   },
   beatbook: {
     fontSize: 150,
-    fontFamily: 'system-ui',
+    fontFamily: "'Baumans', cursive",
     color: 'white',
     display: 'inline-block',
   },

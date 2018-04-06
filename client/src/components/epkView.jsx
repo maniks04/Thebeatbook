@@ -103,7 +103,7 @@ class EPKView extends React.Component {
 
   render() {
     return (
-      <div>
+      <div >
         <Row align="bottom" type="flex" gutter={32}>
           <Col span={4}><img src={this.state.imageUrl} width="100%" /></Col>
           <Col span={16}>

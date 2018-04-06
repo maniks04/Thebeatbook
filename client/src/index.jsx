@@ -12,6 +12,7 @@ import VenueRegister from './components/venueregister.jsx';
 import EPKView from './components/epkView.jsx';
 // import Artist from './components/artist.jsx';
 import reducer from './reducers/index.js';
+import PasswordRecovery from './components/passwordrecovery.jsx';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';//eslint-disable-line
 
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -23,6 +24,7 @@ const Base = ({ store }) => (
         <Route exact path="/artistregister" component={ArtistRegister} />
         <Route exact path="/venueregister" component={VenueRegister} />
         <Route path="/artist/:username" component={EPKView} /* render={() => (actions.checkLoginStatus() === true ? (<Artist />) : <EPKView />)} */ />
+        <Route path="/password/recover/:email/:token" component={PasswordRecovery} />
       </Switch>
     </Router>
   </Provider>

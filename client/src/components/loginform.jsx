@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Form, Icon, Input, Button, Checkbox, Modal, Col } from 'antd';
 import { withRouter } from 'react-router';
+import axios from 'axios';
 import * as actions from '../actions/index.js';
 
 const FormItem = Form.Item;
@@ -11,6 +12,11 @@ const FormItem = Form.Item;
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      registerModalStatus: false,
+      forgotPasswordModalStatus: false,
+      email: '',
+    };
   }
 
   componentDidMount() {
@@ -24,22 +30,42 @@ class LoginForm extends React.Component {
     });
   }
 
+  sendEmail() {
+    this.closeForgotPasswordModal();
+    axios.post('/forgot/password', {
+      email: this.state.email,
+    }).then((res) => {
+      console.log(res.data);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+
+
+  openForgotPasswordModal() {
+    this.setState({ forgotPasswordModalStatus: true });
+  }
+
+  closeForgotPasswordModal() {
+    this.setState({ forgotPasswordModalStatus: false });
+  }
+
   openRegisterModal() {
-    this.props.actions.openRegisterModal(); // sets register modal state to true
+    this.setState({ registerModalStatus: true });
   }
 
   closeRegisterModal() {
-    this.props.actions.closeRegisterModal(); // sets register modal state to false
+    this.setState({ registerModalStatus: false });
   }
 
   loadArtistRegisterPage() {
     this.closeRegisterModal();
-    this.props.history.replace('/artistregister'); // closes modal and loads artist registration form
+    this.props.history.replace('/artistregister');
   }
 
   loadVenueRegisterPage() {
     this.closeRegisterModal();
-    this.props.history.replace('/venueregister'); // closes modal and loads venue registration form
+    this.props.history.replace('/venueregister');
   }
 
   render() {
@@ -47,13 +73,24 @@ class LoginForm extends React.Component {
     return (
       <div style={styles.container}>
         <Modal
-          visible={this.props.store.registerModalStatus}
-          footer={[
-            <Button key="venue" onClick={() => this.loadVenueRegisterPage()}>Venue</Button>,
-            <Button key="artist" onClick={() => this.loadArtistRegisterPage()}>Artist</Button>,
-          ]}
+          visible={this.state.registerModalStatus}
           onCancel={() => this.closeRegisterModal()}
-        />
+          footer={null}
+          style={{ textAlign: 'center' }}
+        >
+          <Button style={styles.modalButton} key="venue" onClick={() => this.loadVenueRegisterPage()}>Venue</Button>
+          <div style={styles.modalButton} />
+          <Button style={styles.modalButton} key="artist" onClick={() => this.loadArtistRegisterPage()}>Artist</Button>
+        </Modal>
+        <Modal
+          visible={this.state.forgotPasswordModalStatus}
+          onCancel={() => this.closeForgotPasswordModal()}
+          // footer={null}
+          onOk={() => this.sendEmail()}
+          style={{ textAlign: 'center' }}
+        >
+          <Input style={styles.modalInput} placeholder="Enter your Email" onChange={e => this.setState({ email: e.target.value })} />
+        </Modal>
 
         <Form onSubmit={e => this.submitLogin(e)} className="login-form">
           <Col span={24}>
@@ -91,13 +128,13 @@ class LoginForm extends React.Component {
             valuePropName: 'checked',
             initialValue: true,
           })(
-            <Checkbox>Remember me</Checkbox>,
+            <Checkbox style={styles.anchor}>Remember me</Checkbox>,
           )}
-            <a className="login-form-forgot" href="">Forgot password</a>
+            <a onClick={() => this.openForgotPasswordModal()} style={styles.anchor}>Forgot password</a>
             <Button type="primary" htmlType="submit" className="login-form-button" style={styles.button}>
             Log in
             </Button>
-            <a onClick={() => this.openRegisterModal()}>Register Here!</a>
+            <a onClick={() => this.openRegisterModal()} style={styles.anchor}>Register Here!</a>
           </FormItem>
 
         </Form>
@@ -130,5 +167,15 @@ const styles = {
     borderRadius: 25,
     borderColor: 'Transparent',
     fontSize: 17,
+  },
+  anchor: {
+    color: 'white',
+  },
+  modalButton: {
+    width: '30%',
+    display: 'inline-block',
+  },
+  modalInput: {
+    width: '75%',
   },
 };
