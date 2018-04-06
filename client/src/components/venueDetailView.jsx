@@ -30,36 +30,42 @@ class VenueDetailView extends React.Component {
   }
 
   render() {
+    const venueName = this.state.venue_name ? this.state.venue_name : '(Not provided)';
+    const venueAddress = this.state.venue_address ? this.state.venue_address : '(Address not provided)';
+    const venueCapacity = this.state.capacity ? this.state.capacity : '(Not provided)';
+    const venueDescription = this.state.venue_description ? this.state.venue_description : '(Not provided)';
+    const venueStage = this.state.venue_stage ? this.state.venue_stage : '(Not provided)';
+    const venueWebsite = this.state.venue_website ? this.state.venue_website : '(Not provided)';
     return (
       <div>
         <Row type="flex" gutter={2}>
           <Col span={5}><p>Venue Name:</p></Col>
-          <Col span={19}>{this.state.venue_name}</Col>
+          <Col span={19}>{venueName}</Col>
         </Row>
         <br />
         <Row type="flex" gutter={2}>
           <Col span={5}><p>Location:</p></Col>
-          <Col span={19}>{this.state.venue_address} - {this.state.venue_city}, {this.state.venue_state}</Col>
+          <Col span={19}>{venueAddress} - {this.state.venue_city}, {this.state.venue_state}</Col>
         </Row>
         <br />
         <Row type="flex" gutter={2}>
           <Col span={5}><p>Capacity:</p></Col>
-          <Col span={19}>{this.state.capacity}</Col>
+          <Col span={19}>{venueCapacity}</Col>
         </Row>
         <br />
         <Row type="flex" gutter={2}>
           <Col span={5}><p>Desctiption:</p></Col>
-          <Col span={19}>{this.state.venue_description}</Col>
+          <Col span={19}>{venueDescription}</Col>
         </Row>
         <br />
         <Row type="flex" gutter={2}>
           <Col span={5}><p>Stage Info:</p></Col>
-          <Col span={19}>{this.state.venue_stage}</Col>
+          <Col span={19}>{venueStage}</Col>
         </Row>
         <br />
         <Row type="flex" gutter={2}>
           <Col span={5}><p>Website:</p></Col>
-          <Col span={19}>{this.state.venue_website}</Col>
+          <Col span={19}>{venueWebsite}</Col>
         </Row>
       </div>
     );

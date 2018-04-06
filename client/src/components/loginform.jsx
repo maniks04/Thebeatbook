@@ -134,7 +134,7 @@ class LoginForm extends React.Component {
             <Button type="primary" htmlType="submit" className="login-form-button" style={styles.button}>
             Log in
             </Button>
-            <a onClick={() => this.openRegisterModal()} style={styles.anchor}>register now!</a>
+            <a onClick={() => this.openRegisterModal()} style={styles.anchor}>Register Here!</a>
           </FormItem>
 
         </Form>

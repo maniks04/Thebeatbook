@@ -51,7 +51,7 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
                   <Form.Item label="End Time">
                     <TimePicker
                       className="end"
-                      defaultValue={moment(end, 'HH:mm')}
+                      defaultValue={end.subtract(1, 'm')}
                       format="HH:mm"
                       minuteStep={15}
                       onChange={value => setEnd(value)}
@@ -114,13 +114,15 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
           bookings.forEach((event) => {
             const startLocal = moment.utc(event.start_time).local().format();
             const endLocal = moment.utc(event.end_time).local().format();
-            // use moment to convert to local time
+            let calendarColor = event.confirmed === 1 ? '#81c784' : '#90a4ae';
+            let subtext = event.venue_name ? event.venue_name : event.artist_name;
             events.push({
               title: event.booking_title,
-              description: event.booking_description,
+              description: `${event.booking_description} - ${subtext} `,
               start: startLocal,
               end: endLocal,
               id: event.booking_id,
+              color: calendarColor,
             });
           });
         }
@@ -131,14 +133,17 @@ const Calendar = (bookings, editable, artistId, venueId, saveToStore, venueName)
       maxTime: '26:00:00',
 
       eventClick(event) {
+        console.log(event)
         Modal.info({
           title: event.title,
           maskClosable: true,
           content: (
-            <div>{event.description}</div>
+            <div>
+              <div>{event.description}</div>
+              <div>{event.start.format('MMMM Do, h:mm a')} - {event.end.format('h:mm a')}</div>
+            </div>
           ),
           onOk() {},
-          onCancel() {},
         });
       },
     });

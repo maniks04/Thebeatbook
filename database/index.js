@@ -121,6 +121,10 @@ const updateDenyBooking = async (info) => {
   });
 };
 
+const deleteBooking = async (bookingId) => {
+  await knex('bookings').where('booking_id', bookingId).del();
+};
+
 const editEPK = async (info) => {
   const id = info.artist_id;
   await knex('artists').where('artist_id', id).update({
@@ -185,12 +189,14 @@ module.exports = {
   getVenuesByCity,
   getEpk,
   getVenueBookings2,
+  getArtistBookings2,
   updateConfirmBooking,
   updateDenyBooking,
   editEPK,
   getEpkData,
   getVenueDetails,
   updateVenue,
+  deleteBooking,
   addTokenToUser,
   changePassword,
 };

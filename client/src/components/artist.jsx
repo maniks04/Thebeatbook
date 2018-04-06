@@ -32,8 +32,10 @@ class Artist extends React.Component {
     const { key } = this.state;
     const artist = this.props.store.artistId;
     const artist2 = parseInt(artist.toString()); /* eslint-disable-line */
+    const { bookings } = this.props.store;
+    const filteredBookings = bookings.filter(booking => booking.denied !== 1);
     if (key === '1') {
-      return calendar(this.props.store.bookings, true, artist2, null, this.props.actions.addBooking);
+      return calendar(filteredBookings, true, artist2, null, this.props.actions.addBooking);
     }
     if (key === '2') {
       return (<SearchVenues />);
