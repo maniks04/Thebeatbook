@@ -305,7 +305,7 @@ class NormalLoginForm extends React.Component {
             />
           </FormItem>
           <FormItem>
-            Spotify Link
+            Spotify Artist Link
             <Input
               prefix={<Icon type="sound" style={{ color: 'rgba(0,0,0,.25)' }} />}
               className="spotify"
