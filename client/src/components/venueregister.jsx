@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import { Form, notification } from 'antd';
+import { Form, notification, Icon } from 'antd';
 import * as actions from '../actions/index.js';
 import VenueRegisterForm from './venueregisterform.jsx';
 
@@ -15,7 +15,7 @@ class VenueRegister extends React.Component {
     super(props);
   }
 
-  goHome() {
+  goBackToLogin() {
     this.props.history.replace('/');
   }
 
@@ -44,10 +44,16 @@ class VenueRegister extends React.Component {
 
   render() {
     return (
-      <div style={styles.registerbox}>
-        <img src={logo} style={styles.logo} alt="" />
-        <div style={styles.registerform}>
-          <VenueRegisterFormContainer registerVenue={this.registerVenue} />
+      <div>
+        <a style={styles.goBack} onClick={() => this.goBackToLogin()}>
+          <Icon type="arrow-left" style={styles.backArrow} />
+          <div style={styles.backText}>Back to Login</div>
+        </a>
+        <div style={styles.registerbox}>
+          <img src={logo} style={styles.logo} alt="" />
+          <div style={styles.registerform}>
+            <VenueRegisterFormContainer registerVenue={this.registerVenue} />
+          </div>
         </div>
       </div>
     );
@@ -88,5 +94,21 @@ const styles = {
     left: '25%',
     top: '5%',
     textAlign: 'center',
+  },
+  backArrow: {
+    fontSize: 20,
+    color: 'white',
+    display: 'inline-block',
+  },
+  backText: {
+    fontSize: 15,
+    display: 'inline-block',
+    color: 'white',
+    font: 'Roboto',
+  },
+  goBack: {
+    position: 'absolute',
+    top: '2%',
+    left: '2%',
   },
 };

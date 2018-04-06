@@ -48,7 +48,7 @@ class Requests extends React.Component {
           confirmed: updatedBookings.filter(booking => booking.confirmed === 1 && booking.denied === 0),
           denied: updatedBookings.filter(booking => booking.denied === 1),
         });
-        message.sucess('This request has been confirmed! We have notified the Artist.');
+        message.success('This request has been confirmed! We have notified the Artist.');
       }).catch(err => console.error(err));
   }
 

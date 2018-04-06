@@ -107,11 +107,34 @@ const addBooking = async (info) => {
   });
 };
 
+const getVenueEmail = async (venueId) => {
+  const userId = await knex.select('user_id').from('venues').where('venue_id', venueId);
+  const venueEmail = await knex.select('email').from('users').where('user_id', userId[0].user_id);
+  return venueEmail[0].email;
+};
+
+const getArtistName = async (artistId) => {
+  const artistName = await knex.select('artist_name').from('artists').where('artist_id', artistId);
+  return artistName[0].artist_name;
+};
+
+const getVenueNameById = async (venueId) => {
+  const venue = await knex.select('venue_name').from('venues').where('venue_id', venueId);
+  return venue[0].venue_name;
+};
+
 const updateConfirmBooking = async (info) => {
   const toggle = info.confirmed === 0 ? 1 : 0;
   await knex('bookings').where('booking_id', info.booking_id).update({
     confirmed: toggle,
   });
+  return sendConfirmBookingEmail(info);
+};
+
+const sendConfirmBookingEmail = async (info) => {
+  const userId = await knex.select('user_id').from('artists').where('artists.artist_id', info.artist_id);
+  const email = await knex.select('email').from('users').where('user_id', userId[0].user_id);
+  return email[0].email;
 };
 
 const updateDenyBooking = async (info) => {
@@ -193,4 +216,7 @@ module.exports = {
   updateVenue,
   addTokenToUser,
   changePassword,
+  getVenueNameById,
+  getVenueEmail,
+  getArtistName,
 };

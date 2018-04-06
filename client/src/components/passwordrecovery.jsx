@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { Modal, Input, notification } from 'antd';
+import { Modal, Input, notification, message } from 'antd';
 import axios from 'axios';
 // import * as actions from '../actions/index.js';
 
@@ -27,6 +27,7 @@ class PasswordRecovery extends React.Component {
 
   changePassword() {
     this.setState({ modalStatus: false });
+    message.success('Your Password has been changed! You can close this window!');
     axios.post('/change/password', {
       email: this.props.match.params.email,
       password: this.state.password,
@@ -45,13 +46,20 @@ class PasswordRecovery extends React.Component {
     });
   }
 
+  notify() {
+    notification.open({
+      message: 'Change your password or close this Window',
+    });
+  }
+
   render() {
     return (
       <div>
         <Modal
           visible={this.state.modalStatus}
-          // onCancel={() => this.closeModal()}
+          onCancel={() => this.notify()}
           // footer={null}
+          title="Please enter your new Password"
           onOk={() => this.passwordCheck()}
           style={{ textAlign: 'center' }}
         >
