@@ -67,7 +67,7 @@ app.post('/register/artist', async (req, res) => {
   } if (registration === 'email already exists') {
     return res.send('email already exists');
   }
-  helpers.sendEmail(req.body.username, req.body.email)
+  helpers.sendEmail(req.body.username, req.body.email);
   const user = await db.getUser(req.body.username);
   req.login(user[0], () => {
     res.send(user);
@@ -82,7 +82,7 @@ app.post('/register/venue', async (req, res) => {
   } if (registration === 'email already exists') {
     return res.send('Email already exists');
   }
-  helpers.sendEmail(req.body.username, req.body.email)
+  helpers.sendEmail(req.body.username, req.body.email);
   const user = await db.getUser(req.body.username);
   req.login(user[0], () => {
     res.send(user);
