@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Checkbox, Modal, Col } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Modal, Col, message } from 'antd';
 import { withRouter } from 'react-router';
 import axios from 'axios';
 import * as actions from '../actions/index.js';
@@ -32,6 +32,7 @@ class LoginForm extends React.Component {
 
   sendEmail() {
     this.closeForgotPasswordModal();
+    message.success(`Sending email to ${this.state.email}`);
     axios.post('/forgot/password', {
       email: this.state.email,
     }).then((res) => {
@@ -86,6 +87,7 @@ class LoginForm extends React.Component {
           visible={this.state.forgotPasswordModalStatus}
           onCancel={() => this.closeForgotPasswordModal()}
           // footer={null}
+          title="You will recieve a Password Recovery email"
           onOk={() => this.sendEmail()}
           style={{ textAlign: 'center' }}
         >

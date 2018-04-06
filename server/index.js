@@ -32,7 +32,6 @@ const randomUrl = (length) => {
 };
 
 app.post('/forgot/password', (req, res) => {
-  console.log(req.body);
   const token = randomUrl(40);
   db.addTokenToUser(req.body.email, token);
   helpers.sendPasswordRecoveryEmail(req.body.email, token);
@@ -40,7 +39,6 @@ app.post('/forgot/password', (req, res) => {
 });
 
 app.post('/change/password', (req, res) => {
-  console.log(req.body);
   const hash = bcrypt.hashSync(req.body.password, 10);
   db.changePassword(req.body.email, hash, req.body.token);
   res.send('changed password');
@@ -136,6 +134,10 @@ app.get('/logout', (req, res) => {
 
 /** ****************************** Calendar ********************************* */
 app.post('/calendar', async (req, res) => {
+  console.log('looking for artisid and venue name', req.body);
+  const venueEmail = await db.getVenueEmail(req.body.venueId);
+  const artistName = await db.getArtistName(req.body.artistId);
+  helpers.sendRequestEmail(venueEmail, artistName);
   await db.addBooking(req.body);
   res.status(200).end();
 });
@@ -161,12 +163,17 @@ app.get('/venueCalendar', async (req, res) => {
 });
 
 app.patch('/confirm', async ({ body }, res) => {
-  await db.updateConfirmBooking(body);
+  const email = await db.updateConfirmBooking(body);
+  const venue = await db.getVenueNameById(body.venue_id);
+  helpers.sendConfirmBooking(email, venue);
   const bookings = await db.getVenueBookings2(body.venue_id);
   res.status(200).send({ bookings });
 });
 
 app.patch('/deny', async ({ body }, res) => {
+  const email = await db.updateConfirmBooking(body);
+  const venue = await db.getVenueNameById(body.venue_id);
+  helpers.sendDenyBooking(email, venue);
   await db.updateDenyBooking(body);
   const bookings = await db.getVenueBookings2(body.venue_id);
   res.status(200).send({ bookings });

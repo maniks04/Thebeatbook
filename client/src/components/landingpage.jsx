@@ -43,20 +43,20 @@ class LandingPageBeta extends React.Component {
         <div id="below" style={styles.below}>
           <article style={styles.article}>
             <div style={styles.articlecontent}>
-              <h1 style={styles.h3}>Easy Registration for Venue/Artist</h1>
+              <h1 style={styles.h3}>Live Calendar viewing/updating</h1>
               <div style={styles.text}>
-                Manage holds for all your rooms and shows on one calendar.
-                Automatically select best available hold levels and easily input large multi date hold requests.
-                One click hold status reporting.
-                Automatically populate agent/promoter contact info for each hold.
+                Manage dates and times for all of your bookings.
+                Quick and easy start and end time selections.
+                Live updates on Calendar schedule changes from your
+                personal schedule as well as bookings.
               </div>
             </div>
             <div style={styles.articlegif}>
               <iframe
                 title="gif"
-                src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9"
+                src="https://giphy.com/embed/5hdkKLAW3IXgMAsJKS"
                 width="480"
-                height="294"
+                height="293"
                 frameBorder="0"
                 className="giphy-embed"
                 style={styles.gifright}
@@ -67,54 +67,51 @@ class LandingPageBeta extends React.Component {
             <div style={styles.articlegif}>
               <iframe
                 title="gif"
-                src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9"
+                src="https://giphy.com/embed/C9EhnuQwh17tld9hBx"
                 width="480"
-                height="294"
+                height="293"
                 frameBorder="0"
                 className="giphy-embed"
                 style={styles.gifleft}
               />
             </div>
             <div style={styles.articlecontent}>
-              <h1 style={styles.h3}>Live Calendar viewing/updating</h1>
+              <h1 style={styles.h3}>Artist EPK</h1>
               <div style={styles.text}>
-                Manage holds for all your rooms and shows on one calendar.
-                Automatically select best available hold levels and easily input large multi date hold requests.
-                One click hold status reporting.
-                Automatically populate agent/promoter contact info for each hold.
+                Display your talents for everyone to see! Display your social
+                media along with your audio and video music
+                Easy information editing so you can focus on what you do best!
               </div>
             </div>
           </article>
           <article style={styles.article}>
             <div style={styles.articlecontent}>
-              <h1 style={styles.h3}>Artist EPK</h1>
+              <h1 style={styles.h3}>Booking Requests</h1>
               <div style={styles.text}>
-                Manage holds for all your rooms and shows on one calendar.
-                Automatically select best available hold levels and easily input large multi date hold requests.
-                One click hold status reporting.
-                Automatically populate agent/promoter contact info for each hold.
+                Search for a Venue or Artist/Band by City, Genre or Name
+                Easily send booking requests within seconds
+                Instant Email notifications for recieved or confirmed requests
+                so you are always up to date!
               </div>
             </div>
             <div style={styles.articlegif}>
               <iframe
                 title="gif"
-                src="https://giphy.com/embed/AFIFa25PDLoRfQMUA9"
+                src="https://giphy.com/embed/5q27K704y6JsG3zHRF"
                 width="480"
-                height="294"
+                height="293"
                 frameBorder="0"
                 className="giphy-embed"
                 style={styles.gifright}
               />
             </div>
           </article>
-
-
+          <article style={styles.footer} />
         </div>
       </div>
     );
   }
 }
-
 const mapStateToProps = state => (
   { store: state }
 );
@@ -240,5 +237,11 @@ const styles = {
   text: {
     textAlign: 'center',
     fontSize: 20,
+  },
+  footer: {
+    borderStyle: 'solid',
+    borderColor: 'white',
+    width: '100%',
+    height: 100,
   },
 };

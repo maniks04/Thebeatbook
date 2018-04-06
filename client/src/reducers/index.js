@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { venue: true });
     case 'LOGOUT':
       return Object.assign({}, state, {
-        artist: false, venue: false, username: '', searchedArtistCityList: [], chosenArtist: '',
+        artist: false, venue: false, username: '', searchedArtistCityList: [], chosenArtist: '', landingViewed: false,
       });
     case 'TOGGLE_LOADING':
       return Object.assign({}, state, { loading: !state.loading });
@@ -36,6 +36,8 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { currentError: action.payload });
     case 'LOADLOGINPAGE':
       return Object.assign({}, state, { landingViewed: true });
+    case 'LOADHOMEPAGE':
+      return Object.assign({}, state, { landingViewed: false });
     default:
       return state;
   }
