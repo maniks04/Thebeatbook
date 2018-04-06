@@ -25,9 +25,14 @@ class Requests extends React.Component {
       end_time: null,
       epkVisible: false,
     };
+    this.onSeeEventClick = this.onSeeEventClick.bind(this);
+    this.onSeeVenueDetailsClick = this.onSeeVenueDetailsClick.bind(this);
+    this.onEpkClick = this.onEpkClick.bind(this);
   }
 
   onSeeEventClick(item) {
+    console.log(item)
+    console.log(this)
     this.setState({
       visible: true,
       booking_description: item.booking_description, // eslint-disable-line
