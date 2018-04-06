@@ -194,7 +194,7 @@ class EPKView extends React.Component {
             <h1 style={{ fontSize: '1.5vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
               Band Bio
             </h1>
-            <p style={{ fontSize: '0.95vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
+            <p style={{ fontSize: '1.05vw', fontFamily: "'Roboto Condensed', sans-serif" }}>
               {this.state.artist_description}
             </p>
           </Col>
@@ -232,7 +232,7 @@ class EPKView extends React.Component {
             <h1 style={{ fontSize: '1.5vw', fontFamily: "'Roboto Condensed', sans-serif", textAlign: 'center' }}>
             Contact
             </h1>
-            <p style={{ fontSize: '0.8vw', fontFamily: "'Roboto Condensed', sans-serif", textAlign: 'center' }}>
+            <p style={{ fontSize: '1.05vw', fontFamily: "'Roboto Condensed', sans-serif", textAlign: 'center' }}>
             Email: {this.state.artist_contactEmail} <br />
             Number: {this.state.artist_contact}
             </p>

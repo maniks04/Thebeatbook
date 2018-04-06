@@ -179,7 +179,7 @@ class Requests extends React.Component {
                     />
                     <Modal
                       visible={this.state.epkVisible}
-                      maskClosable={true} // eslint-disable-line
+                      maskClosable
                       onOk={() => this.setState({ epkVisible: false })}
                       onCancel={() => this.setState({ epkVisible: false })}
                       width="70%"
@@ -188,7 +188,7 @@ class Requests extends React.Component {
                     </Modal>
                     <Modal
                       visible={this.state.visible}
-                      maskClosable={true} // eslint-disable-line
+                      maskClosable
                       onOk={() => this.setState({ visible: false })}
                       title={this.state.booking_title}
                     >
@@ -235,16 +235,6 @@ class Requests extends React.Component {
                       title={<em>{name}</em>}
                       description={<em>{item.booking_description}</em>}
                     />
-                    <Modal
-                      visible={this.state.epkVisible}
-                      maskClosable={true} // eslint-disable-line
-                      onOk={() => this.setState({ epkVisible: false })}
-                      onCancel={() => this.setState({ epkVisible: false })}
-                      title={name}
-                      width="70%"
-                    >
-                      <EPKView artist={item.artist_id} />
-                    </Modal>
                     <Modal
                       visible={this.state.visible}
                       maskClosable={true} // eslint-disable-line
