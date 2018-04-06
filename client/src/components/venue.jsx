@@ -7,6 +7,7 @@ import * as actions from '../actions/index.js';
 import calendar from './calendar.jsx';
 import Requests from './requests.jsx';
 import VenueDetails from './venueDetails.jsx';
+import logo from '../../../beatbooklogo.png';
 
 const { Header, Content, Footer, Sider } = Layout;//eslint-disable-line
 
@@ -80,7 +81,8 @@ class Venue extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-          Ruber Ducky Dynasty!
+            <img src={logo} style={{height: 20}} alt="" />
+            <div style={ {fontSize: 14,fontFamily: "'Baumans', cursive",color: 'black', display: 'inline-block',}}>beatbook</div>
           </Footer>
         </Layout>
       </Layout>
