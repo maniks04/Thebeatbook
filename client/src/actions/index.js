@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-export const openLoginModal = () => ({ type: 'OPENLOGINMODAL' });
-export const closeLoginModal = () => ({ type: 'CLOSELOGINMODAL' });
-export const openRegisterModal = () => ({ type: 'OPENREGISTERMODAL' });
-export const closeRegisterModal = () => ({ type: 'CLOSEREGISTERMODAL' });
 const logoutState = () => ({ type: 'LOGOUT' });
 export const logout = () => dispatch => axios({
   method: 'get',
@@ -18,7 +14,9 @@ export const logout = () => dispatch => axios({
 export const loadArtistPage = () => ({ type: 'LOADARTISTPAGE' });
 export const loadVenuePage = () => ({ type: 'LOADVENUEPAGE' });
 export const loadLoginPage = () => dispatch => dispatch(landingViewed());
+export const loadHomePage = () => dispatch => dispatch(viewLanding());
 const landingViewed = () => ({ type: 'LOADLOGINPAGE' });
+const viewLanding = () => ({ type: 'LOADHOMEPAGE' });
 
 export const submitLogin = (username, password, cb) => dispatch => axios({
   method: 'post',

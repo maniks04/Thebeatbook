@@ -28,9 +28,10 @@ class Venue extends React.Component {
 
   view() {
     const { bookings } = this.props.store;
+    const filteredBookings = bookings.filter(booking => booking.denied === 0);
     const { key } = this.state;
     if (key === '1') {
-      return calendar(bookings, true);
+      return calendar(filteredBookings, true);
     }
     if (key === '2') {
       return (<Requests />);

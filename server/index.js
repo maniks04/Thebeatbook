@@ -22,6 +22,28 @@ app.use(require('express-session')({
   saveUninitialized: false,
 }));
 
+const randomUrl = (length) => {
+  let text = '';
+  const possible = '$2a$10$yBVgx0p7IJJgfrswML8VVun9LprDc1.GYvav6sm3aQKsZOqM1gU8G';
+  for (let i = 0; i < length; i += 1) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
+
+app.post('/forgot/password', (req, res) => {
+  const token = randomUrl(40);
+  db.addTokenToUser(req.body.email, token);
+  helpers.sendPasswordRecoveryEmail(req.body.email, token);
+  res.end('email sent');
+});
+
+app.post('/change/password', (req, res) => {
+  const hash = bcrypt.hashSync(req.body.password, 10);
+  db.changePassword(req.body.email, hash, req.body.token);
+  res.send('changed password');
+});
+
 
 // Due to express, when you load the page, it doesnt make a get request to '/', it simply serves up the dist folder
 app.post('/', (req, res) => {
@@ -112,6 +134,10 @@ app.get('/logout', (req, res) => {
 
 /** ****************************** Calendar ********************************* */
 app.post('/calendar', async (req, res) => {
+  console.log('looking for artisid and venue name', req.body);
+  const venueEmail = await db.getVenueEmail(req.body.venueId);
+  const artistName = await db.getArtistName(req.body.artistId);
+  helpers.sendRequestEmail(venueEmail, artistName);
   await db.addBooking(req.body);
   res.status(200).end();
 });
@@ -137,14 +163,25 @@ app.get('/venueCalendar', async (req, res) => {
 });
 
 app.patch('/confirm', async ({ body }, res) => {
-  await db.updateConfirmBooking(body);
+  const email = await db.updateConfirmBooking(body);
+  const venue = await db.getVenueNameById(body.venue_id);
+  helpers.sendConfirmBooking(email, venue);
   const bookings = await db.getVenueBookings2(body.venue_id);
   res.status(200).send({ bookings });
 });
 
 app.patch('/deny', async ({ body }, res) => {
+  const email = await db.updateConfirmBooking(body);
+  const venue = await db.getVenueNameById(body.venue_id);
+  helpers.sendDenyBooking(email, venue);
   await db.updateDenyBooking(body);
   const bookings = await db.getVenueBookings2(body.venue_id);
+  res.status(200).send({ bookings });
+});
+
+app.post('/booking', async ({ body }, res) => {
+  await db.deleteBooking(body.booking_id);
+  const bookings = await db.getArtistBookings2(body.artist_id);
   res.status(200).send({ bookings });
 });
 
