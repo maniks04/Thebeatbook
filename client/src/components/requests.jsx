@@ -209,7 +209,9 @@ class Requests extends React.Component {
                       title={<a onClick={() => titleFunction(item)} >{name}</a>}
                       description={item.booking_description}
                     />
-                    <div>Trying to gig: {moment(time).local().format('MMM Do')} at {moment(time).local().format('h:mm a')}</div>
+                    <div>
+                      Trying to gig: {moment(time).local().format('MMM Do')} at {moment(time).local().format('h:mm a')}
+                    </div>
                   </List.Item>
                 );
               }}
