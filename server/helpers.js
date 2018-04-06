@@ -57,12 +57,12 @@ exports.sendPasswordRecoveryEmail = (email, token) => {
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: 'trumpchange2@gmail.com',
-        pass: '8~a8UH"Ju"m`8vY\\',
+        user: 'thebeatbookhelp@gmail.com',
+        pass: 'Manikstevetrent!',
       },
     });
     const mailOptions = {
-      from: '"TrumpChange" <trumpchange2@gmail.com>', // sender address
+      from: '"Thebeatbook" <thebeatbookhelp@gmail.com>', // sender address
       to: email, // list of receivers
       subject: `Welcome ${email} ✔`, // Subject line
       text: `Hello ${email}! Welcome to BeatBook!`, // plain text body
