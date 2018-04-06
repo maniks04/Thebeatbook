@@ -86,7 +86,6 @@ class Requests extends React.Component {
   }
 
   onDeleteClick(item) {
-    console.log(item)
     axios.post('/booking', item)
       .then((res) => {
         const updatedBookings = res.data.bookings;

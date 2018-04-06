@@ -122,7 +122,6 @@ const updateDenyBooking = async (info) => {
 };
 
 const deleteBooking = async (bookingId) => {
-  console.log('this is the booking id', bookingId)
   await knex('bookings').where('booking_id', bookingId).del();
 };
 
