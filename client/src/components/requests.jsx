@@ -31,8 +31,6 @@ class Requests extends React.Component {
   }
 
   onSeeEventClick(item) {
-    console.log(item)
-    console.log(this)
     this.setState({
       visible: true,
       booking_description: item.booking_description, // eslint-disable-line
@@ -85,7 +83,7 @@ class Requests extends React.Component {
         if (denied) {
           message.error('This request has been denied. We have notified the Artist.');
         } else {
-          message.success('This request has been restored and is now in Pending.')
+          message.success('This request has been restored and is now in Pending.');
         }
       }).catch(err => console.log(err));
   }
@@ -141,9 +139,9 @@ class Requests extends React.Component {
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
-                      <div>Playing {moment(this.state.start_time).local().format('MMMM Do YYYY')+' '}
-                           from {moment(this.state.start_time).local().format('h:mm a')+' '}
-                           til {' ' + moment(this.state.end_time).local().format('h:mm a')}
+                      <div>Playing {`${moment(this.state.start_time).local().format('MMMM Do YYYY')} `}
+                           from {`${moment(this.state.start_time).local().format('h:mm a')} `}
+                           til {`${moment(this.state.end_time).local().format('h:mm a')}`}
                       </div>
                     </Modal>
                     <div>Gig on: {moment(time).local().format('MMM Do')}</div>
@@ -209,6 +207,7 @@ class Requests extends React.Component {
                     />
                     <Modal
                       visible={this.state.epkVisible}
+                      maskClosable
                       onOk={() => this.setState({ epkVisible: false })}
                       onCancel={() => this.setState({ epkVisible: false })}
                       width="70%"
@@ -217,14 +216,15 @@ class Requests extends React.Component {
                     </Modal>
                     <Modal
                       visible={this.state.visible}
+                      maskClosable
                       onOk={() => this.setState({ visible: false })}
                       onCancel={() => this.setState({ visible: false })}
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
-                      <div>Requesting to play {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(this.state.start_time).local().format('h:mm a')+' '}
-                           til {' ' + moment(this.state.end_time).local().format('h:mm a')}
+                      <div>Requesting to play {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
+                           from {`${moment(this.state.start_time).local().format('h:mm a')} `}
+                           til {`${moment(this.state.end_time).local().format('h:mm a')}`}
                       </div>
                     </Modal>
                     <div>Trying to gig: {moment(time).local().format('MMM Do')} at {moment(time).local().format('h:mm a')}</div>
@@ -247,10 +247,10 @@ class Requests extends React.Component {
                 } else {
                   name = item.artist_name;
                   subtab.push(
-                    <Popconfirm 
+                    <Popconfirm
                       title="Are you sure you want to Restore this request (it will move to Pending)?"
-                      onConfirm={() => this.onDenyClick(item, false)} 
-                      okText="Yes" 
+                      onConfirm={() => this.onDenyClick(item, false)}
+                      okText="Yes"
                       cancelText="No"
                     >
                       <a href="#" >Restore Request</a>
@@ -265,25 +265,18 @@ class Requests extends React.Component {
                       description={<em>{item.booking_description}</em>}
                     />
                     <Modal
-                      visible={this.state.epkVisible}
-                      onOk={() => this.setState({ epkVisible: false })}
-                      onCancel={() => this.setState({ epkVisible: false })}
-                      title={name}
-                      width="70%"
-                    >
-                      <EPKView artist={item.artist_id} />
-                    </Modal>
-                    <Modal
                       visible={this.state.visible}
                       onOk={() => this.setState({ visible: false })}
                       onCancel={() => this.setState({ visible: false })}
                       title={this.state.booking_title}
                     >
                       <em>{name}</em>
-                      <div><em>Initial request sent for {moment(this.state.start_time).format('MMMM Do YYYY')+' '}
-                           from {moment(this.state.start_time).format('h:mm a')+' '}
-                           til {' ' + moment(this.state.end_time).format('h:mm a')}
-                      </em></div>
+                      <div>
+                        <em>Initial request sent for {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
+                           from {`${moment(this.state.start_time).format('h:mm a')} `}
+                           til {`${moment(this.state.end_time).format('h:mm a')}`}
+                        </em>
+                      </div>
                     </Modal>
                     <div><em>Attempted to gig: {moment(time).local().format('MMM Do')}</em></div>
                   </List.Item>
